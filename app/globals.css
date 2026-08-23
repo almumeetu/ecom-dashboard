@@ -1,0 +1,527 @@
+@import "tailwindcss";
+@import "./animations.css";
+
+@source "../node_modules/react-tailwindcss-datepicker/dist";
+
+@theme {
+  --color-white: #ffffff;
+  --color-platinum-gray: #f0f0f0;
+  --color-off-white: #f6f6f6;
+  --color-stone-gray: #999999;
+  --color-rich-black: #665a5d;
+  --color-pearl-gray: #d9d9d6;
+  --color-greenish-gray: #bdbdb5;
+  --color-warm-gray: #c5b9ac;
+  --color-sage-gray: #83847e;
+  --color-olive-slate: #51524e;
+  --color-footer-dark: #3F423E;
+  --color-neutral-dark: #262626;
+  --color-neutral-muted: #A3A3A3;
+  --color-dark-brown: #4b3729;
+  --color-dark-charcoal: #212721;
+  --color-dark-crimson: #d31f3a;
+
+  --color-khaki-gold: #C5A880;
+  --color-sage-gold: #A89F91;
+  --color-orange-accent: #FED7AA;
+  --color-warm-gold: #b4a676;
+  --color-light-gold: #d2c494;
+  --color-mid-gold: #C6B485;
+  --color-script-gold: #8E866B;
+
+  --color-btn-gold-from: #C5A880;
+  --color-btn-gold-to: #A89F91;
+
+  --color-brand-primary: var(--color-warm-gold);
+  --color-brand-2: var(--color-warm-gray);
+  --color-brand-3: var(--color-warm-gold);
+  --color-brand-4: var(--color-warm-gold);
+  --color-brand-5: var(--color-warm-gold);
+
+  --color-text-primary: var(--color-rich-black);
+  --color-text-secondary: var(--color-olive-slate);
+  --color-text-muted: var(--color-stone-gray);
+  --color-text-light: var(--color-white);
+
+  --color-bg-primary: var(--color-white);
+  --color-bg-secondary: var(--color-off-white);
+  --color-bg-muted: var(--color-pearl-gray);
+  --color-bg-dark: var(--color-dark-charcoal);
+
+  --color-primary: var(--color-warm-gold);
+  --color-secondary: var(--color-warm-gold);
+  --color-accent: var(--color-light-gold);
+
+  --color-border: var(--color-pearl-gray);
+  --color-border-dark: var(--color-greenish-gray);
+
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Inter", sans-serif;
+  --font-bembo: var(--font-bembo);
+  --font-snell: var(--font-snell);
+  --font-gotham: var(--font-gotham);
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --spacing-section-top: 9rem;
+  --spacing-section-bottom: 6rem;
+  --spacing-footer-top: 9rem;
+  --spacing-footer-bottom: 3rem;
+
+  --color-stone-850: #1c1917;
+  --color-zinc-850: #1f1f1f;
+  --color-zinc-650: #52525b;
+}
+
+.lte-section {
+  width: 100%;
+  padding-top: var(--spacing-section-top);
+  padding-bottom: var(--spacing-section-bottom);
+}
+
+.lte-container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .lte-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lte-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .lte-container {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+
+.lte-footer {
+  width: 100%;
+  background-color: var(--color-footer-dark);
+  padding-top: var(--spacing-footer-top);
+  padding-bottom: var(--spacing-footer-bottom);
+}
+
+.lte-hero-title {
+  font-family: var(--font-bembo), serif;
+  font-size: 6rem;
+  font-weight: 400;
+  line-height: 7rem;
+}
+
+.lte-hero-script {
+  font-family: var(--font-snell), cursive;
+  font-size: 6rem;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 7rem;
+}
+
+.lte-section-title {
+  font-family: var(--font-bembo), serif;
+  font-size: 3.75rem;
+  font-weight: 400;
+  line-height: 3.5rem;
+  text-align: center;
+}
+
+.lte-section-script {
+  font-family: var(--font-snell), cursive;
+  font-size: 3.75rem;
+  font-weight: 400;
+  line-height: 3.5rem;
+  text-align: center;
+}
+
+.lte-section-subtitle {
+  font-family: var(--font-bembo), serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lte-card-title {
+  font-family: var(--font-gotham), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lte-price {
+  font-family: var(--font-bembo), serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.lte-btn-text {
+  font-family: var(--font-gotham), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lte-body {
+  font-family: var(--font-gotham), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+}
+
+.lte-footer-heading {
+  font-family: var(--font-bembo), serif;
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #ffffff;
+}
+
+.lte-footer-text {
+  font-family: var(--font-gotham), sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  color: var(--color-orange-accent);
+}
+
+.lte-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 100px;
+  font-family: var(--font-gotham), sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.lte-btn:hover { opacity: 0.88; }
+.lte-btn:active { transform: scale(0.98); }
+
+.lte-btn-gold { background: linear-gradient(to right, #C5A880, #A89F91); }
+
+.lte-btn-dark { background-color: #1A1A1A; }
+.lte-btn-dark:hover { background-color: #2d2d2d; opacity: 1; }
+
+.lte-btn-outline {
+  background: transparent;
+  border: 2px solid var(--color-warm-gold);
+  color: var(--color-stone-gray);
+}
+.lte-btn-outline:hover {
+  background-color: var(--color-warm-gold);
+  color: #ffffff;
+  opacity: 1;
+}
+
+.lte-product-card {
+  width: 453px;
+  max-width: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+  position: relative;
+}
+
+.lte-product-card-image {
+  width: 100%;
+  height: 345px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.lte-product-card-body {
+  padding: 1.25rem 2.5rem 2.5rem;
+  background-color: #ffffff;
+  position: relative;
+}
+
+.lte-card-cart-btn {
+  position: absolute;
+  left: 373px;
+  top: -29px;
+  width: 46px;
+  height: 46px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.lte-card-cart-btn:hover { box-shadow: 0 6px 24px rgba(0, 0, 0, 0.16); }
+
+.lte-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.lte-divider-line {
+  width: 2.75rem;
+  height: 1.58px;
+  background-color: var(--color-orange-accent);
+  display: block;
+}
+
+.admin-dashboard {
+  --radius-sm: 0.125rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+.admin-dashboard .font-black,
+.admin-dashboard .font-extrabold,
+.admin-dashboard .font-bold,
+.admin-dashboard th,
+.admin-dashboard h1,
+.admin-dashboard h2,
+.admin-dashboard h3,
+.admin-dashboard button,
+.admin-dashboard select,
+.admin-dashboard input,
+.admin-dashboard label {
+  font-weight: 500 !important;
+}
+
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-backdrop { animation: modal-backdrop-in 0.2s ease-out both; }
+.modal-panel { animation: modal-panel-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.modal-body {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.modal-body::-webkit-scrollbar { width: 5px; }
+.modal-body::-webkit-scrollbar-track { background: transparent; }
+.modal-body::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+}
+
+@keyframes fade-up-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up { animation: fade-up-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.hero-slider .swiper-pagination {
+  bottom: 45px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+@media (max-width: 767px) {
+  .hero-slider .swiper-pagination {
+    bottom: 12px !important;
+  }
+}
+
+.hero-slider .hero-bullet {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin: 0 !important;
+  background: transparent !important;
+  opacity: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.hero-slider .hero-bullet:hover {
+  transform: scale(1.05);
+}
+
+.hero-slider .hero-bullet svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slider .hero-bullet .bg-path {
+  stroke: transparent;
+}
+
+.hero-slider .hero-bullet .path {
+  stroke-dasharray: 50.27;
+  stroke-dashoffset: 50.27;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke: #b7ab74;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hero-slider .hero-bullet .dot {
+  fill: #e5e5e5;
+  transition: fill 0.3s ease;
+}
+
+.hero-slider .hero-bullet-active .path {
+  opacity: 1;
+  animation: hero-progress-run 6s linear forwards;
+}
+
+.hero-slider .hero-bullet-active .dot {
+  fill: #b7ab74;
+}
+
+@keyframes hero-progress-run {
+  from {
+    stroke-dashoffset: 50.27;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.mySwiper .swiper-pagination-bullet,
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #e2e2e2;
+  opacity: 1;
+  margin: 0 6px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.mySwiper .swiper-pagination-bullet-active,
+.swiper-pagination-bullet-active {
+  background: #B9975B;
+  transform: scale(1.2);
+}
+
+.mySwiper .swiper-pagination-bullet:hover,
+.swiper-pagination-bullet:hover {
+  background: #c5a86a;
+}
+
+[class*="font-['Bembo_Std']"],
+.font-bembo,
+.font-family-bembo {
+  font-family: var(--font-bembo), serif !important;
+}
+
+[class*="font-['Snell_Roundhand_LT_Std']"],
+.font-snell {
+  font-family: var(--font-snell), cursive !important;
+}
+
+.font-gotham,
+[class*="font-['Gotham']"] {
+  font-family: var(--font-gotham), sans-serif !important;
+}
+
+.concave-corner-frame {
+  -webkit-mask-image:
+    radial-gradient(circle at 0 0, transparent 40px, black 0),
+    radial-gradient(circle at 100% 0, transparent 40px, black 0),
+    radial-gradient(circle at 0 100%, transparent 40px, black 0),
+    radial-gradient(circle at 100% 100%, transparent 40px, black 0),
+    linear-gradient(black, black),
+    linear-gradient(black, black);
+  -webkit-mask-size:
+    40px 40px, 40px 40px, 40px 40px, 40px 40px,
+    100% calc(100% - 80px), calc(100% - 80px) 100%;
+  -webkit-mask-position:
+    top left, top right, bottom left, bottom right, center, center;
+  -webkit-mask-repeat: no-repeat;
+  mask-image:
+    radial-gradient(circle at 0 0, transparent 40px, black 0),
+    radial-gradient(circle at 100% 0, transparent 40px, black 0),
+    radial-gradient(circle at 0 100%, transparent 40px, black 0),
+    radial-gradient(circle at 100% 100%, transparent 40px, black 0),
+    linear-gradient(black, black),
+    linear-gradient(black, black);
+  mask-size:
+    40px 40px, 40px 40px, 40px 40px, 40px 40px,
+    100% calc(100% - 80px), calc(100% - 80px) 100%;
+  mask-position:
+    top left, top right, bottom left, bottom right, center, center;
+  mask-repeat: no-repeat;
+}
+
+/* Ensure all actions and buttons in the admin dashboard have a pointer cursor */
+.admin-dashboard button,
+.admin-dashboard a,
+.admin-dashboard label,
+.admin-dashboard [role="button"],
+.admin-dashboard [role="tab"],
+.admin-dashboard [role="menuitem"],
+.admin-dashboard [role="option"],
+.admin-dashboard [type="button"],
+.admin-dashboard [type="submit"],
+.admin-dashboard [type="reset"],
+.admin-dashboard select,
+.admin-dashboard input[type="checkbox"],
+.admin-dashboard input[type="radio"] {
+  cursor: pointer;
+}
+
+.admin-dashboard button:disabled,
+.admin-dashboard [role="button"]:disabled,
+.admin-dashboard input:disabled,
+.admin-dashboard select:disabled {
+  cursor: not-allowed;
+}

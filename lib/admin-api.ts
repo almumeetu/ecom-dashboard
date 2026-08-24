@@ -852,44 +852,62 @@ export function formatMoney(value?: string | number | null, symbol?: string) {
  * full URL is returned unchanged.
  */
 export function resolveImageUrl(url?: string | null): string {
-  if (!url) return "";
+  if (!url || typeof url !== "string") return "/images/no-image-icon-6.png";
+
+  let trimmed = url.trim();
+  if (!trimmed) return "/images/no-image-icon-6.png";
 
   // ── 1. Data URIs or blob URIs — return as-is ──────────────────────
-  if (url.startsWith("data:") || url.startsWith("blob:")) {
-    return url;
+  if (trimmed.startsWith("data:") || trimmed.startsWith("blob:")) {
+    return trimmed;
   }
 
-  // ── 2. Derive backend origin from env ─────────────────────────────
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-  let apiOrigin = "http://localhost:5010";
-  if (apiBaseUrl) {
-    try {
+  // ── 2. Frontend public assets ─────────────────────────────────────
+  if (trimmed.startsWith("/images/")) {
+    return trimmed;
+  }
+
+  // ── 3. Handle protocol-relative or scheme-less domains ────────────
+  if (trimmed.startsWith("//")) {
+    trimmed = `https:${trimmed}`;
+  } else if (
+    trimmed.startsWith("api-ecom.bornobyte.com") ||
+    trimmed.startsWith("api-lte-bd.neocomerz.com") ||
+    trimmed.startsWith("tinyecomapi.neocomerz.com") ||
+    trimmed.startsWith("images.unsplash.com")
+  ) {
+    trimmed = `https://${trimmed}`;
+  } else if (trimmed.startsWith("localhost:") || trimmed.startsWith("127.0.0.1:")) {
+    trimmed = `http://${trimmed}`;
+  }
+
+  // ── 4. Full HTTP/HTTPS URLs ───────────────────────────────────────
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    if (trimmed.startsWith("http://localhost")) {
+      try {
+        const parsed = new URL(trimmed);
+        return parsed.pathname + parsed.search;
+      } catch {
+        return trimmed;
+      }
+    }
+    return trimmed;
+  }
+
+  // ── 5. Derive backend origin from env ─────────────────────────────
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api-ecom.bornobyte.com/api/v1";
+  let apiOrigin = "https://api-ecom.bornobyte.com";
+  try {
+    if (apiBaseUrl.startsWith("http://") || apiBaseUrl.startsWith("https://")) {
       apiOrigin = new URL(apiBaseUrl).origin;
-    } catch {
-      // ignore malformed env value
     }
+  } catch {
+    apiOrigin = "https://api-ecom.bornobyte.com";
   }
 
-  // ── 3. If relative URL starting with '/', prepend backend origin ──
-  if (url.startsWith("/")) {
-    // If it's a frontend public asset like /images/no-image-icon-6.png, return as-is
-    if (url.startsWith("/images/")) {
-      return url;
-    }
-    return `${apiOrigin}${url}`;
-  }
-
-  // ── 4. Strip localhost origin to use Next.js proxy rewrites ──────
-  if (url.startsWith("http://localhost")) {
-    try {
-      const parsed = new URL(url);
-      return parsed.pathname + parsed.search;
-    } catch {
-      // ignore
-    }
-  }
-
-  return url;
+  // ── 6. Relative paths (with or without leading slash) ─────────────
+  const cleanPath = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+  return `${apiOrigin}${cleanPath}`;
 }
 
 // ─── News / Blog ───────────────────────────────────────────────────────────

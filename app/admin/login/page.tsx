@@ -32,7 +32,8 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      if (response.user.role?.name !== "admin") {
+      const allowedRoles = ["admin", "superadmin"];
+      if (!response.user.role?.name || !allowedRoles.includes(response.user.role.name)) {
         throw new Error("Only admin users can access the admin panel.");
       }
 

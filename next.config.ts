@@ -40,6 +40,12 @@ const nextConfig: NextConfig = {
         hostname: "api-lte-bd.neocomerz.com",
         pathname: "/**",
       },
+      // Ecom production API
+      {
+        protocol: "https",
+        hostname: "api-ecom.bornobyte.com",
+        pathname: "/**",
+      },
       // localhost images are proxied through Next.js rewrites below,
       // so next/image only ever sees relative or HTTPS URLs in production.
       // Keep this entry so the dev server itself can still serve them directly

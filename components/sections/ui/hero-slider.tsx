@@ -1,95 +1,33 @@
-'use client';
+"use client";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import { useRef, useEffect, useState } from 'react';
-import type { Swiper as SwiperType } from 'swiper';
-import Image from 'next/image';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay, EffectFade } from "swiper/modules";
+import { useRef } from "react";
+import type { Swiper as SwiperType } from "swiper";
+import Image from "next/image";
+import Link from "next/link";
+import { HeroSliderProps } from "@/data/types";
+import { LuArrowRight } from "react-icons/lu";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 
-import { HeroSliderProps } from '@/data/types';
-import Button from './button';
+const QUICK_CATEGORIES = [
+  { label: "Groceries", icon: "🥦", href: "/products?search=grocery", color: "from-emerald-500/10 to-emerald-500/5 hover:border-emerald-500/40 text-emerald-800" },
+  { label: "Food & Bakery", icon: "🥐", href: "/products?search=food", color: "from-amber-500/10 to-amber-500/5 hover:border-amber-500/40 text-amber-900" },
+  { label: "Women's Fashion", icon: "👗", href: "/products?category=Women's+Fashion", color: "from-rose-500/10 to-rose-500/5 hover:border-rose-500/40 text-rose-900" },
+  { label: "Men's Fashion", icon: "👔", href: "/products?category=Men's+Fashion", color: "from-blue-500/10 to-blue-500/5 hover:border-blue-500/40 text-blue-900" },
+  { label: "Footwear", icon: "👟", href: "/products?category=Footwear", color: "from-indigo-500/10 to-indigo-500/5 hover:border-indigo-500/40 text-indigo-900" },
+  { label: "Accessories", icon: "⌚", href: "/products?category=Accessories", color: "from-purple-500/10 to-purple-500/5 hover:border-purple-500/40 text-purple-900" },
+  { label: "Organic Deals", icon: "🌿", href: "/products?search=organic", color: "from-teal-500/10 to-teal-500/5 hover:border-teal-500/40 text-teal-900" },
+];
 
 export default function HeroSlider({ slides }: HeroSliderProps) {
   const swiperRef = useRef<SwiperType | null>(null);
-  const [showOverlay, setShowOverlay] = useState(true);
-  const [typedCount, setTypedCount] = useState(0);
-
-  const text1 = "Well & Fine ";
-  const text2 = "Premium Tea";
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowOverlay(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Typing animation effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTypedCount((prev) => {
-        if (prev >= text1.length + text2.length) {
-          clearInterval(interval);
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 100);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const part1 = text1.slice(0, typedCount);
-  const part2 = typedCount > text1.length ? text2.slice(0, typedCount - text1.length) : '';
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (event.origin !== 'https://www.youtube.com') return;
-
-      try {
-        const data = JSON.parse(event.data);
-
-        if (data.event === 'onStateChange' && data.info === 0) {
-          swiperRef.current?.slideNext();
-        }
-      } catch (error) {
-        // Ignore invalid message
-      }
-    };
-
-    window.addEventListener('message', handleMessage);
-
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
 
   return (
-    <div className="relative w-full h-[500px] md:h-[650px] lg:h-[750px] overflow-hidden">
-      {/* Black full width & height loading overlay (hidden after 5 seconds) */}
-      <div
-        className={`absolute inset-0 w-full h-full bg-black/80 backdrop-blur-md z-30 flex items-center justify-center transition-opacity duration-1000 ${
-          showOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <h1 className="text-center text-white leading-tight">
-          <span className="font-['Bembo_Std'] text-5xl md:text-7xl lg:text-8xl">
-            {part1}
-          </span>
-          {part2 && (
-            <span className="font-['Snell_Roundhand_LT_Std'] italic text-5xl md:text-7xl lg:text-8xl text-[#C5A880]">
-              {part2}
-            </span>
-          )}
-          <span className="inline-block w-[3px] h-[40px] md:h-[60px] lg:h-[70px] bg-[#C5A880] ml-2 animate-pulse align-middle" />
-        </h1>
-      </div>
-
+    <div className="relative w-full overflow-hidden bg-zinc-950">
       <Swiper
         modules={[Pagination, Autoplay, EffectFade]}
         effect="fade"
@@ -98,7 +36,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
         loop={true}
         speed={1000}
         autoplay={{
-          delay: 6000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         onSwiper={(swiper) => {
@@ -106,8 +44,8 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
         }}
         pagination={{
           clickable: true,
-          bulletClass: 'hero-bullet',
-          bulletActiveClass: 'hero-bullet-active',
+          bulletClass: "hero-bullet",
+          bulletActiveClass: "hero-bullet-active",
           renderBullet: (index, className) => {
             return `<span class="${className}">
               <svg class="hero-svg-loader" width="24" height="24" viewBox="0 0 24 24">
@@ -116,23 +54,23 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
                 <circle class="dot" cx="12" cy="12" r="3"></circle>
               </svg>
             </span>`;
-          }
+          },
         }}
         className="hero-slider"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            <div className="relative h-[500px] md:h-[650px] lg:h-[750px]">
-
+            <div className="relative h-[480px] sm:h-[540px] md:h-[620px] lg:h-[680px]">
               {/* Media Background */}
-              <div className="absolute inset-0 overflow-hidden bg-black">
+              <div className="absolute inset-0 overflow-hidden bg-zinc-900">
                 {slide.image ? (
-                  <Image 
-                    src={slide.image} 
-                    alt={slide.title} 
-                    fill 
-                    className="object-cover" 
-                    priority={index === 0} 
+                  <Image
+                    src={slide.image}
+                    alt={slide.title}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                    unoptimized={slide.image.includes("unsplash.com")}
                   />
                 ) : slide.videoId ? (
                   <iframe
@@ -144,48 +82,74 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
                 ) : null}
               </div>
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/20 z-10" />
+              {/* Gradient Dark Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/50 to-zinc-950/30 z-10" />
 
-              {/* Content */}
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-end px-4 py-12 md:py-24">
+              {/* Content Box */}
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-12 max-w-5xl mx-auto">
+                {/* Badge */}
+                {slide.badge && (
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] sm:text-xs font-semibold tracking-widest uppercase mb-4 animate-fadeIn">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    {slide.badge}
+                  </div>
+                )}
 
-                <h1 className="text-center text-white leading-tight mb-4">
-                  <span className="font-['Bembo_Std'] text-5xl md:text-7xl lg:text-8xl">
-                    {slide.title}{' '}
+                {/* Main Heading */}
+                <h1 className="text-white leading-[1.1] mb-4 drop-shadow-md">
+                  <span className="font-['Bembo_Std'] font-medium text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight block sm:inline">
+                    {slide.title}{" "}
                   </span>
-
-                  <span className="font-['Snell_Roundhand_LT_Std'] italic text-5xl md:text-7xl lg:text-8xl">
-                    {slide.titleItalic}
-                  </span>
+                  {slide.titleItalic && (
+                    <span className="font-['Snell_Roundhand_LT_Std'] italic text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-emerald-300 block sm:inline">
+                      {slide.titleItalic}
+                    </span>
+                  )}
                 </h1>
 
-                <p className="font-['Bembo_Std'] text-center text-white uppercase leading-6 text-lg">
+                {/* Subtitle */}
+                <p className="max-w-2xl text-zinc-200 text-sm sm:text-base md:text-lg font-light leading-relaxed mb-8 drop-shadow-sm">
                   {slide.subtitle}
                 </p>
 
-                <div className="relative w-24 h-24">
-                  <Image
-                    src="/images/icons/icon-4.svg"
-                    alt="Decorative Icon"
-                    fill
-                    className="object-contain"
-                  />
+                {/* CTA Buttons */}
+                <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+                  <Link
+                    href={slide.ctaHref || "/products"}
+                    className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-700/50 hover:scale-105 cursor-pointer"
+                  >
+                    <span>{slide.ctaText || "SHOP NOW"}</span>
+                    <LuArrowRight className="w-4 h-4" />
+                  </Link>
+
+                  <Link
+                    href="/products"
+                    className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/25 font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105 cursor-pointer"
+                  >
+                    ALL PRODUCTS
+                  </Link>
                 </div>
-
-                <Button
-                  href="/products"
-                  label="SHOP NOW"
-                  variant="primary"
-                  size="sm"
-                />
-
               </div>
-
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* Multi-Category Quick Navigation Bar */}
+      <div className="relative z-30 w-full bg-white/95 backdrop-blur-md border-b border-zinc-200/80 py-3 sm:py-4 px-4 shadow-sm">
+        <div className="max-w-[1440px] mx-auto flex items-center justify-start sm:justify-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-0.5">
+          {QUICK_CATEGORIES.map((cat, idx) => (
+            <Link
+              key={idx}
+              href={cat.href}
+              className={`shrink-0 flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r border border-zinc-200/70 ${cat.color} font-medium text-xs sm:text-[13px] transition-all duration-200 hover:shadow-xs hover:scale-103 cursor-pointer`}
+            >
+              <span className="text-base">{cat.icon}</span>
+              <span>{cat.label}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,77 +1,53 @@
 import Hero from '@/components/sections/hero';
-import Invitation from '@/components/sections/invitation';
-import Presence from '@/components/sections/presence';
-import Prestige from '@/components/sections/prestige';
-import NewArrival from '@/components/sections/newarrival';
-import Brands from '@/components/sections/brands';
-import Instagram from '@/components/sections/instagram';
-import Testimonial from '@/components/sections/testimonial';
-import TeaCollection from '@/components/sections/ui/tea-collection';
-import TeaLifestyle from '@/components/sections/tea-lifestyle';
-import PresenceImage from '@/components/sections/ui/presence-image';
-import NobleBalance from '@/components/sections/ui/noble-balance';
-import WorldAssembly from '@/components/sections/ui/world-assembly';
-import Subtract from '@/components/sections/subtract';
-import LooseTea from '@/components/sections/ui/loose-tea';
-import GiftItem from '@/components/sections/gift-item';
-import MostPopuler from '@/components/sections/most-populer';
 import TheCollection from '@/components/sections/the-collection';
+import NewArrival from '@/components/sections/newarrival';
+import PromoBanner from '@/components/sections/promo-banner';
+import MostPopuler from '@/components/sections/most-populer';
+import Brands from '@/components/sections/brands';
+import TrustFeatures from '@/components/sections/trust-features';
+import Testimonial from '@/components/sections/testimonial';
 import ScrollAnimate from '@/components/ui/scroll-animate';
 
 export default function Home() {
   return (
-    <div>
+    <div className="w-full overflow-hidden bg-[#FAF9F5]">
+      {/* Dynamic Multi-Category Marketplace Hero with Category Pills */}
       <Hero />
-      <ScrollAnimate variant="fade-in-up">
-        <Invitation />
-      </ScrollAnimate>
+
+      {/* Shop By Department / Multi-Category Cards */}
       <ScrollAnimate variant="fade-in-up">
         <TheCollection />
       </ScrollAnimate>
+
+      {/* Fresh Arrivals & Trending Drops with Category Switcher */}
       <ScrollAnimate variant="fade-in-up">
         <NewArrival />
       </ScrollAnimate>
+
+      {/* Dual High-Impact Promo Split Banners (Groceries & Fashion) */}
       <ScrollAnimate variant="fade-in-up">
-        <LooseTea />
+        <PromoBanner />
       </ScrollAnimate>
-      <Subtract />
+
+      {/* Best Sellers & Customer Favorites */}
       <ScrollAnimate variant="fade-in-up">
         <MostPopuler />
       </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <GiftItem />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <WorldAssembly />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <NobleBalance />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <PresenceImage />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <Presence />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <Prestige />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <TeaCollection />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <TeaLifestyle />
-      </ScrollAnimate>
+
+      {/* Verified Vendors & Brand Partners */}
       <ScrollAnimate variant="fade-in-up">
         <Brands />
       </ScrollAnimate>
+
+      {/* Marketplace Guarantees & Trust Features */}
+      <ScrollAnimate variant="fade-in-up">
+        <TrustFeatures />
+      </ScrollAnimate>
+
+      {/* Community Testimonials */}
       <ScrollAnimate variant="fade-in-up">
         <Testimonial />
-      </ScrollAnimate>
-      <ScrollAnimate variant="fade-in-up">
-        <Instagram />
       </ScrollAnimate>
     </div>
   );
 }
-

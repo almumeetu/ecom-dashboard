@@ -145,8 +145,9 @@ export default function ProductCarousel({ products, title }: ExtendedProductCaro
                 id={product.id}
                 name={product.name}
                 price={`৳${product.price.toLocaleString()}`}
-                originalPrice={`৳${(product.originalPrice || product.price).toLocaleString()}`}
+                originalPrice={product.originalPrice && product.originalPrice > product.price ? `৳${product.originalPrice.toLocaleString()}` : undefined}
                 image={product.image}
+                badge={product.badge}
               />
             </SwiperSlide>
           ))}

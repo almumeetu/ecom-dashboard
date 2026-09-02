@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import DiscoverMoreButton from "./ui/button";
+import Link from 'next/link';
 import ProductCard from "./ui/product-card";
 import { fetchShopProducts, ShopProduct } from "@/lib/shop-api";
+import { LuArrowRight, LuFlame } from 'react-icons/lu';
 
 export default function MostPopuler() {
   const [products, setProducts] = useState<ShopProduct[]>([]);
@@ -12,10 +13,10 @@ export default function MostPopuler() {
   useEffect(() => {
     async function loadProducts() {
       try {
-        const res = await fetchShopProducts({ limit: 12 });
-        // Reverse elements to show different products in Popular section
-        const reversed = [...res.data].reverse().slice(0, 6);
-        setProducts(reversed);
+        const res = await fetchShopProducts({ limit: 16 });
+        // Display popular products (middle slice or reversed to show variety)
+        const popularList = res.data.length > 8 ? res.data.slice(4, 12) : res.data;
+        setProducts(popularList);
       } catch (error) {
         console.error("Failed to fetch most popular products", error);
       } finally {
@@ -25,62 +26,69 @@ export default function MostPopuler() {
     loadProducts();
   }, []);
 
-  if (isLoading) {
-    return (
-      <section className="w-full bg-[#F9F9FB] py-16 md:py-24 border-t border-stone-100">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-10 md:px-14 lg:px-20">
-          <div className="flex justify-center mb-8">
-            <div className="h-10 bg-stone-200 animate-pulse rounded w-64"></div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-72 bg-stone-200 animate-pulse rounded"></div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
-
-  if (products.length === 0) {
+  if (!isLoading && products.length === 0) {
     return null;
   }
 
   return (
-    <section className="relative w-full py-16 md:py-24 bg-[#F9F9FB] border-t border-stone-100 overflow-hidden">
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 md:px-14 lg:px-20">
+    <section className="relative w-full py-14 sm:py-20 bg-white border-t border-stone-200/70 overflow-hidden">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Header */}
-        <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-16">
-          <h2 className="inline-flex justify-center flex-wrap items-center gap-1.5">
-            <span className="text-[#C6B485] text-4xl md:text-5xl lg:text-6xl font-normal font-['Bembo_Std'] leading-tight lg:leading-[56px]">Most</span>
-            <span className="text-[#8E866B] text-4xl md:text-5xl lg:text-6xl font-normal font-['Snell_Roundhand_LT_Std'] leading-tight lg:leading-[56px]">Popular</span>
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-[11px] font-bold uppercase tracking-wider mb-3">
+            <LuFlame className="w-3.5 h-3.5 text-rose-600" />
+            <span>Customer Favorites</span>
+          </div>
+
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+            Most Popular & Best Sellers
           </h2>
-          <p className="max-w-[700px] text-center text-[#83847e] text-base lg:text-lg font-normal font-['Bembo_Std'] leading-6 mx-auto">
-            Designed to make a lasting impression for corporate, seasonal, and personal gifting.
+
+          <p className="max-w-2xl text-zinc-500 text-sm sm:text-base leading-relaxed">
+            Highly rated across verified customer purchases — top fashion essentials, everyday pantry goods, footwear, and accessories.
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={`৳${product.price.toLocaleString()}`}
-              originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
-              image={product.image}
-              slug={product.slug}
-            />
-          ))}
-        </div>
+        {/* Products Grid */}
+        {isLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="h-80 bg-stone-50 rounded-2xl border border-zinc-100 p-4 animate-pulse flex flex-col justify-between">
+                <div className="w-full aspect-square bg-zinc-200/60 rounded-xl" />
+                <div className="h-4 bg-zinc-200/60 rounded w-3/4 mt-4" />
+                <div className="h-6 bg-zinc-200/60 rounded w-1/2 mt-2" />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={`৳${product.price.toLocaleString()}`}
+                originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
+                image={product.image}
+                slug={product.slug}
+                category={product.category}
+                brand={product.team}
+                unit={product.unit}
+                badge={product.badge || "HOT"}
+              />
+            ))}
+          </div>
+        )}
 
+        {/* View All CTA */}
         <div className="pt-12 text-center">
-          <DiscoverMoreButton
+          <Link
             href="/products"
-            label="DISCOVER MORE"
-            variant="primary"
-          />
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-zinc-900 hover:bg-emerald-600 text-white font-sans text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:scale-103 cursor-pointer"
+          >
+            <span>View All Best Sellers</span>
+            <LuArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>

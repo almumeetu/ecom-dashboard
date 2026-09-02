@@ -14,6 +14,9 @@ export type ShopProduct = {
   price: number;
   originalPrice?: number;
   image: string;
+  unit?: string;
+  badge?: string;
+  rating?: number;
 };
 
 export type FetchShopProductsParams = {
@@ -123,6 +126,7 @@ function mapProduct(product: AdminProduct): ShopProduct {
     price: showOriginal ? discountPrice : priceNum,
     originalPrice: showOriginal ? priceNum : (costNum > priceNum ? costNum : undefined),
     image: resolveImageUrl(rawImage),
+    unit: product.unit?.name ?? product.unit?.abbreviation ?? undefined,
   };
 }
 

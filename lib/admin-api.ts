@@ -851,11 +851,62 @@ export function formatMoney(value?: string | number | null, symbol?: string) {
  * NEXT_PUBLIC_API_BASE_URL), so the relative-path logic never fires and the
  * full URL is returned unchanged.
  */
+const KNOWN_ASSET_FALLBACKS: Record<string, string> = {
+  "kids-hoodie.jpg": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80",
+  "canvas-tote-bag.jpg": "https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80",
+  "knitted-scarf.jpg": "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=800&auto=format&fit=crop&q=80",
+  "sunglasses.jpg": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80",
+  "wrist-watch.jpg": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
+  "kids-denim-shorts.jpg": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80",
+  "leather-belt.jpg": "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=800&auto=format&fit=crop&q=80",
+  "79f65a53-3f63-4052-9823-64464d4976fe.jpg": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80",
+  "b52324a2-0593-4569-8746-6c83ff92b887.jpg": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80",
+};
+
+export function getProductFallbackImage(name?: string, category?: string): string {
+  const lower = `${name || ""} ${category || ""}`.toLowerCase();
+  if (lower.includes("grocery") || lower.includes("fruit") || lower.includes("vegetable")) {
+    return "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("food") || lower.includes("bread") || lower.includes("bakery") || lower.includes("snack")) {
+    return "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("tea") || lower.includes("coffee") || lower.includes("drink") || lower.includes("beverage")) {
+    return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("shoe") || lower.includes("footwear") || lower.includes("sneaker")) {
+    return "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("watch")) {
+    return "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("sunglass") || lower.includes("glass")) {
+    return "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("bag") || lower.includes("tote")) {
+    return "https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("jean") || lower.includes("denim") || lower.includes("pant")) {
+    return "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80";
+  }
+  if (lower.includes("hoodie") || lower.includes("shirt") || lower.includes("dress") || lower.includes("fashion") || lower.includes("women") || lower.includes("men") || lower.includes("kid")) {
+    return "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&auto=format&fit=crop&q=80";
+  }
+  return "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&auto=format&fit=crop&q=80";
+}
+
 export function resolveImageUrl(url?: string | null): string {
   if (!url || typeof url !== "string") return "/images/no-image-icon-6.png";
 
   let trimmed = url.trim();
   if (!trimmed) return "/images/no-image-icon-6.png";
+
+  // Check known missing backend demo assets
+  for (const [key, fallback] of Object.entries(KNOWN_ASSET_FALLBACKS)) {
+    if (trimmed.includes(key)) {
+      return fallback;
+    }
+  }
 
   // ── 1. Data URIs or blob URIs — return as-is ──────────────────────
   if (trimmed.startsWith("data:") || trimmed.startsWith("blob:")) {

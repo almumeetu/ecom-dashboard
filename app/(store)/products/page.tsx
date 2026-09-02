@@ -220,7 +220,7 @@ function ProductsPageContent() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      document.title = `${pageHeading} - London Tea Exchange`;
+      document.title = `${pageHeading} - Ecom Marketplace`;
     }
   }, [pageHeading]);
 
@@ -569,7 +569,7 @@ function ProductsPageContent() {
               </div>
             ) : filteredProducts.length > 0 ? (
               <>
-                <div className={`grid grid-cols-1 md:grid-cols-2 ${viewMode === 'grid3' ? 'lg:grid-cols-3' : ''} gap-4 md:gap-6`}>
+                <div className={`grid grid-cols-2 md:grid-cols-3 ${viewMode === 'grid3' ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-3 sm:gap-6`}>
                   {filteredProducts.map((product) => (
                     <ProductCard
                       key={product.id}
@@ -579,6 +579,9 @@ function ProductsPageContent() {
                       originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
                       image={product.image || NO_IMAGE}
                       slug={product.slug}
+                      category={product.category}
+                      brand={product.team}
+                      unit={product.unit}
                     />
                   ))}
                 </div>

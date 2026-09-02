@@ -6,21 +6,36 @@ import { resolveImageUrl } from "@/lib/admin-api";
 export default async function Hero() {
   const defaultSlides: Slide[] = [
     {
-      videoId: "CFfP9DFeOog",
-      title: "Well & Fine",
-      titleItalic: "Premium Tea",
-      subtitle: "A HERITAGE OF RARE TEA, REFINED THROUGH CRAFTSMANSHIP, PURITY AND TIMELESS ELEGANCE",
+      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&auto=format&fit=crop&q=80",
+      badge: "ORGANIC & FRESH DAILY",
+      title: "Fresh Groceries",
+      titleItalic: "& Farm Produce",
+      subtitle: "Handpicked organic produce, pantry essentials & fresh foods delivered fast to your doorstep.",
+      ctaText: "SHOP GROCERIES",
+      ctaHref: "/products?category=Grocery",
     },
     {
-      videoId: "Ko0frhpjKOk",
-      title: "Well & Fine",
-      titleItalic: "Premium Tea",
-      subtitle: "A HERITAGE OF RARE TEA, REFINED THROUGH CRAFTSMANSHIP, PURITY AND TIMELESS ELEGANCE",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&auto=format&fit=crop&q=80",
+      badge: "TRENDING DROPS 2026",
+      title: "Designer Fashion",
+      titleItalic: "& Everyday Style",
+      subtitle: "Explore iconic collections from Zara, H&M, Levi's, Nike & curated global multi-vendors.",
+      ctaText: "EXPLORE FASHION",
+      ctaHref: "/products?category=Fashion",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=1600&auto=format&fit=crop&q=80",
+      badge: "GOURMET KITCHEN",
+      title: "Artisan Food",
+      titleItalic: "& Beverages",
+      subtitle: "Savory delicacies, healthy snacks, craft beverages and premium delights for every craving.",
+      ctaText: "DISCOVER FOOD",
+      ctaHref: "/products?category=Food",
     },
   ];
 
   let slides = defaultSlides;
-  
+
   try {
     const campaigns = await fetchActiveCampaigns();
     const campaignSlides = campaigns
@@ -28,8 +43,12 @@ export default async function Hero() {
       .map((c) => ({
         image: resolveImageUrl(c.images![0].images[0]),
         title: c.title,
-        subtitle: c.description || "A HERITAGE OF RARE TEA, REFINED THROUGH CRAFTSMANSHIP, PURITY AND TIMELESS ELEGANCE",
+        titleItalic: "Collection",
+        subtitle: c.description || "Exclusive multi-category selections from verified premium vendors.",
         hasDiscount: c.hasDiscount,
+        ctaText: "SHOP DEALS",
+        ctaHref: "/products",
+        badge: "EXCLUSIVE PROMO",
       }));
 
     if (campaignSlides.length > 0) {

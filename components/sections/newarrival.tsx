@@ -1,80 +1,144 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import DiscoverMoreButton from "./ui/button";
+import { useState, useEffect, useMemo } from 'react';
+import Link from 'next/link';
 import ProductCard from "./ui/product-card";
-import { fetchShopProducts, ShopProduct } from "@/lib/shop-api";
+import { fetchShopProducts, fetchShopCategories, ShopProduct, ShopCategory } from "@/lib/shop-api";
+import { LuArrowRight, LuSparkles } from 'react-icons/lu';
 
 export default function NewArrival() {
   const [products, setProducts] = useState<ShopProduct[]>([]);
+  const [categories, setCategories] = useState<ShopCategory[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function loadProducts() {
+    async function loadData() {
       try {
-        const res = await fetchShopProducts({ limit: 6 });
-        setProducts(res.data);
+        const [prodRes, catRes] = await Promise.all([
+          fetchShopProducts({ limit: 16 }),
+          fetchShopCategories(),
+        ]);
+        setProducts(prodRes.data);
+        setCategories(catRes.filter(c => !c.parentId));
       } catch (error) {
         console.error("Failed to fetch new arrivals", error);
       } finally {
         setIsLoading(false);
       }
     }
-    loadProducts();
+    loadData();
   }, []);
 
-  if (isLoading) {
-    return (
-      <section className="w-full bg-[#F9F9FB] py-16 md:py-24 border-t border-stone-100">
-        <div className="max-w-[1440px] mx-auto px-5 sm:px-10 md:px-14 lg:px-20">
-          <div className="flex justify-center mb-8">
-            <div className="h-10 bg-stone-200 animate-pulse rounded w-64"></div>
-          </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="h-72 bg-stone-200 animate-pulse rounded"></div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
+  const categoryTabs = useMemo(() => {
+    const list = ["All"];
+    categories.forEach(c => {
+      if (c.name && !list.includes(c.name)) list.push(c.name);
+    });
+    // Add fallback popular multi-category tabs if categories are few
+    ["Groceries", "Food & Beverage", "Fashion"].forEach(name => {
+      if (!list.includes(name) && list.length < 8) list.push(name);
+    });
+    return list;
+  }, [categories]);
 
-  if (products.length === 0) {
-    return null;
-  }
+  const filteredProducts = useMemo(() => {
+    if (selectedCategory === "All") return products.slice(0, 8);
+    const lower = selectedCategory.toLowerCase();
+    const matched = products.filter(p => 
+      p.category?.toLowerCase().includes(lower) || 
+      p.name?.toLowerCase().includes(lower)
+    );
+    return matched.length > 0 ? matched.slice(0, 8) : products.slice(0, 8);
+  }, [products, selectedCategory]);
 
   return (
-    <section className="relative w-full py-16 md:py-24 bg-[#F9F9FB] border-t border-stone-100 overflow-hidden">
-      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-10 md:px-14 lg:px-20">
-        {/* Header */}
-        <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-16">
-          <h2 className="inline-flex justify-center flex-wrap items-center gap-1.5">
-            <span className="text-[#C6B485] text-4xl md:text-5xl lg:text-6xl font-normal font-['Bembo_Std'] leading-tight lg:leading-[56px]">New</span>
-            <span className="text-[#8E866B] text-4xl md:text-5xl lg:text-6xl font-normal font-['Snell_Roundhand_LT_Std'] leading-tight lg:leading-[56px]">Arrivals</span>
+    <section className="relative w-full py-14 sm:py-20 bg-stone-50/60 border-t border-stone-200/70 overflow-hidden">
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        {/* Section Header */}
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-[11px] font-bold uppercase tracking-wider mb-3">
+            <LuSparkles className="w-3.5 h-3.5 text-emerald-600" />
+            <span>Curated Marketplace</span>
+          </div>
+
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+            Fresh Arrivals & Trending Drops
           </h2>
-          <p className="max-w-[700px] text-center text-[#83847e] text-base lg:text-lg font-normal font-['Bembo_Std'] leading-6 mx-auto">
-            Designed to make a lasting impression for corporate, seasonal, and personal gifting.
+
+          <p className="max-w-2xl text-zinc-500 text-sm sm:text-base leading-relaxed">
+            Browse newly added grocery produce, everyday food staples, designer apparel, footwear, and accessories from certified top-rated vendors.
           </p>
+
+          {/* Interactive Category Filter Pills */}
+          <div className="flex items-center justify-center gap-2 flex-wrap mt-6 max-w-4xl">
+            {categoryTabs.map((tab) => {
+              const isActive = selectedCategory === tab;
+              return (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setSelectedCategory(tab)}
+                  className={`px-4 py-2 rounded-full text-xs sm:text-[13px] font-medium transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? "bg-zinc-900 text-white shadow-sm scale-102"
+                      : "bg-white text-zinc-600 hover:text-zinc-900 hover:bg-stone-100 border border-zinc-200/80"
+                  }`}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={`৳${product.price.toLocaleString()}`}
-              originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
-              image={product.image}
-              slug={product.slug}
-            />
-          ))}
-        </div>
+        {/* Products Grid */}
+        {isLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="h-80 bg-white rounded-2xl border border-zinc-100 p-4 animate-pulse flex flex-col justify-between">
+                <div className="w-full aspect-square bg-zinc-100 rounded-xl" />
+                <div className="h-4 bg-zinc-100 rounded w-3/4 mt-4" />
+                <div className="h-6 bg-zinc-100 rounded w-1/2 mt-2" />
+              </div>
+            ))}
+          </div>
+        ) : filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+            {filteredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={`৳${product.price.toLocaleString()}`}
+                originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
+                image={product.image}
+                slug={product.slug}
+                category={product.category}
+                brand={product.team}
+                unit={product.unit}
+                badge={product.badge || "NEW"}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-16 bg-white rounded-2xl border border-zinc-200/60 p-8">
+            <p className="text-zinc-500 text-sm">No products found in this category.</p>
+            <Link href="/products" className="mt-4 inline-block text-emerald-600 font-semibold text-sm hover:underline">
+              View All Products →
+            </Link>
+          </div>
+        )}
 
+        {/* Discover All CTA */}
         <div className="pt-12 text-center">
-          <DiscoverMoreButton href="/products" label="DISCOVER MORE" variant="primary" />
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-zinc-900 hover:bg-emerald-600 text-white font-sans text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:scale-103 cursor-pointer"
+          >
+            <span>Explore All Marketplace Products</span>
+            <LuArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>

@@ -1,66 +1,73 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
+import { LuTruck, LuShieldCheck, LuStore, LuCreditCard } from 'react-icons/lu';
 
 export default function TrustFeatures() {
   const features = [
     {
-      title: 'Sovereign Seal',
-      iconUrl: '/images/icons/why-chosse-1.svg',
+      title: 'Fast Doorstep Delivery',
+      desc: 'Same-day grocery deliveries & rapid shipping for fashion, footwear and electronics.',
+      icon: LuTruck,
+      color: 'text-emerald-600 bg-emerald-50 border-emerald-100',
     },
     {
-      title: 'Grand Passage',
-      iconUrl: '/images/icons/why-chosse-2.svg',
+      title: '100% Authentic Quality',
+      desc: 'All products sourced directly from verified manufacturers and official brand partners.',
+      icon: LuShieldCheck,
+      color: 'text-blue-600 bg-blue-50 border-blue-100',
     },
     {
-      title: 'Noble Balance',
-      iconUrl: '/images/icons/why-chosse-3.svg',
+      title: 'Certified Multi-Vendors',
+      desc: 'Strict seller compliance, background verification, and continuous rating audits.',
+      icon: LuStore,
+      color: 'text-purple-600 bg-purple-50 border-purple-100',
     },
     {
-      title: 'World Assembly',
-      iconUrl: '/images/icons/why-chosse-4.svg',
+      title: 'Secure Payments & Easy Return',
+      desc: 'Encrypted checkout, cash-on-delivery options, and a hassle-free 7-day return policy.',
+      icon: LuCreditCard,
+      color: 'text-amber-600 bg-amber-50 border-amber-100',
     },
   ];
 
   return (
-    <section className="w-full bg-white pt-20 pb-10 sm:pt-28 sm:pb-12 overflow-hidden flex flex-col justify-center items-center">
-      <div className="max-w-6xl mx-auto px-5 w-full flex flex-col justify-start items-center gap-12 sm:gap-16">
+    <section className="w-full bg-[#FAF9F5] py-16 sm:py-20 border-t border-stone-200/70 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 w-full flex flex-col items-center">
         {/* Title */}
-        <div className="self-stretch flex flex-col justify-start items-center">
-          <div className="text-center justify-start text-khaki-gold text-5xl sm:text-6xl font-normal font-['Bembo_Std'] leading-[56px]">
-            Why Choose
+        <div className="text-center max-w-2xl mb-12">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-200/80 text-stone-800 text-[11px] font-bold uppercase tracking-wider mb-3">
+            <span>Marketplace Promise</span>
           </div>
-          <div className="text-center justify-start text-neutral-800 text-5xl sm:text-6xl font-normal font-['Snell_Roundhand_LT_Std'] leading-[56px]">
-            London Tea Exchange
-          </div>
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+            Why Shop On Our Marketplace
+          </h2>
+          <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">
+            We connect you with authentic brands and verified sellers with end-to-end buyer protection and reliable customer support.
+          </p>
         </div>
 
         {/* Features Row */}
-        <div className="flex flex-wrap justify-center items-center gap-10 sm:gap-14 md:gap-20">
-          {features.map((feature, i) => (
-            <div key={i} className="flex flex-col justify-center items-center gap-3 hover:scale-105 transition-transform duration-300">
-              <div className="w-16 h-16 flex items-center justify-center relative">
-                <Image
-                  src={feature.iconUrl}
-                  alt={feature.title}
-                  width={56}
-                  height={56}
-                  className="object-contain"
-                />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          {features.map((feature, i) => {
+            const Icon = feature.icon;
+            return (
+              <div
+                key={i}
+                className="flex flex-col items-center text-center p-6 sm:p-7 rounded-2xl bg-white border border-stone-200/80 shadow-xs hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-4 border ${feature.color} group-hover:scale-110 transition-transform`}>
+                  <Icon className="w-7 h-7" />
+                </div>
+                <h3 className="text-zinc-900 font-semibold text-base sm:text-lg mb-2">
+                  {feature.title}
+                </h3>
+                <p className="text-zinc-500 text-xs sm:text-sm leading-relaxed">
+                  {feature.desc}
+                </p>
               </div>
-              <div className="text-center justify-start text-neutral-800 text-sm sm:text-base md:text-lg font-normal font-['Gotham'] leading-6">
-                {feature.title}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Center Paragraph */}
-        <div className="w-full max-w-[750px] text-center text-zinc-500 text-sm sm:text-base font-normal font-['Bembo_Std'] leading-relaxed px-4">
-          When tea becomes part of your hospitality, gifting, or brand experience, every detail matters. Our
-          collections are curated to leave a lasting impression—through exceptional quality, refined
-          presentation, and uncompromising attention to detail.
+            );
+          })}
         </div>
       </div>
     </section>

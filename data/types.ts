@@ -21,6 +21,9 @@ export interface Slide {
   titleItalic?: string;
   subtitle: string;
   hasDiscount?: boolean;
+  ctaText?: string;
+  ctaHref?: string;
+  badge?: string;
 }
 
 export interface HeroSliderProps {
@@ -59,4 +62,11 @@ export interface ProductCardProps {
   originalPrice?: string;
   image: string;
   slug?: string;
+  category?: string;
+  brand?: string;
+  vendor?: string;
+  rating?: number;
+  reviewCount?: number;
+  unit?: string;
+  badge?: string;
 }

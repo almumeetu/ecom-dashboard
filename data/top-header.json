@@ -9,11 +9,12 @@
   },
   "slider": {
     "slides": [
-      "Purveyor Of Direct Trade, Organic Teas From Off The Beaten Path",
-      "Handpicked Single-Origin Teas From Remote Mountain Gardens"
+      "🌟 Multi-Category Marketplace: Fresh Groceries, Fashion, Footwear & Food",
+      "🚀 Free Express Delivery On Orders Over ৳1,000 | 100% Verified Authentic Brands",
+      "⚡ Mega Flash Sale: Up to 50% Off On Trending Fashion & Daily Pantry"
     ],
-    "autoplayDelay": 3000,
-    "speed": 500
+    "autoplayDelay": 3500,
+    "speed": 600
   },
   "selectors": {
     "language": {

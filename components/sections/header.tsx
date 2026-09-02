@@ -14,19 +14,22 @@ import { useWishlist } from "@/app/_providers/wishlist-provider";
 import { fetchShopProducts, type ShopProduct } from "@/lib/shop-api";
 
 const sylhetiTeaItems = [
-  { label: "Black Tea", href: "/sylheti-tea/black-tea" },
-  { label: "Green Tea", href: "/sylheti-tea/green-tea" },
-  { label: "Organic Collection", href: "/sylheti-tea/organic-collection" },
-  { label: "Signature Collection", href: "/sylheti-tea/signature-collection" },
+  { label: "Fresh Groceries", href: "/products?search=grocery" },
+  { label: "Women's Fashion", href: "/products?category=Women's+Fashion" },
+  { label: "Men's Fashion", href: "/products?category=Men's+Fashion" },
+  { label: "Footwear & Shoes", href: "/products?category=Footwear" },
+  { label: "Bags & Accessories", href: "/products?category=Accessories" },
+  { label: "Artisan Food & Drinks", href: "/products?search=food" },
 ];
 
 const navItems = [
   { label: "Home", href: "/" },
+  { label: "CATEGORIES", href: "/products", hasDropdown: true },
+  { label: "GROCERIES", href: "/products?search=grocery" },
+  { label: "FASHION", href: "/products?category=Fashion" },
+  { label: "FOOTWEAR", href: "/products?category=Footwear" },
+  { label: "ACCESSORIES", href: "/products?category=Accessories" },
   { label: "ABOUT US", href: "/about" },
-  { label: "TEAS", href: "/products", hasDropdown: true },
-  { label: "GIFT SETS", href: "/gift-sets" },
-  { label: "CORPORATE ORDER", href: "/corporate-order" },
-  { label: "GLOBAL FAIR PAY CHARTER", href: "/global-fair-pay-charter" },
   { label: "CONTACT", href: "/contact" },
 ];
 

@@ -7,6 +7,7 @@ import { Navigation, Autoplay } from 'swiper/modules';
 import ProductCard from './product-card';
 import DiscoverMoreButton from './button';
 import { fetchShopProducts, ShopProduct } from '@/lib/shop-api';
+import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -21,11 +22,9 @@ export default function RelatedCarousel() {
     async function loadProducts() {
       try {
         const res = await fetchShopProducts({ limit: 12 });
-        // Reverse or shift elements to show different products in Popular section if needed
-        // Here we just use the fetched products
         setProducts(res.data);
       } catch (err) {
-        console.error('Failed to fetch most popular products', err);
+        console.error('Failed to fetch related products', err);
       } finally {
         setIsLoading(false);
       }
@@ -35,14 +34,15 @@ export default function RelatedCarousel() {
 
   if (isLoading) {
     return (
-      <section className="w-full bg-[#F9F9FB] py-16 sm:py-24 border-t border-stone-100 overflow-hidden">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-center mb-8">
-            <div className="w-64 h-10 bg-stone-200 animate-pulse rounded"></div>
+      <section className="w-full bg-[#FAF9F5] py-16 sm:py-20 border-t border-stone-200/80 overflow-hidden">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
+          <div className="flex flex-col items-center justify-center mb-10 space-y-2">
+            <div className="w-48 h-8 bg-stone-200 animate-pulse rounded-lg" />
+            <div className="w-64 h-4 bg-stone-200 animate-pulse rounded-lg" />
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-72 bg-stone-200 animate-pulse rounded"></div>
+              <div key={i} className="h-80 bg-stone-200 animate-pulse rounded-2xl" />
             ))}
           </div>
         </div>
@@ -54,99 +54,72 @@ export default function RelatedCarousel() {
     return null;
   }
 
-  // Duplicate the list of products to ensure Swiper loop mode works without empty space glitches or warnings.
+  // Duplicate to guarantee smooth infinite loop
   const displayProducts = [
     ...products,
-    ...products.map((product) => ({
-      ...product,
-      id: product.id + '-dup',
-    })),
+    ...products.map((p) => ({ ...p, id: p.id + '-dup' })),
   ];
 
   return (
-    <section className="w-full bg-[#F9F9FB] py-16 sm:py-24 border-t border-stone-100 overflow-hidden">
-      {/* Centered Header with Navigation Controls */}
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="flex flex-col items-center justify-center gap-2 mb-8">
-          <div className="flex items-center justify-center gap-8 sm:gap-12 md:gap-16">
-            <button
-              className="related-prev flex items-center gap-2 text-stone-850 hover:text-[#B9975B] transition-colors text-xs font-semibold uppercase tracking-wider cursor-pointer select-none"
-              aria-label="Previous products"
-            >
-              <span className="text-[#B9975B] text-[11px] font-normal leading-none flex items-center">&lt;</span>
-              <span className="font-gotham font-medium text-[11px] tracking-[0.2em] text-stone-850 leading-none flex items-center">PREVIOUS</span>
-            </button>
-
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal text-center">
-              <span className="font-['Bembo_Std'] text-khaki-gold">Most </span>
-              <span className="font-['Snell_Roundhand_LT_Std'] italic text-stone-gray ml-1.5">Popular</span>
+    <section className="w-full bg-[#FAF9F5] py-16 sm:py-20 border-t border-stone-200/80 overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+        {/* Header with Navigation Controls */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-200/80 text-stone-800 text-[11px] font-bold uppercase tracking-wider mb-2">
+              <span>Handpicked For You</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-zinc-950 font-sans">
+              You May Also Like
             </h2>
-
-            <button
-              className="related-next flex items-center gap-2 text-stone-850 hover:text-[#B9975B] transition-colors text-xs font-semibold uppercase tracking-wider cursor-pointer select-none"
-              aria-label="Next products"
-            >
-              <span className="font-gotham font-medium text-[11px] tracking-[0.2em] text-stone-850 leading-none flex items-center">NEXT</span>
-              <span className="text-[#B9975B] text-[11px] font-normal leading-none flex items-center">&gt;</span>
-            </button>
+            <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+              Popular trending items and verified multi-vendor recommendations
+            </p>
           </div>
 
-          {/* Custom 3-Dot Pagination (Centered below title) */}
-          <div className="flex justify-center items-center gap-2 mt-2 h-4">
-            {[0, 1, 2].map((i) => {
-              // Map loop index (0-5) to 3 dot segments
-              const relativeIndex = activeIndex % 6;
-              const isActive = Math.floor(relativeIndex / 2) === i;
-              return (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (swiperRef) {
-                      swiperRef.slideToLoop(i * 2);
-                    }
-                  }}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                    isActive
-                      ? 'bg-[#B9975B] scale-110'
-                      : 'bg-[#e2e2e2] hover:bg-[#c5a86a]'
-                  }`}
-                  aria-label={`Go to slide group ${i + 1}`}
-                />
-              );
-            })}
+          {/* Navigation Buttons */}
+          <div className="flex items-center gap-2">
+            <button
+              className="related-prev w-11 h-11 rounded-full bg-white border border-stone-200 text-zinc-800 hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all flex items-center justify-center shadow-xs cursor-pointer"
+              aria-label="Previous products"
+            >
+              <IoChevronBackOutline className="w-5 h-5" />
+            </button>
+            <button
+              className="related-next w-11 h-11 rounded-full bg-white border border-stone-200 text-zinc-800 hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all flex items-center justify-center shadow-xs cursor-pointer"
+              aria-label="Next products"
+            >
+              <IoChevronForwardOutline className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Full-width Swiper Carousel Slider (No side padding on desktop or mobile) */}
-      <div className="w-full px-0">
+      {/* Swiper Carousel */}
+      <div className="w-full px-4 sm:px-6 md:px-8 max-w-[1440px] mx-auto">
         <Swiper
           modules={[Navigation, Autoplay]}
           onSwiper={setSwiperRef}
-          onSlideChange={(swiper) => {
-            setActiveIndex(swiper.realIndex);
-          }}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           navigation={{
             prevEl: '.related-prev',
             nextEl: '.related-next',
           }}
           autoplay={{
-            delay: 3500,
+            delay: 4000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
-          spaceBetween={24}
+          spaceBetween={20}
           slidesPerView={1.2}
-          centeredSlides={true}
-          initialSlide={2}
+          centeredSlides={false}
           loop={true}
           breakpoints={{
-            480: { slidesPerView: 1.8, spaceBetween: 20 },
-            768: { slidesPerView: 2.8, spaceBetween: 24 },
-            1024: { slidesPerView: 3.5, spaceBetween: 24 },
-            1440: { slidesPerView: 4.2, spaceBetween: 24 },
+            480: { slidesPerView: 2, spaceBetween: 16 },
+            768: { slidesPerView: 3, spaceBetween: 20 },
+            1024: { slidesPerView: 4, spaceBetween: 24 },
           }}
-          className="related-swiper pb-12 w-full"
+          className="related-swiper pb-4 w-full"
         >
           {displayProducts.map((product) => (
             <SwiperSlide key={product.id}>
@@ -165,8 +138,8 @@ export default function RelatedCarousel() {
         </Swiper>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 mt-10">
-        <DiscoverMoreButton href="/products" label="DISCOVER MORE" variant="primary" />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 text-center mt-10">
+        <DiscoverMoreButton href="/products" label="DISCOVER ALL PRODUCTS" variant="primary" />
       </div>
     </section>
   );

@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+  display: "swap",
+});
 
 const bembo = localFont({
   src: [
@@ -56,8 +64,13 @@ const gotham = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "London Tea Exchange",
-  description: "London Tea Exchange offers an exquisite selection of single estate premium teas and unique tea collections sourced from across the globe.",
+  title: "NovaMart | Multi-Category & Multi-Vendor Marketplace",
+  description: "Discover fresh groceries, trending fashion, footwear, bakery and lifestyle essentials from certified multi-vendors at NovaMart.",
+  icons: {
+    icon: "/images/logo.svg",
+    shortcut: "/images/logo.svg",
+    apple: "/images/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -66,8 +79,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`h-full antialiased scroll-smooth ${bembo.variable} ${snell.variable} ${gotham.variable}`}>
-      <body className="min-h-full flex flex-col">
+    <html lang="en" className={`h-full antialiased scroll-smooth ${plusJakartaSans.variable} ${bembo.variable} ${snell.variable} ${gotham.variable}`}>
+      <body className="min-h-full flex flex-col font-sans text-neutral-900 antialiased selection:bg-stone-800 selection:text-white">
         {children}
       </body>
     </html>

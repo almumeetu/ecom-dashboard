@@ -15,6 +15,7 @@ import { clearBuyNowItem } from "@/lib/buy-now";
 import { fetchShopProductById } from "@/lib/shop-api";
 import { resolveImageUrl } from "@/lib/admin-api";
 import type { Product as AdminProduct } from "@/lib/admin-api";
+import PageBanner from "@/components/ui/page-banner";
 
 
 export default function CartPage() {
@@ -229,6 +230,19 @@ export default function CartPage() {
 
   return (
     <main className="flex-grow bg-white w-full min-h-screen">
+      <PageBanner
+        title="Your Shopping Cart"
+        subtitle={
+          items.length > 0
+            ? `Review your selected ${items.length} item${items.length === 1 ? "" : "s"} before proceeding to checkout.`
+            : "Your shopping bag is currently empty. Explore our marketplace for fresh finds!"
+        }
+        badge="SECURE CART"
+        breadcrumbs={[
+          { label: "Products", href: "/products" },
+          { label: "Shopping Cart" },
+        ]}
+      />
       <div className="max-w-[1200px] mx-auto px-4 sm:px-5 py-8 sm:py-12">
         {!initialised ? (
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_384px] gap-8 lg:gap-16">

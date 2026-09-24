@@ -40,17 +40,17 @@ export default function TopHeader() {
       <div className="topheader-wrapper max-w-360 mx-auto relative">
         <div className="flex items-center justify-between py-1 sm:py-2.5 gap-2 md:gap-4">
           {/* Left Section - Help & Phone */}
-          <div className="flex items-center gap-1 sm:gap-2 text-[11px] sm:text-xs text-white z-10">
-            <span className="font-['Gotham'] text-white hidden sm:inline">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 text-xs text-white/90 z-10 font-normal">
+            <span className="hidden sm:inline">
               {help.text}
             </span>
-            <span className="font-['Gotham'] text-white hidden sm:inline">|</span>
+            <span className="hidden sm:inline text-white/40">|</span>
             <div className="flex items-center gap-1 sm:gap-1.5 text-white">
-              <IoCallOutline className="w-3.5 h-3.5 text-white" />
-              <span className="font-['Gotham'] text-white hidden md:inline">
+              <IoCallOutline className="w-3.5 h-3.5 text-white/80" />
+              <span className="hidden md:inline font-medium">
                 {help.phone.label} {primaryPhone}
               </span>
-              <span className="font-['Gotham'] text-white md:hidden">
+              <span className="md:hidden font-medium">
                 {primaryPhoneShort}
               </span>
             </div>
@@ -62,9 +62,9 @@ export default function TopHeader() {
           </div>
 
           {/* Right Section - Location */}
-          <div className="flex items-center gap-1 sm:gap-1.5 text-xs sm:text-sm text-white z-10">
-            <IoLocationOutline className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
-            <span className="font-['Gotham'] text-white text-[11px] sm:text-xs">
+          <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-white/90 z-10 font-normal">
+            <IoLocationOutline className="w-3.5 h-3.5 text-white/80" />
+            <span className="text-xs">
               Pan Pacific Sonargaon
             </span>
           </div>

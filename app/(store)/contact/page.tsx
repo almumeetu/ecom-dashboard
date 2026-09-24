@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { FiPhone, FiMail, FiMapPin } from 'react-icons/fi';
 import { toast } from 'sonner';
 import ScrollAnimate from '@/components/ui/scroll-animate';
+import PageBanner from '@/components/ui/page-banner';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -81,33 +82,42 @@ export default function ContactPage() {
   ];
 
   return (
-    <main className="relative w-full bg-[#4A4C48] py-16 px-4 sm:px-6 md:px-8 lg:py-24 overflow-hidden">
-      {/* Repeating Luxury Pattern Image */}
-      <div 
-        className="absolute inset-0 z-0 opacity-30 pointer-events-none"
-        style={{
-          backgroundImage: "url('/images/pattern/pattern.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "150px 150px",
-        }}
-      ></div>
+    <div className="w-full">
+      <PageBanner
+        title="Contact & Customer Support"
+        subtitle="Have questions regarding your order, multi-vendor shipping, or partner inquiries? Our support team is here 24/7."
+        badge="GET IN TOUCH"
+        breadcrumbs={[
+          { label: "Contact Us" },
+        ]}
+      />
+      <main className="relative w-full bg-[#4A4C48] py-16 px-4 sm:px-6 md:px-8 lg:py-24 overflow-hidden">
+        {/* Repeating Luxury Pattern Image */}
+        <div 
+          className="absolute inset-0 z-0 opacity-30 pointer-events-none"
+          style={{
+            backgroundImage: "url('/images/pattern/pattern.png')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "150px 150px",
+          }}
+        ></div>
 
-      <div className="relative z-10 max-w-6xl mx-auto">
-        
-        {/* COMBINED CONTAINER: Contact Form, Info & Map */}
-        <ScrollAnimate variant="fade-in-up">
-          <div className="bg-white rounded-xl shadow-2xl border border-white/50 overflow-hidden">
-            {/* CONTAINER 1: Contact Form & Info */}
-            <div className="p-8 sm:p-12 md:p-16">
-              {/* Header */}
-              <div className="text-center mb-16">
-                <h1 className="font-['Bembo_Std'] text-4xl sm:text-5xl text-[#C6B485] font-normal tracking-wide">
-                  Contact <span className="font-['Snell_Roundhand_LT_Std'] italic text-stone-850 lowercase text-5xl sm:text-6xl -ml-1">us</span>
-                </h1>
-                <p className="font-['Bembo_Std'] text-stone-400 text-xs sm:text-sm tracking-wide mt-4 font-light max-w-xl mx-auto">
-                  Where our dedication to tea is matched by a distinguished history of excellence.
-                </p>
-              </div>
+        <div className="relative z-10 max-w-6xl mx-auto">
+          
+          {/* COMBINED CONTAINER: Contact Form, Info & Map */}
+          <ScrollAnimate variant="fade-in-up">
+            <div className="bg-white rounded-xl shadow-2xl border border-white/50 overflow-hidden">
+              {/* CONTAINER 1: Contact Form & Info */}
+              <div className="p-8 sm:p-12 md:p-16">
+                {/* Header */}
+                <div className="text-center mb-16">
+                  <h2 className="font-['Bembo_Std'] text-4xl sm:text-5xl text-[#C6B485] font-normal tracking-wide">
+                    Reach Out <span className="font-['Snell_Roundhand_LT_Std'] italic text-stone-850 lowercase text-5xl sm:text-6xl -ml-1">to us</span>
+                  </h2>
+                  <p className="font-['Bembo_Std'] text-stone-400 text-xs sm:text-sm tracking-wide mt-4 font-light max-w-xl mx-auto">
+                    Dedicated support connecting shoppers, verified multi-vendors, and brand partners with rapid assistance.
+                  </p>
+                </div>
 
               {/* Form and Details Grid */}
               <div className="self-stretch p-4 sm:p-12 flex flex-col lg:flex-row justify-start items-start gap-12">
@@ -398,6 +408,6 @@ export default function ContactPage() {
 
       </div>
     </main>
+    </div>
   );
-
 }

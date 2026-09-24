@@ -21,6 +21,7 @@ import OrdersView from "./_components/orders-view";
 import AddressBookView from "./_components/address-book";
 import WishlistView from "./_components/wishlist-view";
 import TrackOrderView from "./_components/track-order";
+import PageBanner from "@/components/ui/page-banner";
 
 type ProfileTab = "details" | "orders" | "address" | "wishlist" | "track";
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1";
@@ -93,6 +94,15 @@ function ProfilePageContent() {
         </main>
       ) : (
         <div className="relative w-full flex-1 flex flex-col bg-white min-h-[calc(100vh-140px)]">
+          <PageBanner
+            title={user?.name ? `Welcome back, ${user.name}` : "My Account"}
+            subtitle="Manage your profile details, track recent marketplace shipments, and access saved addresses."
+            badge="CUSTOMER PORTAL"
+            breadcrumbs={[
+              { label: "My Account" },
+              ...(activeTab !== "details" ? [{ label: activeTab.toUpperCase() }] : []),
+            ]}
+          />
           <div
             className="absolute inset-y-0 left-0 hidden lg:block bg-[#F7F6F2] border-r border-stone-200/80 pointer-events-none z-0"
             style={{ width: "calc(50vw - min(100vw, 1400px) * 0.25 + 16px)" }}

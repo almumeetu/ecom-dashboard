@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" fill="none">
+  <defs>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981" />
+      <stop offset="50%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="cubeTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6EE7B7" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+    <linearGradient id="cubeRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+    <filter id="shadowGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#10B981" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Modern Geometric Shopping Cube / Sparkle Emblem -->
+  <g transform="translate(6, 6)" filter="url(#shadowGlow)">
+    <!-- Top Face -->
+    <path d="M26 4 L44 14 L26 24 L8 14 Z" fill="url(#cubeTop)" />
+    <!-- Left Face -->
+    <path d="M8 14 L26 24 L26 46 L8 36 Z" fill="url(#primaryGrad)" />
+    <!-- Right Face -->
+    <path d="M26 24 L44 14 L44 36 L26 46 Z" fill="url(#cubeRight)" />
+    <!-- Center Cutout / Marketplace Star -->
+    <circle cx="26" cy="24" r="3.5" fill="#FFFFFF" opacity="0.9" />
+    <!-- Floating Quick-Pulse Accent Dot -->
+    <circle cx="44" cy="14" r="2" fill="#FBBF24" />
+  </g>
+
+  <!-- Wordmark "NovaMart" -->
+  <g transform="translate(66, 12)">
+    <text x="0" y="27" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="28" font-weight="800" fill="#18181B" letter-spacing="-0.8">
+      Nova<tspan fill="#059669">Mart</tspan>
+    </text>
+    <!-- Subtitle / Marketplace Tagline -->
+    <text x="1" y="39" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="8.5" font-weight="600" fill="#71717A" letter-spacing="2.2">
+      MULTI-VENDOR MARKETPLACE
+    </text>
+  </g>
+</svg>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiLoader, FiEye, FiEyeOff } from "react-icons/fi";
 import { apiRequest, setAdminSession, type AdminUser } from "../../../lib/admin-api";
+import Logo from "@/components/ui/logo";
 
 type LoginResponse = {
   accessToken: string;
@@ -51,14 +52,11 @@ export default function AdminLoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#FAF9F5] py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-[450px] bg-white border border-stone-200 p-8 shadow-sm flex flex-col items-center rounded-lg animate-fadeIn">
-        <Link
-          href="/"
-          className="font-['Bembo_Std'] text-3xl font-normal text-zinc-800 tracking-wide mb-2"
-        >
-          London Tea Exchange
-        </Link>
-        <h1 className="font-['Bembo_Std'] text-3xl font-normal text-zinc-800 tracking-wide mb-6">
-          Admin Login
+        <div className="mb-4">
+          <Logo variant="dark" size="lg" />
+        </div>
+        <h1 className="font-['Bembo_Std'] text-2xl font-normal text-zinc-800 tracking-wide mb-6">
+          Vendor & Admin Portal
         </h1>
 
         <div className="flex mb-8 border-b border-stone-150 w-full justify-center">

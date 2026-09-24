@@ -6,11 +6,11 @@ import { LuPrinter, LuX } from "react-icons/lu";
 import type { OrderResult } from "@/lib/types";
 
 const COMPANY = {
-  name: "London Tea Exchange",
-  logo: "/images/logo/Logo-update.png",
-  addressLine: "Room H-125A, Pan Pacific Sonargaon Hotel, 107 Kazi Nazrul Islam Avenue, Dhaka-1215, Bangladesh",
+  name: "NovaMart Multi-Vendor Marketplace",
+  logo: "/images/logo.svg",
+  addressLine: "Pan Pacific Sonargaon, 107 Kazi Nazrul Islam Avenue, Dhaka-1215, Bangladesh",
   phone: "+880 13 3987 9494",
-  email: "store@londonteaexchangebd.com",
+  email: "support@novamart.com",
 };
 
 const currency = (n: number) =>

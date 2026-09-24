@@ -25,12 +25,12 @@ export function PolicyLinksBar({ links }: Props) {
         <span key={link.key} className="flex items-center gap-2">
           <button
             onClick={() => setOpen(link)}
-            className="font-['Gotham'] text-white text-xs hover:text-[#b4a676] transition-colors cursor-pointer bg-transparent border-none p-0"
+            className="text-zinc-400 text-sm hover:text-white transition-colors cursor-pointer bg-transparent border-none p-0"
           >
             {link.label}
           </button>
           {index < links.length - 1 && (
-            <span className="text-white/50 text-xs" aria-hidden>·</span>
+            <span className="text-zinc-600 text-sm" aria-hidden>·</span>
           )}
         </span>
       ))}

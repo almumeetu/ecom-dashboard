@@ -15,6 +15,7 @@ import MapPickerModal from "./_components/map-picker-modal";
 import AddressSelectModal from "./_components/address-select-modal";
 import { getAddresses, createAddress, type SavedAddress } from "@/lib/storefront-api";
 import { toast } from "sonner";
+import PageBanner from "@/components/ui/page-banner";
 
 const emptyAddress: AddressForm = {
   email: "",
@@ -202,6 +203,16 @@ export default function CheckoutPage() {
 
   return (
     <main className="flex-grow bg-white w-full min-h-screen">
+      <PageBanner
+        title="Secure Checkout"
+        subtitle="Complete your shipping address and payment method to place your order."
+        badge="100% ENCRYPTED CHECKOUT"
+        breadcrumbs={[
+          { label: "Products", href: "/products" },
+          { label: "Cart", href: "/cart" },
+          { label: "Checkout" },
+        ]}
+      />
       <div className="max-w-[1200px] mx-auto px-4 sm:px-5 py-8 sm:py-12">
         <form onSubmit={handlePlaceOrder}>
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_384px] gap-8 lg:gap-16">

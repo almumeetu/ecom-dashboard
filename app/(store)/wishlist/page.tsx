@@ -6,6 +6,7 @@ import { useWishlist } from "@/app/_providers/wishlist-provider";
 import { useCart } from "@/app/_providers/cart-provider";
 import { useCurrency } from "@/lib/currency-context";
 import { LuTrash2, LuShoppingBag, LuHeart } from "react-icons/lu";
+import PageBanner from "@/components/ui/page-banner";
 
 export default function WishlistPage() {
   const { items, itemCount, toggleWishlist, clearWishlist } = useWishlist();
@@ -14,11 +15,16 @@ export default function WishlistPage() {
 
   return (
     <main className="flex-grow bg-white w-full min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <h1 className="font-bembo text-3xl text-stone-800 mb-2">Wishlist</h1>
-        <p className="text-stone-400 text-sm mb-8">
-          {itemCount} {itemCount === 1 ? "item" : "items"} saved
-        </p>
+      <PageBanner
+        title="Saved Wishlist"
+        subtitle={`Keep track of your favorite items (${itemCount}) from verified sellers across NovaMart.`}
+        badge="FAVORITES"
+        breadcrumbs={[
+          { label: "Products", href: "/products" },
+          { label: "Wishlist" },
+        ]}
+      />
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
 
         {items.length === 0 ? (
           <div className="text-center py-20">

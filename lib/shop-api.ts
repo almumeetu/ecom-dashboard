@@ -130,6 +130,8 @@ function mapProduct(product: AdminProduct): ShopProduct {
   };
 }
 
+import { FALLBACK_MARKETPLACE_PRODUCTS } from "./fallback-products";
+
 export async function fetchShopProducts(
   params: FetchShopProductsParams = {},
 ): Promise<ShopProductsResponse> {
@@ -154,18 +156,41 @@ export async function fetchShopProducts(
       cache: "no-store",
     });
 
-    if (res.status !== 200) {
-      return { data: [], total: 0 };
+    if (res.status === 200) {
+      const paginated: PaginatedProducts = await res.json();
+      return {
+        data: (paginated.data ?? []).map(mapProduct),
+        total: paginated.meta?.total ?? 0,
+      };
     }
-
-    const paginated: PaginatedProducts = await res.json();
-    return {
-      data: (paginated.data ?? []).map(mapProduct),
-      total: paginated.meta?.total ?? 0,
-    };
-  } catch {
-    return { data: [], total: 0 };
+  } catch (err) {
+    console.warn("API product fetch failed, using fallback:", err);
   }
+
+  // Graceful fallback to rich local marketplace catalog
+  let filtered = FALLBACK_MARKETPLACE_PRODUCTS;
+  if (search) {
+    const s = search.toLowerCase();
+    filtered = filtered.filter(
+      (p) =>
+        p.name.toLowerCase().includes(s) ||
+        (p.category?.name && p.category.name.toLowerCase().includes(s)) ||
+        (p.brand?.name && p.brand.name.toLowerCase().includes(s))
+    );
+  }
+  if (categoryId) {
+    filtered = filtered.filter((p) => p.categoryId === categoryId || p.category?.id === categoryId);
+  }
+  if (brandId) {
+    filtered = filtered.filter((p) => p.brandId === brandId || p.brand?.id === brandId);
+  }
+
+  const start = (page - 1) * limit;
+  const slice = filtered.slice(start, start + limit);
+  return {
+    data: slice.map(mapProduct),
+    total: filtered.length,
+  };
 }
 
 export async function fetchShopProductById(id: string): Promise<AdminProduct | null> {
@@ -175,12 +200,16 @@ export async function fetchShopProductById(id: string): Promise<AdminProduct | n
       cache: "no-store",
     });
 
-    if (res.status !== 200) return null;
-
-    return await res.json() as AdminProduct;
-  } catch {
-    return null;
+    if (res.status === 200) {
+      return (await res.json()) as AdminProduct;
+    }
+  } catch (err) {
+    console.warn(`fetchShopProductById(${id}) failed, checking fallback:`, err);
   }
+
+  // Check fallback
+  const found = FALLBACK_MARKETPLACE_PRODUCTS.find((p) => p.id === id);
+  return found ?? null;
 }
 
 export async function fetchShopProductBySlug(slug: string): Promise<AdminProduct | null> {
@@ -190,12 +219,23 @@ export async function fetchShopProductBySlug(slug: string): Promise<AdminProduct
       cache: "no-store",
     });
 
-    if (res.status !== 200) return null;
-
-    return await res.json() as AdminProduct;
-  } catch {
-    return null;
+    if (res.status === 200) {
+      return (await res.json()) as AdminProduct;
+    }
+  } catch (err) {
+    console.warn(`fetchShopProductBySlug(${slug}) failed, checking fallback:`, err);
   }
+
+  // Check fallback by slug match or clean match
+  const clean = slug.toLowerCase().trim();
+  const found = FALLBACK_MARKETPLACE_PRODUCTS.find(
+    (p) =>
+      p.slug.toLowerCase() === clean ||
+      p.slug.toLowerCase().replace(/[^a-z0-9]+/g, "-") === clean ||
+      clean.includes(p.slug.toLowerCase()) ||
+      p.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === clean
+  );
+  return found ?? null;
 }
 async function safeFetchJson<T>(url: string, fallback: T): Promise<T> {
   try {

@@ -12,6 +12,7 @@ import { useAuth } from "@/app/_providers/auth-provider";
 import { useCart } from "@/app/_providers/cart-provider";
 import { useWishlist } from "@/app/_providers/wishlist-provider";
 import { fetchShopProducts, type ShopProduct } from "@/lib/shop-api";
+import Logo from "@/components/ui/logo";
 
 const sylhetiTeaItems = [
   { label: "Fresh Groceries", href: "/products?search=grocery" },
@@ -416,19 +417,9 @@ export default function Header() {
           />
         </div>
 
-        <Link
-          href="/"
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-auto"
-        >
-          <Image
-            src="/images/logo/Logo-update.png"
-            alt="London Tea Exchange"
-            width={56}
-            height={56}
-            className="w-12 h-12 sm:w-14 sm:h-14 object-contain"
-            priority
-          />
-        </Link>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-auto">
+          <Logo variant="light" size="sm" showTagline={false} />
+        </div>
         <div className="z-10 flex items-center gap-2 shrink-0">
           <Link
             href="/wishlist"

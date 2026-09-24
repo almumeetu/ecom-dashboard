@@ -22,12 +22,12 @@ export async function POST(request: Request) {
         }
 
         const { error } = await resend.emails.send({
-            from: `London Tea Exchange <${fromEmail}>`,
+            from: `NovaMart Marketplace <${fromEmail}>`,
             to: [toEmail],
-            subject: 'New Contact Inquiry From London Tea Exchange Website',
+            subject: 'New Contact Inquiry From NovaMart Marketplace',
             html: `
                 <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
-                    <h1 style="color: #000;">New Contact Inquiry From London Tea Exchange Website</h1>
+                    <h1 style="color: #000;">New Contact Inquiry From NovaMart Marketplace</h1>
                     <p>Someone just submitted a contact inquiry!</p>
                     <table style="border-collapse: collapse; width: 100%;">
                         <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>First Name</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${body.firstName}</td></tr>

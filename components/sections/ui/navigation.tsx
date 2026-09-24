@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { fetchShopCategories, type ShopCategory } from "@/lib/shop-api";
+import Logo from "@/components/ui/logo";
 
 const leftNavItems = [
   { label: "HOME", href: "/" },
@@ -250,7 +251,9 @@ export default function Navigation() {
         {leftNavItems.map(renderNavItem)}
       </div>
 
-      <div className="w-16 xl:w-24"></div>
+      <div className="px-4 xl:px-8 shrink-0 flex items-center justify-center">
+        <Logo variant="light" size="md" />
+      </div>
 
       {/* Right nav group */}
       <div className="flex items-center justify-start gap-3 xl:gap-5 flex-1">

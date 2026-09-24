@@ -10,6 +10,7 @@ import Instagram from "@/components/sections/instagram";
 import ScrollAnimate from "@/components/ui/scroll-animate";
 
 import ProductCard from "@/components/sections/ui/product-card";
+import PageBanner from "@/components/ui/page-banner";
 import { fetchShopProducts, type ShopProduct } from "@/lib/shop-api";
 
 const curatedProducts = [
@@ -102,8 +103,16 @@ export default function GiftsPage() {
 
   return (
     <main className="relative w-full bg-[#FAF9F5] overflow-hidden">
+      <PageBanner
+        title="Gift Sets & Curated Bundles"
+        subtitle="Thoughtfully assembled multi-category luxury gift boxes, festive food packages, and executive celebration sets."
+        badge="CURATED GIFTING"
+        breadcrumbs={[
+          { label: "Gift Sets & Bundles" },
+        ]}
+      />
       
-      {/* SECTION 1: Top Gifting Items (Using existing premium section layout) */}
+      {/* SECTION 1: Top Gifting Items */}
       <ScrollAnimate variant="fade-in-up">
         <GiftItem />
       </ScrollAnimate>

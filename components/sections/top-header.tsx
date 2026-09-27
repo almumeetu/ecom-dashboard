@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
+import { LuTruck } from "react-icons/lu";
 import TopSlider from "./ui/topslider";
 import { fetchShopSettings } from "@/lib/shop-api";
 import data from "@/data/data.json";
@@ -32,47 +34,82 @@ export default function TopHeader() {
       ? shopSettings.contactNumber
       : [];
 
-  const primaryPhone = contactEntries[0]?.value || help.phone.full;
-  const primaryPhoneShort = contactEntries[0]?.value || help.phone.short;
+  const primaryPhone = contactEntries[0]?.value || "01722301927";
+  const primaryPhoneClean = primaryPhone.replace(/[^\d+]/g, "") || "01722301927";
 
   return (
-    <section className="w-full bg-sage-gray text-white font-medium px-2 sm:px-4 md:px-6 py-0.5 relative">
-      <div className="topheader-wrapper max-w-360 mx-auto relative">
-        <div className="flex items-center justify-between py-1 sm:py-2.5 gap-2 md:gap-4">
-          {/* Left Section - Help & Phone */}
-          <div className="flex items-center gap-1.5 sm:gap-2.5 text-xs text-white/90 z-10 font-normal">
-            <span className="hidden sm:inline">
-              {help.text}
-            </span>
-            <span className="hidden sm:inline text-white/40">|</span>
-            <div className="flex items-center gap-1 sm:gap-1.5 text-white">
-              <IoCallOutline className="w-3.5 h-3.5 text-white/80" />
-              <span className="hidden md:inline font-medium">
-                {help.phone.label} {primaryPhone}
+    <section className="w-full bg-[#111317] text-zinc-300 text-xs border-b border-white/[0.08] relative z-40 select-none">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Desktop & Tablet bar (single clean row) */}
+        <div className="hidden md:flex items-center justify-between h-9 gap-4">
+          {/* Left: Hotline & Help */}
+          <div className="flex items-center gap-3 shrink-0 text-xs font-normal">
+            <a
+              href={`tel:${primaryPhoneClean}`}
+              className="flex items-center gap-1.5 text-zinc-300 hover:text-emerald-400 transition-colors"
+            >
+              <IoCallOutline className="w-3.5 h-3.5 text-emerald-400" />
+              <span>
+                Hotline: <strong className="text-white font-medium">{primaryPhone}</strong>
               </span>
-              <span className="md:hidden font-medium">
-                {primaryPhoneShort}
-              </span>
-            </div>
+            </a>
+            <span className="text-zinc-700">|</span>
+            <Link
+              href="/contact"
+              className="text-zinc-400 hover:text-white transition-colors"
+            >
+              {help.text || "Help & Support"}
+            </Link>
           </div>
 
-          {/* Center Section - Promotional Text (Absolutely Centered) */}
-          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-xl z-0">
+          {/* Center: Announcement Slider */}
+          <div className="flex-1 max-w-xl mx-4 overflow-hidden">
             <TopSlider slogan={shopSettings?.slogan} />
           </div>
 
-          {/* Right Section - Location */}
-          <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-white/90 z-10 font-normal">
-            <IoLocationOutline className="w-3.5 h-3.5 text-white/80" />
-            <span className="text-xs">
-              Pan Pacific Sonargaon
-            </span>
+          {/* Right: Track Order & Location */}
+          <div className="flex items-center gap-3.5 shrink-0 text-xs font-normal">
+            <Link
+              href="/profile?tab=orders"
+              className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
+            >
+              <LuTruck className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Track Order</span>
+            </Link>
+            <span className="text-zinc-700">|</span>
+            <Link
+              href="/contact"
+              className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
+            >
+              <IoLocationOutline className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Mohadevpur, Naogaon</span>
+            </Link>
           </div>
         </div>
 
-        {/* Mobile Slider - Below main content */}
-        <div className="lg:hidden pb-1">
-          <TopSlider slogan={shopSettings?.slogan} />
+        {/* Mobile bar (single clean compact row) */}
+        <div className="md:hidden flex items-center justify-between py-1.5 gap-2">
+          <a
+            href={`tel:${primaryPhoneClean}`}
+            className="flex items-center gap-1 text-[11px] text-zinc-300 hover:text-emerald-400 shrink-0 font-medium"
+            aria-label="Hotline call"
+          >
+            <IoCallOutline className="w-3.5 h-3.5 text-emerald-400" />
+            <span>{primaryPhone}</span>
+          </a>
+
+          <div className="flex-1 overflow-hidden px-1">
+            <TopSlider slogan={shopSettings?.slogan} />
+          </div>
+
+          <Link
+            href="/profile?tab=orders"
+            className="flex items-center gap-1 text-[11px] text-zinc-300 hover:text-white shrink-0 font-medium"
+            aria-label="Track order"
+          >
+            <LuTruck className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden xs:inline">Track</span>
+          </Link>
         </div>
       </div>
     </section>

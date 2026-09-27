@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { LuLayoutGrid } from "react-icons/lu";
 import { fetchShopCategories, type ShopCategory } from "@/lib/shop-api";
-import Logo from "@/components/ui/logo";
 
 const leftNavItems = [
   { label: "HOME", href: "/" },
@@ -88,6 +88,8 @@ export default function Navigation() {
 
   const currentCategoryData = categories.find((cat) => cat.id === activeCategory) || categories[0] || null;
 
+  const allNavItems = [...leftNavItems, ...rightNavItems];
+
   const renderNavItem = (item: typeof leftNavItems[0]) => (
     <div 
       key={item.label} 
@@ -97,21 +99,23 @@ export default function Navigation() {
     >
       <Link
         href={item.href}
-        className={`font-gotham text-[10.5px] font-semibold uppercase tracking-wide whitespace-nowrap transition-colors flex items-center gap-1 py-2 relative group ${
-          isActive(item.href)
-            ? "text-emerald-400"
-            : "text-white hover:text-emerald-300"
-        }`}
+        className="block"
       >
-        {item.label}
-
-        {item.hasDropdown && (
-          <RiArrowDownSLine className="text-lg text-zinc-400 group-hover:text-emerald-300 transition-colors" />
-        )}
-
-        {item.label === "CATEGORIES" && (
-          <span className="absolute top-[85%] left-1/2 -translate-x-1/2 hidden group-hover:block bg-zinc-900 border border-zinc-700 text-white text-[10px] font-semibold tracking-wider uppercase py-1 px-2.5 rounded shadow-lg z-[60] whitespace-nowrap">
-            Explore All
+        {item.hasDropdown ? (
+          <span className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wide px-3.5 py-1.5 rounded-lg transition-all shadow-2xs">
+            <LuLayoutGrid className="w-3.5 h-3.5" />
+            <span>{item.label}</span>
+            <RiArrowDownSLine className={`text-base transition-transform duration-200 ${isTeasHovered ? 'rotate-180' : ''}`} />
+          </span>
+        ) : (
+          <span
+            className={`text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap transition-colors flex items-center gap-0.5 py-2.5 ${
+              isActive(item.href)
+                ? "text-emerald-400 font-bold"
+                : "text-zinc-300 hover:text-white"
+            }`}
+          >
+            {item.label}
           </span>
         )}
       </Link>
@@ -126,7 +130,7 @@ export default function Navigation() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="w-[92vw] max-w-[1300px] bg-white shadow-[0px_16px_48px_0px_rgba(0,0,0,0.12)] rounded-2xl border border-zinc-100 overflow-hidden">
+          <div className="w-[92vw] max-w-[1300px] bg-white shadow-[0px_16px_48px_0px_rgba(0,0,0,0.12)] rounded-xl border border-zinc-100 overflow-hidden">
             <div className="px-10 py-10 flex justify-start items-start gap-12 text-zinc-800">
               
               <div className="flex-1 flex justify-start items-start gap-12">
@@ -134,10 +138,10 @@ export default function Navigation() {
                   <Link
                     href="/products"
                     onClick={() => setIsTeasHovered(false)}
-                    className="w-full pb-3 mb-3 border-b border-zinc-100 flex items-center justify-between text-left font-['Bembo_Std'] text-zinc-900 hover:text-emerald-600 text-xl font-bold transition-all duration-200"
+                    className="w-full pb-3 mb-3 border-b border-zinc-100 flex items-center justify-between text-left text-zinc-900 hover:text-emerald-600 text-lg font-bold transition-all duration-200"
                   >
-                    <span>All Marketplace Categories</span>
-                    <span className="text-xs text-emerald-600 font-sans font-semibold">View All →</span>
+                    <span>All Categories</span>
+                    <span className="text-xs text-emerald-600 font-semibold">View All →</span>
                   </Link>
 
                   {categories.map((category) => {
@@ -150,8 +154,8 @@ export default function Navigation() {
                         onClick={() => setIsTeasHovered(false)}
                         className={`w-full py-2.5 flex items-center justify-between text-left transition-all duration-200 cursor-pointer border-none bg-transparent ${
                           isCatActive
-                            ? "text-emerald-700 text-base xl:text-lg font-bold flex items-center gap-2 translate-x-1 bg-emerald-50/50 px-3 rounded-lg"
-                            : "text-zinc-600 text-base xl:text-lg font-medium hover:text-emerald-700 hover:translate-x-1 px-3"
+                            ? "text-emerald-700 text-base font-semibold translate-x-1 bg-emerald-50/50 px-3 rounded-lg"
+                            : "text-zinc-600 text-base font-medium hover:text-emerald-700 hover:translate-x-1 px-3"
                         }`}
                       >
                         <span>{category.name}</span>
@@ -164,8 +168,8 @@ export default function Navigation() {
                 </div>
 
                 <div className="flex-1 pt-2 flex flex-col justify-start items-start">
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 mb-3">
-                    Subcategories & Highlights
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-3">
+                    Subcategories
                   </span>
                   {currentCategoryData?.children && currentCategoryData.children.length > 0 ? (
                     currentCategoryData.children.map((subItem) => (
@@ -245,19 +249,23 @@ export default function Navigation() {
   );
 
   return (
-    <nav className="relative hidden xl:flex items-center justify-center w-full">
-      {/* Left nav group */}
-      <div className="flex items-center justify-end gap-3 xl:gap-5 flex-1">
-        {leftNavItems.map(renderNavItem)}
+    <nav className="relative hidden xl:flex items-center justify-between w-full h-11">
+      <div className="flex items-center gap-5 xl:gap-7">
+        {allNavItems.map(renderNavItem)}
       </div>
 
-      <div className="px-4 xl:px-8 shrink-0 flex items-center justify-center">
-        <Logo variant="light" size="md" />
-      </div>
-
-      {/* Right nav group */}
-      <div className="flex items-center justify-start gap-3 xl:gap-5 flex-1">
-        {rightNavItems.map(renderNavItem)}
+      <div className="flex items-center gap-4 text-xs font-semibold">
+        <Link
+          href="/products"
+          className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors uppercase tracking-wider text-[11px] font-bold"
+        >
+          <span>⚡ Daily Offers</span>
+        </Link>
+        <span className="text-zinc-600">|</span>
+        <span className="text-zinc-400 text-[11px] font-medium flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Free Shipping ৳999+
+        </span>
       </div>
     </nav>
   );

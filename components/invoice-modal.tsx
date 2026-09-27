@@ -6,11 +6,11 @@ import { LuPrinter, LuX } from "react-icons/lu";
 import type { OrderResult } from "@/lib/types";
 
 const COMPANY = {
-  name: "NovaMart Multi-Vendor Marketplace",
-  logo: "/images/logo.svg",
-  addressLine: "Pan Pacific Sonargaon, 107 Kazi Nazrul Islam Avenue, Dhaka-1215, Bangladesh",
-  phone: "+880 13 3987 9494",
-  email: "support@novamart.com",
+  name: "NovaMart Marketplace",
+  logo: "/images/logo/novamart-logo-main.png",
+  addressLine: "Mohadevpur, Naogaon, Rajshahi, Bangladesh",
+  phone: "01707819676 (+880 1707-819676)",
+  email: "support@webdevsoftware.com",
 };
 
 const currency = (n: number) =>

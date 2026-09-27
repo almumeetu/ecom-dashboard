@@ -65,7 +65,7 @@ export default async function Bottomfooter() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-left">
           <p className="text-sm text-zinc-400 font-normal">
             © {new Date().getFullYear()}{" "}
-            <span className="font-semibold text-white tracking-wide">NovaMart</span> Marketplace. All rights reserved.
+            <span className="font-semibold text-white tracking-wide">NovaMart</span> Marketplace. Founded by <span className="text-emerald-400 font-medium">Mohammad Abdullah</span> • Mohadevpur, Naogaon, Rajshahi.
           </p>
           <span className="hidden sm:inline text-zinc-700">|</span>
           <div className="text-sm text-zinc-400 flex items-center gap-2 flex-wrap text-left">

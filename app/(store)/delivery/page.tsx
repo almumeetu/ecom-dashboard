@@ -94,7 +94,7 @@ export default function DeliveryPage() {
                 <div className="flex items-start gap-4">
                   <FiPhone className="w-6 h-6 text-emerald-600 shrink-0 mt-1" />
                   <p>
-                    <strong className="text-neutral-800">Delivery Assistance:</strong> If you require urgent delivery or changes to your delivery address, please reach our helpline at +880 13 3987 9494.
+                    <strong className="text-neutral-800">Delivery Assistance:</strong> If you require urgent delivery or changes to your delivery address, please reach our helpline at 01722301927 (+880 1722-301927).
                   </p>
                 </div>
               </div>

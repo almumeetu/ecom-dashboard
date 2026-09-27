@@ -64,8 +64,8 @@ const gotham = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "NovaMart | Multi-Category & Multi-Vendor Marketplace",
-  description: "Discover fresh groceries, trending fashion, footwear, bakery and lifestyle essentials from certified multi-vendors at NovaMart.",
+  title: "Trust Point | সরাসরি বাগান থেকে আপনার বাড়ি — খাঁটি আম ও অর্গানিক পণ্য",
+  description: "ট্রাস্ট পয়েন্ট (Trust Point) — সরাসরি বাগান থেকে আপনার বাড়ি, মাঝে কোনো আড়ত বা মধ্যস্বত্বভোগী নেই। শতভাগ ফরমালিনমুক্ত ও খাঁটি সতেজতার গ্যারান্টি। প্রতিষ্ঠাতা: Mohammad Abdullah, মহাদেবপুর, নওগাঁ, রাজশাহী।",
   icons: {
     icon: "/images/logo.svg",
     shortcut: "/images/logo.svg",

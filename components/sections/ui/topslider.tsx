@@ -9,26 +9,15 @@ import 'swiper/css/navigation';
 
 export default function TopSlider({ slogan }: { slogan?: string }) {
   const { slider } = data;
-
-  if (slogan) {
-    return (
-      <div className="flex items-center gap-1 sm:gap-2 text-white w-full justify-center">
-        <div className="flex-grow px-0.5 sm:px-1 text-center">
-          <span className="font-gotham text-white text-[11px] sm:text-xs font-normal tracking-wide">
-            {slogan}
-          </span>
-        </div>
-      </div>
-    );
-  }
+  const slides = slogan ? [slogan, ...slider.slides] : slider.slides;
 
   return (
     <div className="flex items-center gap-1 sm:gap-2 text-white w-full justify-center">
       <button 
-        className="topslider-prev cursor-pointer hover:opacity-80 transition-opacity shrink-0 hidden sm:flex items-center justify-center text-white px-0.5 sm:px-1"
+        className="topslider-prev cursor-pointer hover:opacity-80 transition-opacity shrink-0 hidden sm:flex items-center justify-center text-zinc-400 hover:text-white px-0.5 sm:px-1"
         aria-label="Previous slide"
       >
-        <IoChevronBack className="w-3 h-3 sm:w-4 sm:h-4" />
+        <IoChevronBack className="w-3 h-3" />
       </button>
 
       <div className="flex-grow overflow-hidden px-0.5 sm:px-1">
@@ -39,17 +28,17 @@ export default function TopSlider({ slogan }: { slogan?: string }) {
             nextEl: '.topslider-next',
           }}
           autoplay={{
-            delay: slider.autoplayDelay,
+            delay: slider.autoplayDelay || 3500,
             disableOnInteraction: false,
           }}
           loop={true}
-          speed={slider.speed}
+          speed={slider.speed || 600}
           className="topslider-swiper"
         >
-          {slider.slides.map((text: string, index: number) => (
+          {slides.map((text: string, index: number) => (
             <SwiperSlide key={index}>
-              <div className="text-center">
-                  <span className="font-gotham text-white text-[11px] sm:text-xs font-normal tracking-wide cursor-pointer hover:opacity-95 transition-opacity">
+              <div className="text-center truncate">
+                <span className="text-zinc-200 text-[11px] sm:text-xs font-normal tracking-wide cursor-pointer hover:text-white transition-colors">
                   {text}
                 </span>
               </div>
@@ -59,10 +48,10 @@ export default function TopSlider({ slogan }: { slogan?: string }) {
       </div>
 
       <button 
-        className="topslider-next cursor-pointer hover:opacity-80 transition-opacity shrink-0 hidden sm:flex items-center justify-center text-white px-0.5 sm:px-1"
+        className="topslider-next cursor-pointer hover:opacity-80 transition-opacity shrink-0 hidden sm:flex items-center justify-center text-zinc-400 hover:text-white px-0.5 sm:px-1"
         aria-label="Next slide"
       >
-        <IoChevronForward className="w-3 h-3 sm:w-4 sm:h-4" />
+        <IoChevronForward className="w-3 h-3" />
       </button>
     </div>
   );

@@ -104,42 +104,55 @@ export default function Mainfooter() {
             <Logo variant="light" size="md" />
 
             <p className="text-zinc-400 text-sm leading-relaxed mt-4 mb-6">
-              NovaMart is Bangladesh&apos;s leading curated multi-vendor marketplace connecting shoppers with certified local merchants, authentic lifestyle brands, and fresh essentials.
+              NovaMart is Bangladesh&apos;s curated multi-vendor marketplace founded by <span className="text-emerald-400 font-semibold">Mohammad Abdullah</span> (Mohadevpur, Naogaon, Rajshahi), delivering verified authentic lifestyle products, fresh groceries, and fast fulfillment nationwide.
             </p>
 
             {/* Clean Contact Details */}
-            <div className="space-y-3 text-sm text-zinc-300 w-full">
+            <div className="space-y-3.5 text-sm text-zinc-300 w-full">
               <div className="flex items-center gap-3">
-                <HiPhone className="w-4 h-4 text-zinc-400 shrink-0" />
+                <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
                 <div>
-                  <span className="text-zinc-400 text-xs block">Customer Hotline (24/7)</span>
+                  <span className="text-zinc-400 text-xs block">Founder &amp; Executive Desk</span>
                   <a
-                    href="tel:+8801339879494"
-                    className="text-white font-medium hover:text-amber-200 transition-colors"
+                    href="tel:01707819676"
+                    className="text-white font-medium hover:text-emerald-400 transition-colors"
                   >
-                    +880 13 3987 9494
+                    01707819676 (Mohammad Abdullah)
                   </a>
                 </div>
               </div>
 
               <div className="flex items-center gap-3">
-                <HiMail className="w-4 h-4 text-zinc-400 shrink-0" />
+                <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
                 <div>
-                  <span className="text-zinc-400 text-xs block">Email Support</span>
+                  <span className="text-zinc-400 text-xs block">Customer Hotline &amp; WhatsApp (24/7)</span>
                   <a
-                    href="mailto:support@novamart.com"
-                    className="text-white font-medium hover:text-amber-200 transition-colors"
+                    href="tel:01722301927"
+                    className="text-white font-medium hover:text-emerald-400 transition-colors"
                   >
-                    support@novamart.com
+                    01722301927 (+880 1722-301927)
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <HiMail className="w-4 h-4 text-emerald-400 shrink-0" />
+                <div>
+                  <span className="text-zinc-400 text-xs block">Official Email Support</span>
+                  <a
+                    href="mailto:support@webdevsoftware.com"
+                    className="text-white font-medium hover:text-emerald-400 transition-colors"
+                  >
+                    support@webdevsoftware.com
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3">
-                <HiLocationMarker className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
+                <HiLocationMarker className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-zinc-400 text-xs block">Headquarters</span>
-                  <span className="text-zinc-300 font-normal">House 42, Road 11, Banani, Dhaka</span>
+                  <span className="text-zinc-400 text-xs block">Headquarters &amp; Regional Presence</span>
+                  <span className="text-zinc-300 font-normal">Mohadevpur, Naogaon, Rajshahi, Bangladesh</span>
                 </div>
               </div>
             </div>

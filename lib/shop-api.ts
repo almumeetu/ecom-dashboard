@@ -14,6 +14,10 @@ export type ShopProduct = {
   price: number;
   originalPrice?: number;
   image: string;
+  unit?: string;
+  badge?: string;
+  rating?: number;
+  variantId?: string;
 };
 
 export type FetchShopProductsParams = {
@@ -84,23 +88,58 @@ export type ShopCategory = {
   children?: ShopCategory[];
 };
 
+export type ContactEntry = {
+  title: string;
+  value: string;
+  extra?: string;
+};
+
 export type ShopSettings = {
-  id: string;
-  shopName: string;
-  slogan: string;
+  id?: string;
+  shopName?: string;
+  slogan?: string;
   contactNumber?: any;
   email?: any;
   socialContact?: any;
-  currency: string;
-  language: string;
-  deliveryChargeInside: string;
-  deliveryChargeOutside: string;
-  deliveryChargeNearCity: string;
+  currency?: string;
+  language?: string;
+  deliveryChargeInside?: string | number;
+  deliveryChargeOutside?: string | number;
+  deliveryChargeNearCity?: string | number;
   youtubeUrl?: string | null;
   youtubeThumbnailImage?: string | null;
   youtubeTitle?: string | null;
   youtubeDescription?: string | null;
+  branchName?: string | null;
+  branchAddress?: string | null;
+  branchLat?: number | null;
+  branchLng?: number | null;
+  copyrightYear?: string | null;
+  parentCompany?: string | null;
+  parentCompanyLink?: string | null;
+  logo?: string | null;
+  icon?: string | null;
+  favicon?: string | null;
+  isTopBarVisible?: boolean;
+  hideOutOfStock?: boolean;
 };
+
+/** Helper to cleanly extract contact number or email entries from various API formats */
+export function parseContactEntries(field: any): ContactEntry[] {
+  if (!field) return [];
+  if (Array.isArray(field)) {
+    return field
+      .filter((item) => item && typeof item.value === "string" && item.value.trim() !== "")
+      .map((item) => ({ title: item.title || "", value: item.value.trim() }));
+  }
+  if (Array.isArray(field.entries)) {
+    return field.entries
+      .filter((item: any) => item && typeof item.value === "string" && item.value.trim() !== "")
+      .map((item: any) => ({ title: item.title || "", value: item.value.trim() }));
+  }
+  return [];
+}
+
 
 function mapProduct(product: AdminProduct): ShopProduct {
   const defaultVariant = product.variants?.find((v) => v.isDefault) ?? product.variants?.[0];
@@ -123,8 +162,12 @@ function mapProduct(product: AdminProduct): ShopProduct {
     price: showOriginal ? discountPrice : priceNum,
     originalPrice: showOriginal ? priceNum : (costNum > priceNum ? costNum : undefined),
     image: resolveImageUrl(rawImage),
+    unit: product.unit?.name ?? product.unit?.abbreviation ?? undefined,
+    variantId: defaultVariant?.id,
   };
 }
+
+import { FALLBACK_MARKETPLACE_PRODUCTS } from "./fallback-products";
 
 export async function fetchShopProducts(
   params: FetchShopProductsParams = {},
@@ -150,18 +193,41 @@ export async function fetchShopProducts(
       cache: "no-store",
     });
 
-    if (res.status !== 200) {
-      return { data: [], total: 0 };
+    if (res.status === 200) {
+      const paginated: PaginatedProducts = await res.json();
+      return {
+        data: (paginated.data ?? []).map(mapProduct),
+        total: paginated.meta?.total ?? 0,
+      };
     }
-
-    const paginated: PaginatedProducts = await res.json();
-    return {
-      data: (paginated.data ?? []).map(mapProduct),
-      total: paginated.meta?.total ?? 0,
-    };
-  } catch {
-    return { data: [], total: 0 };
+  } catch (err) {
+    console.warn("API product fetch failed, using fallback:", err);
   }
+
+  // Graceful fallback to rich local marketplace catalog
+  let filtered = FALLBACK_MARKETPLACE_PRODUCTS;
+  if (search) {
+    const s = search.toLowerCase();
+    filtered = filtered.filter(
+      (p) =>
+        p.name.toLowerCase().includes(s) ||
+        (p.category?.name && p.category.name.toLowerCase().includes(s)) ||
+        (p.brand?.name && p.brand.name.toLowerCase().includes(s))
+    );
+  }
+  if (categoryId) {
+    filtered = filtered.filter((p) => p.categoryId === categoryId || p.category?.id === categoryId);
+  }
+  if (brandId) {
+    filtered = filtered.filter((p) => p.brandId === brandId || p.brand?.id === brandId);
+  }
+
+  const start = (page - 1) * limit;
+  const slice = filtered.slice(start, start + limit);
+  return {
+    data: slice.map(mapProduct),
+    total: filtered.length,
+  };
 }
 
 export async function fetchShopProductById(id: string): Promise<AdminProduct | null> {
@@ -171,12 +237,16 @@ export async function fetchShopProductById(id: string): Promise<AdminProduct | n
       cache: "no-store",
     });
 
-    if (res.status !== 200) return null;
-
-    return await res.json() as AdminProduct;
-  } catch {
-    return null;
+    if (res.status === 200) {
+      return (await res.json()) as AdminProduct;
+    }
+  } catch (err) {
+    console.warn(`fetchShopProductById(${id}) failed, checking fallback:`, err);
   }
+
+  // Check fallback
+  const found = FALLBACK_MARKETPLACE_PRODUCTS.find((p) => p.id === id);
+  return found ?? null;
 }
 
 export async function fetchShopProductBySlug(slug: string): Promise<AdminProduct | null> {
@@ -186,12 +256,23 @@ export async function fetchShopProductBySlug(slug: string): Promise<AdminProduct
       cache: "no-store",
     });
 
-    if (res.status !== 200) return null;
-
-    return await res.json() as AdminProduct;
-  } catch {
-    return null;
+    if (res.status === 200) {
+      return (await res.json()) as AdminProduct;
+    }
+  } catch (err) {
+    console.warn(`fetchShopProductBySlug(${slug}) failed, checking fallback:`, err);
   }
+
+  // Check fallback by slug match or clean match
+  const clean = slug.toLowerCase().trim();
+  const found = FALLBACK_MARKETPLACE_PRODUCTS.find(
+    (p) =>
+      p.slug.toLowerCase() === clean ||
+      p.slug.toLowerCase().replace(/[^a-z0-9]+/g, "-") === clean ||
+      clean.includes(p.slug.toLowerCase()) ||
+      p.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === clean
+  );
+  return found ?? null;
 }
 async function safeFetchJson<T>(url: string, fallback: T): Promise<T> {
   try {
@@ -254,3 +335,63 @@ export async function fetchActiveCampaigns(): Promise<Campaign[]> {
   const campaigns = await safeFetchJson<Campaign[]>(`${API_BASE_URL}/campaigns`, []);
   return campaigns.filter(c => c.status === "active");
 }
+
+// ─── Product Reviews ─────────────────────────────────────────────────────────
+
+export interface ShopReview {
+  id: string;
+  rating: number;
+  comment?: string | null;
+  createdAt: string;
+  user?: {
+    id: string;
+    name: string;
+  } | null;
+}
+
+export function fetchShopProductReviews(productId: string): Promise<ShopReview[]> {
+  return safeFetchJson<ShopReview[]>(`${API_BASE_URL}/products/${productId}/reviews`, []);
+}
+
+// ─── Coupons ────────────────────────────────────────────────────────────────
+
+export interface CouponItem {
+  id: string;
+  code: string;
+  type: "percentage" | "fixed";
+  value: number | string;
+  maxUsage: number;
+  usedCount: number;
+  expiresAt?: string | null;
+}
+
+export interface ApplyCouponResult {
+  coupon: CouponItem;
+  discount: number;
+  total: number;
+}
+
+export function fetchCoupons(): Promise<CouponItem[]> {
+  return safeFetchJson<CouponItem[]>(`${API_BASE_URL}/coupons`, []);
+}
+
+export async function applyCouponApi(
+  code: string,
+  subtotal: number
+): Promise<{ success: boolean; data?: ApplyCouponResult; message?: string }> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/coupons/apply`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: code.trim().toUpperCase(), subtotal }),
+    });
+    const body = await res.json();
+    if (!res.ok) {
+      return { success: false, message: body?.message || "Invalid coupon code" };
+    }
+    return { success: true, data: body };
+  } catch (err: any) {
+    return { success: false, message: err?.message || "Failed to validate coupon" };
+  }
+}
+

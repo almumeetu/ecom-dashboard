@@ -10,20 +10,20 @@ export default function OurStory() {
             
             {/* First paragraph */}
             <p className="text-lg md:text-xl mb-8 leading-relaxed text-gray-800">
-              In the quiet gardens of Sylhet, nature already sets the standard. Our role is not to improve it, but to respect it with discipline and intention. Inspired by the heritage philosophy of the London Tea Exchange, we follow a simple belief:
+              From the agricultural fields of Mohadevpur, Naogaon to verified artisanal workshops across Bangladesh, authenticity sets the standard. Built upon the visionary principles of Trust Point Mart, we follow a simple belief:
             </p>
             
             {/* Highlighted text */}
             <p className="text-lg md:text-xl mb-12 leading-relaxed text-gray-800">
-              what is rare should never be rushed, and what is pure should never be compromised.
+              what is authentic should never be compromised, and what is delivered to your family should always be trustworthy.
             </p>
             
             {/* Second paragraph */}
             <p className="text-lg md:text-xl mb-8 leading-relaxed text-gray-800">
-              This is not just how we source tea—
+              This is not just how we source our marketplace products—
             </p>
             <p className="text-lg md:text-xl mb-12 leading-relaxed text-gray-800">
-              this is how we define everything we do.
+              this is how we build lasting trust with every Bangladeshi household.
             </p>
             
             {/* Button */}

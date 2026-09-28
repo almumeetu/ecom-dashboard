@@ -17,15 +17,11 @@ export default function TheBrands() {
               </h2>
               
               <p className="mt-6 font-['Bembo_Std'] text-lg font-normal leading-6">
-                London Tea Exchange succeeds <span className="italic">one of the oldest companies in the United Kingdom</span>. For over 
-                two decades, the brand has evolved and carved an enviable niche in the international luxury tea 
-                market. For it is here that luxury is experienced through the richness of purity and authenticity, 
-                discovered in the beauty of artistry and delivered with an intuitive response to personal 
-                expectation and taste.
+                Trust Point Mart is an innovative multi-category hypermarket and marketplace platform founded by entrepreneur <span className="italic">Mohammad Abdullah</span>. Originating from Mohadevpur, Naogaon, Rajshahi Division, we bridge the gap between primary producers, agro-farms, and consumer households with authentic goods, fair pricing, and transparent standards.
               </p>
               
               <p className="mt-4 font-['Bembo_Std'] text-lg font-normal">
-                No one delivers that kind of tea experience quite like London Tea Exchange.
+                No one delivers that kind of multi-category shopping experience with such care and authenticity quite like Trust Point Mart.
               </p>
 
               {/* Two Small Images with Our Promise */}
@@ -73,20 +69,12 @@ export default function TheBrands() {
           <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div>
               <p className="font-['Bembo_Std'] text-lg font-normal leading-6">
-                London Tea Exchange presents an exceptional prospect to build on the brand and succeed in 
-                maintaining a global presence. Serving an untapped market for luxury tea, London Tea Exchange will 
-                dominate the competitive landscape with a cost-efficient model that offers a 
-                healthy return to partners.
+                Trust Point Mart presents an exceptional vision for digital commerce in Bangladesh. Serving the growing demand for authentic groceries, lifestyle fashion, and modern tech, Trust Point Mart operates a cost-efficient supply chain directly from farmgate and verified manufacturers.
               </p>
             </div>
             <div>
               <p className="font-['Bembo_Std'] text-lg font-normal leading-6">
-                London Tea Exchange offers a kind of luxury and depth of flavours and rarity; where 
-                less is more; simplicity speaks volumes and classic will have the choice they need or 
-                desire. The brand has tremendous momentum as it expands into major gateway cities, 
-                fashion districts and affluent neighbourhoods around the world. Uniquely throughout the world. 
-                For not only is London Tea Exchange poised for phenomenal growth and 
-                opportunity; it is poised for greatness and distinction.
+                Trust Point Mart offers depth of quality and verified authenticity across all departments. With expanding logistics hubs and nationwide delivery across all 64 districts, Trust Point Mart is poised for sustainable growth, ethical commerce, and trusted customer relationships.
               </p>
             </div>
           </div>

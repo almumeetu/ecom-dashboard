@@ -44,7 +44,7 @@ export default async function FooterLinks() {
 
         <div className="text-center">
           <p className="font-['Gotham'] text-white text-xs">
-            © {new Date().getFullYear()} London Tea Exchange. All rights reserved.
+            © {new Date().getFullYear()} Trust Point (ট্রাস্ট পয়েন্ট). All rights reserved.
           </p>
         </div>
       </div>

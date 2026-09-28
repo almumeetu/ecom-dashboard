@@ -638,8 +638,25 @@ export type ReportOverview = {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api/v1";
 
-export function getAdminToken() {
-  if (typeof document === "undefined") return null;
+export function isAllowedAdminRole(role: unknown): boolean {
+  if (!role) return false;
+  let roleName = "";
+  if (typeof role === "string") {
+    roleName = role;
+  } else if (typeof role === "object" && "name" in role) {
+    roleName = String((role as { name?: string }).name || "");
+  }
+  const normalized = roleName.toLowerCase().trim();
+  return ["admin", "superadmin", "manager", "staff"].includes(normalized);
+}
+
+export function getAdminToken(): string | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const fromStorage = localStorage.getItem("admin_access_token");
+    if (fromStorage) return fromStorage;
+  } catch {}
 
   return (
     document.cookie
@@ -652,13 +669,25 @@ export function getAdminToken() {
 export function setAdminSession(accessToken: string, user: AdminUser) {
   const maxAge = 60 * 60 * 24 * 7;
 
-  document.cookie = `admin_access_token=${accessToken}; path=/admin; max-age=${maxAge}; SameSite=Lax`;
+  try {
+    localStorage.setItem("admin_access_token", accessToken);
+    localStorage.setItem("admin_user", JSON.stringify(user));
+  } catch {}
+
+  document.cookie = `admin_access_token=${accessToken}; path=/; max-age=${maxAge}; SameSite=Lax`;
   document.cookie = `admin_user=${encodeURIComponent(
     JSON.stringify(user),
-  )}; path=/admin; max-age=${maxAge}; SameSite=Lax`;
+  )}; path=/; max-age=${maxAge}; SameSite=Lax`;
 }
 
 export function clearAdminSession() {
+  try {
+    localStorage.removeItem("admin_access_token");
+    localStorage.removeItem("admin_user");
+  } catch {}
+
+  document.cookie = "admin_access_token=; path=/; max-age=0; SameSite=Lax";
+  document.cookie = "admin_user=; path=/; max-age=0; SameSite=Lax";
   document.cookie = "admin_access_token=; path=/admin; max-age=0; SameSite=Lax";
   document.cookie = "admin_user=; path=/admin; max-age=0; SameSite=Lax";
 }
@@ -851,11 +880,73 @@ export function formatMoney(value?: string | number | null, symbol?: string) {
  * NEXT_PUBLIC_API_BASE_URL), so the relative-path logic never fires and the
  * full URL is returned unchanged.
  */
+const KNOWN_KEYWORD_FALLBACKS: Array<{ keywords: string[]; url: string }> = [
+  { keywords: ["hoodie"], url: "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["tshirt", "t-shirt"], url: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["cardigan", "knit", "scarf"], url: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["crop", "top"], url: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["skirt", "midi", "dress"], url: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["denim", "short", "jean", "pant"], url: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["shoe", "sneaker", "footwear", "canvas"], url: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["watch"], url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["sunglass", "glass"], url: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["bag", "tote"], url: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["belt"], url: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["grocery", "fruit", "vegetable"], url: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80" },
+  { keywords: ["food", "bread", "bakery", "snack"], url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80" },
+];
+
+const FALLBACK_PHOTO_POOL = [
+  "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=800&auto=format&fit=crop&q=80",
+  "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&auto=format&fit=crop&q=80",
+];
+
+export function getProductFallbackImage(name?: string, category?: string): string {
+  const lower = `${name || ""} ${category || ""}`.toLowerCase();
+  for (const item of KNOWN_KEYWORD_FALLBACKS) {
+    if (item.keywords.some((kw) => lower.includes(kw))) {
+      return item.url;
+    }
+  }
+  return "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&auto=format&fit=crop&q=80";
+}
+
 export function resolveImageUrl(url?: string | null): string {
   if (!url || typeof url !== "string") return "/images/no-image-icon-6.png";
 
   let trimmed = url.trim();
   if (!trimmed) return "/images/no-image-icon-6.png";
+
+  // Check if image is from backend products folder (which lacks static uploads and 404s)
+  const isBackendProduct =
+    trimmed.includes("api-ecom.bornobyte.com/products/") ||
+    trimmed.startsWith("/products/") ||
+    trimmed.includes("/products/");
+
+  if (isBackendProduct) {
+    const lower = trimmed.toLowerCase();
+    for (const item of KNOWN_KEYWORD_FALLBACKS) {
+      if (item.keywords.some((kw) => lower.includes(kw))) {
+        return item.url;
+      }
+    }
+    // Deterministic hash fallback for UUID filenames from that backend
+    let hash = 0;
+    for (let i = 0; i < trimmed.length; i++) {
+      hash = (hash * 31 + trimmed.charCodeAt(i)) >>> 0;
+    }
+    return FALLBACK_PHOTO_POOL[hash % FALLBACK_PHOTO_POOL.length];
+  }
 
   // ── 1. Data URIs or blob URIs — return as-is ──────────────────────
   if (trimmed.startsWith("data:") || trimmed.startsWith("blob:")) {

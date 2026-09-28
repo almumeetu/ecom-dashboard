@@ -4,9 +4,11 @@ import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import Logo from "@/components/ui/logo";
 import {
   apiRequest,
   clearAdminSession,
+  isAllowedAdminRole,
   resolveImageUrl,
   type AdminUser,
   type AppSettings,
@@ -168,7 +170,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       .then((currentUser) => {
         if (!isMounted) return;
 
-        if (currentUser.role?.name !== "admin") {
+        if (!isAllowedAdminRole(currentUser.role)) {
           clearAdminSession();
           router.replace("/admin/login");
           return;
@@ -211,22 +213,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
       <aside className="fixed inset-y-0 left-0 z-20 hidden w-[312px] border-r border-slate-200 bg-white lg:block">
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between px-5 py-5">
-            <Link className="block" href="/admin/dashboard">
-              {settings?.logo ? (
-                <Image
-                  src={resolveImageUrl(settings.logo)}
-                  alt={settings.shopName ?? "NeoComerz"}
-                  width={280}
-                  height={80}
-                  className="max-h-20 w-auto object-contain items-center justify-center"
-                  unoptimized
-                />
-              ) : (
-                <span className="text-5xl font-black italic tracking-tight">
-                  NeoComerz
-                </span>
-              )}
-            </Link>
+            <Logo variant="dark" size="md" />
           </div>
           <nav className="flex-1 overflow-y-auto px-3 pb-6 pt-5">
             {menuGroups.map((group) => (

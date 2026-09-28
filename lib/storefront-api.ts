@@ -96,6 +96,9 @@ async function customerRequest<T>(
     if (err instanceof DOMException && err.name === "AbortError") {
       throw new Error("Backend API did not respond. Start the backend server and try again.");
     }
+    if (err instanceof TypeError && err.message.toLowerCase().includes("fetch")) {
+      throw new Error("Cannot connect to backend server. Please verify the API is running at " + API_BASE_URL);
+    }
     throw err instanceof Error ? err : new Error("API request failed");
   } finally {
     window.clearTimeout(timeout);

@@ -1,149 +1,190 @@
-import ScrollReveal from "@/components/ui/scroll-reveal";
+"use client";
+
+import { useState } from "react";
+import {
+  HiShieldCheck,
+  HiOutlineDocumentDownload,
+  HiCheckCircle,
+  HiScale,
+  HiUserGroup,
+  HiHeart,
+  HiGlobeAlt,
+  HiCash,
+  HiOfficeBuilding,
+} from "react-icons/hi";
+import ScrollAnimate from "@/components/ui/scroll-animate";
 
 const articles = [
   {
     roman: "I",
-    title: "FAIR REMUNERATION",
-    desc: "Pay reflects the skill, effort, and responsibility of the role. Equal work is rewarded with equal pay, regardless of gender, ethnicity, religion, nationality, or age."
+    title: "Fair Compensation & Living Wage Mandate",
+    category: "Wage Equity",
+    icon: HiCash,
+    desc: "Every worker in our direct operations and partner supply chains is entitled to compensation exceeding statutory minimums. Living wages must cover wholesome nutrition, secure housing, clean water, healthcare, education, transport, and emergency contingency savings.",
   },
   {
     roman: "II",
-    title: "LIVING WAGE COMMITMENT",
-    desc: "Wages should stretch beyond bare survival — covering food, water, housing, education, healthcare, transport, clothing, and a cushion for the unexpected."
+    title: "Gender Pay Equity & Non-Discrimination",
+    category: "Diversity & Inclusion",
+    icon: HiScale,
+    desc: "Strict equal pay for equal value of work regardless of gender, religion, background, marital status, or disability. All individuals must enjoy unobstructed, equitable pathways to skill development, supervisory promotion, and leadership roles.",
   },
   {
     roman: "III",
-    title: "CYCLICAL REVIEW OF WAGES",
-    desc: "The Fair Pay Foundation works with governments and industry to review pay on a regular cycle, adjusting for cost of living and inflation, with the process kept transparent."
+    title: "Safe, Hygienic & Dignified Workspaces",
+    category: "Health & Safety",
+    icon: HiOfficeBuilding,
+    desc: "Operating facilities, packaging stations, and delivery hubs must maintain certified occupational health standards. This includes clean drinking water, adequate ventilation, regular fire drills, ergonomic setups, and certified personal protective equipment.",
   },
   {
     roman: "IV",
-    title: "EQUAL OPPORTUNITIES",
-    desc: "No worker is shut out of benefits, training, or promotion on the basis of gender, race, religion, or disability."
+    title: "Prompt & Transparent Vendor Disbursements",
+    category: "Merchant Rights",
+    icon: HiShieldCheck,
+    desc: "Independent merchants, cottage businesses, and smallholder farmers are guaranteed prompt settlement cycles with clear, unpadded accounting and zero arbitrary commission clawbacks, protecting small-business liquidity.",
   },
   {
     roman: "V",
-    title: "FREEDOM OF ASSOCIATION",
-    desc: "Workers retain the right to form and join trade unions of their choosing, to bargain collectively, and to assemble peacefully over their working conditions."
+    title: "Absolute Prohibition of Child & Forced Labor",
+    category: "Human Rights",
+    icon: HiCheckCircle,
+    desc: "Uncompromising zero-tolerance prohibition against underage employment, bonded labor, involuntary servitude, or retention of identification documents, in full alignment with International Labour Organization (ILO) Conventions 138 and 182.",
   },
   {
     roman: "VI",
-    title: "HEALTH AND SAFETY",
-    desc: "Working and living environments are held to local and international safety standards, treated as central to the Charter rather than an afterthought."
+    title: "Direct Producer Value & Fair Farmgate Pricing",
+    category: "Direct Sourcing",
+    icon: HiUserGroup,
+    desc: "By removing predatory multi-tier brokerage cartels, we ensure agricultural growers, honey harvesters, and handicraft artisans receive premium, pre-agreed farmgate prices that reflect true production costs and reward quality craftsmanship.",
   },
   {
     roman: "VII",
-    title: "CHILD LABOUR AND FORCED LABOUR",
-    desc: "Both are rejected without exception, in line with International Labour Organisation standards on minimum working age and forced labour."
+    title: "Worker Welfare, Rest Periods & Social Security",
+    category: "Welfare & Health",
+    icon: HiHeart,
+    desc: "Work schedules are restricted to standard working hours with mandatory rest days, transparent overtime premiums, maternity protections, and emergency health assistance for fulfillment and logistics personnel.",
   },
   {
     roman: "VIII",
-    title: "ENVIRONMENTAL SUSTAINABILITY",
-    desc: "Signatories commit to responsible resource use, biodiversity protection, and sustainable agricultural practice — including renewable energy and water conservation."
-  }
+    title: "Environmental Responsibility & Green Logistics",
+    category: "Sustainability",
+    icon: HiGlobeAlt,
+    desc: "All signatories commit to responsible packaging, minimizing single-use non-recyclable plastics, reducing carbon footprints in dispatch routes, and supporting organic, regenerative agricultural methods.",
+  },
 ];
 
 export default function CharterPrinciples() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const categories = ["All", "Wage Equity", "Merchant Rights", "Human Rights", "Health & Safety", "Direct Sourcing", "Sustainability"];
+
+  const filteredArticles = selectedCategory === "All"
+    ? articles
+    : articles.filter(a => a.category === selectedCategory || (selectedCategory === "Wage Equity" && (a.category === "Diversity & Inclusion" || a.category === "Welfare & Health")));
+
   return (
-    <section id="eight-articles" className="w-full bg-[#fbfbfa] pt-20 md:pt-32 lg:pt-44 pb-24 md:pb-36 lg:pb-48 px-6 md:px-12 lg:px-24 relative scroll-mt-10">
-      <div className="max-w-7xl mx-auto">
-        {/* Top Banner: Fairness, Equality, Justice */}
-        <ScrollReveal delay={0} direction="up" className="flex flex-col items-center justify-center mb-16 text-center">
-          <p className=" hidden md:block font-['Bembo_Std'] text-[13px] md:text-[15px] font-normal tracking-[0.35em] text-neutral-400 uppercase mb-4">
-            FAIRNESS &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; EQUALITY &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; JUSTICE
-          </p>
-          <p className="flex md:hidden font-['Bembo_Std'] text-[13px] md:text-[15px] font-normal tracking-[0.35em] text-neutral-400 uppercase mb-4 flex items-center justify-center gap-2 md:gap-8">
-            <span>FAIRNESS</span>
-            <span>•</span>
-            <span>EQUALITY</span>
-            <span>•</span>
-            <span>JUSTICE</span>
-          </p>
+    <section id="eight-articles" className="w-full bg-white py-16 md:py-24 px-4 sm:px-6 lg:px-8 scroll-mt-12">
+      <div className="max-w-6xl mx-auto space-y-12">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <ScrollAnimate variant="fade-in-up">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200">
+              The Code of Ethics
+            </span>
+          </ScrollAnimate>
+          <ScrollAnimate variant="fade-in-up" delay={80}>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
+              Eight Articles, <span className="text-emerald-600">One Standard</span>
+            </h2>
+          </ScrollAnimate>
+          <ScrollAnimate variant="fade-in-up" delay={160}>
+            <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+              Every merchant, supplier, partner warehouse, and delivery affiliate in the Trust Point Mart network operates under these eight binding principles.
+            </p>
+          </ScrollAnimate>
+        </div>
 
-          <div className="w-full flex items-center justify-center gap-4 max-w-xl">
-            <div className="h-px bg-zinc-200 flex-1" />
-            <img
-              src="/images/icons/icon-3.svg"
-              alt="Fleur-de-lis"
-              className="w-[22px] h-[25px] object-contain grayscale opacity-60"
-            />
-            <div className="h-px bg-zinc-200 flex-1" />
-          </div>
-        </ScrollReveal>
+        {/* Filter Chips */}
+        <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide transition-all ${
+                selectedCategory === cat
+                  ? "bg-emerald-600 text-white shadow-xs"
+                  : "bg-stone-100 text-stone-600 hover:bg-stone-200/80"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-        {/* Two-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
-          {/* Left Column: Heading and Info */}
-          <ScrollReveal delay={80} direction="up" className="lg:col-span-5 lg:sticky lg:top-36 lg:h-fit space-y-8">
-            <div className="self-stretch flex flex-col justify-start items-start gap-4 md:gap-6">
-              <div className="text-neutral-400 text-base md:text-lg font-normal font-['Bembo_Std'] uppercase leading-6">
-                The Charter
-              </div>
-              <h2 className="self-stretch justify-start text-khaki-gold text-4xl md:text-5xl lg:text-6xl font-normal font-['Bembo_Std'] leading-tight lg:leading-[56px]">
-                Eight Articles, One Standard
-              </h2>
-              <div className="self-stretch justify-start text-zinc-600 text-base lg:text-lg font-normal font-['Bembo_Std'] leading-relaxed lg:leading-7">
-                The Global Fair Pay Charter was established by the Fair Pay Foundation in 2024 and aligns itself with the United Nations Sustainable Development Goals. Signatories — companies, governments, and civic bodies — commit to all eight articles in full.
-              </div>
-            </div>
-
-            <div className="flex flex-col justify-start items-start gap-3 w-full sm:w-auto">
-              <a
-                href="/global-fair-pay-charter.pdf"
-                download="global-fair-pay-charter.pdf"
-                className="px-6 md:px-8 py-3.5 md:py-4 bg-white rounded-[100px] border border-neutral-600 inline-flex justify-center items-center hover:bg-neutral-800 hover:border-neutral-800 text-neutral-600 hover:text-white transition-all duration-300 text-xs md:text-sm lg:text-base font-medium font-['Gotham'] uppercase leading-tight tracking-wider w-full sm:w-auto text-center cursor-pointer"
-              >
-                Download the official Charter (PDF)
-              </a>
-              <div className="justify-start text-neutral-400 text-[10px] md:text-xs font-medium font-['Gotham'] leading-4 pl-2">
-                Source: Fair Pay Foundation, hosted via Long Finance
-              </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Right Column: 8 Article Cards with Staggered Scroll Reveal */}
-          <div className="lg:col-span-7 space-y-4">
-            {articles.map((art, idx) => (
-              <ScrollReveal
-                key={idx}
-                delay={idx * 80}
-                direction="up"
-
-
-              >
-                <div className="self-stretch p-5 md:p-6 lg:p-8 bg-neutral-100 rounded-xl flex justify-start items-start gap-4 md:gap-6 hover:shadow-xs transition-shadow duration-200">
-                  {/* Article Roman Number Block */}
-                  <div className="w-14 md:w-16 shrink-0 flex flex-col justify-start items-start gap-1 md:gap-2">
-                    <div className="justify-start text-neutral-500 text-[10px] md:text-xs font-medium font-['Gotham'] leading-4">
-                      Article.
+        {/* 2-Column Responsive Grid of Article Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {filteredArticles.map((art, idx) => {
+            const Icon = art.icon;
+            return (
+              <ScrollAnimate key={art.roman} variant="fade-in-up" delay={(idx % 4) * 80}>
+                <div className="h-full bg-stone-50/80 hover:bg-white rounded-2xl p-6 sm:p-7 border border-stone-200/80 hover:border-emerald-300 hover:shadow-lg hover:shadow-emerald-950/5 transition-all duration-200 flex flex-col justify-between group">
+                  <div className="space-y-4">
+                    {/* Header Row: Roman Numeral + Category Badge */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white font-extrabold text-base flex items-center justify-center shadow-xs">
+                          {art.roman}
+                        </div>
+                        <span className="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100/70 px-2.5 py-0.5 rounded-md">
+                          {art.category}
+                        </span>
+                      </div>
+                      <Icon className="w-5 h-5 text-stone-400 group-hover:text-emerald-600 transition-colors" />
                     </div>
-                    <div className="justify-start text-khaki-gold text-2xl md:text-3xl lg:text-4xl font-normal font-['Bembo_Std'] leading-tight">
-                      {art.roman}
-                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-lg sm:text-xl font-bold text-stone-900 group-hover:text-emerald-700 transition-colors leading-snug">
+                      {art.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                      {art.desc}
+                    </p>
                   </div>
 
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col justify-start items-start gap-1 md:gap-2">
-                    <div className="justify-start text-neutral-800 text-base lg:text-lg font-normal font-['Bembo_Std'] uppercase leading-snug lg:leading-6">
-                      {art.title}
-                    </div>
-                    <div className="self-stretch justify-start text-zinc-600 text-sm md:text-base lg:text-lg font-normal font-['Bembo_Std'] leading-relaxed lg:leading-7">
-                      {art.desc}
-                    </div>
+                  <div className="mt-5 pt-3 border-t border-stone-200/60 flex items-center gap-2 text-[11px] font-semibold text-stone-400 uppercase tracking-wider">
+                    <HiCheckCircle className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>Mandatory Marketplace Benchmark</span>
                   </div>
                 </div>
-              </ScrollReveal>
-            ))}
-          </div>
+              </ScrollAnimate>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Instant Inline Bottom curved shape with zero reload animation / shift */}
-      <div className="absolute left-0 right-0 -bottom-[2px] pointer-events-none z-10 select-none">
-        <svg width="1920" height="94" viewBox="0 0 1920 94" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
-          <path d="M0 0C0 0 429.807 94 960 94H0V0Z" fill="#212721" />
-          <path d="M1920 94H960C1490.19 94 1920 0 1920 0V94Z" fill="#212721" />
-        </svg>
+        {/* Download Callout Card */}
+        <ScrollAnimate variant="fade-in-up" delay={200}>
+          <div className="bg-stone-900 text-white rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border border-stone-800">
+            <div className="space-y-1 text-center sm:text-left">
+              <h4 className="text-base sm:text-lg font-bold text-white flex items-center justify-center sm:justify-start gap-2">
+                <HiOutlineDocumentDownload className="w-5 h-5 text-emerald-400" />
+                Download the Complete Charter PDF
+              </h4>
+              <p className="text-xs sm:text-sm text-stone-400 max-w-xl">
+                Read the exhaustive legal guidelines, audit methodologies, wage calculations, and compliance thresholds.
+              </p>
+            </div>
+            <a
+              href="/global-fair-pay-charter.pdf"
+              download="trust-point-fair-pay-charter.pdf"
+              className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold tracking-wider uppercase transition-colors shadow-md shadow-emerald-950/20"
+            >
+              <HiOutlineDocumentDownload className="w-4 h-4" />
+              <span>Download PDF (Official)</span>
+            </a>
+          </div>
+        </ScrollAnimate>
       </div>
     </section>
   );

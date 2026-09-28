@@ -1,11 +1,21 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Image from "next/image";
 import { useAuth } from "@/app/_providers/auth-provider";
 import { useGoogleLogin } from "@react-oauth/google";
-import { LuX, LuEye, LuEyeOff, LuLoader } from "react-icons/lu";
+import {
+  LuX,
+  LuEye,
+  LuEyeOff,
+  LuLoader,
+  LuShieldCheck,
+  LuTruck,
+  LuGift,
+} from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
+import { FiPhone, FiMapPin } from "react-icons/fi";
+import Logo from "@/components/ui/logo";
 
 type AuthView = "login" | "register";
 
@@ -19,7 +29,7 @@ export default function AuthModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [rememberLogin, setRememberLogin] = useState(false);
+  const [rememberLogin, setRememberLogin] = useState(true);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
@@ -30,8 +40,14 @@ export default function AuthModal() {
       setGoogleLoading(true);
       try {
         await loginWithGoogle(tokenResponse.access_token);
+        handleClose();
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Google sign-in failed. Please try again.");
+        const msg = err instanceof Error ? err.message : "Google sign-in failed. Please try again.";
+        if (msg.includes("Failed to fetch") || msg.toLowerCase().includes("cannot connect")) {
+          setError("Unable to connect to the backend server. Please verify the API server is running on port 5010.");
+        } else {
+          setError(msg);
+        }
       } finally {
         setGoogleLoading(false);
       }
@@ -101,112 +117,196 @@ export default function AuthModal() {
       } else {
         await register(name.trim(), email.trim(), password);
       }
+      handleClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      const msg = err instanceof Error ? err.message : "Authentication failed. Please check credentials.";
+      if (msg.includes("Failed to fetch") || msg.toLowerCase().includes("cannot connect")) {
+        setError("Unable to connect to the backend server. Please verify the API server is running on port 5010.");
+      } else {
+        setError(msg);
+      }
     } finally {
       setSubmitting(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
-      <div className="relative w-full bg-[#F5F5DC] shadow-2xl rounded-2xl overflow-hidden flex p-2 gap-2 max-w-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-fadeIn font-sans">
+      <div className="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 border border-zinc-200">
+        {/* Close Button */}
         <button
           type="button"
           onClick={handleClose}
-          className="absolute bg-white p-2 rounded-full top-4 right-4 z-10 text-red-500 hover:text-red-700 transition-colors cursor-pointer"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 flex items-center justify-center transition-colors cursor-pointer shadow-xs"
           aria-label="Close"
         >
-          <LuX className="w-6 h-6" />
+          <LuX className="w-5 h-5" />
         </button>
 
-        {/* Left Form Section */}
-        <div className="w-3/4 px-8 py-10 bg-white rounded-2xl">
-          <h2 className="text-[40px] text-center font-gotham font-normal text-[#262626] tracking-wide uppercase">
-            {view === "login" ? "Log In" : "Sign Up"}
-          </h2>
-          <p className="mt-2 text-sm text-center text-zinc-600 font-gotham">
-            {view === "login" ? (
-              <>
-                Don&apos;t have an account?{" "}
-                <button
-                  type="button"
-                  onClick={switchView}
-                  className="font-semibold text-[#B4A676] hover:text-[#9a884c] transition-colors cursor-pointer"
-                >
-                  CREATE ACCOUNT
-                </button>
-              </>
-            ) : (
-              <>
-                Already a member?{" "}
-                <button
-                  type="button"
-                  onClick={switchView}
-                  className="font-semibold text-red-600 hover:text-red-700 transition-colors cursor-pointer"
-                >
-                  LOG IN
-                </button>
-              </>
-            )}
-          </p>
+        {/* Left Decorative & Info Section (5 cols on md) */}
+        <div className="hidden md:flex md:col-span-5 bg-gradient-to-br from-[#121614] via-[#1A221E] to-[#121614] text-white p-8 flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+
+          <div>
+            <Logo variant="light" size="sm" />
+
+            <div className="inline-block mt-4 px-2.5 py-0.5 rounded-full bg-emerald-950 border border-emerald-700/60 text-emerald-400 text-[9px] font-bold tracking-widest uppercase">
+              Webdev Software Solutions
+            </div>
+
+            <h3 className="text-xl font-black text-white tracking-tight mt-3 leading-snug">
+              {view === "login"
+                ? "Sign In to Access Your Orders & Saved Cart"
+                : "Create Your Account & Claim Member Benefits"}
+            </h3>
+
+            <p className="text-xs text-zinc-400 mt-2 leading-relaxed">
+              Serving customers with verified products, express Dhaka delivery, and bank-grade data security.
+            </p>
+
+            <div className="mt-6 space-y-3">
+              <div className="flex items-start gap-2.5">
+                <LuShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span className="text-[11px] text-zinc-300">100% Genuine Certified Brands</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <LuTruck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span className="text-[11px] text-zinc-300">Central Logistics &amp; Fast Nationwide Dispatch</span>
+              </div>
+              <div className="flex items-start gap-2.5">
+                <LuGift className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <span className="text-[11px] text-zinc-300">Exclusive Vouchers &amp; Flash Deal Alerts</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-5 border-t border-white/10 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-emerald-500/40 ring-2 ring-emerald-500/20 shrink-0">
+                <Image
+                  src="/images/team/Abdullah.jpg"
+                  alt="Mohammad Abdullah"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="text-[11px] leading-tight">
+                <div className="text-white font-bold">Mohammad Abdullah</div>
+                <div className="text-[10px] text-emerald-400 font-medium">Founder &amp; CEO</div>
+              </div>
+            </div>
+            <div className="text-right text-[10px] text-zinc-400">
+              <div className="flex items-center justify-end gap-1 text-zinc-300">
+                <FiMapPin className="w-3 h-3 text-emerald-400 shrink-0" />
+                <span>Mohadevpur</span>
+              </div>
+              <a href="tel:01707819676" className="text-zinc-300 hover:text-emerald-400 font-semibold block mt-0.5">
+                01707819676
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Form Section (7 cols on md) */}
+        <div className="md:col-span-7 p-6 sm:p-10 flex flex-col justify-center">
+          {/* Header & Tabs - pr-12 leaves ample space for close button */}
+          <div className="flex items-start justify-between pb-3 border-b border-zinc-100 mb-5 pr-12">
+            <div>
+              <h2 className="text-2xl font-black text-zinc-950 tracking-tight">
+                {view === "login" ? "Welcome Back" : "Create Account"}
+              </h2>
+              <p className="text-xs text-zinc-500 mt-0.5">
+                {view === "login" ? "Enter your email to sign in" : "Sign up in 30 seconds"}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={switchView}
+              className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer shrink-0 pt-1"
+            >
+              {view === "login" ? "New? Register" : "Have account? Log in"}
+            </button>
+          </div>
 
           {error && (
-            <div className="mt-4 rounded bg-red-50 border border-red-200 px-4 py-2.5 text-sm text-red-700 font-gotham">
+            <div className="mb-4 rounded-xl bg-red-50 border border-red-200 p-3 text-xs text-red-700 font-medium">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          {/* Google 1-Click */}
+          <button
+            type="button"
+            onClick={() => signInWithGoogle()}
+            disabled={googleLoading || submitting}
+            className="w-full flex items-center justify-center gap-2.5 border border-zinc-300 py-2.5 rounded-xl hover:bg-zinc-50 transition-colors text-xs font-bold text-zinc-800 shadow-xs cursor-pointer disabled:opacity-60"
+          >
+            {googleLoading ? <LuLoader className="w-4 h-4 animate-spin" /> : <FcGoogle className="w-4 h-4" />}
+            <span>{googleLoading ? "Connecting..." : "Continue with Google"}</span>
+          </button>
+
+          <div className="relative my-4">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-zinc-200" />
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="px-3 bg-white text-zinc-400 font-medium uppercase tracking-wider text-[10px]">
+                Or with email
+              </span>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-3.5">
             {view === "register" && (
               <div>
-                <label htmlFor="auth-name" className="block text-sm font-semibold text-zinc-700 font-gotham mb-1">
-                  Name
+                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1">
+                  Full Name
                 </label>
                 <input
-                  id="auth-name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your full name"
-                  className="w-full border border-zinc-300 px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors font-gotham"
+                  placeholder="e.g. Saikat Islam"
+                  required
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
                 />
               </div>
             )}
 
             <div>
-              <label htmlFor="auth-email" className="block text-sm font-semibold text-zinc-700 font-gotham mb-1">
-                Email
+              <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1">
+                Email Address
               </label>
               <input
-                id="auth-email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full border border-zinc-300 px-4 py-2.5 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors font-gotham"
+                placeholder="yourname@gmail.com"
+                required
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
               />
             </div>
 
-            <div className={`grid items-center justify-between gap-2 w-full ${view === "login" ? "grid-cols-1" : "xl:grid-cols-2"}`}>
-              <div className="w-full">
-                <label htmlFor="auth-password" className="block text-sm font-semibold text-zinc-700 font-gotham mb-1">
-                  {view === "login" ? "Password" : "Type Password"}
+            <div className={`grid gap-3 ${view === "register" ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1"}`}>
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1">
+                  Password
                 </label>
                 <div className="relative">
                   <input
-                    id="auth-password"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder={view === "login" ? "Enter your password" : "Type new password"}
-                    className="w-full border border-zinc-300 px-4 py-2.5 pr-10 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors font-gotham"
+                    placeholder="Password"
+                    required
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700 cursor-pointer"
-                    tabIndex={-1}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 cursor-pointer"
                   >
                     {showPassword ? <LuEyeOff className="w-4 h-4" /> : <LuEye className="w-4 h-4" />}
                   </button>
@@ -215,23 +315,22 @@ export default function AuthModal() {
 
               {view === "register" && (
                 <div>
-                  <label htmlFor="auth-confirm-password" className="block text-sm font-semibold text-zinc-700 font-gotham mb-1">
-                    Re-Type Password
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-600 mb-1">
+                    Confirm Password
                   </label>
                   <div className="relative">
                     <input
-                      id="auth-confirm-password"
                       type={showConfirmPassword ? "text" : "password"}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Re-type new password"
-                      className="w-full border border-zinc-300 px-4 py-2.5 pr-10 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:border-zinc-500 transition-colors font-gotham"
+                      placeholder="Repeat"
+                      required
+                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
                     />
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-700 cursor-pointer"
-                      tabIndex={-1}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-zinc-600 cursor-pointer"
                     >
                       {showConfirmPassword ? <LuEyeOff className="w-4 h-4" /> : <LuEye className="w-4 h-4" />}
                     </button>
@@ -241,92 +340,66 @@ export default function AuthModal() {
             </div>
 
             {view === "login" && (
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="remember-login"
-                  checked={rememberLogin}
-                  onChange={(e) => setRememberLogin(e.target.checked)}
-                  className="w-4 h-4 accent-[#B4A676] cursor-pointer text-white"
-                />
-                <label htmlFor="remember-login" className="text-sm text-zinc-600 font-gotham">
-                  Remember login
+              <div className="flex items-center justify-between text-xs pt-1">
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={rememberLogin}
+                    onChange={(e) => setRememberLogin(e.target.checked)}
+                    className="w-3.5 h-3.5 accent-emerald-600 rounded cursor-pointer"
+                  />
+                  <span className="text-zinc-600">Remember login</span>
                 </label>
+                <a href="tel:01707819676" className="text-emerald-600 hover:underline">
+                  Need help?
+                </a>
               </div>
             )}
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-red-600 text-white py-3 rounded-full font-gotham font-bold text-sm tracking-wider uppercase hover:bg-red-700 transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-emerald-600/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 mt-2"
             >
               {submitting && <LuLoader className="w-4 h-4 animate-spin" />}
-              {submitting
-                ? view === "login"
-                  ? "LOGGING IN..."
-                  : "SIGNING UP..."
-                : view === "login"
-                  ? "LOG IN"
-                  : "SIGN UP"}
+              <span>
+                {submitting
+                  ? "Processing..."
+                  : view === "login"
+                    ? "Sign In"
+                    : "Create Account"}
+              </span>
             </button>
           </form>
 
-          {view === "login" && (
-            <p className="mt-4 text-center text-sm text-[#B4A676] font-gotham">
-              <button type="button" className="hover:text-[#9a884c] transition-colors cursor-pointer">
-                Having trouble to log in?
-              </button>
-            </p>
-          )}
-
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-zinc-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-zinc-500 font-gotham">Or Continue with</span>
-              </div>
-            </div>
-
-            <div className="mt-4 flex gap-3">
-              <button
-                type="button"
-                onClick={() => signInWithGoogle()}
-                disabled={googleLoading || submitting}
-                className="flex-1 flex items-center justify-center gap-2 border border-zinc-300 py-2.5 rounded-lg hover:bg-zinc-50 transition-colors font-gotham text-sm text-zinc-700 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {googleLoading ? <LuLoader className="w-5 h-5 animate-spin" /> : <FcGoogle className="w-5 h-5" />}
-                {googleLoading ? "Connecting..." : "Google"}
-              </button>
-              {/* <button
-                type="button"
-                className="flex-1 flex items-center justify-center gap-2 border border-zinc-300 py-2.5 rounded-lg hover:bg-zinc-50 transition-colors font-gotham text-sm text-zinc-700 cursor-pointer"
-              >
-                <FaFacebookF className="w-5 h-5 text-blue-600" />
-                Facebook
-              </button> */}
-            </div>
+          {/* Bottom Switch View */}
+          <div className="mt-4 pt-3 border-t border-zinc-100 text-center text-xs text-zinc-500">
+            {view === "login" ? (
+              <span>
+                Don&apos;t have an account yet?{" "}
+                <button
+                  type="button"
+                  onClick={switchView}
+                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                >
+                  Create one now
+                </button>
+              </span>
+            ) : (
+              <span>
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={switchView}
+                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                >
+                  Sign in here
+                </button>
+              </span>
+            )}
           </div>
 
-          {view === "register" && (
-            <p className="mt-6 text-center text-xs text-zinc-500 font-gotham">
-              By sign up, you agree to the{" "}
-              <button type="button" className="text-red-600 hover:text-red-700 transition-colors cursor-pointer">
-                terms & conditions
-              </button>
-              .
-            </p>
-          )}
-        </div>
 
-        {/* Right Decorative Image Section */}
-        <div className="w-1/4 relative flex items-center justify-center rounded-2xl">
-          <div className="relative w-full h-full flex items-center justify-center">
-            <div className="w-full h-full rounded-2xl flex items-center justify-center overflow-hidden relative">
-              <div className="absolute inset-0 z-0" style={{ backgroundImage: "url('/images/login.webp')", backgroundSize: "cover", backgroundPosition: "center" }} />
-            </div>
-          </div>
         </div>
       </div>
     </div>

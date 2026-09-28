@@ -11,7 +11,7 @@ import {
 } from "react";
 import { toast } from "sonner";
 import { useAuth } from "@/app/_providers/auth-provider";
-import { useWishlist } from "./wishlist-provider";
+import { useWishlist } from "@/app/_providers/wishlist-provider";
 import {
   getCart,
   addCartItem,
@@ -19,11 +19,23 @@ import {
   removeCartItem,
   mapBackendCart,
 } from "@/lib/cart-api";
+import { fetchShopProductById, fetchShopProductBySlug } from "@/lib/shop-api";
 import type { CartItem, CartContextValue } from "@/lib/types";
 
 const STORAGE_KEY = "humana-cart";
 
-const CartContext = createContext<CartContextValue | null>(null);
+const defaultCartContext: CartContextValue = {
+  items: [],
+  itemCount: 0,
+  initialised: false,
+  addItem: async () => {},
+  removeItem: () => {},
+  updateQuantity: () => {},
+  updateCartItem: async () => {},
+  clearCart: () => {},
+};
+
+const CartContext = createContext<CartContextValue>(defaultCartContext);
 
 function loadLocalCart(): CartItem[] {
   if (typeof window === "undefined") return [];
@@ -70,8 +82,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
     try {
       for (const item of local) {
-        if (item.variantId) {
-          await addCartItem(item.variantId, item.quantity);
+        let vId = item.variantId;
+        if (!vId && (item.productId || item.id || item.slug)) {
+          try {
+            const targetId = item.productId || item.id;
+            if (targetId) {
+              const prod = await fetchShopProductById(targetId);
+              const def = prod?.variants?.find((v) => v.isDefault) ?? prod?.variants?.[0];
+              if (def?.id) vId = def.id;
+            }
+            if (!vId && item.slug) {
+              const prod = await fetchShopProductBySlug(item.slug);
+              const def = prod?.variants?.find((v) => v.isDefault) ?? prod?.variants?.[0];
+              if (def?.id) vId = def.id;
+            }
+          } catch {
+            // ignore
+          }
+        }
+        if (vId) {
+          await addCartItem(vId, item.quantity);
         }
       }
     } catch {
@@ -109,11 +139,35 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [isAuthenticated, initialised, items, mergeLocalCartToServer]);
 
   const addItem = useCallback(
-    (input: Omit<CartItem, "quantity"> & { quantity?: number }, options?: { silent?: boolean }) => {
+    async (input: Omit<CartItem, "quantity"> & { quantity?: number }, options?: { silent?: boolean }) => {
       const isSilent = options?.silent ?? false;
+      const qty = input.quantity ?? 1;
+
+      // Auto-resolve variantId if missing
+      let vId = input.variantId;
+      if (!vId && (input.productId || input.id || input.slug)) {
+        try {
+          const targetId = input.productId || input.id;
+          if (targetId) {
+            const prod = await fetchShopProductById(targetId);
+            const def = prod?.variants?.find((v) => v.isDefault) ?? prod?.variants?.[0];
+            if (def?.id) {
+              vId = def.id;
+            }
+          }
+          if (!vId && input.slug) {
+            const prod = await fetchShopProductBySlug(input.slug);
+            const def = prod?.variants?.find((v) => v.isDefault) ?? prod?.variants?.[0];
+            if (def?.id) {
+              vId = def.id;
+            }
+          }
+        } catch {
+          // ignore
+        }
+      }
+
       if (isAuthenticated) {
-        const qty = input.quantity ?? 1;
-        const vId = input.variantId;
         if (!vId) {
           toast.error("Cannot add item: missing variant");
           return Promise.reject(new Error("Cannot add item: missing variant"));
@@ -142,19 +196,26 @@ export function CartProvider({ children }: { children: ReactNode }) {
             }
           })
           .catch((err: Error) => {
-            toast.error(err.message);
+            toast.error(err.message || "Failed to add to cart");
             throw err;
           });
       } else {
+        const resolvedId = input.id || vId || input.variantId || input.slug;
+        const itemWithVariant = {
+          ...input,
+          id: resolvedId,
+          variantId: vId || input.variantId,
+          quantity: qty,
+        };
         setItems((prev) => {
-          const existing = prev.find((i) => i.slug === input.slug);
+          const existing = prev.find((i) => (vId && i.variantId === vId) || i.slug === input.slug);
           const next = existing
             ? prev.map((i) =>
-                i.slug === input.slug
-                  ? { ...i, quantity: i.quantity + (input.quantity ?? 1) }
+                ((vId && i.variantId === vId) || i.slug === input.slug)
+                  ? { ...i, quantity: i.quantity + qty }
                   : i,
               )
-            : [{ ...input, quantity: input.quantity ?? 1 } as CartItem, ...prev];
+            : [{ ...itemWithVariant } as CartItem, ...prev];
           saveLocalCart(next);
           return next;
         });
@@ -164,7 +225,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
         // Remove from wishlist if it exists there
         const wishlistMatch = wishlistItems.find(
-          (item) => item.slug === input.slug || (item.variantId && input.variantId && item.variantId === input.variantId)
+          (item) => item.slug === input.slug || (item.variantId && vId && item.variantId === vId)
         );
         if (wishlistMatch) {
           toggleWishlist(wishlistMatch);
@@ -314,6 +375,5 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
 export function useCart(): CartContextValue {
   const ctx = useContext(CartContext);
-  if (!ctx) throw new Error("useCart must be used within CartProvider");
-  return ctx;
+  return ctx ?? defaultCartContext;
 }

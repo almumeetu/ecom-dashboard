@@ -6,6 +6,7 @@ import { useWishlist } from "@/app/_providers/wishlist-provider";
 import { useCart } from "@/app/_providers/cart-provider";
 import { useCurrency } from "@/lib/currency-context";
 import { LuTrash2, LuShoppingBag, LuHeart } from "react-icons/lu";
+import PageBanner from "@/components/ui/page-banner";
 
 export default function WishlistPage() {
   const { items, itemCount, toggleWishlist, clearWishlist } = useWishlist();
@@ -14,11 +15,15 @@ export default function WishlistPage() {
 
   return (
     <main className="flex-grow bg-white w-full min-h-screen">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <h1 className="font-bembo text-3xl text-stone-800 mb-2">Wishlist</h1>
-        <p className="text-stone-400 text-sm mb-8">
-          {itemCount} {itemCount === 1 ? "item" : "items"} saved
-        </p>
+      <PageBanner
+        title="Saved Wishlist"
+        subtitle={`Keep track of your favorite items (${itemCount}) from verified sellers across Trust Point.`}
+        breadcrumbs={[
+          { label: "Products", href: "/products" },
+          { label: "Wishlist" },
+        ]}
+      />
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 lg:py-14">
 
         {items.length === 0 ? (
           <div className="text-center py-20">
@@ -76,19 +81,23 @@ export default function WishlistPage() {
 
                 <div className="w-full sm:w-auto shrink-0 flex sm:justify-end">
                   <button
-                    onClick={() =>
-                      addItem({
-                        productId: product.id,
-                        slug: product.slug,
-                        name: product.name,
-                        price: product.price,
-                        image: product.image,
-                        description: product.description,
-                        color: product.color,
-                        size: product.size,
-                        variantId: product.variantId || product.id,
-                      })
-                    }
+                    onClick={async () => {
+                      try {
+                        await addItem({
+                          productId: product.id,
+                          slug: product.slug,
+                          name: product.name,
+                          price: product.price,
+                          image: product.image,
+                          description: product.description,
+                          color: product.color,
+                          size: product.size,
+                          variantId: product.variantId || undefined,
+                        });
+                      } catch {
+                        // Handled
+                      }
+                    }}
                     className="flex w-full sm:w-auto items-center justify-center gap-2 px-4 py-2.5 bg-stone-800 text-white text-xs font-semibold uppercase tracking-wider hover:bg-stone-700 transition-colors cursor-pointer whitespace-nowrap"
                   >
                     <LuShoppingBag className="w-3.5 h-3.5" />

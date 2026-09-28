@@ -4,15 +4,15 @@ export default function Invitation() {
   const features = [
     {
       icon: "/images/invitation/Invitation-1.svg",
-      description: "Single-Origin Leaves — Sourced with precision from the gardens of Sylhet",
+      description: "Direct Farmgate Sourcing — Sourced with precision from verified regional producers",
     },
     {
       icon: "/images/invitation/Invitation-2.svg",
-      description: "Limited Harvests — No mass production, only moments captured in season",
+      description: "Strict Authenticity — Guaranteed genuine products, transparent origins and fair pricing",
     },
     {
       icon: "/images/invitation/Invitation-3.svg",
-      description: "Refined Craft — Curated with the philosophy of London Tea Exchange",
+      description: "Refined Craft — Curated with the uncompromising quality standards of Trust Point Mart",
     },
   ];
 

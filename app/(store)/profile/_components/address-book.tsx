@@ -222,30 +222,30 @@ export default function AddressBookView() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={FIELD_LABEL}>Full Name *</label>
-                  <input type="text" value={form.fullName} onChange={(e) => patch("fullName", e.target.value)} className={INPUT_BASE} placeholder="John Doe" required />
+                  <input type="text" value={form.fullName} onChange={(e) => patch("fullName", e.target.value)} className={INPUT_BASE} placeholder="e.g. Saikat Islam" required />
                 </div>
                 <div>
                   <label className={FIELD_LABEL}>Phone *</label>
-                  <input type="tel" value={form.phone} onChange={(e) => patch("phone", e.target.value)} className={INPUT_BASE} placeholder="+880 1xxx" required />
+                  <input type="tel" value={form.phone} onChange={(e) => patch("phone", e.target.value)} className={INPUT_BASE} placeholder="017XXXXXXXX" required />
                 </div>
               </div>
 
               <div>
                 <label className={FIELD_LABEL}>Address Line 1 *</label>
-                <input type="text" value={form.addressLine1} onChange={(e) => patch("addressLine1", e.target.value)} className={INPUT_BASE} placeholder="House / Road / Area" required />
+                <input type="text" value={form.addressLine1} onChange={(e) => patch("addressLine1", e.target.value)} className={INPUT_BASE} placeholder="e.g. House 14, Road 7, Sector 3" required />
               </div>
 
               <div>
                 <label className={FIELD_LABEL}>
                   Address Line 2 <span className="normal-case font-normal text-zinc-300 tracking-normal">(optional)</span>
                 </label>
-                <input type="text" value={form.addressLine2} onChange={(e) => patch("addressLine2", e.target.value)} className={INPUT_BASE} placeholder="Apartment, suite, floor…" />
+                <input type="text" value={form.addressLine2} onChange={(e) => patch("addressLine2", e.target.value)} className={INPUT_BASE} placeholder="e.g. Flat 4B, Sector 3, Uttara" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className={FIELD_LABEL}>City *</label>
-                  <input type="text" value={form.city} onChange={(e) => patch("city", e.target.value)} className={INPUT_BASE} placeholder="Dhaka" required />
+                  <label className={FIELD_LABEL}>City / Area *</label>
+                  <input type="text" value={form.city} onChange={(e) => patch("city", e.target.value)} className={INPUT_BASE} placeholder="Uttara" required />
                 </div>
                 <div>
                   <label className={FIELD_LABEL}>State / District *</label>
@@ -255,7 +255,7 @@ export default function AddressBookView() {
 
               <div>
                 <label className={FIELD_LABEL}>Postal Code *</label>
-                <input type="text" value={form.postalCode} onChange={(e) => patch("postalCode", e.target.value)} className={INPUT_BASE} placeholder="1207" required />
+                <input type="text" value={form.postalCode} onChange={(e) => patch("postalCode", e.target.value)} className={INPUT_BASE} placeholder="1230" required />
               </div>
 
               <label className="flex items-center gap-3 cursor-pointer pt-1 group select-none">

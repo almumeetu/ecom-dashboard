@@ -85,6 +85,16 @@ const nextConfig: NextConfig = {
         destination: "/profile?tab=orders",
         permanent: true,
       },
+      {
+        source: "/track",
+        destination: "/profile?tab=track",
+        permanent: true,
+      },
+      {
+        source: "/order-tracking",
+        destination: "/profile?tab=track",
+        permanent: true,
+      },
     ];
   },
 };

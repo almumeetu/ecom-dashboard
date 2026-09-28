@@ -1,94 +1,110 @@
-import ScrollReveal from "@/components/ui/scroll-reveal";
+"use client";
+
+import Link from "next/link";
+import {
+  HiShieldCheck,
+  HiOutlineDocumentDownload,
+  HiCheckCircle,
+  HiScale,
+  HiUserGroup,
+  HiCurrencyDollar,
+  HiArrowDown,
+} from "react-icons/hi";
+import ScrollAnimate from "@/components/ui/scroll-animate";
 
 export default function CharterHero() {
+  const highlights = [
+    {
+      icon: HiShieldCheck,
+      text: "100% Living Wage Benchmarked",
+    },
+    {
+      icon: HiCurrencyDollar,
+      text: "Prompt 48h Vendor Settlements",
+    },
+    {
+      icon: HiUserGroup,
+      text: "Direct Farmer & Artisan Sourcing",
+    },
+    {
+      icon: HiScale,
+      text: "Zero Child & Forced Labor Tolerance",
+    },
+  ];
+
   return (
-    <section className="w-full bg-white py-20 px-6 md:px-12 flex flex-col items-center justify-center text-center relative overflow-x-hidden min-h-[90vh]">
-      {/* Background elegant pattern with soft bottom fade */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-20 [mask-image:linear-gradient(to_bottom,black_30%,transparent_95%)] [-webkit-mask-image:linear-gradient(to_bottom,black_30%,transparent_95%)]"
-        style={{
-          backgroundImage: "url('/images/pattern/pattern.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "160px auto",
-        }}
-      />
+    <section className="relative w-full bg-linear-to-b from-stone-900 via-zinc-900 to-stone-950 text-white pt-16 pb-20 md:pt-24 md:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background Subtle Grid & Ambient Glows */}
+      <div className="absolute inset-0 pointer-events-none opacity-20 [background-image:radial-gradient(rgba(255,255,255,0.15)_1px,transparent_1px)] [background-size:24px_24px]" />
+      
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-emerald-500/15 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute -bottom-24 right-10 w-[400px] h-[300px] bg-teal-500/10 blur-[100px] rounded-full pointer-events-none" />
 
-      <div className="max-w-[1440px] w-full inline-flex flex-col justify-center items-center gap-6 md:gap-8 relative z-10">
-        {/* Top Center Decorative Fleur-de-lis Icon */}
-        <ScrollReveal delay={0} direction="up">
-          <div className="flex items-center justify-center mb-1">
-            <img
-              src="/images/icons/icon-3.svg"
-              alt="Fleur-de-lis"
-              className="w-7 h-8 object-contain filter grayscale brightness-0 opacity-80"
-            />
+      <div className="max-w-6xl mx-auto relative z-10 text-center flex flex-col items-center">
+        {/* Top Badge */}
+        <ScrollAnimate variant="fade-in-up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            Trust Point Marketplace Ethical Standards
           </div>
-        </ScrollReveal>
+        </ScrollAnimate>
 
-        {/* Initiative Pill Tag */}
-        <ScrollReveal delay={80} direction="up">
-          <div className="px-5 md:px-7 py-2.5 bg-white rounded-[100px] border border-neutral-200 shadow-2xs inline-flex justify-center items-center gap-2">
-            <span className="text-center text-neutral-800 text-xs md:text-sm font-normal font-['Bembo_Std'] uppercase tracking-[0.15em] leading-snug">
-              AN INITIATIVE OF LONDON TEA EXCHANGE, WITH UNITAR & THE COMMONWEALTH
+        {/* Main Headline */}
+        <ScrollAnimate variant="fade-in-up" delay={100}>
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.15] mb-6">
+            Global Fair Pay &{" "}
+            <span className="bg-linear-to-r from-emerald-400 via-teal-300 to-emerald-200 bg-clip-text text-transparent">
+              Ethical Sourcing Charter
             </span>
-          </div>
-        </ScrollReveal>
+          </h1>
+        </ScrollAnimate>
 
-        {/* Main Title */}
-        <ScrollReveal delay={160} direction="up">
-          <div className="flex flex-col justify-start items-center my-2">
-            <h1 className="text-center text-khaki-gold text-4xl sm:text-5xl md:text-[64px] font-normal font-['Bembo_Std'] leading-tight sm:leading-[1.15]">
-              Fair pay for every hand
-            </h1>
-            <h2 className="text-center text-neutral-600 text-4xl sm:text-5xl md:text-[64px] font-normal font-['Snell_Roundhand_LT_Std'] italic leading-tight sm:leading-[1.15]">
-              that picks your tea.
-            </h2>
-          </div>
-        </ScrollReveal>
-
-        {/* Spaced Metadata row */}
-        <ScrollReveal delay={240} direction="up">
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-12 my-1">
-            <span className="text-center text-neutral-400 text-sm md:text-lg font-normal font-['Gotham'] leading-snug">
-              Est. 2024
-            </span>
-            <span className="text-center text-neutral-400 text-sm md:text-lg font-normal font-['Gotham'] leading-snug">
-              Mansion House, London
-            </span>
-            <span className="text-center text-neutral-400 text-sm md:text-lg font-normal font-['Gotham'] leading-snug">
-              Eight-Article Pledge
-            </span>
-          </div>
-        </ScrollReveal>
-
-        {/* Paragraph Description */}
-        <ScrollReveal delay={320} direction="up">
-          <p className="w-full max-w-[720px] text-center text-neutral-400 text-sm md:text-base lg:text-lg font-normal font-['Gotham'] leading-relaxed px-2">
-            The Global Fair Pay Charter commits signatories to fair, dignified pay for tea industry workers worldwide. It was conceived by Sheikh Aliur Rahman OBE, Group Chairman of London Tea Exchange, and formally launched with the United Nations Institute for Training and Research on International Tea Day, 22 May 2024.
+        {/* Subtitle / Mission */}
+        <ScrollAnimate variant="fade-in-up" delay={200}>
+          <p className="max-w-3xl text-stone-300 text-base sm:text-lg lg:text-xl font-normal leading-relaxed mb-10 text-balance">
+            Ensuring guaranteed living wages, safe and dignified workplaces, prompt payouts, and direct economic empowerment for every farmer, artisan, warehouse specialist, and delivery courier behind our multi-vendor marketplace.
           </p>
-        </ScrollReveal>
+        </ScrollAnimate>
 
-        {/* Action Buttons (Stacked Vertically) */}
-        <ScrollReveal delay={400} direction="up">
-          <div className="w-full max-w-xs flex flex-col justify-start items-center gap-3.5 mt-2">
-            <a
-              href="#watch-intro"
-              className="w-full px-6 py-4 bg-[#4A4643] rounded-[100px] flex flex-col justify-center items-center cursor-pointer hover:bg-neutral-800 transition-colors duration-300 shadow-xs"
-            >
-              <span className="text-white text-xs md:text-sm font-medium font-['Gotham'] uppercase tracking-wider leading-tight">
-                WATCH THE INTRODUCTION
-              </span>
-            </a>
+        {/* Action Buttons */}
+        <ScrollAnimate variant="fade-in-up" delay={300}>
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
             <a
               href="#eight-articles"
-              className="w-full px-6 py-4 bg-white rounded-[100px] border border-[#4A4643] flex flex-col justify-center items-center cursor-pointer hover:bg-neutral-50 transition-colors duration-300"
+              className="inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm sm:text-base transition-all duration-200 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-700/40 active:scale-95"
             >
-              <span className="text-neutral-700 text-xs md:text-sm font-medium font-['Gotham'] uppercase tracking-wider leading-tight">
-                READ THE EIGHT ARTICLES
-              </span>
+              <span>Explore The 8 Charter Articles</span>
+              <HiArrowDown className="w-4 h-4" />
+            </a>
+
+            <a
+              href="/global-fair-pay-charter.pdf"
+              download="trust-point-fair-pay-charter.pdf"
+              className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-stone-200 hover:text-white border border-white/15 font-semibold text-sm sm:text-base backdrop-blur-md transition-all duration-200 active:scale-95"
+            >
+              <HiOutlineDocumentDownload className="w-5 h-5 text-emerald-400" />
+              <span>Download Official Charter (PDF)</span>
             </a>
           </div>
-        </ScrollReveal>
+        </ScrollAnimate>
+
+        {/* 4 Pillars Pill Bar */}
+        <ScrollAnimate variant="fade-in-up" delay={400} className="w-full">
+          <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-white/10">
+            {highlights.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center justify-center gap-2 sm:gap-2.5 px-3 py-3 rounded-lg bg-white/5 border border-white/10 text-stone-300 text-xs sm:text-sm font-medium hover:bg-white/10 transition-colors"
+                >
+                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0" />
+                  <span className="truncate">{item.text}</span>
+                </div>
+              );
+            })}
+          </div>
+        </ScrollAnimate>
       </div>
     </section>
   );

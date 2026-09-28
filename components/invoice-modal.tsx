@@ -6,11 +6,11 @@ import { LuPrinter, LuX } from "react-icons/lu";
 import type { OrderResult } from "@/lib/types";
 
 const COMPANY = {
-  name: "London Tea Exchange",
-  logo: "/images/logo/Logo-update.png",
-  addressLine: "Room H-125A, Pan Pacific Sonargaon Hotel, 107 Kazi Nazrul Islam Avenue, Dhaka-1215, Bangladesh",
-  phone: "+880 13 3987 9494",
-  email: "store@londonteaexchangebd.com",
+  name: "Trust Point Marketplace",
+  logo: "/images/logo/novamart-logo-main.png",
+  addressLine: "Mohadevpur, Naogaon, Rajshahi, Bangladesh",
+  phone: "01707819676 (+880 1707-819676)",
+  email: "support@trustpointmart.com",
 };
 
 const currency = (n: number) =>
@@ -48,10 +48,10 @@ export default function InvoiceModal({
 
   if (!open || !mounted) return null;
 
-  const subtotal = order.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const shipping = 0;
+  const subtotal = order.subtotal ?? order.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
+  const shipping = order.shippingCost ?? 0;
   const tax = 0;
-  const discount = subtotal + shipping + tax - order.total;
+  const discount = order.discount ?? Math.max(0, subtotal + shipping + tax - order.total);
   const issuedOn = new Date().toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -184,7 +184,7 @@ export default function InvoiceModal({
                 </p>
                 <p>{address.country}</p>
                 <p className="mt-1">{address.phone}</p>
-                <p>{address.email}</p>
+                {address.email && <p>{address.email}</p>}
               </div>
             </div>
 

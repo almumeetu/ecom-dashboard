@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import { FiLoader, FiCheckCircle, FiTruck, FiClock, FiSearch, FiPackage } from "react-icons/fi";
 import { toast } from "sonner";
 
@@ -8,13 +9,22 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/
 
 const SECTION_LABEL = "text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400";
 
+interface StatusLog {
+  id: string;
+  status: string;
+  note?: string | null;
+  createdAt: string;
+}
+
 interface Order {
   id: string;
   orderNumber: string;
   status: string;
-  total: string;
+  total: string | number;
+  shippingCost?: string | number;
   placedAt: string;
   createdAt: string;
+  statusLogs?: StatusLog[];
 }
 
 const STEPS = [
@@ -36,27 +46,46 @@ function statusBadgeClass(status: string) {
 }
 
 export default function TrackOrderView() {
-  const [invoiceId, setInvoiceId] = useState("");
+  const searchParams = useSearchParams();
+  const initialOrderQuery = searchParams.get("order") || searchParams.get("id") || "";
+
+  const [invoiceId, setInvoiceId] = useState(initialOrderQuery);
   const [order, setOrder]         = useState<Order | null>(null);
   const [loading, setLoading]     = useState(false);
   const [searched, setSearched]   = useState(false);
 
-  const handleTrack = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!invoiceId.trim()) return;
+  const fetchOrder = useCallback(async (query: string) => {
+    const clean = query.trim().replace(/^#/, "");
+    if (!clean) return;
     setLoading(true);
     setSearched(false);
     setOrder(null);
     try {
-      const res = await fetch(`${BASE_URL}/orders/track/${invoiceId.trim()}`);
-      if (res.ok) setOrder(await res.json());
-      else toast.error("Order not found. Please check your Invoice ID.");
+      const res = await fetch(`${BASE_URL}/orders/track/${clean}`);
+      if (res.ok) {
+        setOrder(await res.json());
+      } else {
+        toast.error("Order not found. Please check your Invoice ID or Order Number.");
+      }
     } catch {
       toast.error("Failed to reach the server. Please try again.");
     } finally {
       setLoading(false);
       setSearched(true);
     }
+  }, []);
+
+  useEffect(() => {
+    if (initialOrderQuery) {
+      setInvoiceId(initialOrderQuery);
+      fetchOrder(initialOrderQuery);
+    }
+  }, [initialOrderQuery, fetchOrder]);
+
+  const handleTrack = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!invoiceId.trim()) return;
+    await fetchOrder(invoiceId);
   };
 
   const isCancelled = order?.status?.toLowerCase() === "cancelled";
@@ -116,11 +145,19 @@ export default function TrackOrderView() {
                     })}
                   </p>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center flex-wrap gap-3">
+                  {order.shippingCost !== undefined && (
+                    <span className="font-sans text-[11px] text-zinc-500 bg-white border border-stone-200 px-2.5 py-1 rounded-full">
+                      Delivery:{" "}
+                      <strong className="text-zinc-800">
+                        {Number(order.shippingCost) === 0 ? "Free" : `৳${Number(order.shippingCost).toLocaleString()}`}
+                      </strong>
+                    </span>
+                  )}
                   <span className={`border font-sans text-[9px] font-bold tracking-wider uppercase px-3 py-1 rounded-full ${statusBadgeClass(order.status)}`}>
                     {order.status}
                   </span>
-                  <span className="font-sans font-bold text-sm text-zinc-800">
+                  <span className="font-sans font-bold text-base text-zinc-900">
                     ৳{Number(order.total).toLocaleString()}
                   </span>
                 </div>
@@ -171,6 +208,42 @@ export default function TrackOrderView() {
                       );
                     })}
                   </div>
+
+                  {/* Status activity logs */}
+                  {order.statusLogs && order.statusLogs.length > 0 && (
+                    <div className="mt-8 pt-6 border-t border-stone-100">
+                      <p className="font-sans text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400 mb-4">
+                        Status History & Updates
+                      </p>
+                      <div className="space-y-2.5">
+                        {order.statusLogs.map((log) => (
+                          <div
+                            key={log.id}
+                            className="flex items-start justify-between gap-4 p-3 rounded-lg bg-stone-50 border border-stone-100 text-xs"
+                          >
+                            <div>
+                              <span className="font-bold text-zinc-800 capitalize tracking-wide">
+                                {log.status}
+                              </span>
+                              {log.note && (
+                                <p className="text-zinc-600 mt-0.5 leading-relaxed font-sans">
+                                  {log.note}
+                                </p>
+                              )}
+                            </div>
+                            <span className="text-[10px] text-zinc-400 shrink-0 mt-0.5">
+                              {new Date(log.createdAt).toLocaleString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                hour: "2-digit",
+                                minute: "2-digit",
+                              })}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center py-10 border border-dashed border-red-200 rounded-xl bg-red-50/40">

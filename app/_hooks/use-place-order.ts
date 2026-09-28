@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { useCart } from "@/app/_providers/cart-provider";
 import { getCustomerToken } from "@/lib/storefront-api";
+import { fetchShopProductById, fetchShopProductBySlug } from "@/lib/shop-api";
 import type { AddressForm, CartItem, OrderResult } from "@/lib/types";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1";
@@ -14,7 +15,14 @@ export function usePlaceOrder() {
 
   const placeOrder = async (
     address: AddressForm,
-    extra?: { paymentMethod?: string; orderNote?: string; items?: CartItem[]; addressId?: string }
+    extra?: {
+      paymentMethod?: string;
+      orderNote?: string;
+      items?: CartItem[];
+      addressId?: string;
+      couponCode?: string;
+      shippingCost?: number;
+    }
   ): Promise<OrderResult> => {
     setSubmitting(true);
     const token = getCustomerToken();
@@ -41,7 +49,7 @@ export function usePlaceOrder() {
               addressLine2: address.addressLine2 || undefined,
               city: address.city,
               state: address.state,
-              postalCode: address.postalCode,
+              postalCode: address.postalCode?.trim() || undefined,
               country: address.country,
               isDefault: true,
             }),
@@ -52,7 +60,7 @@ export function usePlaceOrder() {
             throw new Error((err as { message?: string }).message ?? "Failed to save address");
           }
 
-          const savedAddress = await addressRes.json() as { id: string };
+          const savedAddress = (await addressRes.json()) as { id: string };
           addressId = savedAddress.id;
         }
 
@@ -64,6 +72,9 @@ export function usePlaceOrder() {
           },
           body: JSON.stringify({
             addressId,
+            couponCode: extra?.couponCode || undefined,
+            shippingCost: extra?.shippingCost ?? 0,
+            orderNote: extra?.orderNote || undefined,
             items: extra?.items
               ? extra.items.map((i) => ({
                   variantId: i.variantId,
@@ -80,27 +91,53 @@ export function usePlaceOrder() {
 
         data = await orderRes.json();
       } else {
-        const lineItems = orderItems.map((i) => {
-          if (!i.variantId) throw new Error(`Missing variant for "${i.name}". Please remove and re-add the item.`);
-          return { variantId: i.variantId, quantity: i.quantity };
-        });
+        // Auto-resolve missing variant IDs so guest checkout never fails
+        const lineItems = await Promise.all(
+          orderItems.map(async (i) => {
+            let variantId = i.variantId;
+            if (!variantId && (i.productId || i.id || i.slug)) {
+              try {
+                const targetId = i.productId || i.id;
+                if (targetId) {
+                  const prod = await fetchShopProductById(targetId);
+                  const def = prod?.variants?.find((v) => v.isDefault) ?? prod?.variants?.[0];
+                  if (def?.id) variantId = def.id;
+                }
+                if (!variantId && i.slug) {
+                  const prod = await fetchShopProductBySlug(i.slug);
+                  const def = prod?.variants?.find((v) => v.isDefault) ?? prod?.variants?.[0];
+                  if (def?.id) variantId = def.id;
+                }
+              } catch {
+                // ignore
+              }
+            }
+            if (!variantId) {
+              throw new Error(`Missing product variant for "${i.name}". Please re-add the item to cart.`);
+            }
+            return { variantId, quantity: i.quantity };
+          })
+        );
 
         const res = await fetch(`${BASE_URL}/orders/guest`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             address: {
-              email: address.email,
+              email: address.email?.trim() || undefined,
               fullName: address.fullName,
               phone: address.phone,
               addressLine1: address.addressLine1,
               addressLine2: address.addressLine2 || undefined,
               city: address.city,
               state: address.state,
-              postalCode: address.postalCode,
+              postalCode: address.postalCode?.trim() || undefined,
               country: address.country,
             },
             items: lineItems,
+            couponCode: extra?.couponCode || undefined,
+            shippingCost: extra?.shippingCost ?? 0,
+            orderNote: extra?.orderNote || undefined,
           }),
         });
 
@@ -112,9 +149,17 @@ export function usePlaceOrder() {
         data = await res.json();
       }
 
+      const totalAmount = Number(data.total) || (orderSubtotal + (extra?.shippingCost ?? 0));
+      const orderShipping = Number(data.shippingCost ?? extra?.shippingCost ?? 0);
+      const orderDiscount = Number(data.discount ?? 0);
+
       const result: OrderResult = {
         orderNumber: (data.orderNumber ?? data.id ?? "N/A") as string,
-        total: (data.total as number) ?? orderSubtotal,
+        total: totalAmount,
+        subtotal: orderSubtotal,
+        shippingCost: orderShipping,
+        discount: orderDiscount,
+        couponCode: extra?.couponCode,
         items: orderItems.map((i) => ({
           name: i.name,
           quantity: i.quantity,
@@ -127,6 +172,12 @@ export function usePlaceOrder() {
       };
 
       if (!extra?.items) clearCart();
+
+      if (typeof window !== "undefined") {
+        try {
+          sessionStorage.removeItem("applied_coupon");
+        } catch {}
+      }
 
       try {
         await fetch("/api/resend/order-confirmation", {

@@ -19,10 +19,10 @@ export default function Prestige() {
               <p 
                 className="text-sm md:text-base leading-relaxed text-stone-gray font-['Bembo_Std']"
               >
-                Rooted in the fertile landscapes of Sylhet, our teas travel beyond origin—carrying with them the character of place, time, and craft. Inspired by the legacy of global trade excellence shaped by the London Tea Exchange, we position every selection not as a commodity, but as a refined expression of origin.
+                Rooted in the agricultural hubs of Mohadevpur, Naogaon and Rajshahi Division, Trust Point Mart bridges the gap between verified producers and modern consumers. Built upon uncompromising quality and transparent origin, we position every selection not as a commodity, but as a trusted expression of authenticity.
               </p>
 
-              {/* Exceptional Teas Quote Banner */}
+              {/* Exceptional Quality Quote Banner */}
               <div className="mt-4 p-6 bg-[#F9F9FB] border border-[#E3E3E3] rounded-lg relative overflow-hidden group">
                 <div 
                   className="absolute inset-0 opacity-5 pointer-events-none"
@@ -33,10 +33,10 @@ export default function Prestige() {
                   }}
                 />
                 <h4 className="font-['Bembo_Std'] text-xs uppercase tracking-widest text-khaki-gold mb-2 font-semibold">
-                  Exceptional Teas
+                  Verified Quality
                 </h4>
                 <blockquote className="font-['Snell_Roundhand_LT_Std'] italic text-2xl md:text-3xl text-stone-700 leading-relaxed">
-                  &ldquo;For those who craft experiences at the highest level, our teas are the choice without compromise.&rdquo;
+                  &ldquo;For those who value authenticity at the highest level, Trust Point Mart is the choice without compromise.&rdquo;
                 </blockquote>
               </div>
             </div>

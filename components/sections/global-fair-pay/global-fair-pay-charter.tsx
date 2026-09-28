@@ -1,38 +1,34 @@
 import CharterHero from "@/components/sections/global-fair-pay/charter-hero";
 import CharterIntro from "@/components/sections/global-fair-pay/charter-intro";
-import CharterVideo from "@/components/sections/global-fair-pay/charter-video";
 import CharterPrinciples from "@/components/sections/global-fair-pay/charter-principles";
-import CharterStats from "@/components/sections/global-fair-pay/charter-stats";
-import CharterPeople from "@/components/sections/global-fair-pay/charter-people";
-import CharterTimeline from "@/components/sections/global-fair-pay/charter-timeline";
-import CharterQuote from "@/components/sections/global-fair-pay/charter-quote";
+import CharterBeneficiaries from "@/components/sections/global-fair-pay/charter-beneficiaries";
+import CharterVerification from "@/components/sections/global-fair-pay/charter-verification";
+import CharterFAQ from "@/components/sections/global-fair-pay/charter-faq";
+import CharterCTA from "@/components/sections/global-fair-pay/charter-cta";
 
 export default function GlobalFairPayCharter() {
   return (
-    <div className="bg-[#fbfbfa] min-h-screen overflow-clip">
-      {/* 1. Hero / Header Area */}
+    <div className="w-full bg-[#FAF9F6] min-h-screen text-stone-900 font-sans">
+      {/* 1. Hero Section */}
       <CharterHero />
 
-      {/* 2. Impact Section */}
+      {/* 2. Impact & Key Metrics */}
       <CharterIntro />
 
-      {/* 3. Video Introduction Section */}
-      <CharterVideo />
-
-      {/* 4. Eight Articles Section */}
+      {/* 3. The 8 Foundational Articles */}
       <CharterPrinciples />
 
-      {/* 5. Metrics & Booklet Section */}
-      <CharterStats />
+      {/* 4. Who the Charter Protects (Beneficiaries) */}
+      <CharterBeneficiaries />
 
-      {/* 6. Involved People & Organizations Section */}
-      <CharterPeople />
+      {/* 5. 4-Stage Verification & Compliance Engine */}
+      <CharterVerification />
 
-      {/* 7. History Timeline Section */}
-      <CharterTimeline />
+      {/* 6. Frequently Asked Questions */}
+      <CharterFAQ />
 
-      {/* 8. Mansion House Quote Section */}
-      <CharterQuote />
+      {/* 7. Call To Action & Partner Commitment */}
+      <CharterCTA />
     </div>
   );
 }

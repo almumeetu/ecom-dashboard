@@ -2,28 +2,27 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { RiArrowDownSLine } from "react-icons/ri";
+import { LuLayoutGrid } from "react-icons/lu";
 import { fetchShopCategories, type ShopCategory } from "@/lib/shop-api";
 
-const leftNavItems = [
-  { label: "HOME", href: "/" },
-  { label: "TEAS", href: "/products", hasDropdown: true },
-  { label: "GIFTS", href: "/gift-sets" },
-  { label: "CORPORATE ORDER", href: "/corporate-order" },
+const initialFallbackCats: ShopCategory[] = [
+  { id: 'cat-grocery', name: 'Groceries & Produce', slug: 'groceries' },
+  { id: 'cat-fashion', name: "Fashion & Apparel", slug: 'fashion' },
+  { id: 'cat-footwear', name: 'Footwear & Shoes', slug: 'footwear' },
 ];
 
-const rightNavItems = [
-  { label: "ABOUT US", href: "/about" },
-  { label: "GLOBAL FAIR PAY CHARTER", href: "/global-fair-pay-charter" },
-  { label: "CONTACT", href: "/contact" },
-];
+export interface NavLinkItem {
+  label: string;
+  href: string;
+  hasDropdown?: boolean;
+}
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [categories, setCategories] = useState<ShopCategory[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string>("");
+  const [categories, setCategories] = useState<ShopCategory[]>(initialFallbackCats);
+  const [activeCategory, setActiveCategory] = useState<string>("cat-grocery");
   const [isTeasHovered, setIsTeasHovered] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -45,11 +44,11 @@ export default function Navigation() {
     async function loadCategories() {
       try {
         const fetched = await fetchShopCategories();
-        // Filters only main categories (e.g. parentId is null)
         const mainCategories = fetched.filter(c => !c.parentId);
-        setCategories(mainCategories);
-        if (mainCategories.length > 0) {
-          setActiveCategory(mainCategories[0].id);
+        const allCats = mainCategories.length > 0 ? mainCategories : initialFallbackCats;
+        setCategories(allCats);
+        if (allCats.length > 0) {
+          setActiveCategory(allCats[0].id);
         }
       } catch (err) {
         console.error("Failed to load categories for menu:", err);
@@ -78,7 +77,23 @@ export default function Navigation() {
 
   const currentCategoryData = categories.find((cat) => cat.id === activeCategory) || categories[0] || null;
 
-  const renderNavItem = (item: typeof leftNavItems[0]) => (
+  // Dynamically take the first 3 categories for the top navigation bar
+  const top3Categories = categories.slice(0, 3);
+  const dynamicCategoryNavItems: NavLinkItem[] = top3Categories.map((cat) => ({
+    label: cat.name.toUpperCase(),
+    href: `/products?category=${encodeURIComponent(cat.slug || cat.name)}`,
+    hasDropdown: false,
+  }));
+
+  const allNavItems: NavLinkItem[] = [
+    { label: "HOME", href: "/", hasDropdown: false },
+    { label: "CATEGORIES", href: "/products", hasDropdown: true },
+    ...dynamicCategoryNavItems,
+    { label: "ABOUT US", href: "/about", hasDropdown: false },
+    { label: "CONTACT", href: "/contact", hasDropdown: false },
+  ];
+
+  const renderNavItem = (item: NavLinkItem) => (
     <div 
       key={item.label} 
       className={item.hasDropdown ? "" : "relative"}
@@ -87,21 +102,23 @@ export default function Navigation() {
     >
       <Link
         href={item.href}
-        className={`font-gotham text-[10.5px] font-semibold uppercase tracking-wide whitespace-nowrap transition-colors flex items-center gap-1 py-2 relative group ${
-          isActive(item.href)
-            ? "text-brand-primary"
-            : "text-white hover:text-brand-primary"
-        }`}
+        className="block"
       >
-        {item.label}
-
-        {item.hasDropdown && (
-          <RiArrowDownSLine className="text-lg text-zinc-400 group-hover:text-brand-primary transition-colors" />
-        )}
-
-        {item.label === "TEAS" && (
-          <span className="absolute top-[85%] left-1/2 -translate-x-1/2 hidden group-hover:block bg-stone-900 border border-stone-800 text-white text-[10px] font-semibold tracking-wider uppercase py-1 px-2.5 rounded shadow-lg z-[60] whitespace-nowrap">
-            All Products
+        {item.hasDropdown ? (
+          <span className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wide px-3.5 py-1.5 rounded-lg transition-all shadow-2xs">
+            <LuLayoutGrid className="w-3.5 h-3.5" />
+            <span>{item.label}</span>
+            <RiArrowDownSLine className={`text-base transition-transform duration-200 ${isTeasHovered ? 'rotate-180' : ''}`} />
+          </span>
+        ) : (
+          <span
+            className={`text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap transition-colors flex items-center gap-0.5 py-2.5 ${
+              isActive(item.href)
+                ? "text-emerald-400 font-bold"
+                : "text-zinc-300 hover:text-white"
+            }`}
+          >
+            {item.label}
           </span>
         )}
       </Link>
@@ -116,17 +133,18 @@ export default function Navigation() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="w-[92vw] max-w-[1400px] bg-white shadow-[0px_12px_48px_0px_rgba(0,0,0,0.08)] rounded-none border border-zinc-100">
-            <div className="px-10 py-12 flex justify-start items-start gap-12 text-zinc-800">
+          <div className="w-[92vw] max-w-[1300px] bg-white shadow-[0px_16px_48px_0px_rgba(0,0,0,0.12)] rounded-xl border border-zinc-100 overflow-hidden">
+            <div className="px-10 py-10 flex justify-start items-start gap-12 text-zinc-800">
               
               <div className="flex-1 flex justify-start items-start gap-12">
-                <div className="w-[300px] xl:w-[350px] shrink-0 flex flex-col justify-start items-start">
+                <div className="w-[280px] xl:w-[320px] shrink-0 flex flex-col justify-start items-start">
                   <Link
                     href="/products"
                     onClick={() => setIsTeasHovered(false)}
-                    className="w-full pb-3 mb-3 border-b border-zinc-100 flex items-center justify-start text-left font-['Bembo_Std'] text-stone-gray hover:text-[#b4a676] text-xl font-semibold transition-all duration-200"
+                    className="w-full pb-3 mb-3 border-b border-zinc-100 flex items-center justify-between text-left text-zinc-900 hover:text-emerald-600 text-lg font-bold transition-all duration-200"
                   >
-                    <span>All Products</span>
+                    <span>All Categories</span>
+                    <span className="text-xs text-emerald-600 font-semibold">View All →</span>
                   </Link>
 
                   {categories.map((category) => {
@@ -137,15 +155,15 @@ export default function Navigation() {
                         href={`/products?category=${encodeURIComponent(category.name)}`}
                         onMouseEnter={() => setActiveCategory(category.id)}
                         onClick={() => setIsTeasHovered(false)}
-                        className={`w-full py-2.5 flex items-center justify-start text-left transition-all duration-200 cursor-pointer border-none bg-transparent ${
+                        className={`w-full py-2.5 flex items-center justify-between text-left transition-all duration-200 cursor-pointer border-none bg-transparent ${
                           isCatActive
-                            ? "font-['Snell_Roundhand_LT_Std'] text-[#b4a676] text-2xl xl:text-3xl font-normal leading-normal flex items-center gap-3 translate-x-1"
-                            : "font-['Bembo_Std'] text-stone-gray text-2xl xl:text-3xl font-normal leading-normal hover:text-[#b4a676] hover:translate-x-1"
+                            ? "text-emerald-700 text-base font-semibold translate-x-1 bg-emerald-50/50 px-3 rounded-lg"
+                            : "text-zinc-600 text-base font-medium hover:text-emerald-700 hover:translate-x-1 px-3"
                         }`}
                       >
                         <span>{category.name}</span>
                         {isCatActive && (
-                          <span className="text-[#b4a676] text-xl font-normal leading-none self-center">⚜</span>
+                          <span className="text-emerald-600 text-sm font-semibold">→</span>
                         )}
                       </Link>
                     );
@@ -153,55 +171,76 @@ export default function Navigation() {
                 </div>
 
                 <div className="flex-1 pt-2 flex flex-col justify-start items-start">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-3">
+                    Subcategories
+                  </span>
                   {currentCategoryData?.children && currentCategoryData.children.length > 0 ? (
                     currentCategoryData.children.map((subItem) => (
                       <Link
                         key={subItem.id}
                         href={`/products?category=${encodeURIComponent(subItem.name)}`}
                         onClick={() => setIsTeasHovered(false)}
-                        className="group/sub py-1.5 flex items-center gap-2 font-['Bembo_Std'] text-stone-gray hover:text-[#b4a676] text-sm lg:text-base font-normal leading-normal transition-all duration-200 hover:translate-x-1.5"
+                        className="group/sub py-1.5 flex items-center gap-2 text-zinc-600 hover:text-emerald-700 text-sm font-medium transition-all duration-200 hover:translate-x-1.5"
                       >
                         <span className="transition-transform duration-200">{subItem.name}</span>
-                        <span className="opacity-0 -translate-x-2 text-xs transition-all duration-200 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 text-[#b4a676]">→</span>
+                        <span className="opacity-0 -translate-x-2 text-xs transition-all duration-200 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 text-emerald-600">→</span>
                       </Link>
                     ))
                   ) : (
-                    <span className="py-2 text-sm text-stone-400 font-['Bembo_Std']">
-                      No subcategories available
-                    </span>
+                    <div className="flex flex-col gap-2">
+                      <Link href="/products?search=grocery" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">🥦 Organic Fruits & Fresh Vegetables</Link>
+                      <Link href="/products?search=food" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">🥐 Bakery, Snacks & Beverages</Link>
+                      <Link href="/products?category=Fashion" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👗 Women&apos;s &amp; Men&apos;s Apparel</Link>
+                      <Link href="/products?category=Footwear" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👟 Footwear & Casual Sneakers</Link>
+                      <Link href="/products?category=Accessories" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">⌚ Watches, Bags & Sunglasses</Link>
+                    </div>
                   )}
                 </div>
               </div>
 
-              <div className="w-px self-stretch bg-zinc-300"></div>
+              <div className="w-px self-stretch bg-zinc-200"></div>
 
+              {/* Promo Cards inside Mega-Menu */}
               <div className="flex-1 flex justify-start items-center gap-6">
                 <Link 
-                  href="/products" 
+                  href="/products?search=grocery" 
                   onClick={() => setIsTeasHovered(false)}
-                  className="flex-1 flex flex-col justify-center items-start gap-3 group/promo"
+                  className="flex-1 flex flex-col justify-center items-start gap-2.5 group/promo"
                 >
-                  <img 
-                    src="/images/products/Product-3.png" 
-                    alt="Best Sellers" 
-                    className="self-stretch h-80 object-cover rounded-md transition-transform duration-300 group-hover/promo:scale-[1.02]"
-                  />
-                  <div className="justify-start text-zinc-650 group-hover/promo:text-[#b4a676] transition-colors text-xl font-normal font-['Gotham'] leading-6">
-                    Best Sellers
+                  <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-xs">
+                    <img 
+                      src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=80" 
+                      alt="Fresh Grocery Deals" 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover/promo:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-emerald-600 px-2 py-0.5 rounded">
+                      Fresh Daily
+                    </span>
+                  </div>
+                  <div className="text-zinc-800 group-hover/promo:text-emerald-600 font-semibold text-sm transition-colors">
+                    Daily Groceries & Pantry →
                   </div>
                 </Link>
+
                 <Link 
-                  href="/products" 
+                  href="/products?category=Fashion" 
                   onClick={() => setIsTeasHovered(false)}
-                  className="flex-1 flex flex-col justify-center items-start gap-3 group/promo"
+                  className="flex-1 flex flex-col justify-center items-start gap-2.5 group/promo"
                 >
-                  <img 
-                    src="/images/products/Product-5.png" 
-                    alt="New Arrivals" 
-                    className="self-stretch h-80 object-cover rounded-md transition-transform duration-300 group-hover/promo:scale-[1.02]"
-                  />
-                  <div className="justify-start text-zinc-650 group-hover/promo:text-[#b4a676] transition-colors text-xl font-normal font-['Gotham'] leading-6">
-                    New Arrivals
+                  <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-xs">
+                    <img 
+                      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop&q=80" 
+                      alt="Trending Fashion" 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover/promo:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-rose-600 px-2 py-0.5 rounded">
+                      Top Brands
+                    </span>
+                  </div>
+                  <div className="text-zinc-800 group-hover/promo:text-emerald-600 font-semibold text-sm transition-colors">
+                    Trending Fashion Drops →
                   </div>
                 </Link>
               </div>
@@ -213,29 +252,24 @@ export default function Navigation() {
   );
 
   return (
-    <nav className="relative hidden xl:flex items-center justify-center w-full">
-      {/* Left nav group */}
-      <div className="flex items-center justify-end gap-3 xl:gap-5 flex-1">
-        {leftNavItems.map(renderNavItem)}
+    <nav className="relative hidden xl:flex items-center justify-between w-full h-11">
+      <div className="flex items-center gap-5 xl:gap-7">
+        {allNavItems.map(renderNavItem)}
       </div>
 
-      {/* Center Logo */}
-      <Link href="/" className="mx-3 xl:mx-5 shrink-0 transition-transform duration-200 hover:scale-105">
-        <Image
-          src="/images/logo/Logo-update.png"
-          alt="London Tea Exchange Logo"
-          width={80}
-          height={80}
-          className="w-20 h-20 object-contain"
-          priority
-        />
-      </Link>
-
-      {/* Right nav group */}
-      <div className="flex items-center justify-start gap-3 xl:gap-5 flex-1">
-        {rightNavItems.map(renderNavItem)}
+      <div className="flex items-center gap-4 text-xs font-semibold">
+        <Link
+          href="/products"
+          className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors uppercase tracking-wider text-[11px] font-bold"
+        >
+          <span>⚡ Daily Offers</span>
+        </Link>
+        <span className="text-zinc-600">|</span>
+        <span className="text-zinc-400 text-[11px] font-medium flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          Free Shipping ৳999+
+        </span>
       </div>
     </nav>
   );
 }
-

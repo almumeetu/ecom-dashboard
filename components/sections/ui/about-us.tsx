@@ -32,8 +32,8 @@ export default function AboutUs() {
                   We understand that our clients take comfort in knowing that quality is at the heart of everything we do. 
                 </p>
               </div>
-              <p className="text-white text-4xl font-normal font-['Bembo_Std'] leading-10">
-                With roots from the city of London spanning hundreds of years, London Tea Exchange offers one of the widest selection of single estate premium teas from across the globe. Our unique tea collections are sourced directly from over forty different countries and includes some of the rarest teas in the world, many of which are exclusive to London Tea Exchange.
+              <p className="text-white text-3xl sm:text-4xl font-normal font-['Bembo_Std'] leading-9 sm:leading-10">
+                Founded by entrepreneur Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi Division, Trust Point Mart brings verified authenticity to Bangladesh&apos;s e-commerce landscape. Sourcing directly from regional farms, artisan clusters, and official brand distributors, we guarantee 100% genuine products with fair pricing and nationwide doorstep delivery.
               </p>
             </div>
 
@@ -42,7 +42,7 @@ export default function AboutUs() {
               <div className="relative w-full max-w-[450px] aspect-square overflow-hidden border border-stone-800 shadow-2xl">
                 <Image
                   src="/images/about/about.png"
-                  alt="London Tea Exchange Storefront"
+                  alt="Trust Point Mart Operations"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />

@@ -147,6 +147,16 @@ export default function MobileMenu({
                 )}
               </div>
             ))}
+
+            <div className="p-3 border-t border-zinc-100 bg-zinc-50/50 mt-1">
+              <Link
+                href="/admin/dashboard"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-center py-2 px-3 rounded-lg bg-emerald-600 text-white font-gotham text-xs font-bold shadow-xs hover:bg-emerald-700 transition-colors"
+              >
+                Admin &amp; Merchant Portal
+              </Link>
+            </div>
           </nav>
         </div>
       )}

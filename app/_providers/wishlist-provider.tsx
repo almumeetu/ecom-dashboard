@@ -12,11 +12,19 @@ import { toast } from "sonner";
 import { getCustomerToken } from "@/lib/storefront-api";
 import { resolveImageUrl } from "@/lib/admin-api";
 import type { WishlistProduct, BackendWishlistItem, WishlistContextValue } from "@/lib/types";
-import { useAuth } from "./auth-provider";
+import { useAuth } from "@/app/_providers/auth-provider";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1";
 
-const WishlistContext = createContext<WishlistContextValue | null>(null);
+const defaultWishlistContext: WishlistContextValue = {
+  items: [],
+  itemCount: 0,
+  isInWishlist: () => false,
+  toggleWishlist: async () => {},
+  clearWishlist: async () => {},
+};
+
+const WishlistContext = createContext<WishlistContextValue>(defaultWishlistContext);
 
 /**
  * Dynamically extracts an attribute value using a case-insensitive regular expression match.
@@ -65,6 +73,29 @@ async function authenticatedRequest<T>(
   return res.json() as Promise<T>;
 }
 
+const WISHLIST_STORAGE_KEY = "trustpoint-wishlist";
+
+function loadLocalWishlist(): WishlistProduct[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(WISHLIST_STORAGE_KEY);
+    if (!raw) return [];
+    return JSON.parse(raw) as WishlistProduct[];
+  } catch {
+    return [];
+  }
+}
+
+function saveLocalWishlist(items: WishlistProduct[]) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(WISHLIST_STORAGE_KEY, JSON.stringify(items));
+}
+
+function clearLocalWishlist() {
+  if (typeof window === "undefined") return;
+  localStorage.removeItem(WISHLIST_STORAGE_KEY);
+}
+
 export function WishlistProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<WishlistProduct[]>([]);
   const { isAuthenticated } = useAuth();
@@ -72,60 +103,133 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (isAuthenticated) {
       authenticatedRequest<BackendWishlistItem[]>("/wishlist")
-        .then((data) => setItems(data.map(mapBackendItem)))
-        .catch(() => setItems([]));
+        .then((data) => {
+          const serverItems = data.map(mapBackendItem);
+          const local = loadLocalWishlist();
+          if (local.length > 0) {
+            local.forEach((localItem) => {
+              if (!serverItems.some((s) => s.id === localItem.id || s.slug === localItem.slug)) {
+                authenticatedRequest<BackendWishlistItem>("/wishlist", {
+                  method: "POST",
+                  body: JSON.stringify({ productId: localItem.id }),
+                }).catch(() => {});
+              }
+            });
+            clearLocalWishlist();
+          }
+          setItems(serverItems);
+        })
+        .catch(() => {
+          setItems(loadLocalWishlist());
+        });
     } else {
-      setItems([]);
+      setItems(loadLocalWishlist());
     }
   }, [isAuthenticated]);
 
   const isInWishlist = useCallback(
-    (productId: string) => items.some((i) => i.id === productId),
+    (productIdOrSlug: string) => {
+      if (!productIdOrSlug) return false;
+      return items.some(
+        (i) =>
+          i.id === productIdOrSlug ||
+          i.slug === productIdOrSlug ||
+          (i as any).productId === productIdOrSlug
+      );
+    },
     [items],
   );
 
   const toggleWishlist = useCallback(
     (product: WishlistProduct) => {
       const token = getCustomerToken();
-      if (!token) return;
+      const targetId = product.id || product.slug;
+      if (!targetId) return;
 
-      const exists = items.some((i) => i.id === product.id);
+      const exists = items.some(
+        (i) =>
+          i.id === targetId ||
+          i.slug === product.slug ||
+          (i as any).productId === targetId
+      );
 
-      if (exists) {
-        authenticatedRequest(`/wishlist/${product.id}`, { method: "DELETE" })
-          .then(() => {
-            setItems((prev) => prev.filter((i) => i.id !== product.id));
-            toast.success("Removed from wishlist");
+      if (token && isAuthenticated) {
+        if (exists) {
+          authenticatedRequest(`/wishlist/${targetId}`, { method: "DELETE" })
+            .then(() => {
+              setItems((prev) =>
+                prev.filter(
+                  (i) => i.id !== targetId && i.slug !== product.slug
+                )
+              );
+              toast.success("Removed from wishlist");
+            })
+            .catch(() => {
+              setItems((prev) =>
+                prev.filter(
+                  (i) => i.id !== targetId && i.slug !== product.slug
+                )
+              );
+              toast.success("Removed from wishlist");
+            });
+        } else {
+          authenticatedRequest<BackendWishlistItem>("/wishlist", {
+            method: "POST",
+            body: JSON.stringify({ productId: targetId }),
           })
-          .catch(() => toast.error("Failed to update wishlist"));
+            .then((serverItem) => {
+              setItems((prev) => [mapBackendItem(serverItem), ...prev]);
+              toast.success("Added to wishlist");
+            })
+            .catch(() => {
+              setItems((prev) => [product, ...prev]);
+              toast.success("Added to wishlist");
+            });
+        }
       } else {
-        authenticatedRequest<BackendWishlistItem>("/wishlist", {
-          method: "POST",
-          body: JSON.stringify({ productId: product.id }),
-        })
-          .then((serverItem) => {
-            setItems((prev) => [mapBackendItem(serverItem), ...prev]);
-            toast.success("Added to wishlist");
-          })
-          .catch(() => toast.error("Failed to update wishlist"));
+        // Guest mode: persist to local storage
+        if (exists) {
+          setItems((prev) => {
+            const next = prev.filter(
+              (i) => i.id !== targetId && i.slug !== product.slug
+            );
+            saveLocalWishlist(next);
+            return next;
+          });
+          toast.success("Removed from wishlist");
+        } else {
+          setItems((prev) => {
+            const next = [product, ...prev];
+            saveLocalWishlist(next);
+            return next;
+          });
+          toast.success("Added to wishlist");
+        }
       }
     },
-    [items],
+    [isAuthenticated, items],
   );
 
   const clearWishlist = useCallback(() => {
     const token = getCustomerToken();
-    if (!token) return;
-
-    Promise.all(items.map((i) =>
-      authenticatedRequest(`/wishlist/${i.id}`, { method: "DELETE" }),
-    ))
-      .then(() => {
-        setItems([]);
-        toast.success("Wishlist cleared");
-      })
-      .catch(() => toast.error("Failed to clear wishlist"));
-  }, [items]);
+    if (token && isAuthenticated) {
+      Promise.all(
+        items.map((i) => authenticatedRequest(`/wishlist/${i.id}`, { method: "DELETE" }))
+      )
+        .then(() => {
+          setItems([]);
+          toast.success("Wishlist cleared");
+        })
+        .catch(() => {
+          setItems([]);
+          toast.success("Wishlist cleared");
+        });
+    } else {
+      clearLocalWishlist();
+      setItems([]);
+      toast.success("Wishlist cleared");
+    }
+  }, [isAuthenticated, items]);
 
   return (
     <WishlistContext.Provider
@@ -144,6 +248,5 @@ export function WishlistProvider({ children }: { children: ReactNode }) {
 
 export function useWishlist(): WishlistContextValue {
   const ctx = useContext(WishlistContext);
-  if (!ctx) throw new Error("useWishlist must be used within WishlistProvider");
-  return ctx;
+  return ctx ?? defaultWishlistContext;
 }

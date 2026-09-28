@@ -291,7 +291,7 @@ export default function GeneralSettingsPage() {
                   <FieldLabel required>Shop Name</FieldLabel>
                   <Input
                     onChange={(v) => setSettings((p) => ({ ...p, shopName: v }))}
-                    placeholder="e.g. London Tea Exchange"
+                    placeholder="e.g. Trust Point Mart"
                     value={settings.shopName ?? ""}
                   />
                 </div>
@@ -426,6 +426,112 @@ export default function GeneralSettingsPage() {
                 ref={faviconInputRef}
                 type="file"
               />
+            </SettingsRow>
+          </div>
+
+          {/* ── Shipping & Delivery Charges ── */}
+          <div className="px-6 py-7 sm:px-8">
+            <SettingsRow
+              label="Shipping & Delivery Fees"
+              hint="Set dynamic doorstep delivery charges. Changes automatically update across the entire storefront."
+              separator={false}
+            >
+              <div className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/50 p-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <FieldLabel required>Inside Dhaka Delivery Fee</FieldLabel>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded">
+                        Dhaka City
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-black text-slate-400 pointer-events-none">
+                        ৳
+                      </span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        className="h-12 w-full rounded-md border border-slate-200 bg-white pl-8 pr-4 text-sm font-bold text-slate-800 outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-100"
+                        placeholder="e.g. 60 (Enter 0 for Free Delivery)"
+                        value={settings.deliveryChargeInside ?? ""}
+                        onChange={(e) =>
+                          setSettings((p) => ({
+                            ...p,
+                            deliveryChargeInside: e.target.value === "" ? "" : Number(e.target.value),
+                          }))
+                        }
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-500 leading-relaxed">
+                      Standard courier delivery fee for Dhaka metropolitan areas. Enter <strong>0</strong> for Free Delivery.
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-slate-200/80 bg-slate-50/50 p-4 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <FieldLabel required>All Bangladesh Delivery Fee</FieldLabel>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded">
+                        Nationwide
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-black text-slate-400 pointer-events-none">
+                        ৳
+                      </span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        className="h-12 w-full rounded-md border border-slate-200 bg-white pl-8 pr-4 text-sm font-bold text-slate-800 outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-100"
+                        placeholder="e.g. 120"
+                        value={settings.deliveryChargeOutside ?? ""}
+                        onChange={(e) =>
+                          setSettings((p) => ({
+                            ...p,
+                            deliveryChargeOutside: e.target.value === "" ? "" : Number(e.target.value),
+                          }))
+                        }
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-500 leading-relaxed">
+                      Courier delivery charge across all 64 districts outside Dhaka. Enter <strong>0</strong> for Free Delivery.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-slate-200/80 bg-slate-50/50 p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <FieldLabel>Dhaka Suburbs / Near City Delivery Fee (Optional)</FieldLabel>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 bg-slate-200/60 px-2 py-0.5 rounded">
+                      Suburban
+                    </span>
+                  </div>
+                  <div className="relative max-w-sm">
+                    <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sm font-black text-slate-400 pointer-events-none">
+                      ৳
+                    </span>
+                    <input
+                      type="number"
+                      min="0"
+                      step="1"
+                      className="h-12 w-full rounded-md border border-slate-200 bg-white pl-8 pr-4 text-sm font-bold text-slate-800 outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-100"
+                      placeholder="e.g. 80"
+                      value={settings.deliveryChargeNearCity ?? ""}
+                      onChange={(e) =>
+                        setSettings((p) => ({
+                          ...p,
+                          deliveryChargeNearCity: e.target.value === "" ? "" : Number(e.target.value),
+                        }))
+                      }
+                    />
+                  </div>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Optional rate for adjacent suburban zones (e.g. Savar, Keraniganj, Gazipur, Narayanganj).
+                  </p>
+                </div>
+              </div>
             </SettingsRow>
           </div>
 

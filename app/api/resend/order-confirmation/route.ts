@@ -14,7 +14,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ success: false, message: "Configuration Error" }, { status: 500 });
         }
 
-        if (!body.orderNumber || !body.address?.fullName || !body.address?.email || !Array.isArray(body.items) || body.items.length === 0) {
+        if (!body.orderNumber || !body.address?.fullName || (!body.address?.phone && !body.address?.email) || !Array.isArray(body.items) || body.items.length === 0) {
             return NextResponse.json({ success: false, message: "Order information is incomplete" }, { status: 400 });
         }
 
@@ -32,18 +32,18 @@ export async function POST(request: Request) {
         `).join('');
 
         const { error } = await resend.emails.send({
-            from: `NovaMart Marketplace <${fromEmail}>`,
+            from: `Trust Point Marketplace <${fromEmail}>`,
             to: [toEmail],
-            subject: 'New Order Placed From NovaMart Marketplace',
+            subject: 'New Order Placed From Trust Point Marketplace',
             html: `
                 <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
-                    <h1 style="color: #000;">New Order Placed From NovaMart Marketplace</h1>
+                    <h1 style="color: #000;">New Order Placed From Trust Point Marketplace</h1>
                     <p>Someone just placed a new order!</p>     
                     <h2 style="color: #000; font-size: 16px;">Order Summary</h2>
                     <table style="border-collapse: collapse; width: 100%;">
                         <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Order Number</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${body.orderNumber}</td></tr>
                         <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Customer Name</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${address.fullName}</td></tr>
-                        <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Email</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${address.email}</td></tr>
+                        <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Email</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${address.email || 'Not provided (Guest Order)'}</td></tr>
                         <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Phone</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${address.phone || 'N/A'}</td></tr>
                         <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Address</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${address.addressLine1}${address.addressLine2 ? ', ' + address.addressLine2 : ''}, ${address.city}, ${address.state}, ${address.postalCode}, ${address.country}</td></tr>
                         <tr><td style="padding: 6px 12px; border: 1px solid #ddd;"><b>Payment Method</b></td><td style="padding: 6px 12px; border: 1px solid #ddd;">${paymentMethod}</td></tr>

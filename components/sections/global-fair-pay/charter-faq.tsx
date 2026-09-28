@@ -1,84 +1,107 @@
 "use client";
 
 import { useState } from "react";
+import { HiChevronDown, HiQuestionMarkCircle } from "react-icons/hi";
+import ScrollAnimate from "@/components/ui/scroll-animate";
 
 const faqs = [
   {
-    q: "What is the Global Fair Pay Charter?",
-    a: "The Global Fair Pay Charter is a framework developed by London Tea Exchange that sets minimum standards for fair pay, safe working conditions, and ethical treatment of all workers in our supply chain. It is formally recognised by the United Nations through UNITAR.",
+    q: "What is Trust Point Mart's Global Fair Pay Charter?",
+    a: "The Global Fair Pay Charter is our core ethical operating framework. It legally commits Trust Point Mart and all onboarded multi-vendors to guarantee living wages, safe working environments, equal gender pay, prompt payouts, and dignified treatment for everyone involved in producing and delivering goods.",
   },
   {
-    q: "How does London Tea Exchange verify compliance?",
-    a: "We conduct annual on-site audits at every partner estate and processing facility. Our team of independent auditors evaluates wage records, worker interviews, safety inspections, and environmental practices before issuing or renewing a charter certification.",
+    q: "How do we verify that independent vendors pay living wages?",
+    a: "Before any merchant catalog goes live, vendors complete an ethical compliance review and submit verifiable payroll benchmarks. Furthermore, our compliance team conducts periodic on-site spot visits and provides workers with an anonymous reporting hotline.",
   },
   {
-    q: "Who can become a signatory?",
-    a: "Any tea estate, processing facility, logistics partner, or retailer that meets our baseline standards can apply to become a signatory. We welcome applications from all regions of the world. Our team will guide you through the onboarding and audit process.",
+    q: "Does guaranteeing fair pay make retail prices higher for consumers?",
+    a: "Not at all. In traditional retail, multiple layers of brokers and middlemen take substantial cuts while squeezing the actual producer. By facilitating direct trade between primary growers/makers and shoppers, we eliminate middleman markups — allowing workers to earn more while consumers enjoy honest, affordable prices.",
   },
   {
-    q: "What happens if a signatory violates the charter?",
-    a: "Violations are taken extremely seriously. Upon discovery, a formal notice is issued and a corrective action plan must be agreed within 30 days. Repeat or serious violations result in immediate suspension and removal from our supply chain.",
+    q: "How does the Charter directly protect rural farmers and cottage artisans?",
+    a: "We provide upfront price commitments for agricultural harvests (such as cold-pressed mustard oil, natural honey, and organic grains) and artisanal crafts. Farmers receive prompt payments upon collection, shielding them from predatory middlemen who force distress sales.",
   },
   {
-    q: "How does the UNITAR partnership work?",
-    a: "UNITAR (United Nations Institute for Training and Research) provides institutional recognition, training programmes, and advocacy support for the Charter. They help us scale the programme globally and connect it to wider UN Sustainable Development Goals.",
+    q: "What happens if a vendor or partner facility violates the charter?",
+    a: "We maintain zero tolerance for critical human rights violations including child labor, forced overtime, or withheld wages. Any verified infraction triggers immediate catalog freezing, contract suspension, and potential permanent blacklisting from our platform.",
   },
   {
-    q: "How can my company support the Charter?",
-    a: "You can support the Charter by signing it as a partner organisation, purchasing from London Tea Exchange, sharing our mission, or making a corporate pledge. Contact our sustainability team to discuss how your business can get involved.",
+    q: "How can a cooperative, producer, or seller become Fair Pay Certified?",
+    a: "Any registered merchant, farming cooperative, or cottage brand that meets or aspires to meet our baseline ethical standards can apply via our Merchant Onboarding portal. Our compliance specialists assist applicants throughout the verification and certification journey.",
   },
 ];
 
 export default function CharterFAQ() {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [openIdx, setOpenIdx] = useState<number | null>(0);
+
+  const toggle = (idx: number) => {
+    setOpenIdx(openIdx === idx ? null : idx);
+  };
 
   return (
-    <section className="w-full py-20 md:py-28 px-6 md:px-12 bg-white">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-14">
-          <p className="font-['Gotham'] text-xs uppercase tracking-[0.3em] text-khaki-gold mb-4">
-            Common Questions
-          </p>
-          <h2 className="font-['Bembo_Std'] text-3xl md:text-4xl lg:text-5xl font-normal text-dark-charcoal leading-tight">
-            Frequently{" "}
-            <span className="font-['Snell_Roundhand_LT_Std'] italic text-khaki-gold">Asked</span>
-          </h2>
+    <section className="w-full bg-[#FAF9F6] py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-stone-200/80">
+      <div className="max-w-4xl mx-auto space-y-12">
+        {/* Section Heading */}
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <ScrollAnimate variant="fade-in-up">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100/60 px-3.5 py-1 rounded-full border border-emerald-300/60">
+              <HiQuestionMarkCircle className="w-3.5 h-3.5" />
+              Frequently Asked Questions
+            </span>
+          </ScrollAnimate>
+          <ScrollAnimate variant="fade-in-up" delay={80}>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
+              Understanding the <span className="text-emerald-600">Charter</span>
+            </h2>
+          </ScrollAnimate>
+          <ScrollAnimate variant="fade-in-up" delay={160}>
+            <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+              Clear answers on how we enforce wage standards, audit multi-vendor partners, and safeguard both consumers and producers.
+            </p>
+          </ScrollAnimate>
         </div>
 
-        <div className="space-y-2">
-          {faqs.map((faq, idx) => (
-            <div
-              key={idx}
-              className="border border-pearl-gray overflow-hidden transition-all duration-200"
-            >
-              <button
-                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                className="w-full text-left flex items-center justify-between px-6 py-5 hover:bg-off-white transition-colors"
-                aria-expanded={openIdx === idx}
-              >
-                <span className="font-['Gotham'] text-sm font-medium text-dark-charcoal pr-4">
-                  {faq.q}
-                </span>
-                <span
-                  className={`shrink-0 w-6 h-6 flex items-center justify-center rounded-full border border-khaki-gold/40 text-khaki-gold transition-transform duration-200 ${
-                    openIdx === idx ? "rotate-45" : ""
+        {/* Accordion List */}
+        <div className="space-y-3">
+          {faqs.map((faq, idx) => {
+            const isOpen = openIdx === idx;
+            return (
+              <ScrollAnimate key={idx} variant="fade-in-up" delay={idx * 60}>
+                <div
+                  className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                    isOpen
+                      ? "bg-white border-emerald-300 shadow-md shadow-emerald-950/5 ring-1 ring-emerald-300/40"
+                      : "bg-white/80 border-stone-200/80 hover:border-stone-300"
                   }`}
                 >
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M6 1V11M1 6H11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                </span>
-              </button>
+                  <button
+                    onClick={() => toggle(idx)}
+                    className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-4 cursor-pointer focus:outline-hidden"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="text-sm sm:text-base font-bold text-stone-900 leading-snug">
+                      {faq.q}
+                    </span>
+                    <span
+                      className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-transform duration-200 ${
+                        isOpen
+                          ? "bg-emerald-600 text-white rotate-180"
+                          : "bg-stone-100 text-stone-500 hover:bg-stone-200"
+                      }`}
+                    >
+                      <HiChevronDown className="w-4 h-4" />
+                    </span>
+                  </button>
 
-              {openIdx === idx && (
-                <div className="px-6 pb-6 pt-1 border-t border-pearl-gray bg-off-white/50">
-                  <p className="font-['Bembo_Std'] text-sm md:text-base text-stone-gray leading-relaxed">
-                    {faq.a}
-                  </p>
+                  {isOpen && (
+                    <div className="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-stone-600 leading-relaxed border-t border-stone-100">
+                      {faq.a}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              </ScrollAnimate>
+            );
+          })}
         </div>
       </div>
     </section>

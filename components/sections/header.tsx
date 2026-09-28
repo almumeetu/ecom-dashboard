@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import MobileMenu from "./ui/mobile-menu";
 import Navigation from "./ui/navigation";
 import { IoSearchOutline, IoHeartOutline } from "react-icons/io5";
-import { LuShoppingBag, LuUser, LuChevronDown, LuLogOut, LuPhone, LuTruck, LuMapPin, LuX } from "react-icons/lu";
+import { LuShoppingBag, LuUser, LuChevronDown, LuLogOut, LuPhone, LuTruck, LuMapPin, LuX, LuLayoutDashboard } from "react-icons/lu";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useAuth } from "@/app/_providers/auth-provider";
 import { useCart } from "@/app/_providers/cart-provider";
 import { useWishlist } from "@/app/_providers/wishlist-provider";
-import { fetchShopProducts, type ShopProduct } from "@/lib/shop-api";
+import { fetchShopProducts, fetchShopCategories, type ShopProduct, type ShopCategory } from "@/lib/shop-api";
 import Logo from "@/components/ui/logo";
 
 const sylhetiTeaItems = [
@@ -23,28 +23,54 @@ const sylhetiTeaItems = [
   { label: "Artisan Food & Drinks", href: "/products?search=food" },
 ];
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "CATEGORIES", href: "/products", hasDropdown: true },
-  { label: "GROCERIES", href: "/products?search=grocery" },
-  { label: "FASHION", href: "/products?category=Fashion" },
-  { label: "FOOTWEAR", href: "/products?category=Footwear" },
-  { label: "ACCESSORIES", href: "/products?category=Accessories" },
-  { label: "ABOUT US", href: "/about" },
-  { label: "CONTACT", href: "/contact" },
-];
-
 export default function Header() {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { user, isAuthenticated, setShowAuthModal, logout } = useAuth();
   const { itemCount: cartItemCount } = useCart();
   const { itemCount: wishlistItemCount } = useWishlist();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState<ShopProduct[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [categories, setCategories] = useState<ShopCategory[]>([]);
+
   const desktopDropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Fetch categories dynamically for mobile menu navigation
+  useEffect(() => {
+    fetchShopCategories()
+      .then((cats) => {
+        const main = cats.filter((c) => !c.parentId);
+        if (main.length > 0) setCategories(main);
+      })
+      .catch((err) => console.error("Failed to load header categories:", err));
+  }, []);
+
+  const dynamicNavItems = useMemo(() => {
+    const top3 = (categories.length > 0 ? categories : [
+      { id: 'cat-grocery', name: 'Groceries', slug: 'groceries' },
+      { id: 'cat-fashion', name: "Fashion", slug: 'fashion' },
+      { id: 'cat-footwear', name: 'Footwear', slug: 'footwear' },
+    ]).slice(0, 3);
+
+    return [
+      { label: "Home", href: "/" },
+      { label: "CATEGORIES", href: "/products", hasDropdown: true },
+      ...top3.map((cat) => ({
+        label: cat.name.toUpperCase(),
+        href: `/products?category=${encodeURIComponent(cat.slug || cat.name)}`,
+      })),
+      { label: "ABOUT US", href: "/about" },
+      { label: "CONTACT", href: "/contact" },
+    ];
+  }, [categories]);
 
   // Close dropdowns/suggestions and scroll to top on route changes
   useEffect(() => {
@@ -66,13 +92,6 @@ export default function Header() {
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  const searchParams = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState<ShopProduct[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const searchContainerRef = useRef<HTMLDivElement>(null);
 
   // Sync search input with URL search param
   useEffect(() => {
@@ -154,7 +173,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full font-sans bg-white">
       {/* ═══════════════ Desktop Main Header ═══════════════ */}
       <div className="hidden xl:block bg-white border-b border-zinc-200/80 shadow-2xs">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-[72px] gap-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex items-center justify-between h-[72px] gap-8">
           {/* Logo */}
           <div className="shrink-0">
             <Logo variant="dark" size="md" showTagline={false} />
@@ -271,7 +290,7 @@ export default function Header() {
           {/* Right Actions */}
           <div className="flex items-center gap-2 shrink-0">
             <Link
-              href="/profile?tab=orders"
+              href="/profile?tab=track"
               className="flex items-center gap-1.5 px-3 py-1.5 text-zinc-600 hover:text-emerald-600 hover:bg-zinc-50 transition-colors rounded-xl text-xs font-semibold"
             >
               <LuTruck className="w-4 h-4 text-emerald-500" />
@@ -430,18 +449,27 @@ export default function Header() {
                         <IoHeartOutline className="w-4 h-4 text-zinc-400" />
                         Wishlist
                       </Link>
+
+                      <Link
+                        href="/admin/dashboard"
+                        onClick={() => setDropdownOpen(false)}
+                        className="flex items-center gap-2.5 w-full text-left px-3.5 py-2.5 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors cursor-pointer border border-emerald-100"
+                      >
+                        <LuLayoutDashboard className="w-4 h-4 text-emerald-600" />
+                        Admin Dashboard
+                      </Link>
                     </div>
 
-                    {/* Helpline */}
+                    {/* Customer Support */}
                     <div className="px-3.5 py-2 bg-zinc-50 rounded-lg my-1 border border-zinc-100">
                       <p className="text-[10px] uppercase font-bold text-zinc-400">
-                        Helpline
+                        Customer Support
                       </p>
                       <a
-                        href="tel:01722301927"
+                        href="tel:01707819676"
                         className="text-xs font-bold text-emerald-600 hover:underline"
                       >
-                        01722301927
+                        01707819676
                       </a>
                     </div>
 
@@ -468,7 +496,7 @@ export default function Header() {
 
       {/* ═══════════════ Desktop Navigation Bar ═══════════════ */}
       <div className="hidden xl:block bg-[#181D1A] text-white border-t border-white/5">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <Navigation />
         </div>
       </div>
@@ -479,7 +507,7 @@ export default function Header() {
         <div className="flex items-center justify-between px-4 h-14">
           <div className="flex items-center shrink-0">
             <MobileMenu
-              navItems={navItems}
+              navItems={dynamicNavItems}
               sylhetiTeaItems={sylhetiTeaItems}
             />
           </div>

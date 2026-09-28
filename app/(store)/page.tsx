@@ -6,6 +6,8 @@ import MostPopuler from '@/components/sections/most-populer';
 import Brands from '@/components/sections/brands';
 import TrustFeatures from '@/components/sections/trust-features';
 import Testimonial from '@/components/sections/testimonial';
+import SocialReels from '@/components/sections/social-reels';
+import FounderCta from '@/components/sections/founder-cta';
 import ScrollAnimate from '@/components/ui/scroll-animate';
 
 export default function Home() {
@@ -14,14 +16,14 @@ export default function Home() {
       {/* Dynamic Multi-Category Marketplace Hero with Category Pills */}
       <Hero />
 
+      {/* Fresh Arrivals & Trending Drops — Products First Focus for Customers */}
+      <ScrollAnimate variant="fade-in-up">
+        <NewArrival />
+      </ScrollAnimate>
+
       {/* Shop By Department / Multi-Category Cards */}
       <ScrollAnimate variant="fade-in-up">
         <TheCollection />
-      </ScrollAnimate>
-
-      {/* Fresh Arrivals & Trending Drops with Category Switcher */}
-      <ScrollAnimate variant="fade-in-up">
-        <NewArrival />
       </ScrollAnimate>
 
       {/* Dual High-Impact Promo Split Banners (Groceries & Fashion) */}
@@ -39,14 +41,24 @@ export default function Home() {
         <Brands />
       </ScrollAnimate>
 
+      {/* Facebook Reels & Social Media Videos */}
+      <ScrollAnimate variant="fade-in-up">
+        <SocialReels />
+      </ScrollAnimate>
+
       {/* Marketplace Guarantees & Trust Features */}
       <ScrollAnimate variant="fade-in-up">
         <TrustFeatures />
       </ScrollAnimate>
 
-      {/* Community Testimonials */}
+      {/* Community Testimonials — Redesigned Premium Cards */}
       <ScrollAnimate variant="fade-in-up">
         <Testimonial />
+      </ScrollAnimate>
+
+      {/* Founder CTA with Abdullah's Image — Trust Builder */}
+      <ScrollAnimate variant="fade-in-up">
+        <FounderCta />
       </ScrollAnimate>
     </div>
   );

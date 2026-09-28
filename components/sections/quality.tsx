@@ -24,13 +24,13 @@ export default function Quality() {
             </h2>
             
             <p className="mx-auto mt-6 font-['Gotham'] text-sm leading-6 md:text-lg font-normal">
-                We follow a strict clean confidentiality policy governing the use of client information. London Tea Exchange is{" "}
-                <span className="font-['Snell_Roundhand_LT_Std'] italic font-">registered with the Information Commissioners Office and abides by the Data Protection Act 1998</span>{" "}
-                and all subsequent codes of conduct entailed therein.
+                We follow a strict clean confidentiality and quality control policy governing our operations. Trust Point Mart is{" "}
+                <span className="font-['Snell_Roundhand_LT_Std'] italic font-">committed to verified consumer protection, authentic origin validation</span>{" "}
+                and transparent ethical trading practices across Bangladesh.
             </p>
             
             <p className="mx-auto mt-4 font-['Gotham'] text-xs text-zinc-500">
-                London Tea Exchange is already a member of the
+                Trust Point Mart is verified and certified with
             </p>
             </div>
             {/* Certification Logos */}

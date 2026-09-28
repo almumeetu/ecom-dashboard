@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Image from "next/image";
 import { useAuth } from "@/app/_providers/auth-provider";
 import { useGoogleLogin } from "@react-oauth/google";
 import {
@@ -41,7 +42,12 @@ export default function AuthModal() {
         await loginWithGoogle(tokenResponse.access_token);
         handleClose();
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Google sign-in failed. Please try again.");
+        const msg = err instanceof Error ? err.message : "Google sign-in failed. Please try again.";
+        if (msg.includes("Failed to fetch") || msg.toLowerCase().includes("cannot connect")) {
+          setError("Unable to connect to the backend server. Please verify the API server is running on port 5010.");
+        } else {
+          setError(msg);
+        }
       } finally {
         setGoogleLoading(false);
       }
@@ -113,7 +119,12 @@ export default function AuthModal() {
       }
       handleClose();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Authentication failed. Please check credentials.");
+      const msg = err instanceof Error ? err.message : "Authentication failed. Please check credentials.";
+      if (msg.includes("Failed to fetch") || msg.toLowerCase().includes("cannot connect")) {
+        setError("Unable to connect to the backend server. Please verify the API server is running on port 5010.");
+      } else {
+        setError(msg);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -126,7 +137,7 @@ export default function AuthModal() {
         <button
           type="button"
           onClick={handleClose}
-          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 flex items-center justify-center transition-colors cursor-pointer"
+          className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 flex items-center justify-center transition-colors cursor-pointer shadow-xs"
           aria-label="Close"
         >
           <LuX className="w-5 h-5" />
@@ -169,22 +180,38 @@ export default function AuthModal() {
             </div>
           </div>
 
-          <div className="pt-6 border-t border-white/10 text-[11px] text-zinc-400 space-y-1">
-            <div className="flex items-center gap-1.5 text-zinc-300">
-              <FiMapPin className="w-3 h-3 text-emerald-400" />
-              <span>Mohadevpur, Naogaon, Rajshahi</span>
+          <div className="pt-5 border-t border-white/10 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-emerald-500/40 ring-2 ring-emerald-500/20 shrink-0">
+                <Image
+                  src="/images/team/Abdullah.jpg"
+                  alt="Mohammad Abdullah"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="text-[11px] leading-tight">
+                <div className="text-white font-bold">Mohammad Abdullah</div>
+                <div className="text-[10px] text-emerald-400 font-medium">Founder &amp; CEO</div>
+              </div>
             </div>
-            <div className="flex items-center gap-1.5 text-zinc-300">
-              <FiPhone className="w-3 h-3 text-emerald-400" />
-              <span>Hotline: 01707819676</span>
+            <div className="text-right text-[10px] text-zinc-400">
+              <div className="flex items-center justify-end gap-1 text-zinc-300">
+                <FiMapPin className="w-3 h-3 text-emerald-400 shrink-0" />
+                <span>Mohadevpur</span>
+              </div>
+              <a href="tel:01707819676" className="text-zinc-300 hover:text-emerald-400 font-semibold block mt-0.5">
+                01707819676
+              </a>
             </div>
           </div>
         </div>
 
         {/* Right Form Section (7 cols on md) */}
         <div className="md:col-span-7 p-6 sm:p-10 flex flex-col justify-center">
-          {/* Header & Tabs */}
-          <div className="flex items-center justify-between pb-3 border-b border-zinc-100 mb-5">
+          {/* Header & Tabs - pr-12 leaves ample space for close button */}
+          <div className="flex items-start justify-between pb-3 border-b border-zinc-100 mb-5 pr-12">
             <div>
               <h2 className="text-2xl font-black text-zinc-950 tracking-tight">
                 {view === "login" ? "Welcome Back" : "Create Account"}
@@ -197,7 +224,7 @@ export default function AuthModal() {
             <button
               type="button"
               onClick={switchView}
-              className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+              className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer shrink-0 pt-1"
             >
               {view === "login" ? "New? Register" : "Have account? Log in"}
             </button>
@@ -323,7 +350,7 @@ export default function AuthModal() {
                   />
                   <span className="text-zinc-600">Remember login</span>
                 </label>
-                <a href="tel:01722301927" className="text-emerald-600 hover:underline">
+                <a href="tel:01707819676" className="text-emerald-600 hover:underline">
                   Need help?
                 </a>
               </div>
@@ -345,9 +372,34 @@ export default function AuthModal() {
             </button>
           </form>
 
-          <p className="mt-5 text-center text-[10px] text-zinc-400">
-            Founded by Mohammad Abdullah • Mohadevpur, Naogaon, Rajshahi • 01707819676
-          </p>
+          {/* Bottom Switch View */}
+          <div className="mt-4 pt-3 border-t border-zinc-100 text-center text-xs text-zinc-500">
+            {view === "login" ? (
+              <span>
+                Don&apos;t have an account yet?{" "}
+                <button
+                  type="button"
+                  onClick={switchView}
+                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                >
+                  Create one now
+                </button>
+              </span>
+            ) : (
+              <span>
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={switchView}
+                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                >
+                  Sign in here
+                </button>
+              </span>
+            )}
+          </div>
+
+
         </div>
       </div>
     </div>

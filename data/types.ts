@@ -37,6 +37,10 @@ export interface Product {
   originalPrice?: number;
   image: string;
   badge?: string;
+  slug?: string;
+  category?: string;
+  team?: string;
+  variantId?: string;
 }
 
 export interface ProductCarouselProps {
@@ -69,4 +73,5 @@ export interface ProductCardProps {
   reviewCount?: number;
   unit?: string;
   badge?: string;
+  variantId?: string;
 }

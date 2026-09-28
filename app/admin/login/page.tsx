@@ -4,7 +4,12 @@ import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiLoader, FiEye, FiEyeOff } from "react-icons/fi";
-import { apiRequest, setAdminSession, type AdminUser } from "../../../lib/admin-api";
+import {
+  apiRequest,
+  setAdminSession,
+  isAllowedAdminRole,
+  type AdminUser,
+} from "../../../lib/admin-api";
 import Logo from "@/components/ui/logo";
 
 type LoginResponse = {
@@ -33,9 +38,8 @@ export default function AdminLoginPage() {
         body: JSON.stringify({ email, password }),
       });
 
-      const allowedRoles = ["admin", "superadmin"];
-      if (!response.user.role?.name || !allowedRoles.includes(response.user.role.name)) {
-        throw new Error("Only admin users can access the admin panel.");
+      if (!isAllowedAdminRole(response.user.role)) {
+        throw new Error("Only authorized administrative accounts can access the admin portal.");
       }
 
       setAdminSession(response.accessToken, response.user);

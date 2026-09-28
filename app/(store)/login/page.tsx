@@ -130,8 +130,8 @@ function LoginFormContent() {
                   <LuTruck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-white">Next-Day Uttara & Dhaka Delivery</h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">Dispatched from our Sector 3 logistics hub</p>
+                  <h4 className="text-xs font-bold text-white">Next-Day Dhaka & Nationwide Delivery</h4>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">Dispatched securely from our central logistics hub</p>
                 </div>
               </div>
 
@@ -237,7 +237,7 @@ function LoginFormContent() {
                     Password
                   </label>
                   <a
-                    href="tel:01722301927"
+                    href="tel:01707819676"
                     className="text-[11px] font-semibold text-emerald-600 hover:underline"
                   >
                     Forgot password?
@@ -274,7 +274,7 @@ function LoginFormContent() {
                 </label>
 
                 <span className="text-[11px] text-zinc-400">
-                  Uttara Hub Security
+                  Verified Secure SSL
                 </span>
               </div>
 
@@ -289,9 +289,7 @@ function LoginFormContent() {
             </form>
 
             <p className="mt-8 text-center text-[11px] text-zinc-400">
-              Protected by Webdev Software Solutions Security Shield.
-              <br />
-              Questions? Call helpline: <strong className="text-zinc-600">01722301927</strong>
+              Questions? Call customer support: <strong className="text-zinc-600">01707819676</strong>
             </p>
           </div>
         </div>

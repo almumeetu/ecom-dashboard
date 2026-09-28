@@ -15,13 +15,15 @@ import {
   IoRepeatOutline,
   IoLockClosedOutline,
   IoBagCheckOutline,
+  IoLogoWhatsapp,
 } from 'react-icons/io5';
-import { LuRuler, LuStar, LuTruck } from 'react-icons/lu';
+import { LuRuler, LuStar, LuTruck, LuSparkles, LuCheck, LuHeadphones } from 'react-icons/lu';
 import { useCart } from '@/app/_providers/cart-provider';
 import { useWishlist } from '@/app/_providers/wishlist-provider';
 import { useAuth } from '@/app/_providers/auth-provider';
 import { setBuyNowItem } from '@/lib/buy-now';
 import { toast } from 'sonner';
+import { fetchShopSettings, type ShopSettings } from '@/lib/shop-api';
 import SizeGuideModal from './size-guide-modal';
 import type { ParsedVariant } from '../product-details';
 
@@ -44,6 +46,7 @@ export interface ProductInfoProps {
     category: string;
     description: string;
   };
+  initialSettings?: ShopSettings | null;
   onVariantChange?: (variant: ParsedVariant | null) => void;
   onReviewsClick?: () => void;
 }
@@ -82,6 +85,7 @@ export default function ProductInfo({
   sku = '',
   variants = [],
   productData,
+  initialSettings = null,
   onVariantChange,
   onReviewsClick,
 }: ProductInfoProps) {
@@ -90,8 +94,41 @@ export default function ProductInfo({
   const { isInWishlist, toggleWishlist } = useWishlist();
   const { isAuthenticated, setShowAuthModal } = useAuth();
 
+  const [settings, setSettings] = useState<ShopSettings | null>(initialSettings ?? null);
+
+  useEffect(() => {
+    if (!settings) {
+      fetchShopSettings()
+        .then((s) => {
+          if (s) setSettings(s);
+        })
+        .catch(() => {});
+    }
+  }, [settings]);
+
+  const insideFeeText = useMemo(() => {
+    if (settings?.deliveryChargeInside === undefined || settings?.deliveryChargeInside === null) {
+      return '৳60';
+    }
+    const val = Number(settings.deliveryChargeInside);
+    return val === 0 ? 'FREE' : `৳${val}`;
+  }, [settings?.deliveryChargeInside]);
+
+  const outsideFeeText = useMemo(() => {
+    if (settings?.deliveryChargeOutside === undefined || settings?.deliveryChargeOutside === null) {
+      return '৳120';
+    }
+    const val = Number(settings.deliveryChargeOutside);
+    return val === 0 ? 'FREE' : `৳${val}`;
+  }, [settings?.deliveryChargeOutside]);
+
   const [quantity, setQuantity] = useState(1);
-  const [selectedVariant, setSelectedVariant] = useState<ParsedVariant | null>(null);
+  const [selectedVariant, setSelectedVariant] = useState<ParsedVariant | null>(() => {
+    if (variants && variants.length > 0) {
+      return variants.find((v) => v.isDefault) ?? variants[0] ?? null;
+    }
+    return null;
+  });
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
 
@@ -99,7 +136,7 @@ export default function ProductInfo({
   useEffect(() => {
     if (variants && variants.length > 0) {
       const def = variants.find((v) => v.isDefault) ?? variants[0] ?? null;
-      setSelectedVariant(def);
+      setSelectedVariant((prev) => prev ?? def);
     }
   }, [variants]);
 
@@ -163,7 +200,7 @@ export default function ProductInfo({
 
   const displayPrice = selectedVariant ? selectedVariant.priceFormatted : price;
   const displayOriginalPrice = selectedVariant ? selectedVariant.originalPriceFormatted : originalPrice;
-  const activeVariantId = selectedVariant ? selectedVariant.id : variantId;
+  const activeVariantId = selectedVariant?.id || variantId || variants?.[0]?.id || '';
 
   // Calculate discount savings if applicable
   const activePriceNum = selectedVariant ? selectedVariant.priceNum : productData.priceNum;
@@ -177,6 +214,8 @@ export default function ProductInfo({
     origPriceNum > activePriceNum
       ? Math.round(((origPriceNum - activePriceNum) / origPriceNum) * 100)
       : 0;
+
+  const savingsAmount = origPriceNum > activePriceNum ? origPriceNum - activePriceNum : 0;
 
   const buildCartItem = () => {
     const finalPrice = selectedVariant ? selectedVariant.priceNum : productData.priceNum;
@@ -206,12 +245,16 @@ export default function ProductInfo({
     };
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (isOutOfStock) return;
-    addItem(buildCartItem());
-    toast.success(`Added ${productData.name} to your bag!`, {
-      description: `${quantity} item(s) ready in cart.`,
-    });
+    try {
+      await addItem(buildCartItem(), { silent: true });
+      toast.success(`Added ${productData.name} to your bag!`, {
+        description: `${quantity} item(s) ready in cart.`,
+      });
+    } catch {
+      // Error message handled by CartProvider
+    }
   };
 
   const handleBuyNow = async () => {
@@ -268,13 +311,13 @@ export default function ProductInfo({
 
   return (
     <div className="w-full flex flex-col gap-6 select-none">
-      {/* ── Brand & Meta Row ─────────────────────────────────────────── */}
+      {/* ── Brand, Category & Share Row ─────────────────────────────── */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-2.5">
           {brand && (
             <Link
               href={`/products?brand=${encodeURIComponent(brand)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-stone-100 text-zinc-900 hover:bg-zinc-900 hover:text-white transition-all shadow-2xs"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-stone-100 text-zinc-900 hover:bg-zinc-950 hover:text-white transition-all shadow-2xs"
             >
               <span>{brand}</span>
               <IoCheckmarkCircle className="w-3.5 h-3.5 text-emerald-600" />
@@ -284,7 +327,7 @@ export default function ProductInfo({
           {category && (
             <Link
               href={`/products?category=${encodeURIComponent(category)}`}
-              className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors uppercase tracking-wider font-semibold"
+              className="text-xs text-zinc-500 hover:text-zinc-950 transition-colors uppercase tracking-wider font-semibold"
             >
               {category}
             </Link>
@@ -294,17 +337,17 @@ export default function ProductInfo({
         {/* Share Button */}
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-900 transition-colors cursor-pointer py-1 px-2 rounded-lg hover:bg-stone-100"
+          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-950 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-stone-100 border border-transparent hover:border-stone-200"
           title="Share Product"
         >
           <IoShareSocialOutline className="w-4 h-4" />
-          <span className="hidden sm:inline font-medium">Share</span>
+          <span className="font-medium">Share</span>
         </button>
       </div>
 
-      {/* ── Product Title & Highlights ───────────────────────────────── */}
+      {/* ── Product Title & Subtitle ─────────────────────────────────── */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 font-sans leading-tight">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-sans leading-[1.25]">
           {name}
         </h1>
         {subtitle && (
@@ -315,7 +358,7 @@ export default function ProductInfo({
       </div>
 
       {/* ── Social Proof & Rating Strip ─────────────────────────────── */}
-      <div className="flex items-center gap-4 flex-wrap pb-2 border-b border-stone-100">
+      <div className="flex items-center gap-3.5 flex-wrap pb-2 border-b border-stone-100">
         <button
           onClick={onReviewsClick}
           className="flex items-center gap-1.5 group cursor-pointer"
@@ -328,7 +371,7 @@ export default function ProductInfo({
               />
             ))}
           </div>
-          <span className="text-xs font-bold text-zinc-900 ml-1">4.9</span>
+          <span className="text-xs font-bold text-zinc-950 ml-0.5">4.9</span>
           <span className="text-xs text-zinc-500 group-hover:text-emerald-700 underline underline-offset-2 transition-colors">
             (128 reviews)
           </span>
@@ -336,40 +379,40 @@ export default function ProductInfo({
 
         <span className="text-stone-300">•</span>
 
-        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/60">
+        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
           <IoFlashOutline className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
           <span>50+ purchased in the last 24h</span>
         </div>
       </div>
 
       {/* ── Price Block ─────────────────────────────────────────────── */}
-      <div className="flex flex-col gap-2 p-4 sm:p-5 rounded-2xl bg-stone-50/80 border border-stone-200/80">
+      <div className="flex flex-col gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#FAF9F6] border border-stone-200/90 shadow-2xs">
         <div className="flex items-baseline gap-3 flex-wrap">
           <span className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-sans tracking-tight">
             {displayPrice}
           </span>
 
           {displayOriginalPrice && (
-            <span className="text-lg sm:text-xl text-zinc-400 line-through font-medium">
+            <span className="text-lg sm:text-xl text-zinc-400 line-through font-semibold">
               {displayOriginalPrice}
             </span>
           )}
 
           {discountPercent > 0 && (
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200">
-              Save {discountPercent}%
+            <span className="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200/90 shadow-2xs">
+              Save {discountPercent}% {savingsAmount > 0 ? `(৳${savingsAmount.toLocaleString('en-BD')})` : ''}
             </span>
           )}
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-zinc-500 pt-1">
+        <div className="flex items-center gap-2 text-xs text-zinc-500 pt-0.5">
           <IoShieldCheckmarkOutline className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>Tax included • Free express shipping on orders over ৳2,000</span>
+          <span>VAT included • Free express shipping on orders over ৳2,000</span>
         </div>
       </div>
 
-      {/* ── Live Inventory Status ────────────────────────────────────── */}
-      <div className="flex items-center gap-2 text-xs">
+      {/* ── Live Inventory Status & SKU ──────────────────────────────── */}
+      <div className="flex items-center justify-between gap-2 text-xs">
         {isOutOfStock ? (
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-bold uppercase tracking-wider">
             <span className="w-2 h-2 rounded-full bg-rose-600" />
@@ -394,7 +437,7 @@ export default function ProductInfo({
         )}
 
         {sku && (
-          <span className="text-zinc-400 font-mono text-[11px] ml-auto">
+          <span className="text-zinc-400 font-mono text-[11px]">
             SKU: {selectedVariant?.sku || sku}
           </span>
         )}
@@ -402,7 +445,7 @@ export default function ProductInfo({
 
       {/* ── Dynamic Variant Selectors ────────────────────────────────── */}
       {Object.keys(allAttributes).length > 0 && (
-        <div className="flex flex-col gap-5 py-4 border-y border-stone-200">
+        <div className="flex flex-col gap-5 py-4 border-y border-stone-200/90">
           {Object.entries(allAttributes).map(([attrName, values]) => {
             const isColor = attrName.toLowerCase().includes('color') || attrName.toLowerCase().includes('colour');
             const isSize = attrName.toLowerCase().includes('size');
@@ -412,17 +455,17 @@ export default function ProductInfo({
               <div key={attrName} className="flex flex-col gap-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider font-bold text-zinc-900">
-                    {attrName}: <span className="font-normal text-zinc-600 capitalize">{currentSelected}</span>
+                    {attrName}: <span className="font-semibold text-zinc-950 capitalize ml-1">{currentSelected}</span>
                   </span>
 
                   {isSize && (
                     <button
                       type="button"
                       onClick={() => setIsSizeGuideOpen(true)}
-                      className="inline-flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-900 underline underline-offset-2 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 text-xs text-zinc-600 hover:text-zinc-950 underline underline-offset-2 transition-colors cursor-pointer"
                     >
-                      <LuRuler className="w-3.5 h-3.5" />
-                      <span>Size Guide</span>
+                      <LuRuler className="w-3.5 h-3.5 text-zinc-700" />
+                      <span className="font-medium">Size Guide</span>
                     </button>
                   )}
                 </div>
@@ -440,7 +483,7 @@ export default function ProductInfo({
                           onClick={() => handleOptionSelect(attrName, val)}
                           className={`relative w-9 h-9 rounded-full transition-all cursor-pointer flex items-center justify-center ${
                             isSelected
-                              ? 'ring-2 ring-zinc-900 ring-offset-2 scale-110 shadow-sm'
+                              ? 'ring-2 ring-zinc-950 ring-offset-2 scale-110 shadow-sm'
                               : 'hover:scale-105 border border-stone-300'
                           }`}
                           style={{ backgroundColor: colorHex }}
@@ -465,10 +508,10 @@ export default function ProductInfo({
                         key={val}
                         type="button"
                         onClick={() => handleOptionSelect(attrName, val)}
-                        className={`min-w-[44px] px-4 py-2 text-xs font-semibold rounded-xl border transition-all cursor-pointer ${
+                        className={`min-w-[44px] px-4 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm'
-                            : 'bg-white border-stone-300 text-zinc-700 hover:border-zinc-900 hover:text-zinc-900'
+                            ? 'bg-zinc-950 border-zinc-950 text-white shadow-xs'
+                            : 'bg-white border-stone-300 text-zinc-800 hover:border-zinc-950 hover:text-zinc-950'
                         }`}
                       >
                         {val}
@@ -483,7 +526,7 @@ export default function ProductInfo({
       )}
 
       {/* ── Quantity & High-Conversion Action Controls ────────────────── */}
-      <div className="flex flex-col gap-3 pt-2">
+      <div className="flex flex-col gap-3 pt-1">
         <div className="flex items-center gap-3">
           {/* Quantity Stepper */}
           <div className="flex items-center border border-stone-300 rounded-xl bg-stone-50 p-1 shrink-0">
@@ -515,7 +558,7 @@ export default function ProductInfo({
             type="button"
             onClick={handleAddToCart}
             disabled={isOutOfStock}
-            className="flex-1 h-12 px-6 bg-white border-2 border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+            className="flex-1 h-12 px-6 bg-white border-2 border-zinc-950 text-zinc-950 hover:bg-zinc-950 hover:text-white font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-40 disabled:pointer-events-none active:scale-[0.99]"
           >
             <IoBagCheckOutline className="w-4 h-4" />
             <span>Add to Bag</span>
@@ -530,7 +573,7 @@ export default function ProductInfo({
             className={`w-12 h-12 rounded-xl flex items-center justify-center border transition-all cursor-pointer shrink-0 shadow-xs ${
               isItInWishlist
                 ? 'bg-rose-50 border-rose-300 text-rose-600'
-                : 'bg-white border-stone-300 text-zinc-700 hover:border-zinc-900 hover:text-zinc-900'
+                : 'bg-white border-stone-300 text-zinc-700 hover:border-zinc-950 hover:text-zinc-950'
             }`}
             aria-label="Wishlist"
             title={isItInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
@@ -555,42 +598,73 @@ export default function ProductInfo({
         </button>
       </div>
 
+      {/* ── WhatsApp Instant Order & Customer Support ─────────────────── */}
+      <a
+        href={`https://wa.me/8801700000000?text=${encodeURIComponent(
+          `Hi, I have a question about ${name} (ID: ${productId}): ${typeof window !== 'undefined' ? window.location.href : ''}`
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center justify-between p-3.5 rounded-xl border border-emerald-200/90 bg-emerald-50/60 hover:bg-emerald-50 text-emerald-950 transition-all group shadow-2xs"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+            <IoLogoWhatsapp className="w-4 h-4" />
+          </div>
+          <div>
+            <p className="text-xs font-bold text-emerald-950">Questions about sizing or specs?</p>
+            <p className="text-[11px] text-emerald-700">Chat directly with our support specialists on WhatsApp</p>
+          </div>
+        </div>
+        <span className="text-xs font-bold text-emerald-800 group-hover:underline flex items-center gap-1 shrink-0">
+          Chat Now &rarr;
+        </span>
+      </a>
+
       {/* ── Delivery Estimator Box ──────────────────────────────────── */}
       <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/90 text-xs space-y-2.5">
-        <div className="font-bold text-zinc-900 flex items-center gap-2">
-          <LuTruck className="w-4 h-4 text-zinc-900" />
+        <div className="font-bold text-zinc-950 flex items-center gap-2">
+          <LuTruck className="w-4 h-4 text-zinc-950" />
           <span>Estimated Delivery Timeline:</span>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-zinc-600">
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-            <span><strong>Inside Dhaka:</strong> 1–2 business days</span>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+            <span><strong>Inside Dhaka:</strong> {insideFeeText} (1–2 business days)</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-            <span><strong>Nationwide:</strong> 2–4 business days</span>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+            <span><strong>All Bangladesh:</strong> {outsideFeeText} (2–4 business days)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+            <span><strong>Cash on Delivery:</strong> Available</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
+            <span><strong>Free Shipping:</strong> Orders over ৳2,000</span>
           </div>
         </div>
       </div>
 
       {/* ── International Buyer Protection & Trust Guarantees ────────── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
+        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
           <IoShieldCheckmarkOutline className="w-5 h-5 text-emerald-600 mb-1" />
           <span className="text-[11px] font-bold text-zinc-900">100% Authentic</span>
           <span className="text-[10px] text-zinc-500">Verified Brand</span>
         </div>
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200">
+        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
           <LuTruck className="w-5 h-5 text-blue-600 mb-1" />
           <span className="text-[11px] font-bold text-zinc-900">Fast Dispatch</span>
           <span className="text-[10px] text-zinc-500">Doorstep Delivery</span>
         </div>
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200">
+        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
           <IoRepeatOutline className="w-5 h-5 text-purple-600 mb-1" />
           <span className="text-[11px] font-bold text-zinc-900">Easy Returns</span>
           <span className="text-[10px] text-zinc-500">7-Day Guarantee</span>
         </div>
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200">
+        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
           <IoLockClosedOutline className="w-5 h-5 text-amber-600 mb-1" />
           <span className="text-[11px] font-bold text-zinc-900">Secure Checkout</span>
           <span className="text-[10px] text-zinc-500">bKash, Cards, COD</span>

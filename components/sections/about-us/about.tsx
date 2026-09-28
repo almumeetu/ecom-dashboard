@@ -10,425 +10,333 @@ import {
   HiLocationMarker,
   HiPhone,
   HiMail,
-  HiStar,
   HiCheckCircle,
 } from "react-icons/hi";
 import {
   FiArrowRight,
   FiShoppingBag,
-  FiUsers,
-  FiAward,
-  FiExternalLink,
+  FiLayers,
+  FiRefreshCw,
+  FiClock,
 } from "react-icons/fi";
-import { FaWhatsapp, FaQuoteLeft, FaFacebook, FaPlay } from "react-icons/fa6";
+import { FaWhatsapp, FaQuoteLeft } from "react-icons/fa6";
 import ScrollAnimate from "@/components/ui/scroll-animate";
 
 export default function About() {
-  const stats = [
-    { value: "50,000+", label: "সন্তুষ্ট পরিবার", icon: FiUsers },
-    { value: "100%", label: "ফরমালিনমুক্ত ও খাঁটি", icon: HiShieldCheck },
-    { value: "সরাসরি বাগান", label: "মাঝে কোনো মধ্যস্বত্বভোগী নেই", icon: FiShoppingBag },
-    { value: "৬৪ জেলা", label: "দ্রুত হোম ডেলিভারি", icon: HiTruck },
-  ];
-
-  const reels = [
+  const departments = [
     {
-      title: "আজ থেকে শুরু হচ্ছে রুপালী আমের হোম ডেলিভারি",
-      subtitle: "রাজশাহীর বাগান থেকে সরাসরি গাছপাকা রুপালী ও আম্রপালি আম প্যাকিং ও ডিসপ্যাচ।",
-      url: "https://www.facebook.com/reel/2085813248644612",
-      badge: "আম্রপালি ও রুপালী আম",
-      tag: "Live Harvest",
-    },
-    {
-      title: "সরাসরি বাগান থেকে আপনার বাড়ি — কোনো আড়ত নেই",
-      subtitle: "গাছ থেকে পেরে সরাসরি ক্রেতার ঠিকানায় কুরিয়ার। শতভাগ ফরমালিনমুক্ত ও খাঁটি।",
-      url: "https://www.facebook.com/reel/1037525895516511",
-      badge: "বাগান থেকে সরাসরি",
-      tag: "Orchard Fresh",
-    },
-    {
-      title: "খাঁটি সতেজতার নিশ্চয়তা — ট্রাস্ট পয়েন্ট",
-      subtitle: "মোহাম্মদ আব্দুল্লাহর সরাসরি তত্ত্বাবধানে প্রতিটি ঝুড়ি ও ক্রেটের কোয়ালিটি চেক।",
-      url: "https://www.facebook.com/reel/730088990198543",
-      badge: "কোয়ালিটি গ্যারান্টি",
-      tag: "Verified Pure",
-    },
-  ];
-
-  const pillars = [
-    {
-      icon: HiShieldCheck,
-      title: "১০০% ফরমালিনমুক্ত ও খাঁটি",
-      desc: "সরাসরি বাগান থেকে গাছপাকা আম সংগ্রহ করা হয়। কোনো প্রকার কেমিক্যাল বা কৃত্রিম পাকানোর ওষুধ স্পর্শও করে না।",
-      color: "bg-emerald-50 text-emerald-600 border-emerald-100",
-    },
-    {
-      icon: HiTruck,
-      title: "সরাসরি বাগান থেকে আপনার বাড়ি",
-      desc: "মাঝে কোনো আড়ত বা মধ্যস্বত্বভোগী নেই। তাই বাগান থেকে তুলে সরাসরি নিজস্ব তত্ত্বাবধানে দ্রুত আপনার ঘরে পৌঁছে দেওয়া হয়।",
-      color: "bg-blue-50 text-blue-600 border-blue-100",
-    },
-    {
-      icon: HiBadgeCheck,
-      title: "সততাই আমাদের মূলধন (Trust Point)",
-      desc: "ব্যবসা শুধু পণ্য বিক্রয় নয়, এটি একটি পবিত্র আমানত। ওজনে নিখুঁত, মানে সেরা এবং প্রতিটি ফলের জন্য আমাদের পূর্ণ দায়বদ্ধতা।",
-      color: "bg-amber-50 text-amber-600 border-amber-100",
-    },
-    {
-      icon: HiOutlineSupport,
-      title: "ফাউন্ডার ও ডিরেক্ট হেল্পলাইন",
-      desc: "যেকোনো পরামর্শ, অর্ডার বা বাল্ক বুকিংয়ের জন্য প্রতিষ্ঠাতা মোহাম্মদ আব্দুল্লাহর সরাসরি হটলাইন 01707819676-এ যোগাযোগ করতে পারেন।",
-      color: "bg-purple-50 text-purple-600 border-purple-100",
-    },
-  ];
-
-  const categories = [
-    {
-      title: "রাজশাহীর খাঁটি ও ফরমালিনমুক্ত আম",
-      desc: "রূপালী, আম্রপালি, গোপালভোগ, ক্ষীরশাপাত ও হিমসাগর আম—সরাসরি বাগান থেকে পেড়ে হোম ডেলিভারি।",
-      image: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&auto=format&fit=crop&q=80",
-      tag: "বাগান ফ্রেশ",
-      link: "/products?search=mango",
-    },
-    {
-      title: "খাঁটি খাদ্য ও অর্গানিক গ্রোসারি",
-      desc: "ঘানিভাঙা খাঁটি সরিষার তেল, সুন্দরবনের প্রাকৃতিক মধু, ঘি ও পুষ্টিকর ড্রাই ফ্রুটস।",
+      title: "Fresh Groceries & Farm Produce",
+      desc: "Cold-pressed oils, pure natural honey, unadulterated spices, organic grains, and seasonal harvests sourced directly from growers.",
       image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80",
-      tag: "১০০% অর্গানিক",
+      tag: "Pantry & Organic",
       link: "/products?search=grocery",
     },
     {
-      title: "ফ্যাশন ও প্রিমিয়াম লাইফস্টাইল",
-      desc: "আরামদায়ক ঐতিহ্যবাহী পাঞ্জাবি, সমকালীন পোশাক এবং দীর্ঘস্থায়ী প্রিমিয়াম ফ্যাশন কালেকশন।",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=80",
-      tag: "ট্রেন্ডিং",
-      link: "/products?category=Fashion",
+      title: "Men's Fashion & Apparel",
+      desc: "Traditional panjabis, executive formal shirts, comfortable casual tees, denim, and modern everyday essentials.",
+      image: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=800&auto=format&fit=crop&q=80",
+      tag: "Apparel",
+      link: "/products?category=Men's+Fashion",
     },
     {
-      title: "ফুটওয়্যার ও প্রয়োজনীয় এক্সেসরিজ",
-      desc: "টেকসই স্নিকার্স, চামড়ার বেল্ট, ওয়ালেট ও দৈনন্দিন আধুনিক ফ্যাশন অনুষঙ্গ।",
+      title: "Women's Fashion & Lifestyle",
+      desc: "Contemporary ethnic wear, festive kurtis, comfortable casuals, and modern lifestyle fashion accessories.",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=80",
+      tag: "Fashion",
+      link: "/products?category=Women's+Fashion",
+    },
+    {
+      title: "Footwear & Daily Essentials",
+      desc: "Handcrafted genuine leather footwear, comfortable walking sneakers, casual sandals, and formal shoes.",
       image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80",
-      tag: "প্রিমিয়াম কোয়ালিটি",
+      tag: "Footwear",
       link: "/products?category=Footwear",
+    },
+    {
+      title: "Electronics, Audio & Smart Gadgets",
+      desc: "Smart wearables, high-fidelity wireless audio, fast-charging hubs, power accessories, and tech essentials.",
+      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
+      tag: "Electronics",
+      link: "/products?category=Accessories",
+    },
+    {
+      title: "Home, Kitchen & Living Essentials",
+      desc: "Durable kitchenware, storage organizers, home utility goods, and essentials designed for modern family living.",
+      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
+      tag: "Home & Living",
+      link: "/products",
     },
   ];
 
-  const testimonials = [
+  const commitments = [
     {
-      quote:
-        "ট্রাস্ট পয়েন্ট থেকে রূপালী ও গোপালভোগ আম নিয়েছিলাম। প্রতিটি আম ছিল অক্ষত, মিষ্টি এবং সত্যিই গাছপাকা সুবাসযুক্ত। কোনো কেমিক্যালের গন্ধ ছিল না। মোহাম্মদ আব্দুল্লাহ ভাইয়ের সততা প্রশংসনীয়!",
-      author: "ইঞ্জি. তারিকুল ইসলাম",
-      location: "উত্তরা, ঢাকা",
-      rating: 5,
+      icon: HiShieldCheck,
+      title: "100% Genuine & Verified Quality",
+      desc: "Every product in our catalog is procured through verified channels and primary producers, guaranteeing absolute authenticity.",
     },
     {
-      quote:
-        "সরাসরি বাগান থেকে এত নিখুঁতভাবে কুরিয়ার প্যাকেজিং করে পাঠানো সত্যিই অবিশ্বাস্য। অনলাইনে আম কেনায় আগের খারাপ অভিজ্ঞতা ট্রাস্ট পয়েন্ট সম্পূর্ণ দূর করে দিয়েছে।",
-      author: "ড. সামসুল আরেফিন",
-      location: "রাজশাহী",
-      rating: 5,
+      icon: FiLayers,
+      title: "Direct Sourcing & Fair Pricing",
+      desc: "By bypassing traditional multi-tier broker networks, we connect growers and manufacturers directly to consumers at transparent prices.",
     },
     {
-      quote:
-        "মাঝে কোনো আড়তদার বা মধ্যস্বত্বভোগী না থাকায় দাম ছিল একদম ন্যায্য এবং মান অতুলনীয়। ডেলিভারিও পেয়েছি একদম সময়মতো। ট্রাস্ট পয়েন্টের জন্য শুভকামনা।",
-      author: "নাসরিন সুলতানা",
-      location: "ধানমন্ডি, ঢাকা",
-      rating: 5,
+      icon: HiTruck,
+      title: "Nationwide Doorstep Delivery",
+      desc: "Comprehensive logistics network servicing all 64 districts in Bangladesh with secure packaging and reliable tracking.",
+    },
+    {
+      icon: FiRefreshCw,
+      title: "Buyer Protection & 7-Day Returns",
+      desc: "Transparent return and exchange policies paired with secure payment gateways and Cash on Delivery options.",
     },
   ];
 
   return (
     <div className="w-full bg-[#FAFAFA] text-zinc-900 font-sans">
-      {/* ── 1. Impact Metrics Bar (Cleanly Spaced) ── */}
-      <section className="pt-8 sm:pt-10 pb-4 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-zinc-200/80 p-6 sm:p-8 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-          {stats.map((s, idx) => {
-            const Icon = s.icon;
-            return (
-              <div key={idx} className="flex flex-col items-center justify-center p-3">
-                <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-3">
-                  <Icon className="w-6 h-6" />
+      
+      {/* ── 1. Our Story & Purpose Section ── */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <ScrollAnimate variant="fade-in-up">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+              
+              {/* Left Column: Mission & Narrative */}
+              <div className="lg:col-span-7 space-y-5">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold tracking-wider uppercase">
+                  <FiShoppingBag className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>About Trust Point Mart</span>
                 </div>
-                <div className="text-xl sm:text-2xl md:text-3xl font-extrabold text-zinc-900 tracking-tight">
-                  {s.value}
-                </div>
-                <div className="text-xs sm:text-sm font-medium text-zinc-500 mt-1">
-                  {s.label}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
 
-      {/* ── 2. Our Story Section: Trust Point ── */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 md:px-10 lg:px-16 max-w-7xl mx-auto">
-        <ScrollAnimate variant="fade-in-up">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            {/* Left Narrative */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold tracking-wider uppercase">
-                <FiAward className="w-4 h-4 text-emerald-600" />
-                <span>আমাদের পরিচিতি ও অঙ্গীকার</span>
-              </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-zinc-950 tracking-tight leading-tight">
+                  Direct Sourcing, Authentic Quality &amp; Transparent Commerce Across Bangladesh
+                </h2>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-zinc-950 tracking-tight leading-[1.18]">
-                সরাসরি বাগান থেকে আপনার বাড়ি, <span className="text-emerald-600">মাঝে কোনো মধ্যস্বত্বভোগী নেই</span>
-              </h2>
-
-              <p className="text-base sm:text-lg text-zinc-700 leading-relaxed font-normal">
-                তরুণ উদ্যোক্তা ও দূরদর্শী নেতা <strong className="text-zinc-950 font-bold">মোহাম্মদ আব্দুল্লাহর</strong> হাত ধরে <strong className="text-zinc-950 font-bold">মহাদেবপুর, নওগাঁ, রাজশাহী</strong> থেকে গড়ে উঠেছে <strong className="text-emerald-700 font-extrabold">ট্রাস্ট পয়েন্ট (Trust Point)</strong>। আমাদের একমাত্র লক্ষ্য—অনলাইন কেনাকাটায় আস্থার সংকট দূর করে শতভাগ খাঁটি ও নিরাপদ পণ্য ঘরে ঘরে পৌঁছে দেওয়া।
-              </p>
-
-              <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 text-emerald-950 text-sm leading-relaxed">
-                <p className="font-semibold text-emerald-900 mb-1">
-                  🌿 শতভাগ ফরমালিনমুক্ত ও খাঁটি সতেজতার গ্যারান্টি:
+                <p className="text-sm sm:text-base text-zinc-700 leading-relaxed">
+                  <strong className="text-zinc-950 font-bold">Trust Point Mart</strong> is a dedicated multi-category online hypermarket and marketplace platform founded by entrepreneur <strong className="text-zinc-950 font-bold">Mohammad Abdullah</strong>, originating from <strong className="text-zinc-950 font-bold">Mohadevpur, Naogaon, Rajshahi Division</strong>.
                 </p>
-                রাজশাহীর বিখ্যাত আম বাগান থেকে কোনো আড়তদার বা মধ্যস্বত্বভোগীর হাত ছাড়া সরাসরি আম সংগ্রহ করা হয়। গাছ থেকে নামিয়ে সযত্নে বাছাই করে নিজস্ব প্যাকিংয়ে দেশের যেকোনো প্রান্তে পৌঁছে দেওয়া হয়।
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
-                  <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-sm font-bold text-zinc-900">মহাদেবপুর, নওগাঁ হেডকোয়ার্টার</h4>
-                    <p className="text-xs text-zinc-500 mt-1">সরাসরি স্থানীয় বাগান ও চাষীদের সাথে সংযোগ এবং কেন্দ্রীয় কোয়ালিটি নিয়ন্ত্রণ।</p>
-                  </div>
-                </div>
+                <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+                  Our core mission is straightforward: to eliminate unnecessary middlemen markups, address counterfeit concerns in the retail market, and deliver genuine daily essentials—from pantry staples and farm-fresh produce to lifestyle fashion, footwear, and consumer goods—directly to families across all 64 districts.
+                </p>
 
-                <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
-                  <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-sm font-bold text-zinc-900">ভেজাল ও কেমিক্যালমুক্ত নিশ্চয়তা</h4>
-                    <p className="text-xs text-zinc-500 mt-1">ক্যালসিয়াম কার্বাইড বা ফরমালিনের সম্পূর্ণ বিপরীত—প্রাকৃতিক সতেজতা।</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-2 flex flex-wrap items-center gap-4">
-                <Link
-                  href="/products"
-                  className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm px-7 py-3.5 rounded-full shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
-                >
-                  <span>পণ্যসমূহ দেখুন</span>
-                  <FiArrowRight className="w-4 h-4" />
-                </Link>
-
-                <a
-                  href="tel:01707819676"
-                  className="inline-flex items-center gap-2 bg-white hover:bg-zinc-100 text-zinc-800 font-semibold text-sm px-7 py-3.5 rounded-full border border-zinc-200 shadow-xs transition-all cursor-pointer"
-                >
-                  <HiPhone className="w-4 h-4 text-emerald-600" />
-                  <span>সরাসরি কল করুন: 01707819676</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Right Visual Card */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-zinc-900 aspect-[4/5] sm:aspect-square lg:aspect-[4/5]">
-                <img
-                  src="https://images.unsplash.com/photo-1553279768-865429fa0078?w=900&auto=format&fit=crop&q=80"
-                  alt="Fresh garden mangoes direct from orchard"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
-
-                {/* Floating Glassmorphic Badge */}
-                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-white/40 shadow-xl">
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center font-black text-xl shrink-0 shadow-md">
-                      TP
-                    </div>
+                {/* 4 Feature Badges Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
+                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-sm font-bold text-zinc-950 leading-tight">
-                        Trust Point (ট্রাস্ট পয়েন্ট)
-                      </h4>
-                      <p className="text-xs text-zinc-600 mt-0.5">
-                        সরাসরি বাগান থেকে আপনার বাড়ি • মহাদেবপুর, নওগাঁ
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Direct From Source</h4>
+                      <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
+                        Connecting primary producers with households at fair prices.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
+                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Verified Quality</h4>
+                      <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
+                        Carefully checked and packaged before nationwide dispatch.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
+                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">All 64 Districts</h4>
+                      <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
+                        Reliable courier delivery with end-to-end tracking updates.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
+                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Customer Support</h4>
+                      <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
+                        Direct executive desk and 24/7 customer care helpline.
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </ScrollAnimate>
-      </section>
 
-      {/* ── 3. EXECUTIVE SPOTLIGHT: FOUNDER & CEO MOHAMMAD ABDULLAH ── */}
-      <section className="py-20 sm:py-28 bg-[#0D1117] text-white relative overflow-hidden">
-        {/* Subtle Ambient Glows */}
-        <div className="absolute top-1/4 -left-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-10 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                {/* Actions */}
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <Link
+                    href="/products"
+                    className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
+                  >
+                    <span>Explore Products</span>
+                    <FiArrowRight className="w-4 h-4" />
+                  </Link>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 relative z-10">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-14 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-950/80 border border-emerald-500/30 text-emerald-400 text-xs font-bold tracking-widest uppercase mb-4 shadow-inner">
-              <HiBadgeCheck className="w-4 h-4 text-emerald-400" />
-              <span>Executive Leadership • প্রতিষ্ঠাতা ও পরিচালক</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-tight">
-              Meet Our Founder &amp; CEO
-            </h2>
-            <p className="text-zinc-400 text-sm sm:text-base mt-3.5 leading-relaxed">
-              সততা, দায়িত্বশীল নেতৃত্ব ও খাঁটি পণ্যের নিশ্চয়তায় ট্রাস্ট পয়েন্টকে এগিয়ে নিয়ে যাচ্ছেন মোহাম্মদ আব্দুল্লাহ।
-            </p>
-          </div>
-
-          {/* Main CEO Executive Profile Card */}
-          <div className="bg-zinc-900/90 border border-white/10 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl backdrop-blur-md">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-              
-              {/* Left Column: Portrait & Direct Contact Actions */}
-              <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="relative w-full max-w-xs sm:max-w-sm mx-auto group">
-                  {/* Glowing Ring Effect */}
-                  <div className="absolute -inset-1.5 bg-gradient-to-tr from-emerald-500 via-teal-400 to-amber-400 rounded-3xl opacity-40 group-hover:opacity-75 blur-md transition duration-500" />
-                  
-                  <div className="relative rounded-3xl overflow-hidden bg-zinc-950 border-2 border-white/20 aspect-square shadow-2xl">
-                    <Image
-                      src="/images/team/abdullah-2.jpg"
-                      alt="Mohammad Abdullah - Founder & CEO of Trust Point"
-                      width={960}
-                      height={957}
-                      priority
-                      className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-105"
-                    />
-                    
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-transparent to-transparent" />
-                    
-                    {/* Floating Verified Seal Badge */}
-                    <div className="absolute top-4 right-4 bg-emerald-600/95 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-lg border border-emerald-400/40">
-                      <HiShieldCheck className="w-4 h-4 text-emerald-200" />
-                      <span>Verified Founder &amp; Owner</span>
-                    </div>
-
-                    {/* Bottom Image Overlay Caption */}
-                    <div className="absolute bottom-4 left-4 right-4 text-left">
-                      <div className="text-white font-extrabold text-lg sm:text-xl leading-snug">
-                        Mohammad Abdullah
-                      </div>
-                      <div className="text-emerald-400 text-xs font-semibold flex items-center gap-1.5 mt-0.5">
-                        <HiLocationMarker className="w-3.5 h-3.5 shrink-0" />
-                        <span>Mohadevpur, Naogaon, Rajshahi</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Direct CEO Action Buttons below portrait */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xs sm:max-w-sm mt-5">
                   <a
                     href="tel:01707819676"
-                    className="inline-flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-emerald-600/25 cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-800 font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl border border-zinc-300 shadow-xs transition-all cursor-pointer"
                   >
-                    <HiPhone className="w-4 h-4 shrink-0" />
-                    <span>Call: 01707819676</span>
-                  </a>
-
-                  <a
-                    href="https://wa.me/8801707819676?text=Assalamu%20Alaikum%20Mohammad%20Abdullah%20Sir%2C%20I%20am%20contacting%20you%20from%20Trust%20Point."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md shadow-[#25D366]/25 cursor-pointer"
-                  >
-                    <FaWhatsapp className="w-4 h-4 shrink-0 text-white" />
-                    <span>WhatsApp CEO</span>
+                    <HiPhone className="w-4 h-4 text-emerald-600" />
+                    <span>Executive Desk: 01707819676</span>
                   </a>
                 </div>
               </div>
 
-              {/* Right Column: Founder's Story, Vision & Credentials */}
-              <div className="lg:col-span-7 space-y-6">
-                <div>
-                  <div className="flex items-center gap-2.5 flex-wrap">
-                    <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 border border-emerald-800/80 px-3.5 py-1 rounded-full">
-                      Founder &amp; Chief Executive Officer
-                    </span>
-                    <span className="text-xs font-semibold text-zinc-300 bg-zinc-800/80 border border-white/10 px-3 py-1 rounded-full">
-                      মুহাম্মদ আব্দুল্লাহ
-                    </span>
-                  </div>
+              {/* Right Column: Visual Showcase */}
+              <div className="lg:col-span-5 relative">
+                <div className="relative rounded-2xl overflow-hidden shadow-xl border border-zinc-200 bg-zinc-900 aspect-[4/5] sm:aspect-square lg:aspect-[4/5] group">
+                  <img
+                    src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000&auto=format&fit=crop&q=80"
+                    alt="Trust Point Mart Products & Operations"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
 
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight mt-3">
+                  {/* Bottom Info Card */}
+                  <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center font-black text-lg shrink-0 shadow-xs">
+                        TP
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-zinc-950 leading-tight">
+                          Trust Point Mart
+                        </h4>
+                        <p className="text-xs text-zinc-600 mt-0.5">
+                          Multi-Category E-Commerce &amp; Hypermarket
+                        </p>
+                        <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
+                          Headquarters: Mohadevpur, Naogaon, Rajshahi Division
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </ScrollAnimate>
+        </div>
+      </section>
+
+      {/* ── 2. Executive Leadership: Founder & CEO ── */}
+      <section className="py-14 sm:py-20 bg-[#0B0F17] text-white">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="bg-zinc-900/90 border border-white/10 rounded-2xl p-6 sm:p-10 shadow-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* Portrait & Contact */}
+              <div className="lg:col-span-5 flex flex-col items-center">
+                <div className="relative w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden bg-zinc-950 border border-white/20 aspect-square shadow-xl">
+                  <Image
+                    src="/images/team/Abdullah.jpg"
+                    alt="Mohammad Abdullah - Founder & CEO of Trust Point Mart"
+                    width={960}
+                    height={957}
+                    priority
+                    className="w-full h-full object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
+                  
+                  <div className="absolute bottom-4 left-4 right-4 text-left">
+                    <div className="text-white font-bold text-base sm:text-lg leading-snug">
+                      Mohammad Abdullah
+                    </div>
+                    <div className="text-emerald-400 text-xs font-medium flex items-center gap-1 mt-0.5">
+                      <HiLocationMarker className="w-3.5 h-3.5 shrink-0" />
+                      <span>Mohadevpur, Naogaon, Rajshahi Division</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2.5 w-full max-w-xs sm:max-w-sm mt-4">
+                  <a
+                    href="tel:01707819676"
+                    className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all"
+                  >
+                    <HiPhone className="w-4 h-4 shrink-0" />
+                    <span>Call Desk</span>
+                  </a>
+
+                  <a
+                    href="https://wa.me/8801707819676?text=Hello%20Mohammad%20Abdullah%2C%20I%20am%20contacting%20you%20from%20Trust%20Point%20Mart."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all"
+                  >
+                    <FaWhatsapp className="w-4 h-4 shrink-0 text-white" />
+                    <span>WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Founder Profile & Governance */}
+              <div className="lg:col-span-7 space-y-5">
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    <HiBadgeCheck className="w-4 h-4 text-emerald-400" />
+                    <span>Executive Leadership</span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
                     Mohammad Abdullah
                   </h3>
-                  <p className="text-emerald-400 text-sm font-semibold mt-1">
-                    প্রতিষ্ঠাতা ও উদ্যোক্তা, ট্রাস্ট পয়েন্ট (Trust Point) • মহাদেবপুর, নওগাঁ
+                  <p className="text-emerald-400 text-xs sm:text-sm font-medium mt-0.5">
+                    Founder &amp; Chief Executive Officer • Trust Point Mart
                   </p>
                 </div>
 
                 {/* Quote Block */}
-                <div className="relative bg-zinc-950/60 border-l-4 border-emerald-500 rounded-r-2xl p-5 sm:p-6 backdrop-blur-xs">
-                  <FaQuoteLeft className="w-6 h-6 text-emerald-500/30 mb-2" />
-                  <p className="text-sm sm:text-base text-zinc-200 italic leading-relaxed">
-                    &ldquo;সরাসরি বাগান থেকে আপনার বাড়ি, মাঝে কোনো আড়ত বা মধ্যস্বত্বভোগী নেই। তাই শতভাগ ফরমালিনমুক্ত ও খাঁটি সতেজতার গ্যারান্টি। আম কিংবা নিত্যপ্রয়োজনীয় পণ্য—ট্রাস্ট পয়েন্টে আপনি যা পাবেন, তা প্রতিটি পরিবারের জন্য শতভাগ খাঁটি ও নিরাপদ। মানুষের বিশ্বাস ও দুআই আমাদের ব্যবসার শ্রেষ্ঠ অর্জন।&rdquo;
+                <div className="bg-zinc-950/60 border-l-4 border-emerald-500 rounded-r-xl p-4 sm:p-5">
+                  <FaQuoteLeft className="w-5 h-5 text-emerald-500/30 mb-1.5" />
+                  <p className="text-xs sm:text-sm text-zinc-200 italic leading-relaxed">
+                    &ldquo;Commerce is an enduring covenant of trust. Whether we are packing daily groceries, fresh regional harvests, or contemporary lifestyle fashion, our standard is absolute honesty. By connecting sources directly to homes, we ensure families across Bangladesh receive genuine products at fair prices.&rdquo;
                   </p>
-                  <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
-                    <div>
-                      <span className="font-bold text-white uppercase tracking-wider">Mohammad Abdullah</span>
-                      <span className="text-[11px] text-zinc-400 block">Founder &amp; CEO, Trust Point</span>
-                    </div>
-                    <span className="text-emerald-400 font-medium">Mohadevpur, Naogaon, Rajshahi</span>
-                  </div>
                 </div>
 
-                {/* 3 Core Leadership Highlights */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
-                  <div className="bg-zinc-800/60 border border-white/5 rounded-2xl p-4">
-                    <div className="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold mb-2">
-                      <HiShieldCheck className="w-5 h-5" />
+                {/* 3 Core Points */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold mb-2">
+                      <HiShieldCheck className="w-4 h-4" />
                     </div>
                     <h5 className="text-xs font-bold text-white uppercase tracking-wide">
-                      ১০০% ফরমালিনমুক্ত
+                      Authenticity
                     </h5>
-                    <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                      রাসায়নিকমুক্ত গাছপাকা আমের খাঁটি নিশ্চয়তা।
+                    <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
+                      Zero tolerance for counterfeits or adulteration.
                     </p>
                   </div>
 
-                  <div className="bg-zinc-800/60 border border-white/5 rounded-2xl p-4">
-                    <div className="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold mb-2">
-                      <HiLocationMarker className="w-5 h-5" />
+                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
+                    <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold mb-2">
+                      <HiLocationMarker className="w-4 h-4" />
                     </div>
                     <h5 className="text-xs font-bold text-white uppercase tracking-wide">
-                      মহাদেবপুর হেড অফিস
+                      Northern Hub
                     </h5>
-                    <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                      নওগাঁ-রাজশাহীর সেরা বাগান থেকে সরাসরি পরিচালনা।
+                    <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
+                      Headquarters in Mohadevpur, Naogaon.
                     </p>
                   </div>
 
-                  <div className="bg-zinc-800/60 border border-white/5 rounded-2xl p-4">
-                    <div className="w-9 h-9 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold mb-2">
-                      <HiPhone className="w-5 h-5" />
+                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
+                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold mb-2">
+                      <HiPhone className="w-4 h-4" />
                     </div>
                     <h5 className="text-xs font-bold text-white uppercase tracking-wide">
-                      ডিরেক্ট যোগাযোগ
+                      Direct Access
                     </h5>
-                    <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-                      সিইওর সাথে সরাসরি কথা বলুন: 01707819676 নম্বরে।
+                    <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
+                      Direct desk: 01707819676 for corporate orders.
                     </p>
                   </div>
                 </div>
 
-                {/* Executive Contact Strip */}
-                <div className="pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-4 text-xs text-zinc-400">
-                  <div className="flex items-center gap-2">
-                    <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Founder&apos;s Direct Desk: <a href="tel:01707819676" className="text-white font-bold hover:text-emerald-400 transition-colors">01707819676</a></span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <HiLocationMarker className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Headquarters: <strong className="text-white">Mohadevpur, Naogaon, Rajshahi</strong></span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <HiBadgeCheck className="w-4 h-4 text-emerald-400 shrink-0" />
-                    <span>Brand: <strong className="text-white">Trust Point (ট্রাস্ট পয়েন্ট)</strong></span>
-                  </div>
+                {/* Contact desk details */}
+                <div className="pt-2 border-t border-white/10 flex flex-wrap items-center gap-4 text-xs text-zinc-300">
+                  <span>Founder Desk: <a href="tel:01707819676" className="text-white font-bold hover:text-emerald-400">01707819676</a></span>
+                  <span className="hidden sm:inline">•</span>
+                  <span>WhatsApp Direct: <a href="https://wa.me/8801707819676" className="text-emerald-400 font-semibold hover:underline">01707819676</a></span>
                 </div>
 
               </div>
@@ -438,115 +346,99 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 4. LIVE ORCHARD PROOF: FACEBOOK REELS & VIDEOS ── */}
-      <section className="py-20 bg-zinc-950 text-white border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      {/* ── 3. Marketplace Departments ── */}
+      <section className="py-14 sm:py-20">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 text-xs font-bold tracking-wider uppercase mb-3 border border-emerald-800/80">
-                <FaPlay className="w-3 h-3 text-emerald-400" />
-                <span>সরাসরি বাগান থেকে লাইভ ভিডিও ও রিলস</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
-                বাস্তব প্রমাণ: দেখুন আমাদের বাগানের লাইভ ভিডিও
+              <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">
+                Product Departments
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
+                Explore Our Core Categories
               </h2>
-              <p className="text-zinc-400 text-sm sm:text-base mt-2">
-                আম নামানো থেকে শুরু করে প্যাকিং পর্যন্ত প্রতিটি ধাপের লাইভ ভিডিও দেখুন আমাদের ফেসবুক পেজে।
+              <p className="text-xs sm:text-sm text-zinc-500 mt-1">
+                Curated everyday essentials, pantry goods, fashion, footwear, and consumer technology.
               </p>
             </div>
-
-            <a
-              href="https://www.facebook.com/reel/2085813248644612"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold bg-[#1877F2] hover:bg-[#1567d3] text-white px-5 py-3 rounded-xl shadow-lg transition-all shrink-0 cursor-pointer"
+            <Link
+              href="/products"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 transition-colors shrink-0"
             >
-              <FaFacebook className="w-4 h-4" />
-              <span>Facebook Page-এ যুক্ত হন</span>
-              <FiExternalLink className="w-3.5 h-3.5 ml-1" />
-            </a>
+              <span>View All Products</span>
+              <FiArrowRight className="w-4 h-4" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reels.map((reel, idx) => (
-              <div
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {departments.map((d, idx) => (
+              <Link
                 key={idx}
-                className="group relative rounded-2xl bg-zinc-900 border border-white/10 hover:border-emerald-500/50 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                href={d.link}
+                className="group rounded-2xl overflow-hidden bg-white border border-zinc-200/90 shadow-2xs hover:shadow-md transition-all flex flex-col"
               >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-4">
-                    <span className="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-md bg-emerald-950 text-emerald-400 border border-emerald-800/60">
-                      {reel.badge}
-                    </span>
-                    <span className="flex items-center gap-1.5 text-xs text-zinc-400">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      {reel.tag}
-                    </span>
+                <div className="relative h-48 sm:h-52 w-full overflow-hidden bg-zinc-100">
+                  <img
+                    src={d.image}
+                    alt={d.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span className="absolute top-3 left-3 bg-zinc-900/85 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    {d.tag}
+                  </span>
+                </div>
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-600 transition-colors">
+                      {d.title}
+                    </h3>
+                    <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed">
+                      {d.desc}
+                    </p>
                   </div>
-
-                  <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors leading-snug">
-                    {reel.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-zinc-400 mt-2.5 leading-relaxed">
-                    {reel.subtitle}
-                  </p>
+                  <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs font-bold text-emerald-600">
+                    <span>Browse Department</span>
+                    <FiArrowRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
-
-                <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
-                  <a
-                    href={reel.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300 transition-colors group-hover:translate-x-1"
-                  >
-                    <span className="w-7 h-7 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <FaPlay className="w-2.5 h-2.5 text-emerald-400 ml-0.5" />
-                    </span>
-                    <span>রিলস ভিডিও দেখুন</span>
-                    <FiExternalLink className="w-3.5 h-3.5" />
-                  </a>
-
-                  <span className="text-[11px] text-zinc-500">Facebook Reel</span>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── 5. Core Pillars of Excellence ── */}
-      <section className="py-20 bg-white border-y border-zinc-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600">
-              কেন ট্রাস্ট পয়েন্ট সবার চেয়ে আলাদা
+      {/* ── 4. Our Commitments ── */}
+      <section className="py-14 sm:py-20 bg-white border-y border-zinc-200/80">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">
+              Why Trust Point Mart
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-zinc-950 tracking-tight mt-2">
-              আমাদের ৪টি প্রধান মূলনীতি
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
+              Our Core Service Commitments
             </h2>
-            <p className="text-zinc-500 text-sm sm:text-base mt-3 leading-relaxed">
-              সরাসরি বাগান থেকে শুরু করে আপনার বাড়ির দস্তরখান পর্যন্ত—প্রতিটি পদক্ষেপে সততা ও বিশুদ্ধতার নিশ্চয়তা।
+            <p className="text-xs sm:text-sm text-zinc-500 mt-1.5 leading-relaxed">
+              Built on transparency, verified supply chains, and customer-first accountability.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pillars.map((p, idx) => {
-              const Icon = p.icon;
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {commitments.map((c, idx) => {
+              const Icon = c.icon;
               return (
                 <div
                   key={idx}
-                  className="p-6 rounded-2xl bg-zinc-50/70 border border-zinc-200/70 hover:border-emerald-500/50 hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                  className="p-5 sm:p-6 rounded-2xl bg-zinc-50/70 border border-zinc-200/70 flex flex-col justify-between"
                 >
                   <div>
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 border ${p.color}`}>
-                      <Icon className="w-6 h-6" />
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-100">
+                      <Icon className="w-5 h-5" />
                     </div>
-                    <h3 className="text-lg font-bold text-zinc-900 leading-snug mb-2">
-                      {p.title}
+                    <h3 className="text-sm font-bold text-zinc-900 leading-snug mb-1.5">
+                      {c.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
-                      {p.desc}
+                    <p className="text-xs text-zinc-600 leading-relaxed">
+                      {c.desc}
                     </p>
                   </div>
                 </div>
@@ -556,161 +448,110 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 6. Curated Marketplace Departments ── */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-          <div>
-            <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600">
-              আমাদের প্রোডাক্ট রেঞ্জ
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black text-zinc-950 tracking-tight mt-2">
-              খাঁটি আম, খাদ্যপণ্য ও লাইফস্টাইল কালেকশন
-            </h2>
-            <p className="text-zinc-500 text-sm sm:text-base mt-2">
-              সরাসরি বাগান ও বিশ্বস্ত কারিগরদের থেকে সংগৃহীত সেরা পণ্যসম্ভার।
-            </p>
-          </div>
-          <Link
-            href="/products"
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-700 hover:text-emerald-800 transition-colors"
-          >
-            <span>সব পণ্য একসাথে দেখুন</span>
-            <FiArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map((c, idx) => (
-            <Link
-              key={idx}
-              href={c.link}
-              className="group rounded-2xl overflow-hidden bg-white border border-zinc-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
-            >
-              <div className="relative h-52 w-full overflow-hidden bg-zinc-100">
-                <img
-                  src={c.image}
-                  alt={c.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <span className="absolute top-3 left-3 bg-zinc-900/80 backdrop-blur-xs text-white text-[11px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-                  {c.tag}
-                </span>
-              </div>
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-600 transition-colors">
-                    {c.title}
-                  </h3>
-                  <p className="text-xs text-zinc-500 mt-2 leading-relaxed">
-                    {c.desc}
-                  </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center text-xs font-bold text-emerald-600 group-hover:translate-x-1 transition-transform">
-                  অর্ডার করুন →
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 7. Operations & Corporate Headquarters ── */}
-      <section className="py-20 bg-[#121614] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <span className="inline-block text-xs font-extrabold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3.5 py-1 rounded-full">
-                কেন্দ্রীয় কার্যালয় ও বাগান
+      {/* ── 5. Operations & Customer Support Hub ── */}
+      <section className="py-14 sm:py-18 bg-[#101318] text-white">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div className="lg:col-span-6 space-y-4">
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
+                Operations &amp; Logistics
               </span>
 
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
-                মহাদেবপুর, নওগাঁ, রাজশাহী থেকে সারাদেশে
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                Central Operations in Mohadevpur, Naogaon
               </h2>
 
-              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
-                ট্রাস্ট পয়েন্ট পরিচালিত হচ্ছে নওগাঁর ঐতিহ্যবাহী মহাদেবপুর থেকে। প্রতিষ্ঠাতা মোহাম্মদ আব্দুল্লাহর সরাসরি তত্ত্বাবধানে নিজস্ব বাগান থেকে ফ্রেশ ফল হার্ভেস্টিং, গ্রেডিং, প্যাকিং ও ডেলিভারি সম্পন্ন হয়।
+              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                Trust Point Mart operates its central logistics and procurement hub in Mohadevpur, Naogaon, Rajshahi Division. From here, our team oversees direct sourcing partnerships with regional agricultural hubs, quality inspection, parcel packaging, and nationwide courier routing.
               </p>
 
-              <div className="space-y-4 pt-2">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
-                    <HiLocationMarker className="w-5 h-5" />
-                  </div>
+              <div className="space-y-3 pt-2 text-xs text-zinc-300">
+                <div className="flex items-start gap-3">
+                  <HiLocationMarker className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold text-white">প্রধান কার্যালয় ও বাগান হাব</h4>
-                    <p className="text-xs text-zinc-400 mt-0.5">
-                      মোহাম্মদ আব্দুল্লাহ — মহাদেবপুর, নওগাঁ, রাজশাহী বিভাগ, বাংলাদেশ
-                    </p>
+                    <strong className="text-white block font-semibold">Central Logistics Hub:</strong>
+                    <span>Mohadevpur, Naogaon, Rajshahi Division, Bangladesh</span>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
-                    <HiPhone className="w-5 h-5" />
-                  </div>
+                <div className="flex items-start gap-3">
+                  <HiPhone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold text-white">প্রতিষ্ঠাতা ও ডিরেক্ট কল ডেস্ক</h4>
-                    <a
-                      href="tel:01707819676"
-                      className="text-xs text-emerald-400 font-semibold hover:underline mt-0.5 inline-block"
-                    >
-                      01707819676 (+880 1707-819676)
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
-                    <HiMail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-white">অফিসিয়াল ইমেইল</h4>
-                    <a
-                      href="mailto:support@webdevsoftware.com"
-                      className="text-xs text-emerald-400 font-semibold hover:underline mt-0.5 inline-block"
-                    >
-                      support@webdevsoftware.com
-                    </a>
+                    <strong className="text-white block font-semibold">Direct Founder &amp; Executive Desk:</strong>
+                    <span>Call / WhatsApp: <a href="tel:01707819676" className="text-emerald-400 font-bold hover:underline">01707819676</a></span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Card with hours & contact */}
-            <div className="lg:col-span-6 bg-zinc-900/90 border border-white/10 rounded-3xl p-8 space-y-6">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <span>অর্ডার ও গ্রাহক সহায়তা সময়সূচি</span>
-              </h3>
+            {/* Support Schedule Card */}
+            <div className="lg:col-span-6 bg-zinc-900/90 border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4">
+              <div className="flex items-center gap-2 text-sm font-bold text-white">
+                <FiClock className="w-4 h-4 text-emerald-400" />
+                <span>Ordering &amp; Customer Care Schedule</span>
+              </div>
 
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between py-2 border-b border-white/10 text-zinc-300">
-                  <span>শনিবার – বৃহস্পতিবার</span>
-                  <span className="font-semibold text-white">সকাল ৯:০০ – রাত ৯:০০</span>
+              <div className="space-y-2.5 text-xs text-zinc-300">
+                <div className="flex justify-between py-1.5 border-b border-white/10">
+                  <span>Saturday – Thursday (Support Desk)</span>
+                  <span className="font-semibold text-white">9:00 AM – 10:00 PM</span>
                 </div>
-                <div className="flex justify-between py-2 border-b border-white/10 text-zinc-300">
-                  <span>শুক্রবার</span>
-                  <span className="font-semibold text-white">দুপুর ২:০০ – রাত ৯:০০</span>
+                <div className="flex justify-between py-1.5 border-b border-white/10">
+                  <span>Friday (Customer Desk)</span>
+                  <span className="font-semibold text-white">2:00 PM – 10:00 PM</span>
                 </div>
-                <div className="flex justify-between py-2 text-zinc-300">
-                  <span>অনলাইন ওয়েবসাইট বুকিং</span>
-                  <span className="font-semibold text-emerald-400">২৪ ঘণ্টা উন্মুক্ত (৩৬৫ দিন)</span>
+                <div className="flex justify-between py-1.5">
+                  <span>Online Store Ordering</span>
+                  <span className="font-semibold text-emerald-400">Open 24 Hours / 365 Days</span>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row gap-4">
+              <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row gap-3">
                 <a
-                  href="https://wa.me/8801707819676?text=Assalamu%20Alaikum%20Mohammad%20Abdullah%20Sir%2C%20I%20am%20contacting%20you%20from%20Trust%20Point."
+                  href="https://wa.me/8801707819676?text=Hello%20Trust%20Point%20Mart%2C%20I%20would%20like%20to%20inquire%20about%20an%20order."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-3 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-center text-xs uppercase tracking-wider transition-colors cursor-pointer"
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center text-xs tracking-wider transition-colors cursor-pointer"
                 >
-                  WhatsApp-এ আম বুকিং করুন
+                  WhatsApp Support
                 </a>
                 <Link
                   href="/contact"
-                  className="flex-1 py-3 px-5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-center text-xs uppercase tracking-wider transition-colors cursor-pointer"
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-center text-xs tracking-wider transition-colors cursor-pointer"
                 >
-                  পূর্ণাঙ্গ যোগাযোগ পেজ
+                  Contact Page
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── 6. Call to Action Banner ── */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="bg-gradient-to-r from-emerald-900 to-zinc-950 rounded-2xl p-8 sm:p-12 text-white text-center shadow-lg border border-emerald-800/30">
+            <div className="max-w-xl mx-auto space-y-4">
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
+                Shop with Confidence at Trust Point Mart
+              </h2>
+              <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
+                Discover verified groceries, fashion, footwear, and consumer goods backed by our direct-sourcing guarantee.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
+                <Link
+                  href="/products"
+                  className="bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  Start Shopping
+                </Link>
+                <Link
+                  href="/contact"
+                  className="bg-emerald-950/70 hover:bg-emerald-950 text-white border border-emerald-400/30 font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl transition-colors cursor-pointer"
+                >
+                  Customer Support
                 </Link>
               </div>
             </div>
@@ -718,70 +559,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 8. Verified Customer Testimonials ── */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600">
-            গ্রাহকের মূল্যায়ন
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-zinc-950 tracking-tight mt-2">
-            সারাদেশের সন্তুষ্ট পরিবারদের অভিজ্ঞতা
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, idx) => (
-            <div
-              key={idx}
-              className="p-8 rounded-2xl bg-white border border-zinc-200 shadow-sm flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-1 text-amber-400 mb-4">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <HiStar key={i} className="w-5 h-5 fill-current" />
-                  ))}
-                </div>
-                <p className="text-sm text-zinc-700 italic leading-relaxed">
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-zinc-100">
-                <h4 className="text-sm font-bold text-zinc-900">{t.author}</h4>
-                <p className="text-xs text-zinc-500 mt-0.5">{t.location}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── 9. Call To Action ── */}
-      <section className="pb-20 px-4 sm:px-6 md:px-10 lg:px-16 max-w-7xl mx-auto">
-        <div className="bg-gradient-to-r from-emerald-800 to-teal-900 rounded-3xl p-8 sm:p-12 md:p-16 text-white text-center shadow-2xl relative overflow-hidden">
-          <div className="relative z-10 max-w-2xl mx-auto space-y-6">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white leading-tight">
-              আজই সরাসরি বাগান থেকে খাঁটি ফল অর্ডার করুন!
-            </h2>
-            <p className="text-sm sm:text-base text-emerald-100 leading-relaxed">
-              মাঝে কোনো আড়ত বা মধ্যস্বত্বভোগী নেই। শতভাগ ফরমালিনমুক্ত ও সুমিষ্ট আম সরাসরি আপনার বাড়িতে পৌঁছে যাবে।
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-              <Link
-                href="/products"
-                className="bg-white hover:bg-zinc-100 text-emerald-950 font-bold text-sm px-8 py-4 rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer"
-              >
-                আম ও পণ্য অর্ডার করুন
-              </Link>
-              <a
-                href="tel:01707819676"
-                className="bg-emerald-950/60 hover:bg-emerald-950 text-white border border-emerald-400/40 font-semibold text-sm px-8 py-4 rounded-full transition-colors cursor-pointer"
-              >
-                কল করুন: 01707819676
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

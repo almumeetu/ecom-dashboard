@@ -181,8 +181,13 @@ export default function OrderPageView({ title, description, fixedStatus }: Order
                         </div>
 
                         <div className="flex items-center justify-between text-[11px] text-slate-500 w-full">
-                          <span>{formatDateTime(order.placedAt)}</span>
+                          <span className="truncate max-w-[140px] font-medium text-slate-700">
+                            {order.user?.name || (order.shippingAddress as any)?.fullName || "Guest Customer"}
+                          </span>
                           <span>{order.items?.length ?? 0} {order.items?.length === 1 ? "item" : "items"}</span>
+                        </div>
+                        <div className="text-[10px] text-slate-400">
+                          {formatDateTime(order.placedAt)}
                         </div>
 
                         <div className="flex items-center gap-1.5 mt-1 w-full flex-wrap">

@@ -17,6 +17,7 @@ export type ShopProduct = {
   unit?: string;
   badge?: string;
   rating?: number;
+  variantId?: string;
 };
 
 export type FetchShopProductsParams = {
@@ -87,23 +88,58 @@ export type ShopCategory = {
   children?: ShopCategory[];
 };
 
+export type ContactEntry = {
+  title: string;
+  value: string;
+  extra?: string;
+};
+
 export type ShopSettings = {
-  id: string;
-  shopName: string;
-  slogan: string;
+  id?: string;
+  shopName?: string;
+  slogan?: string;
   contactNumber?: any;
   email?: any;
   socialContact?: any;
-  currency: string;
-  language: string;
-  deliveryChargeInside: string;
-  deliveryChargeOutside: string;
-  deliveryChargeNearCity: string;
+  currency?: string;
+  language?: string;
+  deliveryChargeInside?: string | number;
+  deliveryChargeOutside?: string | number;
+  deliveryChargeNearCity?: string | number;
   youtubeUrl?: string | null;
   youtubeThumbnailImage?: string | null;
   youtubeTitle?: string | null;
   youtubeDescription?: string | null;
+  branchName?: string | null;
+  branchAddress?: string | null;
+  branchLat?: number | null;
+  branchLng?: number | null;
+  copyrightYear?: string | null;
+  parentCompany?: string | null;
+  parentCompanyLink?: string | null;
+  logo?: string | null;
+  icon?: string | null;
+  favicon?: string | null;
+  isTopBarVisible?: boolean;
+  hideOutOfStock?: boolean;
 };
+
+/** Helper to cleanly extract contact number or email entries from various API formats */
+export function parseContactEntries(field: any): ContactEntry[] {
+  if (!field) return [];
+  if (Array.isArray(field)) {
+    return field
+      .filter((item) => item && typeof item.value === "string" && item.value.trim() !== "")
+      .map((item) => ({ title: item.title || "", value: item.value.trim() }));
+  }
+  if (Array.isArray(field.entries)) {
+    return field.entries
+      .filter((item: any) => item && typeof item.value === "string" && item.value.trim() !== "")
+      .map((item: any) => ({ title: item.title || "", value: item.value.trim() }));
+  }
+  return [];
+}
+
 
 function mapProduct(product: AdminProduct): ShopProduct {
   const defaultVariant = product.variants?.find((v) => v.isDefault) ?? product.variants?.[0];
@@ -127,6 +163,7 @@ function mapProduct(product: AdminProduct): ShopProduct {
     originalPrice: showOriginal ? priceNum : (costNum > priceNum ? costNum : undefined),
     image: resolveImageUrl(rawImage),
     unit: product.unit?.name ?? product.unit?.abbreviation ?? undefined,
+    variantId: defaultVariant?.id,
   };
 }
 
@@ -298,3 +335,63 @@ export async function fetchActiveCampaigns(): Promise<Campaign[]> {
   const campaigns = await safeFetchJson<Campaign[]>(`${API_BASE_URL}/campaigns`, []);
   return campaigns.filter(c => c.status === "active");
 }
+
+// ─── Product Reviews ─────────────────────────────────────────────────────────
+
+export interface ShopReview {
+  id: string;
+  rating: number;
+  comment?: string | null;
+  createdAt: string;
+  user?: {
+    id: string;
+    name: string;
+  } | null;
+}
+
+export function fetchShopProductReviews(productId: string): Promise<ShopReview[]> {
+  return safeFetchJson<ShopReview[]>(`${API_BASE_URL}/products/${productId}/reviews`, []);
+}
+
+// ─── Coupons ────────────────────────────────────────────────────────────────
+
+export interface CouponItem {
+  id: string;
+  code: string;
+  type: "percentage" | "fixed";
+  value: number | string;
+  maxUsage: number;
+  usedCount: number;
+  expiresAt?: string | null;
+}
+
+export interface ApplyCouponResult {
+  coupon: CouponItem;
+  discount: number;
+  total: number;
+}
+
+export function fetchCoupons(): Promise<CouponItem[]> {
+  return safeFetchJson<CouponItem[]>(`${API_BASE_URL}/coupons`, []);
+}
+
+export async function applyCouponApi(
+  code: string,
+  subtotal: number
+): Promise<{ success: boolean; data?: ApplyCouponResult; message?: string }> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/coupons/apply`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: code.trim().toUpperCase(), subtotal }),
+    });
+    const body = await res.json();
+    if (!res.ok) {
+      return { success: false, message: body?.message || "Invalid coupon code" };
+    }
+    return { success: true, data: body };
+  } catch (err: any) {
+    return { success: false, message: err?.message || "Failed to validate coupon" };
+  }
+}
+

@@ -21,24 +21,23 @@ export interface PageBannerProps {
 export default function PageBanner({
   title,
   subtitle,
-  badge,
   breadcrumbs,
   showTrustChips = false,
   className = "",
 }: PageBannerProps) {
   return (
     <div
-      className={`w-full bg-[#FAF9F6]/85 backdrop-blur-xs border-b border-stone-200/70 transition-all ${className}`}
+      className={`w-full bg-[#FAF9F6]/90 backdrop-blur-xs border-b border-stone-200/60 transition-all ${className}`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2.5 sm:py-3.5">
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1.5 md:gap-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2 sm:py-2.5">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-4">
           
-          {/* Left Column: Breadcrumb Path + Compact Heading */}
+          {/* Left Column: Breadcrumb Path + Clean Heading */}
           <div className="min-w-0">
             {/* Breadcrumb strip */}
             <nav
               aria-label="Breadcrumb"
-              className="flex items-center gap-1.5 text-xs text-stone-400 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden mb-0.5 sm:mb-1"
+              className="flex items-center gap-1.5 text-xs text-stone-400 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden mb-0.5"
             >
               <Link
                 href="/"
@@ -70,24 +69,16 @@ export default function PageBanner({
               })}
             </nav>
 
-            {/* Page title row */}
+            {/* Page title */}
             {title && (
-              <div className="flex items-center gap-2.5 flex-wrap">
-                <h1 className="text-base sm:text-lg md:text-xl font-bold tracking-tight text-stone-900 leading-tight">
-                  {title}
-                </h1>
-
-                {badge && (
-                  <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-emerald-50 text-emerald-700 border border-emerald-200/80 shrink-0 max-w-[240px] truncate">
-                    {badge}
-                  </span>
-                )}
-              </div>
+              <h1 className="text-base sm:text-lg font-bold tracking-tight text-stone-900 leading-tight">
+                {title}
+              </h1>
             )}
 
             {/* Subtitle for small screens (< md) */}
             {subtitle && (
-              <p className="text-xs text-stone-500 mt-1 line-clamp-1 md:hidden">
+              <p className="text-xs text-stone-500 mt-0.5 line-clamp-1 md:hidden">
                 {subtitle}
               </p>
             )}

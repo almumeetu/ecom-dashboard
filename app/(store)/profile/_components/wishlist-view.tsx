@@ -13,25 +13,28 @@ export default function WishlistView() {
   const { items, toggleWishlist } = useWishlist();
   const { addItem } = useCart();
 
-  const handleAddToCart = (item: (typeof items)[number]) => {
-    if (!item.variantId) {
-      toast.error("Cannot add to cart: variant information is missing.");
-      return;
+  const handleAddToCart = async (item: (typeof items)[number]) => {
+    try {
+      await addItem(
+        {
+          id: item.id,
+          productId: item.id,
+          name: item.name,
+          slug: item.slug,
+          price: item.price,
+          image: item.image,
+          description: item.description,
+          quantity: 1,
+          variantId: item.variantId,
+          color: item.color,
+          size: item.size,
+        },
+        { silent: true }
+      );
+      toast.success(`${item.name} added to cart.`);
+    } catch {
+      // Error is handled and toasted by CartProvider
     }
-    addItem({
-      id: item.id,
-      productId: item.id,
-      name: item.name,
-      slug: item.slug,
-      price: item.price,
-      image: item.image,
-      description: item.description,
-      quantity: 1,
-      variantId: item.variantId,
-      color: item.color,
-      size: item.size,
-    });
-    toast.success(`${item.name} added to cart.`);
   };
 
   return (

@@ -127,80 +127,103 @@ Corporate Gifting / Event Inquiry Details:
   };
  
   return (
-    <section id="inquiry-form" className="w-full bg-[#F9F9FB] py-16 sm:py-24 px-6 md:px-12">
+    <section id="inquiry-form" className="w-full bg-[#FAF9F6] py-16 sm:py-24 px-4 sm:px-6 md:px-12 border-t border-stone-200">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column (Content) */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <div className="space-y-4">
+              <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
+                Direct Enterprise Desk
+              </span>
               <h2 className="font-['Bembo_Std'] text-3xl sm:text-4xl text-[#1C1C1C] font-normal leading-tight">
                 Let&apos;s Curate Something Worth Remembering
               </h2>
-              <p className="font-gotham text-stone-500 text-xs sm:text-sm leading-relaxed">
-                Whether you&apos;re planning executive gifts, elevating your hospitality experience, or
-                creating a bespoke collection for a special occasion, we&apos;d be delighted to curate a
-                solution tailored to your vision.
+              <p className="font-gotham text-stone-600 text-xs sm:text-sm leading-relaxed">
+                Whether you&apos;re planning executive celebration hampers, rewarding staff across Bangladesh, or procuring wholesale supplies for corporate offices and hotels, our dedicated specialists will prepare a bespoke proposal tailored to your vision.
               </p>
             </div>
- 
-            {/* "You may also like" products */}
+
+            {/* Corporate Curations Preview */}
             <div className="space-y-4 pt-4 border-t border-stone-200">
-              <h3 className="font-gotham text-xs font-semibold uppercase tracking-wider text-stone-400">
-                You may also like
+              <h3 className="font-gotham text-xs font-semibold uppercase tracking-wider text-stone-500">
+                Signature Enterprise Packages
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {/* Best Sellers */}
+                {/* Hamper 1 */}
                 <div className="group cursor-pointer">
-                  <div className="relative aspect-square w-full bg-stone-100 overflow-hidden mb-2">
+                  <div className="relative aspect-square w-full bg-stone-100 rounded-xl overflow-hidden mb-2 border border-stone-200">
                     <Image
-                      src="/images/products/product-1.webp"
-                      alt="Best Sellers"
+                      src="/images/gift/executive-gourmet-hamper.jpg"
+                      alt="Executive Gourmet Hampers"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="font-['Bembo_Std'] text-sm text-[#1C1C1C] font-medium tracking-wide">
-                    Best Sellers
+                  <h4 className="font-['Bembo_Std'] text-sm text-[#1C1C1C] font-semibold tracking-wide">
+                    Executive Gourmet Hamper
                   </h4>
+                  <p className="text-[11px] text-stone-500">Cold-pressed oils, honey &amp; organic sweets</p>
                 </div>
- 
-                {/* New Arrivals */}
+
+                {/* Hamper 2 */}
                 <div className="group cursor-pointer">
-                  <div className="relative aspect-square w-full bg-stone-100 overflow-hidden mb-2">
+                  <div className="relative aspect-square w-full bg-stone-100 rounded-xl overflow-hidden mb-2 border border-stone-200">
                     <Image
-                      src="/images/products/product-2.webp"
-                      alt="New Arrivals"
+                      src="/images/gift/artisanal-celebration-box.jpg"
+                      alt="Artisanal Celebration Box"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="font-['Bembo_Std'] text-sm text-[#1C1C1C] font-medium tracking-wide">
-                    New Arrivals
+                  <h4 className="font-['Bembo_Std'] text-sm text-[#1C1C1C] font-semibold tracking-wide">
+                    Artisanal Celebration Box
                   </h4>
+                  <p className="text-[11px] text-stone-500">Festive Eid, milestone &amp; onboarding</p>
                 </div>
+              </div>
+            </div>
+
+            {/* Reassurance points */}
+            <div className="space-y-3 pt-4 border-t border-stone-200 text-xs text-stone-600">
+              <div className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span>Dedicated account manager assigned within 2 business hours</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span>Custom logo printing on ribbons, cards &amp; rigid gift packaging</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span>Multi-address individual doorstep delivery to 64 districts</span>
+              </div>
+              <div className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span>Full VAT / Mushak-6.3 Tax Challan provided with every invoice</span>
               </div>
             </div>
           </div>
- 
+
           {/* Right Column (Form Card) */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl p-8 sm:p-10 shadow-lg border border-stone-100">
+            <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-stone-200">
               <div className="mb-8">
-                <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl text-[#1C1C1C] font-normal mb-2">
+                <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl text-[#1C1C1C] font-semibold mb-2">
                   Tell Us About Your Requirement
                 </h3>
                 <p className="font-gotham text-xs text-stone-500 leading-relaxed">
-                  Our specialists will prepare a personalised recommendation and quotation based on your needs.
+                  Our specialists will prepare a personalised recommendation, sample review, and volume quotation based on your needs.
                 </p>
               </div>
- 
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 
                 {/* Contact Information Divider */}
                 <div className="space-y-4">
-                  <h4 className="font-gotham text-[10px] font-bold uppercase tracking-widest text-stone-400">
-                    Contact Information
+                  <h4 className="font-gotham text-[10px] font-bold uppercase tracking-widest text-emerald-800">
+                    Organization &amp; Contact Details
                   </h4>
                   
                   {/* Row 1 */}
@@ -213,48 +236,48 @@ Corporate Gifting / Event Inquiry Details:
                         value={formData.fullName}
                         onChange={handleInputChange}
                         placeholder="Enter full name"
-                        className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 placeholder-stone-300 focus:outline-none focus:border-stone-400"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
                       />
                       {errors.fullName && (
                         <p className="text-xs text-red-500 font-gotham">{errors.fullName}</p>
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Organisation/Company</label>
+                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Organisation / Company <span className="text-red-500">*</span></label>
                       <input
                         type="text"
                         name="organisation"
                         value={formData.organisation}
                         onChange={handleInputChange}
                         placeholder="Enter organization/company name"
-                        className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 placeholder-stone-300 focus:outline-none focus:border-stone-400"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
                       />
                       {errors.organisation && (
                         <p className="text-xs text-red-500 font-gotham">{errors.organisation}</p>
                       )}
                     </div>
                   </div>
- 
+
                   {/* Row 2 */}
                   <div className="space-y-1.5">
-                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Email Address <span className="text-red-500">*</span></label>
+                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Official Email Address <span className="text-red-500">*</span></label>
                     <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="Enter email address"
-                      className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 placeholder-stone-300 focus:outline-none focus:border-stone-400"
+                      placeholder="corporate.email@company.com"
+                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
                     />
                     {errors.email && (
                       <p className="text-xs text-red-500 font-gotham">{errors.email}</p>
                     )}
                   </div>
- 
+
                   {/* Row 3 */}
                   <div className="space-y-1.5">
                     <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Phone Number <span className="text-red-500">*</span></label>
-                    <div className="flex border border-stone-200 rounded-md overflow-hidden">
+                    <div className="flex border border-stone-200 rounded-xl overflow-hidden focus-within:border-emerald-600">
                       <select
                         name="countryCode"
                         value={formData.countryCode}
@@ -271,8 +294,8 @@ Corporate Gifting / Event Inquiry Details:
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleInputChange}
-                        placeholder="Phone Number"
-                        className="w-full px-4 py-3 text-xs font-gotham text-stone-850 placeholder-stone-300 focus:outline-none"
+                        placeholder="017XXXXXXXX"
+                        className="w-full px-4 py-3 text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none"
                       />
                     </div>
                     {errors.phoneNumber && (
@@ -280,13 +303,13 @@ Corporate Gifting / Event Inquiry Details:
                     )}
                   </div>
                 </div>
- 
+
                 {/* Inquiry Details Divider */}
                 <div className="space-y-4 pt-2 border-t border-stone-100">
-                  <h4 className="font-gotham text-[10px] font-bold uppercase tracking-widest text-stone-400">
-                    Inquiry Details
+                  <h4 className="font-gotham text-[10px] font-bold uppercase tracking-widest text-emerald-800">
+                    Order Scope &amp; Specifications
                   </h4>
- 
+
                   {/* Row 4 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
@@ -295,93 +318,98 @@ Corporate Gifting / Event Inquiry Details:
                         name="purpose"
                         value={formData.purpose}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 focus:outline-none focus:border-stone-400 cursor-pointer"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 focus:outline-none focus:border-emerald-600 cursor-pointer"
                       >
-                        <option value="">Select</option>
-                        <option value="corporate">Corporate Gifting</option>
-                        <option value="hospitality">Luxury Hospitality</option>
-                        <option value="event">Bespoke Event</option>
-                        <option value="retail">Retail Partnership</option>
+                        <option value="">Select Purpose</option>
+                        <option value="corporate-gifting">Executive &amp; Corporate Gifting</option>
+                        <option value="seasonal-harvest">Seasonal Harvest &amp; Mango Crates</option>
+                        <option value="employee-appreciation">Employee Rewards &amp; Milestone Bundles</option>
+                        <option value="wholesale-procurement">Bulk Wholesale &amp; Pantry Supply</option>
+                        <option value="retail-distribution">Retail Reseller &amp; Merchant Supply</option>
                       </select>
                       {errors.purpose && (
                         <p className="text-xs text-red-500 font-gotham">{errors.purpose}</p>
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Preferred Collection</label>
+                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Preferred Category / Solution</label>
                       <select
                         name="preferredCollection"
                         value={formData.preferredCollection}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 focus:outline-none focus:border-stone-400 cursor-pointer"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 focus:outline-none focus:border-emerald-600 cursor-pointer"
                       >
-                        <option value="">Select</option>
-                        <option value="royal">Royal Collection</option>
-                        <option value="classic">Classic Collection</option>
-                        <option value="signature">Signature Collection</option>
-                        <option value="limited">Limited Edition</option>
+                        <option value="">Select Category</option>
+                        <option value="gourmet-hampers">Executive Gourmet &amp; Grocery Hampers</option>
+                        <option value="seasonal-fruit">Seasonal Rajshahi Mangoes &amp; Farm Harvest</option>
+                        <option value="apparel-leather">Apparel, Footwear &amp; Leather Sets</option>
+                        <option value="tech-gadgets">Electronics &amp; Smart Corporate Gadgets</option>
+                        <option value="custom-mix">Bespoke Custom Multi-Category Package</option>
                       </select>
                     </div>
                   </div>
- 
+
                   {/* Row 5 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Required Delivery Date <span className="text-red-500">*</span></label>
+                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Target Delivery Date <span className="text-red-500">*</span></label>
                       <input
                         type="date"
                         name="deliveryDate"
                         value={formData.deliveryDate}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 focus:outline-none focus:border-stone-400 cursor-pointer"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 focus:outline-none focus:border-emerald-600 cursor-pointer"
                       />
                       {errors.deliveryDate && (
                         <p className="text-xs text-red-500 font-gotham">{errors.deliveryDate}</p>
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Estimated Quantity <span className="text-red-500">*</span></label>
+                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Estimated Quantity (Units/Boxes) <span className="text-red-500">*</span></label>
                       <input
                         type="text"
                         name="quantity"
                         value={formData.quantity}
                         onChange={handleInputChange}
-                        placeholder="Write here ..."
-                        className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 placeholder-stone-300 focus:outline-none focus:border-stone-400"
+                        placeholder="e.g. 50 boxes, 200 crates, 500 units"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
                       />
                       {errors.quantity && (
                         <p className="text-xs text-red-500 font-gotham">{errors.quantity}</p>
                       )}
                     </div>
                   </div>
- 
+
                   {/* Row 6 */}
                   <div className="space-y-1.5">
-                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Additional Requirements</label>
+                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Special Instructions / Customization Details</label>
                     <textarea
                       name="requirements"
                       value={formData.requirements}
                       onChange={handleInputChange}
-                      placeholder="Write here ..."
+                      placeholder="Specify company logo branding, budget per unit, multi-address shipping requirements, or specific products you'd like included..."
                       rows={4}
-                      className="w-full px-4 py-3 border border-stone-200 rounded-md text-xs font-gotham text-stone-850 placeholder-stone-300 focus:outline-none focus:border-stone-400 resize-none"
+                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600 resize-none"
                     />
                     {errors.requirements && (
                       <p className="text-xs text-red-500 font-gotham">{errors.requirements}</p>
                     )}
                   </div>
                 </div>
- 
-                <div className="pt-2">
+
+                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="px-10 py-3.5 bg-[#C5B382] hover:bg-[#b4a16f] text-white font-gotham text-xs font-semibold uppercase tracking-[0.2em] rounded-full transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
-                    {submitting ? 'SUBMITTING...' : 'Submit'}
+                    {submitting ? 'SUBMITTING INQUIRY...' : 'Submit Corporate Inquiry'}
                   </button>
+                  <span className="text-[11px] text-stone-400 text-center sm:text-right">
+                    Direct Desk: 01707819676 (Mohammad Abdullah)
+                  </span>
                 </div>
- 
+
               </form>
             </div>
           </div>

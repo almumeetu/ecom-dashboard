@@ -22,37 +22,36 @@ export default function CollectionBanner() {
               </div>
               <div className="flex flex-col lg:flex-row justify-center items-center gap-4 py-3 px-4">
                 <Link
-                  href="/products?category=Assorted+Collections"
+                  href="/products?category=Fresh+Groceries"
                   className="bg-brand-primary text-white text-center py-3 px-5 font-bembo text-sm uppercase tracking-wide hover:bg-opacity-90 transition-all min-w-[170px]"
                 >
-                  ASSORTED COLLECTIONS
+                  FRESH GROCERIES
                 </Link>
                 <div className="w-12 h-12 flex items-center justify-center relative shrink-0">
                   <Image
                     src="/images/footer/footerrightlogo.png"
-                    alt="London Tea Exchange Logo"
+                    alt="Trust Point Mart Logo"
                     width={48}
                     height={48}
                     className="object-contain"
                   />
                 </div>
                 <Link
-                  href="/products?category=Tea+Books+Collections"
+                  href="/products?category=Fashion"
                   className="bg-white text-text-primary text-center py-3 px-5 font-bembo text-sm uppercase tracking-wide hover:bg-brand-3 hover:text-white transition-all min-w-[170px]"
                 >
-                  TEA BOOK COLLECTIONS
+                  FASHION & APPAREL
                 </Link>
                 <Link
-                  href="/products?category=Tea+Chests"
+                  href="/products?category=Footwear"
                   className="bg-white text-text-primary text-center py-3 px-5 font-bembo text-sm uppercase tracking-wide hover:bg-brand-3 hover:text-white transition-all min-w-[170px]"
                 >
-                  TEA CHESTS
+                  FOOTWEAR & GADGETS
                 </Link>
               </div>
               <div className="flex justify-center px-6">
                 <p className="text-white text-center text-sm font-gotham leading-relaxed max-w-3xl">
-                  Elegant tea bag presentations featuring rare blends, royal
-                  infusions, wellness selections, and timeless classics.
+                  Curated multi-category departments featuring fresh farm produce, designer wear, authentic footwear, smart wearables, and daily essentials.
                 </p>
               </div>
             </div>

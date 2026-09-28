@@ -2,30 +2,27 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { RiArrowDownSLine } from "react-icons/ri";
 import { LuLayoutGrid } from "react-icons/lu";
 import { fetchShopCategories, type ShopCategory } from "@/lib/shop-api";
 
-const leftNavItems = [
-  { label: "HOME", href: "/" },
-  { label: "CATEGORIES", href: "/products", hasDropdown: true },
-  { label: "GROCERIES", href: "/products?search=grocery" },
-  { label: "FASHION", href: "/products?category=Fashion" },
+const initialFallbackCats: ShopCategory[] = [
+  { id: 'cat-grocery', name: 'Groceries & Produce', slug: 'groceries' },
+  { id: 'cat-fashion', name: "Fashion & Apparel", slug: 'fashion' },
+  { id: 'cat-footwear', name: 'Footwear & Shoes', slug: 'footwear' },
 ];
 
-const rightNavItems = [
-  { label: "FOOTWEAR", href: "/products?category=Footwear" },
-  { label: "ACCESSORIES", href: "/products?category=Accessories" },
-  { label: "ABOUT US", href: "/about" },
-  { label: "CONTACT", href: "/contact" },
-];
+export interface NavLinkItem {
+  label: string;
+  href: string;
+  hasDropdown?: boolean;
+}
 
 export default function Navigation() {
   const pathname = usePathname();
-  const [categories, setCategories] = useState<ShopCategory[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string>("");
+  const [categories, setCategories] = useState<ShopCategory[]>(initialFallbackCats);
+  const [activeCategory, setActiveCategory] = useState<string>("cat-grocery");
   const [isTeasHovered, setIsTeasHovered] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -48,15 +45,7 @@ export default function Navigation() {
       try {
         const fetched = await fetchShopCategories();
         const mainCategories = fetched.filter(c => !c.parentId);
-        const fallbackMarketplaceCats: ShopCategory[] = [
-          { id: 'cat-grocery', name: 'Groceries & Produce', slug: 'groceries' },
-          { id: 'cat-food', name: 'Food & Bakery', slug: 'food' },
-          { id: 'cat-wfash', name: "Women's Fashion", slug: 'womens-fashion' },
-          { id: 'cat-mfash', name: "Men's Fashion", slug: 'mens-fashion' },
-          { id: 'cat-foot', name: 'Footwear & Shoes', slug: 'footwear' },
-          { id: 'cat-acc', name: 'Bags & Accessories', slug: 'accessories' },
-        ];
-        const allCats = mainCategories.length > 0 ? mainCategories : fallbackMarketplaceCats;
+        const allCats = mainCategories.length > 0 ? mainCategories : initialFallbackCats;
         setCategories(allCats);
         if (allCats.length > 0) {
           setActiveCategory(allCats[0].id);
@@ -88,9 +77,23 @@ export default function Navigation() {
 
   const currentCategoryData = categories.find((cat) => cat.id === activeCategory) || categories[0] || null;
 
-  const allNavItems = [...leftNavItems, ...rightNavItems];
+  // Dynamically take the first 3 categories for the top navigation bar
+  const top3Categories = categories.slice(0, 3);
+  const dynamicCategoryNavItems: NavLinkItem[] = top3Categories.map((cat) => ({
+    label: cat.name.toUpperCase(),
+    href: `/products?category=${encodeURIComponent(cat.slug || cat.name)}`,
+    hasDropdown: false,
+  }));
 
-  const renderNavItem = (item: typeof leftNavItems[0]) => (
+  const allNavItems: NavLinkItem[] = [
+    { label: "HOME", href: "/", hasDropdown: false },
+    { label: "CATEGORIES", href: "/products", hasDropdown: true },
+    ...dynamicCategoryNavItems,
+    { label: "ABOUT US", href: "/about", hasDropdown: false },
+    { label: "CONTACT", href: "/contact", hasDropdown: false },
+  ];
+
+  const renderNavItem = (item: NavLinkItem) => (
     <div 
       key={item.label} 
       className={item.hasDropdown ? "" : "relative"}
@@ -187,7 +190,7 @@ export default function Navigation() {
                     <div className="flex flex-col gap-2">
                       <Link href="/products?search=grocery" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">🥦 Organic Fruits & Fresh Vegetables</Link>
                       <Link href="/products?search=food" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">🥐 Bakery, Snacks & Beverages</Link>
-                      <Link href="/products?category=Fashion" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👗 Women's & Men's Apparel</Link>
+                      <Link href="/products?category=Fashion" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👗 Women&apos;s &amp; Men&apos;s Apparel</Link>
                       <Link href="/products?category=Footwear" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👟 Footwear & Casual Sneakers</Link>
                       <Link href="/products?category=Accessories" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">⌚ Watches, Bags & Sunglasses</Link>
                     </div>

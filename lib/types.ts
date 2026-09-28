@@ -156,6 +156,10 @@ export type OrderResultItem = {
 export type OrderResult = {
   orderNumber: string;
   total: number;
+  subtotal?: number;
+  shippingCost?: number;
+  discount?: number;
+  couponCode?: string;
   items: OrderResultItem[];
   address: AddressForm;
   paymentMethod?: string;

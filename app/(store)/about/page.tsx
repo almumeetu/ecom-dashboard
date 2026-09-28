@@ -2,19 +2,18 @@ import About from '@/components/sections/about-us/about';
 import PageBanner from '@/components/ui/page-banner';
 
 export const metadata = {
-  title: "About Us | Trust Point — সরাসরি বাগান থেকে আপনার বাড়ি",
-  description: "Learn about Trust Point, founded by Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi. 100% formalin-free fresh mangoes, authentic agro produce, and verified lifestyle marketplace in Bangladesh.",
+  title: "About Us | Trust Point Mart — Defining Bangladesh's Multi-Category E-Commerce Standard",
+  description: "Learn about Trust Point Mart, founded by entrepreneur Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi. Discover our mission to deliver authentic groceries, lifestyle fashion, tech, and verified consumer goods nationwide.",
 };
 
 export default function AboutPage() {
   return (
     <div className="w-full">
       <PageBanner
-        title="About Trust Point (ট্রাস্ট পয়েন্ট)"
-        subtitle="সরাসরি বাগান থেকে আপনার বাড়ি, মাঝে কোনো আড়ত বা মধ্যস্বত্বভোগী নেই। তাই শতভাগ ফরমালিনমুক্ত ও খাঁটি সতেজতার গ্যারান্টি। প্রতিষ্ঠাতা: Mohammad Abdullah, মহাদেবপুর, নওগাঁ, রাজশাহী।"
-        badge="FOUNDER & CEO: MOHAMMAD ABDULLAH • MOHADEVPUR, NAOGAON, RAJSHAHI"
+        title="About Trust Point Mart"
+        subtitle="Bangladesh's trusted multi-category online hypermarket. Built on direct sourcing, zero middleman markups, and verified authenticity. Founded by Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi."
         breadcrumbs={[
-          { label: "About Trust Point" },
+          { label: "About Us" },
         ]}
       />
       <About />

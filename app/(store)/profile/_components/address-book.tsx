@@ -226,7 +226,7 @@ export default function AddressBookView() {
                 </div>
                 <div>
                   <label className={FIELD_LABEL}>Phone *</label>
-                  <input type="tel" value={form.phone} onChange={(e) => patch("phone", e.target.value)} className={INPUT_BASE} placeholder="01722301927" required />
+                  <input type="tel" value={form.phone} onChange={(e) => patch("phone", e.target.value)} className={INPUT_BASE} placeholder="017XXXXXXXX" required />
                 </div>
               </div>
 

@@ -64,8 +64,8 @@ const gotham = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Trust Point | সরাসরি বাগান থেকে আপনার বাড়ি — খাঁটি আম ও অর্গানিক পণ্য",
-  description: "ট্রাস্ট পয়েন্ট (Trust Point) — সরাসরি বাগান থেকে আপনার বাড়ি, মাঝে কোনো আড়ত বা মধ্যস্বত্বভোগী নেই। শতভাগ ফরমালিনমুক্ত ও খাঁটি সতেজতার গ্যারান্টি। প্রতিষ্ঠাতা: Mohammad Abdullah, মহাদেবপুর, নওগাঁ, রাজশাহী।",
+  title: "Trust Point Mart | Multi-Category E-Commerce & Lifestyle Hypermarket",
+  description: "Trust Point Mart — Bangladesh's trusted online hypermarket for authentic groceries, fresh farm produce, fashion apparel, footwear, and consumer lifestyle essentials. Founded by Mohammad Abdullah (Mohadevpur, Naogaon, Rajshahi).",
   icons: {
     icon: "/images/logo.svg",
     shortcut: "/images/logo.svg",

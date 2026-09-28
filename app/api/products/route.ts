@@ -35,7 +35,7 @@ export async function GET() {
         collection: product.brand?.name ?? product.category?.name ?? "",
         priceNum: activePrice,
         category: product.category?.name ?? "",
-        origin: "Sylhet, Bangladesh",
+        origin: "Naogaon, Rajshahi, Bangladesh",
         subtitle: product.description ? product.description.split('.')[0] + '.' : product.name,
         description: product.description ?? "",
         teas: [],

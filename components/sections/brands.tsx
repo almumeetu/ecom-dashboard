@@ -58,8 +58,8 @@ export default function Brands({
   const activeBrands = brandList.length > 0 ? brandList : fallbackBrands;
 
   return (
-    <section className={`w-full py-14 sm:py-20 px-4 sm:px-6 md:px-12 lg:py-20 ${bgClassName} border-t border-stone-200/70`}>
-      <div className="max-w-[1440px] mx-auto">
+    <section className={`w-full py-14 sm:py-20 ${bgClassName} border-t border-stone-200/70`}>
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-[11px] font-bold uppercase tracking-wider mb-3">
             <LuBadgeCheck className="w-3.5 h-3.5 text-emerald-600" />

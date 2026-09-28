@@ -118,7 +118,7 @@ function SignUpFormContent() {
             </div>
 
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-700/60 text-emerald-400 text-[10px] font-bold tracking-widest uppercase mb-4">
-              <span>Webdev Software Solutions</span>
+              <span>Verified Marketplace</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
@@ -126,7 +126,7 @@ function SignUpFormContent() {
             </h2>
 
             <p className="text-xs sm:text-sm text-zinc-400 mt-3 leading-relaxed">
-              Join 50,000+ happy shoppers enjoying verified products, next-day Uttara & Dhaka delivery, and member benefits.
+              Join 50,000+ happy shoppers enjoying verified products, fast nationwide doorstep delivery, and member benefits.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -135,8 +135,8 @@ function SignUpFormContent() {
                   <LuGift className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-white">৳100 Welcome Voucher</h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">Applied automatically on your first order</p>
+                  <h4 className="text-xs font-bold text-white">Exclusive Member Offers</h4>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">Special promotional vouchers on seasonal deals</p>
                 </div>
               </div>
 
@@ -146,7 +146,7 @@ function SignUpFormContent() {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold text-white">Real-Time Delivery Tracker</h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">Live parcel tracking from our Uttara hub</p>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">Live parcel tracking from our central logistics hub</p>
                 </div>
               </div>
 
@@ -320,8 +320,6 @@ function SignUpFormContent() {
             </form>
 
             <p className="mt-8 text-center text-[11px] text-zinc-400">
-              Founded by Mohammad Abdullah • Mohadevpur, Naogaon, Rajshahi
-              <br />
               Need help? Hotline: <strong className="text-zinc-600">01707819676</strong>
             </p>
           </div>

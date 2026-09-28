@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
-import { LuLoader, LuX, LuMapPin } from "react-icons/lu";
+import { LuLoader, LuX, LuMapPin, LuSearch, LuCheck } from "react-icons/lu";
 
 interface MapPickerModalProps {
   open: boolean;
@@ -69,10 +69,10 @@ export default function MapPickerModal({ open, onClose, onSelect }: MapPickerMod
     }).addTo(map);
 
     const icon = L.divIcon({
-      html: `<svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#C51E3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+      html: `<svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="#059669" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3" fill="#10B981"/></svg>`,
       className: "",
-      iconSize: [32, 32],
-      iconAnchor: [16, 32],
+      iconSize: [36, 36],
+      iconAnchor: [18, 36],
     });
 
     const marker = L.marker([23.8103, 90.4125], { icon, draggable: true });
@@ -103,11 +103,11 @@ export default function MapPickerModal({ open, onClose, onSelect }: MapPickerMod
           const street = [a.house_number, a.road].filter(Boolean).join(" ");
           const city = a.city || a.town || a.village || "";
           setSelectedAddress({
-            addressLine1: street,
+            addressLine1: street || `${city} Address`,
             city,
             state: a.state || "",
             postalCode: a.postcode || "",
-            country: a.country || "",
+            country: a.country || "Bangladesh",
           });
         }
       } catch {
@@ -144,14 +144,14 @@ export default function MapPickerModal({ open, onClose, onSelect }: MapPickerMod
     setLoading(true);
     try {
       const res = await fetch(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=1`,
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery + ", Bangladesh")}&limit=1`,
         { headers: { "Accept-Language": "en" } }
       );
       const results = (await res.json()) as Array<{ lat: string; lon: string }>;
       if (results.length > 0) {
         const { lat, lon } = results[0];
         const map = mapInstanceRef.current;
-        map.setView([parseFloat(lat), parseFloat(lon)], 14);
+        map.setView([parseFloat(lat), parseFloat(lon)], 15);
         if (markerRef.current) {
           markerRef.current.setLatLng([parseFloat(lat), parseFloat(lon)]);
           markerRef.current.fire("dragend");
@@ -167,69 +167,96 @@ export default function MapPickerModal({ open, onClose, onSelect }: MapPickerMod
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
-      <div className="relative w-full max-w-3xl mx-2 sm:mx-4 my-2 sm:my-0 bg-white rounded-xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-xs p-3 sm:p-4 animate-fadeIn">
+      <div className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col border border-zinc-200">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-zinc-200 shrink-0">
-          <h3 className="font-bembo text-lg sm:text-xl text-[#4A4A4A]">Set from Map</h3>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-100 shrink-0">
+          <div>
+            <h3 className="text-lg font-bold text-zinc-900 tracking-tight">Select Delivery Location</h3>
+            <p className="text-xs text-zinc-500 mt-0.5">Click or drag the marker to pinpoint your delivery address</p>
+          </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1 hover:bg-zinc-100 rounded-full transition-colors cursor-pointer"
+            className="w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 flex items-center justify-center transition-colors cursor-pointer"
+            aria-label="Close map"
           >
-            <LuX className="w-5 h-5 text-zinc-500" />
+            <LuX className="w-5 h-5" />
           </button>
         </div>
 
         {/* Search Bar */}
-        <div className="px-4 sm:px-6 py-2 sm:py-3 border-b border-zinc-200 shrink-0">
-          <div className="flex flex-col sm:flex-row gap-2">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-              placeholder="Search location..."
-              className="flex-1 p-3 rounded-md outline outline-1 outline-offset-[-1px] outline-zinc-300 font-gotham text-sm text-[#222222] placeholder:text-zinc-300 placeholder:text-xs placeholder:font-medium placeholder:font-['Gotham'] leading-4 focus:outline-stone-500"
-            />
+        <div className="px-6 py-3 border-b border-zinc-100 shrink-0 bg-zinc-50/70">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSearch();
+            }}
+            className="flex gap-2"
+          >
+            <div className="relative flex-1">
+              <LuSearch className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search area, road, or city in Bangladesh (e.g. Uttara Sector 3)..."
+                className="w-full pl-10 pr-4 py-2.5 bg-white border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 transition-all"
+              />
+            </div>
             <button
-              type="button"
-              onClick={handleSearch}
+              type="submit"
               disabled={loading || !searchQuery.trim()}
-              className="w-full sm:w-auto px-5 py-2 bg-stone-800 text-white font-gotham text-sm rounded-md hover:bg-stone-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+              className="px-5 py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 cursor-pointer shrink-0"
             >
-              {loading ? <LuLoader className="w-4 h-4 animate-spin" /> : <LuMapPin className="w-4 h-4" />}
-              Search
+              {loading ? <LuLoader className="w-3.5 h-3.5 animate-spin" /> : <LuMapPin className="w-3.5 h-3.5" />}
+              <span>Find</span>
             </button>
-          </div>
+          </form>
         </div>
 
-        {/* Map */}
-        <div ref={mapRef} className="w-full min-h-[250px] sm:min-h-[350px] flex-1" />
+        {/* Map View */}
+        <div ref={mapRef} className="w-full min-h-[300px] sm:min-h-[380px] flex-1 z-0 relative" />
 
         {/* Footer */}
-        <div className="px-4 sm:px-6 py-3 sm:py-4 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0">
+        <div className="px-6 py-4 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3 shrink-0 bg-zinc-50/70">
           {selectedAddress ? (
-            <p className="font-gotham text-xs text-[#4A4A4A] text-center sm:text-left truncate max-w-[250px]">
-              <span className="font-medium">Selected:</span> {selectedAddress.addressLine1}, {selectedAddress.city}
-            </p>
+            <div className="min-w-0 text-center sm:text-left">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full inline-block mb-1">
+                Detected Location
+              </span>
+              <p className="text-xs font-semibold text-zinc-900 truncate max-w-sm sm:max-w-md">
+                {[selectedAddress.addressLine1, selectedAddress.city, selectedAddress.state].filter(Boolean).join(", ")}
+              </p>
+            </div>
           ) : (
-            <p className="font-gotham text-xs text-[#999999] text-center sm:text-left">
-              Click on the map or drag the marker to set your location
+            <p className="text-xs font-medium text-zinc-500 text-center sm:text-left">
+              Click anywhere on the map to place your delivery pin
             </p>
           )}
-          <button
-            type="button"
-            onClick={() => {
-              if (selectedAddress) {
-                onSelect(selectedAddress);
-              }
-            }}
-            disabled={!selectedAddress}
-            className="w-full sm:w-auto px-6 py-2 bg-[#C51E3A] text-white font-gotham text-sm rounded-full hover:bg-opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-          >
-            {selectedAddress ? "Confirm Location" : "Select a Location"}
-          </button>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2.5 rounded-xl border border-zinc-200 text-zinc-600 hover:bg-zinc-100 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (selectedAddress) {
+                  onSelect(selectedAddress);
+                }
+              }}
+              disabled={!selectedAddress}
+              className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md shadow-emerald-600/20 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-1.5 cursor-pointer"
+            >
+              <LuCheck className="w-4 h-4 stroke-[3]" />
+              <span>Use This Address</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

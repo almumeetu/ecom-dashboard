@@ -113,10 +113,10 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
                 </p>
 
                 {/* CTA Buttons */}
-                <div className="flex items-center gap-3 sm:gap-4 flex-wrap justify-center">
+                <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center w-full max-w-xs sm:max-w-none">
                   <Link
                     href={slide.ctaHref || "/products"}
-                    className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-700/50 hover:scale-105 cursor-pointer"
+                    className="w-full sm:w-auto px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-900/30 hover:shadow-emerald-700/50 hover:scale-103 active:scale-95 cursor-pointer"
                   >
                     <span>{slide.ctaText || "SHOP NOW"}</span>
                     <LuArrowRight className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default function HeroSlider({ slides }: HeroSliderProps) {
 
                   <Link
                     href="/products"
-                    className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/25 font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-105 cursor-pointer"
+                    className="w-full sm:w-auto px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/25 font-sans text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:scale-103 active:scale-95 cursor-pointer text-center"
                   >
                     ALL PRODUCTS
                   </Link>

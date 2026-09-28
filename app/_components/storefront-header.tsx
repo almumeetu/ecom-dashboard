@@ -20,10 +20,10 @@ export default function StorefrontHeader() {
             <Link href="#">Archive</Link>
           </nav>
 
-          <Link href="/" className="mx-auto lg:mx-0" aria-label="London Tea Exchange home">
+          <Link href="/" className="mx-auto lg:mx-0" aria-label="Trust Point Mart home">
             <Image
               src={humanaLogo}
-              alt="London Tea Exchange"
+              alt="Trust Point Mart"
               priority
               className="h-9 w-auto sm:h-11"
             />

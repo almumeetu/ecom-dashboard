@@ -46,6 +46,8 @@ export interface MappedProduct {
   brand: string;
   subtitle: string;
   description: string;
+  shortDescription?: string;
+  tags?: string[];
   sku: string;
   unit: string;
   variantId: string;
@@ -135,6 +137,10 @@ export function mapProduct(raw: Product): MappedProduct {
     brand: raw.brand?.name ?? '',
     subtitle,
     description: raw.description ?? '',
+    shortDescription: raw.shortDescription?.trim() || '',
+    tags: (raw.tags ?? [])
+      .map((t: any) => (typeof t === 'string' ? t : t?.name || t?.slug || ''))
+      .filter(Boolean),
     sku: defaultVariant?.sku ?? (raw as any).sku ?? '',
     unit: raw.unit?.name ?? raw.unit?.abbreviation ?? 'Piece',
     variantId: defaultVariant?.id ?? '',
@@ -145,7 +151,7 @@ export function mapProduct(raw: Product): MappedProduct {
 // Loading Skeleton
 function Skeleton() {
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12">
+    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
         <div className="lg:col-span-7 w-full space-y-4 animate-pulse">
           <div className="w-full aspect-[4/5] bg-stone-100 rounded-2xl" />
@@ -237,6 +243,18 @@ export default function ProductDetails({
     return list.length > 0 ? list : ['/images/no-image-icon-6.png'];
   }, [product]);
 
+  const discountPercentage = useMemo(() => {
+    if (!product) return undefined;
+    const currentPrice = selectedVariant ? selectedVariant.priceNum : product.priceNum;
+    const origStr = selectedVariant?.originalPriceFormatted || product.originalPriceFormatted;
+    if (!origStr) return undefined;
+    const origNum = Number(origStr.replace(/[^\d.]/g, ''));
+    if (origNum > currentPrice) {
+      return Math.round(((origNum - currentPrice) / origNum) * 100);
+    }
+    return undefined;
+  }, [product, selectedVariant]);
+
   if (loading) return <Skeleton />;
 
   if (error || !product) {
@@ -265,24 +283,31 @@ export default function ProductDetails({
     }
   };
 
-  const handleMobileAddToCart = () => {
+  const handleMobileAddToCart = async () => {
     const finalPrice = selectedVariant ? selectedVariant.priceNum : product.priceNum;
     const attributes = selectedVariant?.attributes ?? {};
-    addItem({
-      productId: product.id,
-      slug: product.slug,
-      name: product.name,
-      price: finalPrice,
-      image: selectedVariant?.image ?? product.image,
-      description: product.description,
-      color: attributes.Color ?? attributes.Colour ?? attributes.color ?? '',
-      size: attributes.Size ?? attributes.size ?? '',
-      variantId: selectedVariant?.id ?? product.variantId,
-      quantity: 1,
-      attributes,
-      ...attributes,
-    });
-    toast.success(`Added ${product.name} to your bag!`);
+    try {
+      await addItem(
+        {
+          productId: product.id,
+          slug: product.slug,
+          name: product.name,
+          price: finalPrice,
+          image: selectedVariant?.image ?? product.image,
+          description: product.description,
+          color: attributes.Color ?? attributes.Colour ?? attributes.color ?? '',
+          size: attributes.Size ?? attributes.size ?? '',
+          variantId: selectedVariant?.id ?? product.variantId,
+          quantity: 1,
+          attributes,
+          ...attributes,
+        },
+        { silent: true }
+      );
+      toast.success(`Added ${product.name} to your bag!`);
+    } catch {
+      // Error message handled by CartProvider
+    }
   };
 
   const handleMobileBuyNow = () => {
@@ -311,7 +336,7 @@ export default function ProductDetails({
     <main className="flex-grow bg-white w-full">
       {/* ── Minimalist Clean Breadcrumb Strip ───────────────────────── */}
       <div className="w-full border-b border-stone-200/80 bg-stone-50/50">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-3 flex items-center justify-between text-xs text-zinc-500">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-3 flex items-center justify-between text-xs text-zinc-500">
           <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap">
             <Link
               href="/"
@@ -356,8 +381,8 @@ export default function ProductDetails({
       </div>
 
       {/* ── Main Product Two-Column Layout ──────────────────────────── */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12 lg:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-10 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-start">
           {/* Gallery Column (Left - 7 cols) */}
           <div className="lg:col-span-7 w-full lg:sticky lg:top-24">
             <ProductGallery
@@ -365,6 +390,7 @@ export default function ProductDetails({
               activeImage={selectedVariant?.image}
               productName={product.name}
               badge={product.brand || 'VERIFIED'}
+              discountPercentage={discountPercentage}
             />
           </div>
 
@@ -376,6 +402,7 @@ export default function ProductDetails({
               price={product.priceFormatted}
               originalPrice={product.originalPriceFormatted}
               productId={product.id}
+              variantId={selectedVariant?.id ?? product.variantId}
               productSlug={product.slug}
               category={product.category}
               brand={product.brand}
@@ -391,19 +418,27 @@ export default function ProductDetails({
                 description: product.description,
               }}
             />
-
-            {/* Structured Specifications & Overview Tabs */}
-            <ProductTabs
-              description={product.description}
-              category={product.category}
-              brand={product.brand}
-              sku={product.sku}
-              unit={product.unit}
-              attributes={selectedVariant?.attributes || {}}
-            />
           </div>
         </div>
       </div>
+
+      {/* ── Product Deep Dive / Tabs Section (Spacious & Clean) ──────── */}
+      <section className="w-full border-t border-stone-200/80 bg-[#FAF9F6] py-12 sm:py-16">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <ProductTabs
+            productId={product.id}
+            productName={product.name}
+            description={product.description}
+            category={product.category}
+            brand={product.brand}
+            sku={selectedVariant?.sku || product.sku}
+            unit={product.unit}
+            tags={product.tags}
+            stockQuantity={selectedVariant?.stockQuantity}
+            attributes={selectedVariant?.attributes || {}}
+          />
+        </div>
+      </section>
 
       {/* ── Recommended & Related Products Carousel ─────────────────── */}
       <RelatedCarousel />

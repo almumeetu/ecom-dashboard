@@ -132,6 +132,7 @@ export default function RelatedCarousel() {
                 slug={product.slug}
                 category={product.category}
                 brand={product.team}
+                variantId={product.variantId}
               />
             </SwiperSlide>
           ))}

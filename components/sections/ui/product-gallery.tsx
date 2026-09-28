@@ -65,7 +65,7 @@ export default function ProductGallery({
       <div className="w-full flex flex-col-reverse lg:flex-row gap-4 items-start select-none">
         {/* ── Desktop Left Vertical Thumbnails (Hidden on mobile) ─────── */}
         {displayImages.length > 1 && (
-          <div className="hidden lg:flex flex-col gap-3 max-h-[560px] overflow-y-auto pr-1 scrollbar-none shrink-0 py-1">
+          <div className="hidden lg:flex flex-col gap-3 max-h-[580px] overflow-y-auto pr-1.5 scrollbar-none shrink-0 py-1">
             {displayImages.map((img, idx) => {
               const isActive = idx === activeIndex;
               return (
@@ -73,10 +73,10 @@ export default function ProductGallery({
                   key={idx}
                   onClick={() => setActiveIndex(idx)}
                   onMouseEnter={() => setActiveIndex(idx)}
-                  className={`relative w-20 h-20 rounded-xl overflow-hidden bg-stone-50 border-2 transition-all duration-200 cursor-pointer ${
+                  className={`relative w-20 h-20 rounded-2xl overflow-hidden bg-[#FAF9F6] border-2 transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? 'border-zinc-900 shadow-md shadow-zinc-900/10 scale-102 ring-2 ring-zinc-900/10'
-                      : 'border-stone-200/80 hover:border-zinc-400 opacity-70 hover:opacity-100'
+                      ? 'border-zinc-950 shadow-md shadow-zinc-950/15 scale-[1.02] ring-2 ring-zinc-950/15'
+                      : 'border-stone-200/80 hover:border-zinc-400 opacity-75 hover:opacity-100'
                   }`}
                   aria-label={`View image ${idx + 1}`}
                 >
@@ -88,7 +88,7 @@ export default function ProductGallery({
                     className="object-contain p-1.5"
                   />
                   {isActive && (
-                    <div className="absolute inset-0 border-2 border-zinc-900 rounded-xl pointer-events-none" />
+                    <div className="absolute inset-0 border-2 border-zinc-950 rounded-2xl pointer-events-none" />
                   )}
                 </button>
               );
@@ -104,7 +104,7 @@ export default function ProductGallery({
             onMouseLeave={() => setIsZoomed(false)}
             onMouseMove={handleMouseMove}
             onClick={() => setLightboxOpen(true)}
-            className="relative w-full aspect-[4/5] sm:aspect-square md:aspect-[4/5] max-h-[600px] rounded-2xl bg-stone-50/70 border border-stone-200/90 overflow-hidden flex items-center justify-center cursor-crosshair group shadow-xs hover:shadow-xl transition-all duration-300"
+            className="relative w-full aspect-[4/5] sm:aspect-square md:aspect-[4/5] max-h-[620px] rounded-3xl bg-[#FAF9F6] border border-stone-200/90 overflow-hidden flex items-center justify-center cursor-crosshair group shadow-2xs hover:shadow-xl transition-all duration-300"
           >
             {/* Primary Image with Magnifier Zoom */}
             <div className="relative w-full h-full overflow-hidden">
@@ -114,7 +114,7 @@ export default function ProductGallery({
                 fill
                 priority
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 55vw, 50vw"
-                className={`object-contain p-4 sm:p-6 transition-transform duration-150 ease-out will-change-transform ${
+                className={`object-contain p-4 sm:p-8 transition-transform duration-150 ease-out will-change-transform ${
                   isZoomed ? 'scale-175' : 'scale-100'
                 }`}
                 style={{
@@ -126,14 +126,14 @@ export default function ProductGallery({
             {/* Badges Overlay (Top-Left) */}
             <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 pointer-events-none">
               {discountPercentage && discountPercentage > 0 ? (
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold tracking-wide uppercase bg-rose-600 text-white shadow-md shadow-rose-600/30">
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-black tracking-wide uppercase bg-rose-600 text-white shadow-md shadow-rose-600/30">
                   <span>-{discountPercentage}%</span>
                   <span className="hidden sm:inline">OFF</span>
                 </span>
               ) : null}
 
               {badge && (
-                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-white/90 backdrop-blur-sm text-zinc-900 border border-stone-200/80 shadow-xs">
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-white/90 backdrop-blur-md text-zinc-950 border border-stone-200/80 shadow-xs">
                   <IoSparklesOutline className="w-3.5 h-3.5 text-amber-500" />
                   <span>{badge}</span>
                 </span>
@@ -146,7 +146,7 @@ export default function ProductGallery({
                 e.stopPropagation();
                 setLightboxOpen(true);
               }}
-              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-zinc-700 hover:text-zinc-900 flex items-center justify-center shadow-md border border-stone-200/80 backdrop-blur-xs transition-all hover:scale-105 cursor-pointer opacity-90 group-hover:opacity-100"
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-zinc-800 hover:text-zinc-950 flex items-center justify-center shadow-md border border-stone-200/80 backdrop-blur-md transition-all hover:scale-105 active:scale-95 cursor-pointer opacity-90 group-hover:opacity-100"
               title="Expand Fullscreen (Click to Zoom)"
               aria-label="Expand image"
             >
@@ -161,7 +161,7 @@ export default function ProductGallery({
                     e.stopPropagation();
                     handlePrev();
                   }}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-zinc-800 flex items-center justify-center shadow-md border border-stone-200/80 transition-all hover:scale-105 cursor-pointer opacity-0 group-hover:opacity-100 z-10"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-zinc-900 flex items-center justify-center shadow-md border border-stone-200/80 backdrop-blur-md transition-all hover:scale-110 active:scale-95 cursor-pointer opacity-0 group-hover:opacity-100 z-10"
                   aria-label="Previous image"
                 >
                   <IoChevronBackOutline className="w-5 h-5" />
@@ -171,7 +171,7 @@ export default function ProductGallery({
                     e.stopPropagation();
                     handleNext();
                   }}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-zinc-800 flex items-center justify-center shadow-md border border-stone-200/80 transition-all hover:scale-105 cursor-pointer opacity-0 group-hover:opacity-100 z-10"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-zinc-900 flex items-center justify-center shadow-md border border-stone-200/80 backdrop-blur-md transition-all hover:scale-110 active:scale-95 cursor-pointer opacity-0 group-hover:opacity-100 z-10"
                   aria-label="Next image"
                 >
                   <IoChevronForwardOutline className="w-5 h-5" />

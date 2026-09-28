@@ -28,6 +28,7 @@ import AddressBookView from "./_components/address-book";
 import WishlistView from "./_components/wishlist-view";
 import TrackOrderView from "./_components/track-order";
 import PageBanner from "@/components/ui/page-banner";
+import { fetchShopSettings, parseContactEntries, type ShopSettings } from "@/lib/shop-api";
 
 type ProfileTab = "details" | "orders" | "address" | "wishlist" | "track";
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1";
@@ -40,6 +41,13 @@ function ProfilePageContent() {
 
   const [activeTab, setActiveTab] = useState<ProfileTab>("details");
   const [hasOrders, setHasOrders] = useState(false);
+  const [settings, setSettings] = useState<ShopSettings | null>(null);
+
+  useEffect(() => {
+    fetchShopSettings().then((s) => {
+      if (s) setSettings(s);
+    });
+  }, []);
 
   useEffect(() => {
     if (tabParam && ["details", "orders", "address", "wishlist", "track"].includes(tabParam)) {
@@ -65,7 +73,26 @@ function ProfilePageContent() {
 
   return (
     <div className="relative min-h-[calc(100vh-140px)] bg-[#FAFAFA] flex flex-col justify-between font-sans">
-      {!isAuthenticated ? (
+      {!isAuthenticated && activeTab === "track" ? (
+        /* ── Public / Guest Order Tracking ── */
+        <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full animate-fadeIn">
+          <div className="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-zinc-200/80 mb-6">
+            <TrackOrderView />
+          </div>
+          <div className="flex items-center justify-between p-4 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-xs">
+            <span className="text-zinc-600 font-medium">Already have an account with Trust Point?</span>
+            <button
+              onClick={() => {
+                setActiveTab("details");
+                setShowAuthModal(true);
+              }}
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              Sign In to View All Orders
+            </button>
+          </div>
+        </main>
+      ) : !isAuthenticated ? (
         /* ── Unauthenticated State ── */
         <main className="min-h-[75vh] flex items-center justify-center px-4 py-16">
           {loading ? (
@@ -82,7 +109,7 @@ function ProfilePageContent() {
               </div>
 
               <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                A Product of Webdev Software Solutions
+                {settings?.shopName ? `${settings.shopName} Account` : "Verified Customer Portal"}
               </span>
 
               <h1 className="text-2xl sm:text-3xl font-black text-zinc-950 tracking-tight mt-3">
@@ -98,16 +125,25 @@ function ProfilePageContent() {
                 <button
                   type="button"
                   onClick={() => setShowAuthModal(true)}
-                  className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold uppercase tracking-wider py-4 px-9 rounded-full shadow-lg shadow-emerald-600/20 transition-all cursor-pointer"
+                  className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold uppercase tracking-wider py-4 px-8 rounded-full shadow-lg shadow-emerald-600/20 transition-all cursor-pointer"
                 >
-                  Sign In to Account
+                  Sign In
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("track")}
+                  className="w-full sm:w-auto bg-white hover:bg-zinc-50 border border-zinc-300 text-zinc-800 text-xs font-bold uppercase tracking-wider py-4 px-8 rounded-full transition-all text-center cursor-pointer flex items-center justify-center gap-2"
+                >
+                  <FiSearch className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Track Order as Guest</span>
                 </button>
 
                 <Link
                   href="/signup"
-                  className="w-full sm:w-auto bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold uppercase tracking-wider py-4 px-9 rounded-full transition-all text-center cursor-pointer"
+                  className="w-full sm:w-auto bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-bold uppercase tracking-wider py-4 px-8 rounded-full transition-all text-center cursor-pointer"
                 >
-                  Create New Account
+                  Create Account
                 </Link>
               </div>
 
@@ -116,7 +152,9 @@ function ProfilePageContent() {
                 <div className="p-3 rounded-xl bg-zinc-50 flex items-start gap-2.5">
                   <FiTruck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-[11px] font-bold text-zinc-800">Uttara & Dhaka Hub</h5>
+                    <h5 className="text-[11px] font-bold text-zinc-800">
+                      {settings?.branchName || "Dhaka & Nationwide Hub"}
+                    </h5>
                     <p className="text-[10px] text-zinc-400">Next-day live delivery status</p>
                   </div>
                 </div>
@@ -141,9 +179,9 @@ function ProfilePageContent() {
               {/* Direct Help */}
               <div className="mt-6 text-xs text-zinc-500 flex items-center justify-center gap-2">
                 <FiPhone className="w-3.5 h-3.5 text-emerald-600" />
-                <span>Need assistance? Call Helpline:</span>
-                <a href="tel:01722301927" className="font-bold text-zinc-900 hover:underline">
-                  01722301927
+                <span>Need assistance? Call Support:</span>
+                <a href="tel:01707819676" className="font-bold text-zinc-900 hover:underline">
+                  01707819676
                 </a>
               </div>
             </div>
@@ -155,14 +193,13 @@ function ProfilePageContent() {
           <PageBanner
             title={user?.name ? `Welcome back, ${user.name}` : "My Account"}
             subtitle="Manage your profile details, track recent marketplace shipments, and access saved addresses."
-            badge="CUSTOMER PORTAL • WEBDEV SOFTWARE SOLUTIONS"
             breadcrumbs={[
               { label: "My Account" },
               ...(activeTab !== "details" ? [{ label: activeTab.toUpperCase() }] : []),
             ]}
           />
 
-          <div className="relative max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 z-10 flex-1 flex flex-col py-8">
+          <div className="relative max-w-[1440px] w-full mx-auto px-4 sm:px-6 md:px-10 lg:px-16 z-10 flex-1 flex flex-col py-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* Left Profile Sidebar (3 cols) */}
@@ -225,10 +262,18 @@ function ProfilePageContent() {
                 <div className="pt-4 border-t border-zinc-200 text-xs text-zinc-500 space-y-2">
                   <div className="flex items-center gap-2 text-zinc-700 font-semibold">
                     <FiPhone className="w-4 h-4 text-emerald-600" />
-                    <span>01722301927</span>
+                    {(() => {
+                      const contacts = parseContactEntries(settings?.contactNumber);
+                      const phone = contacts[0]?.value || "01707819676";
+                      return (
+                        <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} className="hover:underline">
+                          {phone}
+                        </a>
+                      );
+                    })()}
                   </div>
                   <p className="text-[11px] text-zinc-400">
-                    Sector 3, Uttara, Dhaka Central Hub
+                    {settings?.branchAddress || (settings?.branchName ? `${settings.branchName}, Dhaka` : "Central Hub, Dhaka")}
                   </p>
                 </div>
 

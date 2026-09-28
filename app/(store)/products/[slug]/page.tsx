@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) {
     return {
-      title: "Product Not Found | NovaMart Marketplace",
+      title: "Product Not Found | Trust Point Marketplace",
     };
   }
 
@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : undefined;
 
   return {
-    title: `${product.metaTitle ?? product.name} | NovaMart Marketplace`,
+    title: `${product.metaTitle ?? product.name} | Trust Point Marketplace`,
     description:
       product.metaDescription ??
       product.shortDescription ??
       product.description ??
-      `Shop authentic ${product.name} with express delivery and verified buyer protection from NovaMart.`,
+      `Shop authentic ${product.name} with express delivery and verified buyer protection from Trust Point.`,
     keywords: product.metaKeywords ?? undefined,
     openGraph: {
       title: product.metaTitle ?? product.name,
@@ -57,7 +57,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 // ─── Skeleton Fallback ────────────────────────────────────────────────────────
 function ProductSkeleton() {
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12">
+    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
         <div className="lg:col-span-7 w-full animate-pulse space-y-4">
           <div className="w-full aspect-[4/5] bg-stone-100 rounded-2xl" />

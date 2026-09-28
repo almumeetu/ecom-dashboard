@@ -1,174 +1,242 @@
-"use client";
-
 import Link from "next/link";
 import Logo from "@/components/ui/logo";
-import { HiPhone, HiMail, HiLocationMarker } from "react-icons/hi";
-import { LuSend, LuCheck } from "react-icons/lu";
-import { useState } from "react";
-import { toast } from "sonner";
+import {
+  HiPhone,
+  HiMail,
+  HiShieldCheck,
+  HiTruck,
+  HiOutlineSupport,
+} from "react-icons/hi";
+import { FiRefreshCw } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa6";
+import {
+  fetchShopSettings,
+  fetchShopCategories,
+  parseContactEntries,
+  type ShopCategory,
+} from "@/lib/shop-api";
+import NewsletterSubscribeForm from "./ui/newsletter-subscribe-form";
 
-export default function Mainfooter() {
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+export default async function Mainfooter() {
+  const [settings, categories] = await Promise.all([
+    fetchShopSettings(),
+    fetchShopCategories(),
+  ]);
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterEmail.trim()) return;
-    setSubscribed(true);
-    toast.success("Welcome! You've successfully subscribed to NovaMart updates.");
-    setNewsletterEmail("");
-    setTimeout(() => setSubscribed(false), 4000);
-  };
+  // Dynamic Shop Name & Slogan from Admin Dashboard Settings
+  const shopName = settings?.shopName?.trim() || "Trust Point Mart";
+  const shopSlogan = settings?.slogan?.trim() || "YOUR TRUSTED ONLINE MART";
 
-  const categoryLinks = [
-    { label: "Fresh Groceries & Produce", href: "/products?search=grocery" },
-    { label: "Women's Fashion & Apparel", href: "/products?category=Women's+Fashion" },
-    { label: "Men's Streetwear & Casuals", href: "/products?category=Men's+Fashion" },
-    { label: "Shoes & Footwear Drops", href: "/products?category=Footwear" },
-    { label: "Bags, Watches & Accessories", href: "/products?category=Accessories" },
-    { label: "Artisan Food & Bakery", href: "/products?search=food" },
-  ];
+  // Dynamic Contact Numbers from Admin Dashboard Settings
+  const rawContactEntries = parseContactEntries(settings?.contactNumber);
+  const rawEmailEntries = parseContactEntries(settings?.email);
 
+  // Filter out dummy helpline 01722301927 or unwanted desk entries
+  const validContacts = rawContactEntries.filter(
+    (c) =>
+      !c.value.includes("01722301927") &&
+      !c.title.includes("01722301927") &&
+      !c.extra?.includes("Mohammad Abdullah") &&
+      !c.title?.toLowerCase().includes("executive desk")
+  );
+
+  const displayedContacts = validContacts;
+
+  const primaryPhone = displayedContacts[0]?.value || "01707819676";
+  const rawPhoneDigits = (displayedContacts[0]?.value || primaryPhone).replace(/[^\d]/g, "");
+  const formattedWhatsapp = rawPhoneDigits.startsWith("88")
+    ? rawPhoneDigits
+    : rawPhoneDigits.startsWith("0")
+    ? `88${rawPhoneDigits}`
+    : `880${rawPhoneDigits}`;
+
+  // Remove dummy email support@webdevsoftware.com if present
+  const displayedEmails = rawEmailEntries.filter(
+    (e) => !e.value.toLowerCase().includes("support@webdevsoftware.com") && !e.value.toLowerCase().includes("webdevsoftware")
+  );
+
+  // Dynamic Shop Departments (Categories) synced with Admin Dashboard
+  const topCategories = (categories || []).filter((c: ShopCategory) => !c.parentId);
+  const departmentLinks =
+    topCategories.length > 0
+      ? [
+          ...topCategories.slice(0, 6).map((cat: ShopCategory) => ({
+            label: cat.name,
+            href: `/products?category=${encodeURIComponent(cat.slug || cat.name)}`,
+          })),
+          { label: "Browse All Products", href: "/products" },
+        ]
+      : [
+          { label: "Fresh Groceries & Farm Produce", href: "/products?search=grocery" },
+          { label: "Pantry Staples & Organic Food", href: "/products?search=food" },
+          { label: "Men's Fashion & Apparel", href: "/products?category=Men%27s+Fashion" },
+          { label: "Women's Fashion & Lifestyle", href: "/products?category=Women%27s+Fashion" },
+          { label: "Footwear & Daily Essentials", href: "/products?category=Footwear" },
+          { label: "Smart Tech & Digital Accessories", href: "/products?category=Accessories" },
+          { label: "Browse All Products", href: "/products" },
+        ];
+
+  // Essential E-Commerce Customer Care Links
   const customerLinks = [
-    { label: "Track Your Order", href: "/profile?tab=orders" },
-    { label: "Delivery & Shipping Rates", href: "/delivery" },
+    { label: "Track Your Order", href: "/profile?tab=track" },
+    { label: "Shipping & Delivery Rates", href: "/delivery" },
     { label: "7-Day Return & Exchange", href: "/delivery" },
-    { label: "Buyer Protection Policy", href: "/about" },
-    { label: "Customer Help & FAQ", href: "/contact" },
+    { label: "Customer Help & FAQs", href: "/contact" },
     { label: "Wishlist & Saved Items", href: "/wishlist" },
+    { label: "Shopping Cart", href: "/cart" },
+    { label: "My Account Profile", href: "/profile" },
   ];
 
-  const vendorLinks = [
-    { label: "Become a Verified Vendor", href: "/admin/login" },
-    { label: "Seller Dashboard Login", href: "/admin/login" },
-    { label: "Bulk & Corporate Inquiries", href: "/corporate-order" },
-    { label: "Multi-Vendor Standards", href: "/global-fair-pay-charter" },
-    { label: "Brand Partnerships", href: "/contact" },
-    { label: "About NovaMart", href: "/about" },
+  // Clean, Standard E-Commerce Company Links
+  const companyLinks = [
+    { label: `About ${shopName}`, href: "/about" },
+    { label: "Contact Customer Care", href: "/contact" },
+    { label: "Nationwide Store Delivery", href: "/delivery" },
+    { label: "Browse Marketplace", href: "/products" },
+    { label: "Merchant & Admin Portal", href: "/admin/login" },
   ];
 
   return (
-    <footer className="w-full bg-[#111317] text-zinc-300 border-t border-white/10 font-sans">
-      {/* 1. Clean, Minimalist Newsletter Bar */}
-      <div className="border-b border-white/10 py-10 sm:py-12 px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="max-w-[1440px] mx-auto flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
-          <div className="max-w-xl">
-            <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-              Stay in the Loop
-            </h3>
-            <p className="text-zinc-400 text-sm sm:text-base mt-1.5 leading-relaxed">
-              Subscribe for exclusive member vouchers, curated product drops, and weekly marketplace specials.
-            </p>
+    <footer className="w-full bg-[#0D1117] text-zinc-200 font-sans border-t border-white/10">
+      {/* ── 1. Clean, Compact Trust Highlights Bar ── */}
+      <div className="border-b border-white/10 py-3.5 sm:py-4">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+              <HiTruck className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-xs sm:text-sm font-bold text-white block">
+                Nationwide Delivery
+              </span>
+              <span className="text-xs text-zinc-300 block">
+                All 64 districts in Bangladesh
+              </span>
+            </div>
           </div>
 
-          <form
-            onSubmit={handleSubscribe}
-            className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto min-w-[300px] sm:min-w-[440px]"
-          >
-            <div className="relative flex-grow">
-              <HiMail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
-              <input
-                type="email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="Enter your email address"
-                className="w-full pl-11 pr-4 py-3 rounded-xl bg-zinc-900/80 border border-white/10 text-white placeholder-zinc-500 text-sm focus:outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400 transition-all"
-                required
-              />
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+              <HiShieldCheck className="w-5 h-5" />
             </div>
-            <button
-              type="submit"
-              className="px-6 py-3 rounded-xl bg-white hover:bg-zinc-100 active:scale-[0.99] text-zinc-900 font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shrink-0 shadow-xs"
-            >
-              {subscribed ? (
-                <>
-                  <span>Subscribed</span>
-                  <LuCheck className="w-4 h-4 text-emerald-600" />
-                </>
-              ) : (
-                <>
-                  <span>Subscribe</span>
-                  <LuSend className="w-3.5 h-3.5" />
-                </>
-              )}
-            </button>
-          </form>
+            <div>
+              <span className="text-xs sm:text-sm font-bold text-white block">
+                100% Genuine Quality
+              </span>
+              <span className="text-xs text-zinc-300 block">
+                Direct from verified sources
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+              <FiRefreshCw className="w-4.5 h-4.5" />
+            </div>
+            <div>
+              <span className="text-xs sm:text-sm font-bold text-white block">
+                7-Day Easy Returns
+              </span>
+              <span className="text-xs text-zinc-300 block">
+                Simple exchange &amp; refunds
+              </span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+              <HiOutlineSupport className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-xs sm:text-sm font-bold text-white block">
+                Dedicated Support
+              </span>
+              <a
+                href={`tel:${primaryPhone.replace(/[^\d+]/g, "")}`}
+                className="text-xs text-emerald-400 hover:underline font-semibold block"
+              >
+                Call: {primaryPhone}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* 2. Main 4-Column Directory */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12">
-          {/* Col 1: Brand & Direct Contact (4.5 cols on lg) */}
-          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-6">
-            <Logo variant="light" size="md" />
-
-            <p className="text-zinc-400 text-sm leading-relaxed mt-4 mb-6">
-              NovaMart is Bangladesh&apos;s curated multi-vendor marketplace founded by <span className="text-emerald-400 font-semibold">Mohammad Abdullah</span> (Mohadevpur, Naogaon, Rajshahi), delivering verified authentic lifestyle products, fresh groceries, and fast fulfillment nationwide.
+      {/* ── 2. Compact Newsletter Strip ── */}
+      <div className="border-b border-white/10 py-5 sm:py-6">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-5">
+          <div>
+            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight">
+              Stay in the Loop with {shopName}
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-300 mt-0.5">
+              Subscribe for new category arrivals, fresh stock, and exclusive marketplace offers.
             </p>
-
-            {/* Clean Contact Details */}
-            <div className="space-y-3.5 text-sm text-zinc-300 w-full">
-              <div className="flex items-center gap-3">
-                <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <div>
-                  <span className="text-zinc-400 text-xs block">Founder &amp; Executive Desk</span>
-                  <a
-                    href="tel:01707819676"
-                    className="text-white font-medium hover:text-emerald-400 transition-colors"
-                  >
-                    01707819676 (Mohammad Abdullah)
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
-                <div>
-                  <span className="text-zinc-400 text-xs block">Customer Hotline &amp; WhatsApp (24/7)</span>
-                  <a
-                    href="tel:01722301927"
-                    className="text-white font-medium hover:text-emerald-400 transition-colors"
-                  >
-                    01722301927 (+880 1722-301927)
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <HiMail className="w-4 h-4 text-emerald-400 shrink-0" />
-                <div>
-                  <span className="text-zinc-400 text-xs block">Official Email Support</span>
-                  <a
-                    href="mailto:support@webdevsoftware.com"
-                    className="text-white font-medium hover:text-emerald-400 transition-colors"
-                  >
-                    support@webdevsoftware.com
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <HiLocationMarker className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-zinc-400 text-xs block">Headquarters &amp; Regional Presence</span>
-                  <span className="text-zinc-300 font-normal">Mohadevpur, Naogaon, Rajshahi, Bangladesh</span>
-                </div>
-              </div>
-            </div>
           </div>
 
-          {/* Col 2: Shop Departments (2.5 cols on lg) */}
+          <NewsletterSubscribeForm />
+        </div>
+      </div>
+
+      {/* ── 3. Proportional Multi-Column Directory ── */}
+      <div className="py-8 sm:py-10">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8">
+          
+          {/* Column 1: Brand & Contact (4 cols) */}
+          <div className="lg:col-span-4 flex flex-col items-start pr-0 lg:pr-6 space-y-3.5">
+            <Logo variant="light" size="md" tagline={shopSlogan} />
+
+            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
+              <strong className="text-white font-semibold">{shopName}</strong> is Bangladesh&apos;s trusted multi-category online hypermarket delivering authentic groceries, farm produce, fashion, footwear, and consumer lifestyle essentials straight to your home.
+            </p>
+
+            {(displayedContacts.length > 0 || displayedEmails.length > 0) && (
+              <div className="space-y-2 text-xs text-zinc-200 w-full pt-1">
+                {displayedContacts.map((contact, idx) => (
+                  <div key={idx} className="flex items-center gap-2.5">
+                    <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>
+                      {contact.title ? `${contact.title}: ` : "Desk: "}
+                      <a
+                        href={`tel:${contact.value.replace(/[^\d+]/g, "")}`}
+                        className="text-white font-bold hover:text-emerald-400 transition-colors"
+                      >
+                        {contact.value}
+                      </a>
+                      {contact.extra && <span className="text-zinc-400 ml-1">{contact.extra}</span>}
+                    </span>
+                  </div>
+                ))}
+
+                {displayedEmails.map((emailItem, idx) => (
+                  <div key={idx} className="flex items-center gap-2.5">
+                    <HiMail className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>
+                      {emailItem.title ? `${emailItem.title}: ` : "Email: "}
+                      <a
+                        href={`mailto:${emailItem.value}`}
+                        className="text-white hover:text-emerald-400 transition-colors"
+                      >
+                        {emailItem.value}
+                      </a>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Column 2: Departments (3 cols) */}
           <div className="lg:col-span-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-5">
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-3.5">
               Shop Departments
             </h4>
-            <ul className="space-y-3">
-              {categoryLinks.map((item, idx) => (
+            <ul className="space-y-2 text-xs sm:text-sm">
+              {departmentLinks.map((item, idx) => (
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-zinc-400 hover:text-white text-sm transition-colors block"
+                    className="text-zinc-300 hover:text-emerald-400 transition-colors block font-medium"
                   >
                     {item.label}
                   </Link>
@@ -177,17 +245,17 @@ export default function Mainfooter() {
             </ul>
           </div>
 
-          {/* Col 3: Customer Care (2.5 cols on lg) */}
-          <div className="lg:col-span-3">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-5">
+          {/* Column 3: Customer Care (2.5 cols) */}
+          <div className="lg:col-span-2">
+            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-3.5">
               Customer Care
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 text-xs sm:text-sm">
               {customerLinks.map((item, idx) => (
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-zinc-400 hover:text-white text-sm transition-colors block"
+                    className="text-zinc-300 hover:text-emerald-400 transition-colors block font-medium"
                   >
                     {item.label}
                   </Link>
@@ -196,26 +264,43 @@ export default function Mainfooter() {
             </ul>
           </div>
 
-          {/* Col 4: Vendors & Business (2 cols on lg) */}
-          <div className="lg:col-span-2">
-            <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-5">
-              Partners & Policies
-            </h4>
-            <ul className="space-y-3">
-              {vendorLinks.map((item, idx) => (
-                <li key={idx}>
-                  <Link
-                    href={item.href}
-                    className="text-zinc-400 hover:text-white text-sm transition-colors block"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Column 4: Quick Links & Quick WhatsApp (2.5 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <div>
+              <h4 className="text-white font-bold text-xs uppercase tracking-wider mb-3.5">
+                About &amp; Orders
+              </h4>
+              <ul className="space-y-2 text-xs sm:text-sm">
+                {companyLinks.map((item, idx) => (
+                  <li key={idx}>
+                    <Link
+                      href={item.href}
+                      className="text-zinc-300 hover:text-emerald-400 transition-colors block font-medium"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Clean Direct WhatsApp Order CTA */}
+            <div className="pt-1">
+              <a
+                href={`https://wa.me/${formattedWhatsapp}?text=Hello%20${encodeURIComponent(shopName)}%2C%20I%20would%20like%20to%20place%20an%20order.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white font-bold text-xs tracking-wide transition-all shadow-sm cursor-pointer"
+              >
+                <FaWhatsapp className="w-4 h-4 text-white" />
+                <span>WhatsApp Quick Order</span>
+              </a>
+            </div>
           </div>
+
         </div>
       </div>
     </footer>
   );
 }
+

@@ -638,8 +638,25 @@ export type ReportOverview = {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api/v1";
 
-export function getAdminToken() {
-  if (typeof document === "undefined") return null;
+export function isAllowedAdminRole(role: unknown): boolean {
+  if (!role) return false;
+  let roleName = "";
+  if (typeof role === "string") {
+    roleName = role;
+  } else if (typeof role === "object" && "name" in role) {
+    roleName = String((role as { name?: string }).name || "");
+  }
+  const normalized = roleName.toLowerCase().trim();
+  return ["admin", "superadmin", "manager", "staff"].includes(normalized);
+}
+
+export function getAdminToken(): string | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const fromStorage = localStorage.getItem("admin_access_token");
+    if (fromStorage) return fromStorage;
+  } catch {}
 
   return (
     document.cookie
@@ -652,13 +669,25 @@ export function getAdminToken() {
 export function setAdminSession(accessToken: string, user: AdminUser) {
   const maxAge = 60 * 60 * 24 * 7;
 
-  document.cookie = `admin_access_token=${accessToken}; path=/admin; max-age=${maxAge}; SameSite=Lax`;
+  try {
+    localStorage.setItem("admin_access_token", accessToken);
+    localStorage.setItem("admin_user", JSON.stringify(user));
+  } catch {}
+
+  document.cookie = `admin_access_token=${accessToken}; path=/; max-age=${maxAge}; SameSite=Lax`;
   document.cookie = `admin_user=${encodeURIComponent(
     JSON.stringify(user),
-  )}; path=/admin; max-age=${maxAge}; SameSite=Lax`;
+  )}; path=/; max-age=${maxAge}; SameSite=Lax`;
 }
 
 export function clearAdminSession() {
+  try {
+    localStorage.removeItem("admin_access_token");
+    localStorage.removeItem("admin_user");
+  } catch {}
+
+  document.cookie = "admin_access_token=; path=/; max-age=0; SameSite=Lax";
+  document.cookie = "admin_user=; path=/; max-age=0; SameSite=Lax";
   document.cookie = "admin_access_token=; path=/admin; max-age=0; SameSite=Lax";
   document.cookie = "admin_user=; path=/admin; max-age=0; SameSite=Lax";
 }

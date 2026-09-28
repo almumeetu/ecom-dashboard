@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   FiPhone,
   FiMail,
@@ -16,8 +17,39 @@ import { FaWhatsapp } from 'react-icons/fa6';
 import { toast } from 'sonner';
 import ScrollAnimate from '@/components/ui/scroll-animate';
 import PageBanner from '@/components/ui/page-banner';
+import { fetchShopSettings, parseContactEntries, type ShopSettings } from '@/lib/shop-api';
 
 export default function ContactPage() {
+  const [settings, setSettings] = useState<ShopSettings | null>(null);
+
+  useEffect(() => {
+    fetchShopSettings().then((s) => {
+      if (s) setSettings(s);
+    });
+  }, []);
+
+  const shopName = settings?.shopName?.trim() || 'Trust Point Mart';
+  const contactEntries = parseContactEntries(settings?.contactNumber);
+  const primaryPhone = contactEntries[0]?.value || '01707819676';
+  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01707819676';
+  const rawWhatsapp = settings?.socialContact?.whatsapp || primaryPhone;
+  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801707819676';
+  const fullWhatsapp = whatsappNumber.startsWith('88') ? whatsappNumber : `88${whatsappNumber.replace(/^0+/, '')}`;
+  const emailEntries = parseContactEntries(settings?.email);
+  const primaryEmail = emailEntries[0]?.value || 'support@trustpointmart.com';
+  const branchAddress = settings?.branchAddress?.trim() || 'Mohadevpur, Naogaon, Rajshahi Division, Bangladesh';
+  const deliveryInside =
+    settings?.deliveryChargeInside !== undefined && settings?.deliveryChargeInside !== null
+      ? Number(settings.deliveryChargeInside) === 0
+        ? 'FREE'
+        : `৳${settings.deliveryChargeInside}`
+      : '৳60';
+  const deliveryOutside =
+    settings?.deliveryChargeOutside !== undefined && settings?.deliveryChargeOutside !== null
+      ? Number(settings.deliveryChargeOutside) === 0
+        ? 'FREE'
+        : `৳${settings.deliveryChargeOutside}`
+      : '৳120';
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -54,7 +86,7 @@ export default function ContactPage() {
         message: '',
       });
     } catch (err: any) {
-      toast.success('Inquiry submitted! Our support team at 01722301927 will reach back to you promptly.');
+      toast.success('Inquiry submitted! Our support team at 01707819676 will reach back to you promptly.');
     } finally {
       setSubmitting(false);
     }
@@ -80,7 +112,7 @@ export default function ContactPage() {
     {
       question: 'What are the delivery charges for my order?',
       answer:
-        'Delivery inside Dhaka (including Uttara) is ৳60. We offer FREE delivery on all orders over ৳1,999! For delivery outside Dhaka anywhere across Bangladesh, the standard courier charge is ৳120.',
+        `Delivery inside Dhaka (including Uttara) is ${deliveryInside}. We offer FREE delivery on all orders over ৳1,999! For delivery to All Bangladesh (outside Dhaka), the standard courier charge is ${deliveryOutside}.`,
     },
     {
       question: 'What payment methods do you support?',
@@ -90,26 +122,25 @@ export default function ContactPage() {
     {
       question: 'What is your 7-day return and exchange policy?',
       answer:
-        'If you receive an item that is defective, damaged in transit, or does not match the product description, you can request an exchange or refund within 7 days of delivery. Simply call our hotline at 01722301927 or message our WhatsApp support.',
+        'If you receive an item that is defective, damaged in transit, or does not match the product description, you can request an exchange or refund within 7 days of delivery. Simply call our hotline at 01707819676 or message our WhatsApp support.',
     },
     {
-      question: 'Where is your company located and who operates NovaMart?',
+      question: 'Where is your company located and who operates Trust Point?',
       answer:
-        'NovaMart is founded and operated under the visionary leadership of Founder & CEO Mohammad Abdullah. Our central corporate headquarters are located in Mohadevpur, Naogaon, Rajshahi, Bangladesh.',
+        'Trust Point is founded and operated under executive leadership. Our central corporate operations are located in Mohadevpur, Naogaon, Rajshahi, Bangladesh.',
     },
   ];
 
   return (
     <div className="w-full bg-[#FAFAFA] font-sans">
       <PageBanner
-        title="Contact & Customer Care"
-        subtitle="Have questions about your order, delivery timeline, or vendor partnerships? Reach out directly to our headquarters in Mohadevpur, Naogaon or call our executive line."
-        badge="FOUNDER & CEO: MOHAMMAD ABDULLAH • MOHADEVPUR, NAOGAON, RAJSHAHI"
+        title="Contact & Customer Care — Trust Point Mart"
+        subtitle="We are here to assist you 24/7. Connect directly with our customer experience team or executive desk for order support, vendor partnerships, and corporate inquiries."
         breadcrumbs={[{ label: 'Contact Us' }]}
       />
 
       {/* ── 1. Quick Info Cards ── */}
-      <section className="relative py-8 sm:py-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 z-20">
+      <section className="relative py-8 sm:py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 z-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Card 1: Phone */}
           <div className="bg-white rounded-2xl p-6 shadow-lg border border-zinc-100 flex flex-col justify-between hover:shadow-xl transition-all">
@@ -121,17 +152,17 @@ export default function ContactPage() {
                 Customer Hotline
               </h3>
               <p className="text-lg font-extrabold text-zinc-900 mt-1">
-                01722301927
+                {primaryPhone}
               </p>
               <p className="text-xs text-zinc-500 mt-1">
-                +880 1722-301927 (Toll-free / Direct)
+                Direct helpline &amp; support
               </p>
             </div>
             <a
-              href="tel:01722301927"
+              href={`tel:${cleanPhone}`}
               className="mt-4 text-xs font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1"
             >
-              <span>Call Helpline Now</span> →
+              <span>Call Support Now</span> →
             </a>
           </div>
 
@@ -148,11 +179,11 @@ export default function ContactPage() {
                 Instant Chat Support
               </p>
               <p className="text-xs text-zinc-500 mt-1">
-                Fast responses for tracking & order queries
+                Fast responses for tracking &amp; order queries
               </p>
             </div>
             <a
-              href="https://wa.me/8801722301927"
+              href={`https://wa.me/${fullWhatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-4 text-xs font-bold text-green-600 hover:text-green-700 inline-flex items-center gap-1"
@@ -171,10 +202,10 @@ export default function ContactPage() {
                 Corporate Headquarters
               </h3>
               <p className="text-base font-bold text-zinc-900 mt-1 leading-snug">
-                Mohadevpur, Naogaon
+                {branchAddress}
               </p>
               <p className="text-xs text-zinc-500 mt-1">
-                Rajshahi Division, Bangladesh
+                Headquarters &amp; Central Distribution
               </p>
             </div>
             <a
@@ -210,7 +241,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── 2. Contact Form & Company Details ── */}
-      <section className="py-20 px-4 sm:px-6 md:px-10 lg:px-16 max-w-7xl mx-auto">
+      <section className="py-20 px-4 sm:px-6 md:px-10 lg:px-16 max-w-[1440px] mx-auto">
         <ScrollAnimate variant="fade-in-up">
           <div className="bg-white rounded-3xl shadow-xl border border-zinc-100 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
             
@@ -276,7 +307,7 @@ export default function ContactPage() {
                           name="phoneNumber"
                           value={formData.phoneNumber}
                           onChange={handleInputChange}
-                          placeholder="01722301927"
+                          placeholder="01707819676"
                           required
                           className="w-full bg-transparent px-3 py-3 text-sm text-zinc-900 focus:outline-none placeholder:text-zinc-400"
                         />
@@ -345,7 +376,7 @@ export default function ContactPage() {
                     </button>
 
                     <a
-                      href="https://wa.me/8801722301927"
+                      href="https://wa.me/8801707819676"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 font-semibold text-sm px-6 py-3.5 rounded-full border border-green-200 transition-all cursor-pointer"
@@ -375,18 +406,24 @@ export default function ContactPage() {
 
                 <div className="space-y-6 mt-8">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
-                      <FiMapPin className="w-5 h-5" />
+                    <div className="relative w-11 h-11 rounded-xl overflow-hidden border border-emerald-500/40 ring-2 ring-emerald-500/20 shrink-0">
+                      <Image
+                        src="/images/team/Abdullah.jpg"
+                        alt="Mohammad Abdullah"
+                        width={44}
+                        height={44}
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                        Corporate Headquarters
+                        Corporate Headquarters &amp; Founder
                       </h4>
-                      <p className="text-sm font-semibold text-white mt-1">
-                        NovaMart Marketplace (Mohammad Abdullah)
+                      <p className="text-sm font-semibold text-white mt-0.5">
+                        {shopName} (Mohammad Abdullah)
                       </p>
                       <p className="text-xs text-zinc-300 mt-0.5 leading-relaxed">
-                        Mohadevpur, Naogaon, Rajshahi Division, Bangladesh
+                        {branchAddress}
                       </p>
                     </div>
                   </div>
@@ -397,33 +434,35 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                        Helpline / bKash Hotline
+                        Executive Desk / Hotline
                       </h4>
                       <a
-                        href="tel:01722301927"
+                        href={`tel:${cleanPhone}`}
                         className="text-sm font-bold text-emerald-400 hover:underline mt-1 inline-block"
                       >
-                        01722301927 (+880 1722-301927)
+                        {primaryPhone}
                       </a>
                       <p className="text-xs text-zinc-400 mt-0.5">
-                        WhatsApp & Mobile Support Active
+                        WhatsApp &amp; Mobile Support Active
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-xl bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
-                      <FiMail className="w-5 h-5" />
+                      <FaWhatsapp className="w-5 h-5" />
                     </div>
                     <div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                        Corporate Inquiries
+                        Instant WhatsApp Chat
                       </h4>
                       <a
-                        href="mailto:support@webdevsoftware.com"
+                        href={`https://wa.me/${fullWhatsapp}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="text-xs font-semibold text-zinc-200 hover:text-emerald-400 transition-colors mt-1 block"
                       >
-                        support@webdevsoftware.com
+                        {primaryPhone} (Live Support)
                       </a>
                     </div>
                   </div>
@@ -445,7 +484,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── 3. Google Maps Embed (Uttara, Dhaka) ── */}
-      <section id="map-section" className="py-12 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+      <section id="map-section" className="py-12 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="bg-white rounded-3xl p-4 shadow-xl border border-zinc-100 overflow-hidden">
           <div className="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-zinc-100 mb-3">
             <div>
@@ -537,13 +576,13 @@ export default function ContactPage() {
             </p>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
               <a
-                href="tel:01722301927"
+                href="tel:01707819676"
                 className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-6 py-2.5 rounded-full transition-colors"
               >
-                Call: 01722301927
+                Call: 01707819676
               </a>
               <a
-                href="https://wa.me/8801722301927"
+                href="https://wa.me/8801707819676"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white hover:bg-zinc-100 text-emerald-900 font-semibold text-xs px-6 py-2.5 rounded-full border border-emerald-200 transition-colors"

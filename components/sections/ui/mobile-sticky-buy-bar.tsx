@@ -40,11 +40,11 @@ export default function MobileStickyBuyBar({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/95 backdrop-blur-md border-t border-stone-200 px-4 py-2.5 shadow-[0_-4px_20px_rgba(0,0,0,0.1)] animate-in slide-in-from-bottom duration-300">
+    <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/95 backdrop-blur-md border-t border-stone-200/90 px-4 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-6px_25px_rgba(0,0,0,0.08)] animate-in slide-in-from-bottom duration-300">
       <div className="flex items-center justify-between gap-3 max-w-md mx-auto">
         {/* Mini Product Details */}
         <div className="flex items-center gap-2.5 min-w-0 flex-1">
-          <div className="relative w-11 h-11 rounded-lg overflow-hidden bg-stone-50 border border-stone-200 shrink-0">
+          <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-stone-50 border border-stone-200/80 shrink-0">
             <Image
               src={image || '/images/no-image-icon-6.png'}
               alt={name}
@@ -54,10 +54,10 @@ export default function MobileStickyBuyBar({
             />
           </div>
           <div className="min-w-0 flex-1">
-            <h4 className="text-xs font-bold text-zinc-900 truncate leading-tight">
+            <h4 className="text-xs font-extrabold text-zinc-950 truncate leading-tight">
               {name}
             </h4>
-            <span className="text-xs font-extrabold text-zinc-950">
+            <span className="text-xs font-black text-zinc-950">
               {priceFormatted}
             </span>
           </div>
@@ -69,7 +69,7 @@ export default function MobileStickyBuyBar({
             type="button"
             onClick={onAddToCart}
             disabled={isOutOfStock}
-            className="h-10 px-3.5 bg-white border border-zinc-900 text-zinc-900 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 disabled:opacity-40"
+            className="h-10 px-3.5 bg-white border-2 border-zinc-950 text-zinc-950 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 disabled:opacity-40"
             aria-label="Add to Bag"
           >
             <IoBagCheckOutline className="w-4 h-4" />

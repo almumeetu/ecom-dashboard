@@ -75,16 +75,17 @@ export default function MostPopuler() {
                 brand={product.team}
                 unit={product.unit}
                 badge={product.badge || "HOT"}
+                variantId={product.variantId}
               />
             ))}
           </div>
         )}
 
         {/* View All CTA */}
-        <div className="pt-12 text-center">
+        <div className="pt-10 sm:pt-12 text-center px-4">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-zinc-900 hover:bg-emerald-600 text-white font-sans text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg hover:scale-103 cursor-pointer"
+            className="w-full sm:w-auto max-w-sm sm:max-w-none inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-zinc-900 hover:bg-emerald-600 text-white font-sans text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
           >
             <span>View All Best Sellers</span>
             <LuArrowRight className="w-4 h-4" />

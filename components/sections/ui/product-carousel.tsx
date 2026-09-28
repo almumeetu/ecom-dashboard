@@ -148,6 +148,10 @@ export default function ProductCarousel({ products, title }: ExtendedProductCaro
                 originalPrice={product.originalPrice && product.originalPrice > product.price ? `৳${product.originalPrice.toLocaleString()}` : undefined}
                 image={product.image}
                 badge={product.badge}
+                slug={product.slug}
+                category={product.category}
+                brand={product.team}
+                variantId={product.variantId}
               />
             </SwiperSlide>
           ))}

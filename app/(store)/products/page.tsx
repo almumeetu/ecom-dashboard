@@ -22,7 +22,8 @@ import {
   LuCheck,
   LuRotateCcw,
   LuTag,
-  LuSparkles,
+  LuRows2,
+  LuGrid2X2,
 } from 'react-icons/lu';
 import { IoCloseOutline } from 'react-icons/io5';
 
@@ -52,7 +53,7 @@ function ProductsPageContent() {
 
   // Display & UI state
   const [showDesktopSidebar, setShowDesktopSidebar] = useState(true);
-  const [viewMode, setViewMode] = useState<'grid2' | 'grid3' | 'grid4'>('grid3');
+  const [viewMode, setViewMode] = useState<'grid1' | 'grid2' | 'grid3' | 'grid4'>('grid3');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
 
@@ -183,7 +184,7 @@ function ProductsPageContent() {
   }, [dbCategories]);
 
   const categoryOptions = useMemo(() => {
-    let filtered = dbCategories;
+    const filtered = dbCategories;
     if (selectedCollection !== 'All') {
       const parent = dbCategories.find((c) => c.name.toLowerCase() === selectedCollection.toLowerCase());
       if (parent && parent.children && parent.children.length > 0) {
@@ -454,7 +455,7 @@ function ProductsPageContent() {
   }, [selectedSort]);
 
   // Sidebar Facets Component (used in both Desktop & Mobile Drawer)
-  const renderSidebarFilters = (isMobile = false) => {
+  const renderSidebarFilters = () => {
     return (
       <div className="space-y-6 text-zinc-800 text-xs">
         {/* 1. Availability Facet */}
@@ -527,35 +528,36 @@ function ProductsPageContent() {
                 })}
               </div>
 
-              {/* Min - Max Inputs */}
-              <div className="flex items-center gap-2 pt-1">
-                <div className="relative flex-1">
-                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">৳</span>
-                  <input
-                    type="number"
-                    placeholder="Min"
-                    value={minPriceInput}
-                    onChange={(e) => setMinPriceInput(e.target.value)}
-                    className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-emerald-500"
-                  />
-                </div>
-                <span className="text-zinc-400 text-xs">to</span>
-                <div className="relative flex-1">
-                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">৳</span>
-                  <input
-                    type="number"
-                    placeholder="Max"
-                    value={maxPriceInput}
-                    onChange={(e) => setMaxPriceInput(e.target.value)}
-                    className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-emerald-500"
-                  />
+              {/* Min - Max Inputs (Mobile responsive 2-column layout) */}
+              <div className="space-y-2 pt-1">
+                <div className="grid grid-cols-2 gap-2 items-center">
+                  <div className="relative">
+                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">৳</span>
+                    <input
+                      type="number"
+                      placeholder="Min"
+                      value={minPriceInput}
+                      onChange={(e) => setMinPriceInput(e.target.value)}
+                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-emerald-500 bg-white"
+                    />
+                  </div>
+                  <div className="relative">
+                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 text-xs">৳</span>
+                    <input
+                      type="number"
+                      placeholder="Max"
+                      value={maxPriceInput}
+                      onChange={(e) => setMaxPriceInput(e.target.value)}
+                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-emerald-500 bg-white"
+                    />
+                  </div>
                 </div>
                 <button
                   type="button"
                   onClick={applyCustomPrice}
-                  className="px-3 py-1.5 bg-zinc-900 hover:bg-emerald-600 text-white rounded-md text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+                  className="w-full py-2 bg-zinc-900 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
                 >
-                  Apply
+                  Apply Price
                 </button>
               </div>
             </div>
@@ -754,155 +756,318 @@ function ProductsPageContent() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white font-sans text-left">
+    <div className="flex flex-col min-h-screen bg-[#FAF9F5] font-sans text-left">
       <main className="flex-grow w-full text-left">
         {/* Strictly Left-Aligned Page Banner */}
         <PageBanner
           title={pageHeading}
           subtitle={`Explore ${filteredProducts.length} verified products from multi-vendors with doorstep delivery and buyer protection.`}
-          badge="Marketplace Catalog"
           breadcrumbs={[
             { label: 'Products', href: '/products' },
             ...(selectedCategory !== 'All' ? [{ label: selectedCategory }] : []),
           ]}
         />
 
-        {/* Shopify OS 2.0 Filter Control Toolbar */}
-        <div className="w-full border-b border-zinc-200 bg-white sticky top-[60px] z-30 shadow-xs">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-3 flex items-center justify-between gap-4">
+        {/* Quick Category Swipe Strip (Mobile & Desktop) */}
+        <div className="w-full bg-[#FAF9F5] border-b border-zinc-200/60 py-2 sm:py-2.5">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <button
+              type="button"
+              onClick={() => {
+                setSelectedCollection('All');
+                setSelectedCategory('All');
+                setOnSaleOnly(false);
+              }}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
+                selectedCollection === 'All' && selectedCategory === 'All' && !onSaleOnly
+                  ? 'bg-zinc-900 text-white shadow-xs font-semibold'
+                  : 'bg-white text-zinc-600 hover:bg-zinc-100 border border-zinc-200/80'
+              }`}
+            >
+              All Products
+            </button>
+
+            {collectionOptions
+              .filter((opt) => opt !== 'All')
+              .map((col) => {
+                const isSelected = selectedCollection === col;
+                return (
+                  <button
+                    key={col}
+                    type="button"
+                    onClick={() => {
+                      setSelectedCollection(col);
+                      setSelectedCategory('All');
+                    }}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
+                      isSelected
+                        ? 'bg-emerald-600 text-white shadow-xs font-semibold'
+                        : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200/80'
+                    }`}
+                  >
+                    {col}
+                  </button>
+                );
+              })}
+
+            <button
+              type="button"
+              onClick={() => setOnSaleOnly(!onSaleOnly)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1 shrink-0 ${
+                onSaleOnly
+                  ? 'bg-rose-600 text-white shadow-xs font-semibold'
+                  : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200/60'
+              }`}
+            >
+              <LuTag className="w-3 h-3" />
+              <span>Deals & Sales</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Shopify OS 2.0 Filter Control Toolbar (Sticky with correct header clearance) */}
+        <div className="w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-md sticky top-[104px] xl:top-[118px] z-30 shadow-xs">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2.5 sm:py-3">
             
-            {/* Left: Filter Toggle & Item Count */}
-            <div className="flex items-center gap-3 sm:gap-4">
-              {/* Desktop Filter Toggle Button */}
-              <button
-                type="button"
-                onClick={() => setShowDesktopSidebar(!showDesktopSidebar)}
-                className="hidden lg:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-zinc-300 hover:border-zinc-400 bg-white text-zinc-800 text-xs font-semibold transition-all cursor-pointer shadow-2xs hover:bg-zinc-50"
-                aria-label="Toggle Filters"
-              >
-                <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
-                <span>{showDesktopSidebar ? 'Hide Filters' : 'Show Filters'}</span>
-                {activeFilters.length > 0 && (
-                  <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center">
-                    {activeFilters.length}
-                  </span>
-                )}
-              </button>
-
-              {/* Mobile Filter Trigger Button */}
-              <button
-                type="button"
-                onClick={() => setIsMobileFilterOpen(true)}
-                className="lg:hidden inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-zinc-300 hover:border-zinc-400 bg-white text-zinc-800 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
-              >
-                <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
-                <span>Filters & Sort</span>
-                {activeFilters.length > 0 && (
-                  <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center">
-                    {activeFilters.length}
-                  </span>
-                )}
-              </button>
-
-              {/* Total Products Count */}
-              <span className="text-xs text-zinc-500 font-medium">
-                Showing <strong className="text-zinc-900 font-semibold">{filteredProducts.length}</strong> products
-              </span>
-            </div>
-
-            {/* Right: Grid Switcher & Shopify Sort By */}
-            <div className="flex items-center gap-3 sm:gap-5">
-              {/* Desktop Grid Switcher */}
-              <div className="hidden sm:flex items-center gap-1 border border-zinc-200 rounded-lg p-0.5 bg-zinc-50">
-                {/* 2 Cols */}
+            {/* Mobile Layout (< sm): Single neat row with zero overflow */}
+            <div className="flex sm:hidden items-center justify-between gap-2 w-full">
+              <div className="flex items-center gap-1.5 min-w-0">
+                {/* Mobile Filter Trigger Button */}
                 <button
                   type="button"
-                  onClick={() => setViewMode('grid2')}
-                  title="2 Columns Grid"
-                  className={`p-1.5 rounded-md transition-all cursor-pointer ${
-                    viewMode === 'grid2'
-                      ? 'bg-white text-zinc-900 shadow-2xs'
-                      : 'text-zinc-400 hover:text-zinc-700'
-                  }`}
+                  onClick={() => setIsMobileFilterOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold shadow-2xs active:bg-zinc-100 shrink-0"
+                  aria-label="Open Filters"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                    <rect x="1" y="2" width="6" height="12" rx="1" />
-                    <rect x="9" y="2" width="6" height="12" rx="1" />
-                  </svg>
+                  <LuSlidersHorizontal className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <span>Filters</span>
+                  {activeFilters.length > 0 && (
+                    <span className="w-4.5 h-4.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                      {activeFilters.length}
+                    </span>
+                  )}
                 </button>
 
-                {/* 3 Cols */}
-                <button
-                  type="button"
-                  onClick={() => setViewMode('grid3')}
-                  title="3 Columns Grid"
-                  className={`p-1.5 rounded-md transition-all cursor-pointer ${
-                    viewMode === 'grid3'
-                      ? 'bg-white text-zinc-900 shadow-2xs'
-                      : 'text-zinc-400 hover:text-zinc-700'
-                  }`}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                    <rect x="1" y="2" width="4" height="12" rx="0.75" />
-                    <rect x="6" y="2" width="4" height="12" rx="0.75" />
-                    <rect x="11" y="2" width="4" height="12" rx="0.75" />
-                  </svg>
-                </button>
+                {/* Mobile Sort Dropdown */}
+                <div className="relative shrink-0" ref={sortRef}>
+                  <button
+                    type="button"
+                    onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-zinc-200 bg-white text-zinc-700 text-xs font-medium shadow-2xs active:bg-zinc-100"
+                    aria-label="Sort Options"
+                  >
+                    <span className="text-zinc-400">Sort:</span>
+                    <span className="font-semibold text-zinc-900 max-w-[80px] truncate">
+                      {selectedSort === 'newest'
+                        ? 'Newest'
+                        : selectedSort === 'price_asc'
+                        ? '৳ Low'
+                        : selectedSort === 'price_desc'
+                        ? '৳ High'
+                        : selectedSort === 'alpha_asc'
+                        ? 'A-Z'
+                        : 'Z-A'}
+                    </span>
+                    <LuChevronDown className={`w-3 h-3 text-zinc-400 transition-transform ${isSortDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
 
-                {/* 4 Cols */}
-                <button
-                  type="button"
-                  onClick={() => setViewMode('grid4')}
-                  title="4 Columns Grid"
-                  className={`p-1.5 rounded-md transition-all cursor-pointer ${
-                    viewMode === 'grid4'
-                      ? 'bg-white text-zinc-900 shadow-2xs'
-                      : 'text-zinc-400 hover:text-zinc-700'
-                  }`}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                    <rect x="1" y="2" width="2.5" height="12" rx="0.5" />
-                    <rect x="5" y="2" width="2.5" height="12" rx="0.5" />
-                    <rect x="9" y="2" width="2.5" height="12" rx="0.5" />
-                    <rect x="13" y="2" width="2.5" height="12" rx="0.5" />
-                  </svg>
-                </button>
+                  {isSortDropdownOpen && (
+                    <div className="absolute left-0 mt-1.5 w-48 bg-white border border-zinc-200 rounded-xl shadow-xl py-1.5 z-50">
+                      {SORT_OPTIONS.map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => {
+                            setSelectedSort(opt.value);
+                            setIsSortDropdownOpen(false);
+                          }}
+                          className={`w-full flex items-center justify-between px-3 py-2 text-left text-xs transition-colors cursor-pointer ${
+                            selectedSort === opt.value
+                              ? 'bg-emerald-50 text-emerald-700 font-bold'
+                              : 'text-zinc-700 hover:bg-zinc-50'
+                          }`}
+                        >
+                          <span>{opt.label}</span>
+                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Sort By Dropdown (Shopify Style) */}
-              <div className="relative" ref={sortRef}>
+              {/* Mobile Right: View Mode (1 vs 2 cols) & Count */}
+              <div className="flex items-center gap-2 shrink-0">
+                {/* Mobile 1-Col vs 2-Col Switcher */}
+                <div className="flex items-center border border-zinc-200 rounded-lg p-0.5 bg-zinc-50">
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('grid1')}
+                    title="Single Column View"
+                    className={`p-1 rounded-md transition-all ${
+                      viewMode === 'grid1'
+                        ? 'bg-white text-zinc-900 shadow-2xs font-bold'
+                        : 'text-zinc-400 hover:text-zinc-700'
+                    }`}
+                  >
+                    <LuRows2 className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('grid2')}
+                    title="Two Columns View"
+                    className={`p-1 rounded-md transition-all ${
+                      viewMode !== 'grid1'
+                        ? 'bg-white text-zinc-900 shadow-2xs font-bold'
+                        : 'text-zinc-400 hover:text-zinc-700'
+                    }`}
+                  >
+                    <LuGrid2X2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                <span className="text-[11px] text-zinc-500 font-medium whitespace-nowrap">
+                  <strong className="text-zinc-900 font-semibold">{filteredProducts.length}</strong> items
+                </span>
+              </div>
+            </div>
+
+            {/* Desktop & Tablet Layout (sm+) */}
+            <div className="hidden sm:flex items-center justify-between gap-4">
+              {/* Left: Filter Toggle & Item Count */}
+              <div className="flex items-center gap-3 sm:gap-4">
+                {/* Desktop Filter Toggle Button */}
                 <button
                   type="button"
-                  onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                  className="flex items-center gap-1.5 text-xs text-zinc-700 hover:text-zinc-900 font-medium py-1.5 px-2.5 rounded-lg border border-zinc-200 hover:border-zinc-300 bg-white transition-all cursor-pointer shadow-2xs"
+                  onClick={() => setShowDesktopSidebar(!showDesktopSidebar)}
+                  className="hidden lg:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-zinc-300 hover:border-zinc-400 bg-white text-zinc-800 text-xs font-semibold transition-all cursor-pointer shadow-2xs hover:bg-zinc-50"
+                  aria-label="Toggle Filters"
                 >
-                  <span className="text-zinc-400">Sort by:</span>
-                  <span className="font-semibold text-zinc-900">{currentSortLabel}</span>
-                  <LuChevronDown className={`w-3.5 h-3.5 text-zinc-500 transition-transform ${isSortDropdownOpen ? 'rotate-180' : ''}`} />
+                  <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
+                  <span>{showDesktopSidebar ? 'Hide Filters' : 'Show Filters'}</span>
+                  {activeFilters.length > 0 && (
+                    <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center">
+                      {activeFilters.length}
+                    </span>
+                  )}
                 </button>
 
-                {isSortDropdownOpen && (
-                  <div className="absolute right-0 mt-1.5 w-52 bg-white border border-zinc-200 rounded-xl shadow-xl py-1.5 z-50">
-                    {SORT_OPTIONS.map((opt) => (
-                      <button
-                        key={opt.value}
-                        type="button"
-                        onClick={() => {
-                          setSelectedSort(opt.value);
-                          setIsSortDropdownOpen(false);
-                        }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2 text-left text-xs transition-colors cursor-pointer ${
-                          selectedSort === opt.value
-                            ? 'bg-emerald-50 text-emerald-700 font-bold'
-                            : 'text-zinc-700 hover:bg-zinc-50'
-                        }`}
-                      >
-                        <span>{opt.label}</span>
-                        {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {/* Tablet Filter Trigger Button */}
+                <button
+                  type="button"
+                  onClick={() => setIsMobileFilterOpen(true)}
+                  className="lg:hidden inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-zinc-300 hover:border-zinc-400 bg-white text-zinc-800 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+                >
+                  <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
+                  <span>Filters & Sort</span>
+                  {activeFilters.length > 0 && (
+                    <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center">
+                      {activeFilters.length}
+                    </span>
+                  )}
+                </button>
+
+                {/* Total Products Count */}
+                <span className="text-xs text-zinc-500 font-medium">
+                  Showing <strong className="text-zinc-900 font-semibold">{filteredProducts.length}</strong> products
+                </span>
+              </div>
+
+              {/* Right: Grid Switcher & Shopify Sort By */}
+              <div className="flex items-center gap-3 sm:gap-5">
+                {/* Desktop Grid Switcher */}
+                <div className="flex items-center gap-1 border border-zinc-200 rounded-lg p-0.5 bg-zinc-50">
+                  {/* 2 Cols */}
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('grid2')}
+                    title="2 Columns Grid"
+                    className={`p-1.5 rounded-md transition-all cursor-pointer ${
+                      viewMode === 'grid2'
+                        ? 'bg-white text-zinc-900 shadow-2xs'
+                        : 'text-zinc-400 hover:text-zinc-700'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                      <rect x="1" y="2" width="6" height="12" rx="1" />
+                      <rect x="9" y="2" width="6" height="12" rx="1" />
+                    </svg>
+                  </button>
+
+                  {/* 3 Cols */}
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('grid3')}
+                    title="3 Columns Grid"
+                    className={`p-1.5 rounded-md transition-all cursor-pointer ${
+                      viewMode === 'grid3'
+                        ? 'bg-white text-zinc-900 shadow-2xs'
+                        : 'text-zinc-400 hover:text-zinc-700'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                      <rect x="1" y="2" width="4" height="12" rx="0.75" />
+                      <rect x="6" y="2" width="4" height="12" rx="0.75" />
+                      <rect x="11" y="2" width="4" height="12" rx="0.75" />
+                    </svg>
+                  </button>
+
+                  {/* 4 Cols */}
+                  <button
+                    type="button"
+                    onClick={() => setViewMode('grid4')}
+                    title="4 Columns Grid"
+                    className={`p-1.5 rounded-md transition-all cursor-pointer ${
+                      viewMode === 'grid4'
+                        ? 'bg-white text-zinc-900 shadow-2xs'
+                        : 'text-zinc-400 hover:text-zinc-700'
+                    }`}
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                      <rect x="1" y="2" width="2.5" height="12" rx="0.5" />
+                      <rect x="5" y="2" width="2.5" height="12" rx="0.5" />
+                      <rect x="9" y="2" width="2.5" height="12" rx="0.5" />
+                      <rect x="13" y="2" width="2.5" height="12" rx="0.5" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Sort By Dropdown (Shopify Style) */}
+                <div className="relative" ref={sortRef}>
+                  <button
+                    type="button"
+                    onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
+                    className="flex items-center gap-1.5 text-xs text-zinc-700 hover:text-zinc-900 font-medium py-1.5 px-2.5 rounded-lg border border-zinc-200 hover:border-zinc-300 bg-white transition-all cursor-pointer shadow-2xs"
+                  >
+                    <span className="text-zinc-400">Sort by:</span>
+                    <span className="font-semibold text-zinc-900">{currentSortLabel}</span>
+                    <LuChevronDown className={`w-3.5 h-3.5 text-zinc-500 transition-transform ${isSortDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  {isSortDropdownOpen && (
+                    <div className="absolute right-0 mt-1.5 w-52 bg-white border border-zinc-200 rounded-xl shadow-xl py-1.5 z-50">
+                      {SORT_OPTIONS.map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => {
+                            setSelectedSort(opt.value);
+                            setIsSortDropdownOpen(false);
+                          }}
+                          className={`w-full flex items-center justify-between px-3.5 py-2 text-left text-xs transition-colors cursor-pointer ${
+                            selectedSort === opt.value
+                              ? 'bg-emerald-50 text-emerald-700 font-bold'
+                              : 'text-zinc-700 hover:bg-zinc-50'
+                          }`}
+                        >
+                          <span>{opt.label}</span>
+                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
               </div>
 
             </div>
@@ -910,12 +1075,12 @@ function ProductsPageContent() {
           </div>
         </div>
 
-        {/* Active Filter Chips Bar (Shopify Pill Tags) */}
+        {/* Active Filter Chips Bar (Shopify Pill Tags, horizontally scrollable on mobile) */}
         {activeFilters.length > 0 && (
-          <div className="w-full bg-zinc-50/70 border-b border-zinc-200/80 py-2.5 px-4 sm:px-6 md:px-10 lg:px-16">
-            <div className="max-w-[1440px] mx-auto flex items-center gap-2 flex-wrap text-left">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 mr-1 select-none">
-                Active filters:
+          <div className="w-full bg-zinc-50/90 border-b border-zinc-200/80">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2 flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-zinc-400 shrink-0 mr-1 select-none">
+                Filters:
               </span>
 
               {activeFilters.map((filter) => (
@@ -923,17 +1088,17 @@ function ProductsPageContent() {
                   key={filter.id}
                   type="button"
                   onClick={filter.onRemove}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-white border border-zinc-300 text-zinc-800 hover:border-red-300 hover:bg-red-50 hover:text-red-600 transition-all cursor-pointer shadow-2xs group"
+                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-white border border-zinc-300 text-zinc-800 hover:border-red-300 hover:bg-red-50 hover:text-red-600 transition-all cursor-pointer shadow-2xs shrink-0 group"
                 >
-                  <span>{filter.label}</span>
-                  <LuX className="w-3.5 h-3.5 text-zinc-400 group-hover:text-red-500" />
+                  <span className="truncate max-w-[140px] sm:max-w-none">{filter.label}</span>
+                  <LuX className="w-3 h-3 text-zinc-400 group-hover:text-red-500 shrink-0" />
                 </button>
               ))}
 
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 underline underline-offset-2 ml-1 cursor-pointer transition-colors"
+                className="text-[11px] sm:text-xs font-semibold text-emerald-700 hover:text-emerald-800 underline underline-offset-2 ml-1 cursor-pointer transition-colors shrink-0 whitespace-nowrap"
               >
                 Clear all ({activeFilters.length})
               </button>
@@ -942,12 +1107,12 @@ function ProductsPageContent() {
         )}
 
         {/* Main Body: Desktop Sidebar + Product Grid */}
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-10">
-          <div className="flex items-start gap-8 lg:gap-10">
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-10">
+          <div className="flex items-start gap-6 lg:gap-10">
             
             {/* Desktop Left-Hand Shopify Sidebar */}
             {showDesktopSidebar && (
-              <aside className="hidden lg:block w-72 shrink-0 sticky top-28 self-start pr-2">
+              <aside className="hidden lg:block w-[260px] shrink-0 sticky top-[175px] self-start pr-2">
                 <div className="flex items-center justify-between pb-4 mb-2 border-b border-zinc-200">
                   <h3 className="font-extrabold text-sm uppercase tracking-wider text-zinc-900 flex items-center gap-2">
                     <LuSlidersHorizontal className="w-4 h-4 text-emerald-600" />
@@ -964,20 +1129,20 @@ function ProductsPageContent() {
                   )}
                 </div>
 
-                {renderSidebarFilters(false)}
+                {renderSidebarFilters()}
               </aside>
             )}
 
             {/* Right Product Grid Area */}
             <div className="flex-1 min-w-0">
               {isLoading && products.length === 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 w-full">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
                   {[...Array(8)].map((_, i) => (
                     <div
                       key={i}
-                      className="w-full h-[360px] bg-zinc-50 animate-pulse border border-zinc-100 rounded-xl flex flex-col justify-between p-4"
+                      className="w-full h-[300px] sm:h-[360px] bg-zinc-50 animate-pulse border border-zinc-100 rounded-xl flex flex-col justify-between p-3 sm:p-4"
                     >
-                      <div className="w-full h-[200px] bg-zinc-200 rounded-lg" />
+                      <div className="w-full h-[160px] sm:h-[200px] bg-zinc-200 rounded-lg" />
                       <div className="h-4 bg-zinc-200 w-3/4 rounded mt-3" />
                       <div className="flex justify-between items-center mt-3">
                         <div className="h-4 bg-zinc-200 w-1/3 rounded" />
@@ -989,12 +1154,14 @@ function ProductsPageContent() {
               ) : filteredProducts.length > 0 ? (
                 <>
                   <div
-                    className={`grid gap-3 sm:gap-6 ${
-                      viewMode === 'grid2'
-                        ? 'grid-cols-2'
+                    className={`grid ${
+                      viewMode === 'grid1'
+                        ? 'grid-cols-1 gap-3.5'
+                        : viewMode === 'grid2'
+                        ? 'grid-cols-2 gap-2.5 sm:gap-5'
                         : viewMode === 'grid3'
-                        ? 'grid-cols-2 md:grid-cols-3'
-                        : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+                        ? 'grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-5'
+                        : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5'
                     }`}
                   >
                     {filteredProducts.map((product) => (
@@ -1011,12 +1178,13 @@ function ProductsPageContent() {
                         category={product.category}
                         brand={product.team}
                         unit={product.unit}
+                        variantId={product.variantId}
                       />
                     ))}
                   </div>
 
                   {/* Infinite Scroll trigger */}
-                  <div className="mt-12">
+                  <div className="mt-10 sm:mt-12">
                     <InfiniteScroll
                       hasMore={hasMore}
                       isLoading={isLoading}
@@ -1029,11 +1197,11 @@ function ProductsPageContent() {
                 </>
               ) : (
                 /* Empty state when filters return 0 results */
-                <div className="flex flex-col items-center justify-center py-20 text-center px-4 bg-zinc-50/50 rounded-2xl border border-dashed border-zinc-200 my-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
-                    <LuRotateCcw className="w-8 h-8" />
+                <div className="flex flex-col items-center justify-center py-12 sm:py-20 text-center px-4 bg-zinc-50/50 rounded-2xl border border-dashed border-zinc-200 my-4">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+                    <LuRotateCcw className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
-                  <h3 className="text-xl font-bold text-zinc-900 mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-1">
                     No products matched your filters
                   </h3>
                   <p className="text-xs text-zinc-500 max-w-md mb-6 leading-relaxed">
@@ -1042,7 +1210,7 @@ function ProductsPageContent() {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md shadow-emerald-600/20"
+                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md shadow-emerald-600/20 active:scale-95"
                   >
                     Clear All Filters
                   </button>
@@ -1056,10 +1224,17 @@ function ProductsPageContent() {
         {/* Mobile Slide-Over Filter Drawer (Shopify Style) */}
         {isMobileFilterOpen && (
           <div className="fixed inset-0 z-[100] flex justify-end bg-black/60 backdrop-blur-xs transition-opacity duration-300">
-            <div className="w-full max-w-[360px] h-full bg-white shadow-2xl flex flex-col justify-between font-sans">
+            {/* Click backdrop to close */}
+            <div
+              className="absolute inset-0 cursor-pointer"
+              onClick={() => setIsMobileFilterOpen(false)}
+              aria-label="Close backdrop"
+            />
+
+            <div className="relative w-full sm:max-w-[380px] h-[100dvh] bg-white shadow-2xl flex flex-col justify-between font-sans z-10">
               
               {/* Drawer Header */}
-              <div className="px-5 py-4 border-b border-zinc-200 flex items-center justify-between shrink-0 bg-zinc-50">
+              <div className="px-4 sm:px-5 py-3.5 border-b border-zinc-200 flex items-center justify-between shrink-0 bg-zinc-50">
                 <div className="flex items-center gap-2">
                   <LuSlidersHorizontal className="w-4 h-4 text-emerald-600" />
                   <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
@@ -1072,20 +1247,20 @@ function ProductsPageContent() {
                   )}
                 </div>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   {activeFilters.length > 0 && (
                     <button
                       type="button"
                       onClick={clearAllFilters}
-                      className="text-[11px] font-bold text-red-500 uppercase tracking-wider cursor-pointer"
+                      className="text-xs font-semibold text-red-500 hover:text-red-700 cursor-pointer"
                     >
-                      Clear
+                      Reset
                     </button>
                   )}
                   <button
                     type="button"
                     onClick={() => setIsMobileFilterOpen(false)}
-                    className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:text-zinc-800 cursor-pointer bg-white"
+                    className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:text-zinc-800 cursor-pointer bg-white active:scale-95"
                     aria-label="Close filters"
                   >
                     <IoCloseOutline className="w-5 h-5" />
@@ -1094,10 +1269,10 @@ function ProductsPageContent() {
               </div>
 
               {/* Drawer Scrollable Content */}
-              <div className="flex-grow overflow-y-auto px-5 py-5 space-y-6 bg-white">
+              <div className="flex-grow overflow-y-auto px-4 sm:px-5 py-4 space-y-5 bg-white">
                 {/* Mobile Sort Option */}
-                <div className="border-b border-zinc-200 pb-5">
-                  <h4 className="font-bold text-xs uppercase tracking-wider text-zinc-900 mb-3">
+                <div className="border-b border-zinc-200 pb-4">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-zinc-900 mb-2.5">
                     Sort By
                   </h4>
                   <div className="grid grid-cols-1 gap-1.5">
@@ -1109,7 +1284,7 @@ function ProductsPageContent() {
                         className={`px-3 py-2 rounded-lg text-xs font-medium border text-left flex items-center justify-between cursor-pointer transition-colors ${
                           selectedSort === opt.value
                             ? 'bg-emerald-50 border-emerald-500 text-emerald-700 font-bold'
-                            : 'bg-zinc-50 border-zinc-200 text-zinc-700'
+                            : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-zinc-100'
                         }`}
                       >
                         <span>{opt.label}</span>
@@ -1119,17 +1294,26 @@ function ProductsPageContent() {
                   </div>
                 </div>
 
-                {renderSidebarFilters(true)}
+                {renderSidebarFilters()}
               </div>
 
               {/* Drawer Sticky Footer Action */}
-              <div className="p-4 border-t border-zinc-200 bg-zinc-50 shrink-0">
+              <div className="p-3.5 sm:p-4 border-t border-zinc-200 bg-zinc-50 shrink-0 pb-[max(1rem,env(safe-area-inset-bottom))] flex items-center gap-2.5">
+                {activeFilters.length > 0 && (
+                  <button
+                    type="button"
+                    onClick={clearAllFilters}
+                    className="py-3 px-3.5 rounded-xl border border-zinc-300 hover:bg-zinc-100 text-zinc-700 text-xs font-semibold uppercase tracking-wider text-center transition-all cursor-pointer shadow-2xs shrink-0"
+                  >
+                    Reset
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => setIsMobileFilterOpen(false)}
-                  className="w-full py-3.5 bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-all cursor-pointer shadow-sm active:scale-[0.99]"
+                  className="flex-1 py-3 px-4 bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-all cursor-pointer shadow-sm active:scale-[0.99]"
                 >
-                  View Products ({filteredProducts.length})
+                  View ({filteredProducts.length}) Products
                 </button>
               </div>
 

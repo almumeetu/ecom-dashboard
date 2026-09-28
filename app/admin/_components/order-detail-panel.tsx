@@ -164,31 +164,55 @@ export function OrderDetailPanel({
 
       <div className="grid gap-4 md:grid-cols-2 mb-4">
         <div className="rounded-lg border border-slate-200/60 bg-white p-5 shadow-xs">
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-1.5">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-400" />
-            Customer Details
-          </h3>
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 font-semibold text-slate-700 text-sm">
-                {(order.user?.name ?? "G").charAt(0).toUpperCase()}
-              </div>
-              <div className="min-w-0">
-                <p className="text-sm font-semibold text-slate-800 truncate">
-                  {order.user?.name ?? "Guest Customer"}
-                </p>
-                <p className="text-xs text-slate-400 truncate mt-0.5">
-                  {order.user?.email ?? "No email provided"}
-                </p>
-              </div>
-            </div>
-            {order.user?.phone && (
-              <div className="flex items-center gap-2 text-xs text-slate-600">
-                <span className="font-medium text-slate-400">Phone:</span>
-                <span className="font-semibold">{order.user.phone}</span>
-              </div>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-slate-400" />
+              Customer Details
+            </h3>
+            {!order.user && (
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-amber-50 text-amber-700 px-2 py-0.5 rounded border border-amber-200">
+                Guest Order
+              </span>
             )}
           </div>
+          {(() => {
+            const guestAddr = order.shippingAddress as any;
+            const customerName = order.user?.name || guestAddr?.fullName || "Guest Customer";
+            const customerEmail = order.user?.email || guestAddr?.email;
+            const customerPhone = order.user?.phone || guestAddr?.phone;
+
+            return (
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-9 w-9 place-items-center rounded-full bg-slate-100 font-semibold text-slate-700 text-sm">
+                    {customerName.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-slate-800 truncate">
+                      {customerName}
+                    </p>
+                    <p className="text-xs text-slate-400 truncate mt-0.5">
+                      {customerEmail || "No email provided"}
+                    </p>
+                  </div>
+                </div>
+                {customerPhone && (
+                  <div className="flex items-center gap-2 text-xs text-slate-600">
+                    <span className="font-medium text-slate-400">Phone:</span>
+                    <a href={`tel:${customerPhone}`} className="font-semibold text-blue-600 hover:underline">
+                      {customerPhone}
+                    </a>
+                  </div>
+                )}
+                {guestAddr?.orderNote && (
+                  <div className="mt-2.5 p-2.5 rounded-md bg-amber-50 border border-amber-200 text-xs">
+                    <span className="font-bold text-amber-800 block text-[11px] mb-0.5">Delivery Note:</span>
+                    <p className="text-amber-900 italic">&ldquo;{guestAddr.orderNote}&rdquo;</p>
+                  </div>
+                )}
+              </div>
+            );
+          })()}
         </div>
 
         <div className="rounded-lg border border-slate-200/60 bg-white p-5 shadow-xs">

@@ -14,19 +14,19 @@ import PageBanner from "@/components/ui/page-banner";
 import { fetchShopProducts, type ShopProduct } from "@/lib/shop-api";
 
 const curatedProducts = [
-  { id: "1", name: "Tea Book Collection", price: "Tk 5,500", image: "/images/products/Product-1.png" },
-  { id: "2", name: "Assertion Classic Collection", price: "Tk 5,500", image: "/images/products/Product-2.png" },
-  { id: "3", name: "Asserted Super Fruit Collection", price: "Tk 5,500", image: "/images/products/Product-3.png" },
-  { id: "4", name: "Asserted Floral Collection", price: "Tk 5,500", image: "/images/products/Product-4.png" },
-  { id: "5", name: "Asserted Wild Orchard Collection", price: "Tk 5,500", image: "/images/products/Product-5.png" },
-  { id: "6", name: "Tea Book No. 3 Royal Collection", price: "Tk 5,500", image: "/images/products/Product-6.png" },
+  { id: "1", name: "Artisanal Gourmet Collection", price: "Tk 3,500", image: "/images/gift/item-1.png" },
+  { id: "2", name: "Executive Festive Collection", price: "Tk 4,500", image: "/images/gift/item-2.png" },
+  { id: "3", name: "Seasonal Harvest Fruit Crate", price: "Tk 2,800", image: "/images/gift/item-3.png" },
+  { id: "4", name: "Premium Leather Lifestyle Set", price: "Tk 5,500", image: "/images/Assembly/img-1.png" },
+  { id: "5", name: "Organic Farm Honey & Delicacies", price: "Tk 3,200", image: "/images/Assembly/img-10.webp" },
+  { id: "6", name: "Royal Executive Celebration Hamper", price: "Tk 6,500", image: "/images/Assembly/img-2.png" },
 ];
 
 const heritageItems = [
   {
     id: 1,
     title: "Gracious Hospitality",
-    desc: "Welcome guests and honour relationships with a tea experience crafted to be remembered beyond the final cup.",
+    desc: "Welcome guests and honour relationships with curated gifting experiences crafted to be remembered.",
     image: "/images/Assembly/img-11.webp",
     aspect: "aspect-square"
   },
@@ -106,7 +106,6 @@ export default function GiftsPage() {
       <PageBanner
         title="Gift Sets & Curated Bundles"
         subtitle="Thoughtfully assembled multi-category luxury gift boxes, festive food packages, and executive celebration sets."
-        badge="CURATED GIFTING"
         breadcrumbs={[
           { label: "Gift Sets & Bundles" },
         ]}
@@ -120,7 +119,7 @@ export default function GiftsPage() {
       {/* SECTION 2: Curated Collections */}
       <ScrollAnimate variant="fade-in-up">
         <section className="w-full py-16 md:py-24 bg-[#F6F6F6] border-t border-stone-100">
-          <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+          <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             {/* Header */}
             <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-16">
               <h2 className="inline-flex justify-center flex-wrap items-center gap-1.5">
@@ -143,6 +142,7 @@ export default function GiftsPage() {
                   originalPrice={product.originalPrice}
                   image={product.image}
                   slug={product.slug}
+                  variantId={product.variantId}
                 />
               ))}
             </div>
@@ -164,13 +164,13 @@ export default function GiftsPage() {
             </svg>
           </div>
 
-          <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-20">
+          <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 relative z-20">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               
               {/* Left Title Panel */}
               <div className="lg:col-span-5 flex flex-col justify-start items-start gap-4">
                 <h2 className="text-[#C5B382] text-2xl sm:text-4xl md:text-5xl font-normal font-['Bembo_Std'] leading-tight tracking-wide whitespace-nowrap">
-                  Give More Than Tea—
+                  Give More Than Gifts—
                   <span className="block mt-2 font-['Snell_Roundhand_LT_Std'] italic text-[#1C1C1C] text-3xl sm:text-5xl md:text-6xl leading-none whitespace-nowrap">
                     Share a Heritage
                   </span>

@@ -7,6 +7,7 @@ interface LogoProps {
   className?: string;
   showTagline?: boolean;
   size?: "sm" | "md" | "lg";
+  tagline?: string;
 }
 
 export default function Logo({
@@ -14,25 +15,26 @@ export default function Logo({
   className = "",
   showTagline = true,
   size = "md",
+  tagline = "YOUR TRUSTED ONLINE MART",
 }: LogoProps) {
   const isLight = variant === "light";
 
   const sizeConfig = {
     sm: {
       brand: "text-lg",
-      tagline: "text-[7.5px] tracking-wide mt-[2px]",
+      tagline: "text-[7.5px] tracking-wider mt-[2px]",
       gap: "gap-[3px]",
       icon: "w-5 h-5 text-xs",
     },
     md: {
       brand: "text-[21px]",
-      tagline: "text-[8.5px] tracking-wide mt-[2px]",
+      tagline: "text-[8.5px] tracking-wider mt-[2px]",
       gap: "gap-2",
       icon: "w-6 h-6 text-sm",
     },
     lg: {
       brand: "text-2xl sm:text-3xl",
-      tagline: "text-[9.5px] tracking-wider mt-1",
+      tagline: "text-[9.5px] tracking-widest mt-1",
       gap: "gap-2.5",
       icon: "w-8 h-8 text-base",
     },
@@ -70,11 +72,11 @@ export default function Logo({
 
         {showTagline && (
           <span
-            className={`font-bold leading-none ${s.tagline} ${
+            className={`font-bold uppercase leading-none ${s.tagline} ${
               isLight ? "text-emerald-400" : "text-emerald-700"
             }`}
           >
-            সরাসরি বাগান থেকে আপনার বাড়ি
+            {tagline}
           </span>
         )}
       </div>

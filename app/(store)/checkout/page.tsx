@@ -95,9 +95,6 @@ export default function CheckoutPage() {
   const [buyNowItem, setBuyNowItem] = useState<CartItem | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  // Collapsible sidebar accordion states
-  const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
-  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
   const [isItemsOpen, setIsItemsOpen] = useState(true);
 
   useEffect(() => {
@@ -710,252 +707,211 @@ export default function CheckoutPage() {
                   )}
                 </div>
 
-                {/* ── Standard Collapsible Delivery Destination Widget ── */}
-                <div className="rounded-2xl border border-zinc-200/90 bg-white overflow-hidden transition-all shadow-2xs">
-                  {/* Summary / Toggle Bar */}
-                  <button
-                    type="button"
-                    onClick={() => setIsDeliveryOpen(!isDeliveryOpen)}
-                    className="w-full p-3.5 flex items-center justify-between text-left cursor-pointer hover:bg-zinc-50/80 transition-colors group select-none"
-                  >
+                {/* ── 1. Delivery Destination Section ── */}
+                <div className="rounded-2xl border border-zinc-200/90 bg-white p-3.5 sm:p-4 shadow-2xs space-y-3 transition-all">
+                  <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-200/60">
-                        <LuTruck className="w-4 h-4" />
+                      <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-200/60">
+                        <LuTruck className="w-3.5 h-3.5" />
                       </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-xs font-bold text-zinc-900">Delivery Destination</span>
-                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#4F46E5] bg-indigo-100/70 px-1.5 py-0.2 rounded">
-                            {deliveryZone === "dhaka" ? "Inside Dhaka" : "All Bangladesh"}
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-zinc-500 mt-0.5">
-                          {deliveryZone === "dhaka"
-                            ? `Next Day • ${isDhakaFree ? "FREE Delivery" : formatCurrency(insideRate)}`
-                            : `2 - 4 Days • ${outsideRate === 0 ? "FREE Delivery" : formatCurrency(outsideRate)}`}
-                        </p>
+                      <div>
+                        <h3 className="text-xs font-bold text-zinc-900 leading-tight">Delivery Destination</h3>
+                        <p className="text-[10px] text-zinc-400">Choose courier speed &amp; coverage zone</p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-[#4F46E5] group-hover:text-[#4338CA] shrink-0 ml-2">
-                      <span>{isDeliveryOpen ? "Done" : "Change"}</span>
-                      <LuChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          isDeliveryOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </div>
-                  </button>
+                    <span className="text-[10px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-full shrink-0 border border-indigo-100">
+                      {deliveryZone === "dhaka" ? "Next Day" : "2–4 Days"}
+                    </span>
+                  </div>
 
-                  {/* Collapsible Content */}
-                  {isDeliveryOpen && (
-                    <div className="p-3.5 pt-0 border-t border-zinc-100 bg-zinc-50/40">
-                      <p className="text-[11px] text-zinc-500 mb-2.5">
-                        Select your preferred delivery speed and courier coverage:
-                      </p>
-
-                      <div className="grid grid-cols-2 gap-2">
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setDeliveryZone("dhaka");
-                            setIsDeliveryOpen(false);
-                          }}
-                          className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer relative flex flex-col justify-between ${
+                  {/* 2-Column Responsive Selector */}
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* Option: Inside Dhaka */}
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryZone("dhaka")}
+                      className={`p-3 rounded-xl text-left transition-all duration-150 cursor-pointer relative flex flex-col justify-between ${
+                        deliveryZone === "dhaka"
+                          ? "border-2 border-[#4F46E5] bg-[#EEF2FF]/60 ring-2 ring-[#4F46E5]/10 shadow-xs"
+                          : "border border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between w-full mb-1">
+                        <span className="text-xs font-bold text-zinc-950">Inside Dhaka</span>
+                        <div
+                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${
                             deliveryZone === "dhaka"
-                              ? "border-[#4F46E5] bg-[#EEF2FF]/80 text-[#1E1B4B] ring-1 ring-[#4F46E5]/20 shadow-2xs"
-                              : "border-zinc-200 bg-white hover:border-zinc-300 text-zinc-700"
+                              ? "bg-[#4F46E5] text-white shadow-2xs"
+                              : "border border-zinc-300 bg-white"
                           }`}
                         >
-                          <div className="flex items-center justify-between w-full mb-1">
-                            <span className="text-xs font-bold">Inside Dhaka</span>
-                            <div
-                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
-                                deliveryZone === "dhaka"
-                                  ? "bg-[#4F46E5] text-white font-bold"
-                                  : "border border-zinc-300 bg-white"
-                              }`}
-                            >
-                              {deliveryZone === "dhaka" && "✓"}
-                            </div>
-                          </div>
-                          <p className="text-[10px] text-zinc-500">Next Day Delivery</p>
-                          <div className="mt-1.5 flex items-center justify-between text-[11px]">
-                            <span className="font-extrabold text-emerald-700">
-                              {isDhakaFree ? "FREE" : formatCurrency(insideRate)}
-                            </span>
-                            <span className="text-[10px] text-zinc-400">1 Day</span>
-                          </div>
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setDeliveryZone("outside");
-                            setIsDeliveryOpen(false);
-                          }}
-                          className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer relative flex flex-col justify-between ${
-                            deliveryZone === "outside"
-                              ? "border-[#4F46E5] bg-[#EEF2FF]/80 text-[#1E1B4B] ring-1 ring-[#4F46E5]/20 shadow-2xs"
-                              : "border-zinc-200 bg-white hover:border-zinc-300 text-zinc-700"
-                          }`}
-                        >
-                          <div className="flex items-center justify-between w-full mb-1">
-                            <span className="text-xs font-bold">All Bangladesh</span>
-                            <div
-                              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
-                                deliveryZone === "outside"
-                                  ? "bg-[#4F46E5] text-white font-bold"
-                                  : "border border-zinc-300 bg-white"
-                              }`}
-                            >
-                              {deliveryZone === "outside" && "✓"}
-                            </div>
-                          </div>
-                          <p className="text-[10px] text-zinc-500">All 64 Districts</p>
-                          <div className="mt-1.5 flex items-center justify-between text-[11px]">
-                            <span className="font-bold text-zinc-900">
-                              {outsideRate === 0 ? "FREE" : formatCurrency(outsideRate)}
-                            </span>
-                            <span className="text-[10px] text-zinc-400">2-4 Days</span>
-                          </div>
-                        </button>
+                          {deliveryZone === "dhaka" && <LuCheck className="w-2.5 h-2.5 stroke-[3]" />}
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* ── Standard Collapsible Payment Method Widget ── */}
-                <div className="rounded-2xl border border-zinc-200/90 bg-white overflow-hidden transition-all shadow-2xs">
-                  {/* Summary / Toggle Bar */}
-                  <button
-                    type="button"
-                    onClick={() => setIsPaymentOpen(!isPaymentOpen)}
-                    className="w-full p-3.5 flex items-center justify-between text-left cursor-pointer hover:bg-zinc-50/80 transition-colors group select-none"
-                  >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-200/60">
-                        <LuShieldCheck className="w-4 h-4" />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-xs font-bold text-zinc-900">Payment Method</span>
-                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#4F46E5] bg-indigo-100/70 px-1.5 py-0.2 rounded">
-                            Verified
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-zinc-500 mt-0.5">
-                          Cash on Delivery • Pay upon doorstep inspection
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-[#4F46E5] group-hover:text-[#4338CA] shrink-0 ml-2">
-                      <span>{isPaymentOpen ? "Close" : "Change"}</span>
-                      <LuChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                          isPaymentOpen ? "rotate-180" : ""
-                        }`}
-                      />
-                    </div>
-                  </button>
-
-                  {/* Collapsible Content */}
-                  {isPaymentOpen && (
-                    <div className="p-3.5 pt-0 border-t border-zinc-100 bg-zinc-50/40 space-y-2">
-                      <p className="text-[11px] text-zinc-500 mb-2">
-                        Select your preferred payment method:
-                      </p>
-
-                      {/* Cash on Delivery option */}
-                      <label
-                        className={`flex items-start gap-2.5 p-3 rounded-xl border-2 transition-all cursor-pointer relative ${
-                          paymentMethod === "cod"
-                            ? "border-[#4F46E5] bg-[#EEF2FF]/70 shadow-2xs"
-                            : "border-zinc-200 bg-white hover:border-zinc-300"
-                        }`}
-                      >
-                        <div className="mt-0.5 shrink-0">
-                          <div
-                            className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
-                              paymentMethod === "cod"
-                                ? "border-[#4F46E5] bg-[#4F46E5] text-white"
-                                : "border-zinc-300 bg-white"
-                            }`}
-                          >
-                            {paymentMethod === "cod" && <LuCheck className="w-2.5 h-2.5 stroke-[3]" />}
-                          </div>
-                        </div>
-                        <input
-                          type="radio"
-                          name="collapsible-payment"
-                          value="cod"
-                          checked={paymentMethod === "cod"}
-                          onChange={() => {
-                            setPaymentMethod("cod");
-                            setIsPaymentOpen(false);
-                          }}
-                          className="sr-only"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between flex-wrap gap-1">
-                            <span className="text-xs font-bold text-zinc-900">
-                              Cash on Delivery
-                            </span>
-                            <span className="text-[9px] font-extrabold uppercase tracking-wider bg-[#EEF2FF] text-[#4F46E5] px-1.5 py-0.5 rounded-full">
-                              Zero Prepayment
-                            </span>
-                          </div>
-                          <p className="text-[11px] text-zinc-600 mt-0.5 leading-relaxed">
-                            Pay with cash upon receiving and inspecting items at your doorstep. Zero advance payment required.
-                          </p>
-                        </div>
-                      </label>
-
-                      {/* Digital Payment (Coming Soon) */}
-                      <div className="flex items-center justify-between p-2.5 rounded-xl border border-zinc-200/80 bg-white opacity-75 text-xs">
-                        <div className="flex items-center gap-2">
-                          <div className="w-3.5 h-3.5 rounded-full border border-zinc-300 bg-zinc-100 shrink-0" />
-                          <div>
-                            <span className="text-[11px] font-semibold text-zinc-700 block">
-                              Cards & Mobile Banking
-                            </span>
-                            <span className="text-[9px] text-zinc-400">bKash, Nagad, Visa, Mastercard</span>
-                          </div>
-                        </div>
-                        <span className="text-[9px] font-bold uppercase tracking-wider bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded-md shrink-0">
-                          Coming Soon
+                      <p className="text-[11px] text-zinc-500 font-medium mb-2">Next Day Express</p>
+                      <div className="flex items-center justify-between text-xs pt-1 border-t border-zinc-200/50">
+                        <span className={`font-extrabold ${isDhakaFree ? "text-emerald-700" : "text-[#1E1B4B]"}`}>
+                          {isDhakaFree ? "FREE" : formatCurrency(insideRate)}
+                        </span>
+                        <span className="text-[10px] font-semibold text-zinc-400 bg-white px-1.5 py-0.5 rounded border border-zinc-200/60">
+                          1 Day
                         </span>
                       </div>
-                    </div>
-                  )}
+                    </button>
+
+                    {/* Option: All Bangladesh */}
+                    <button
+                      type="button"
+                      onClick={() => setDeliveryZone("outside")}
+                      className={`p-3 rounded-xl text-left transition-all duration-150 cursor-pointer relative flex flex-col justify-between ${
+                        deliveryZone === "outside"
+                          ? "border-2 border-[#4F46E5] bg-[#EEF2FF]/60 ring-2 ring-[#4F46E5]/10 shadow-xs"
+                          : "border border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
+                      }`}
+                    >
+                      <div className="flex items-start justify-between w-full mb-1">
+                        <span className="text-xs font-bold text-zinc-950">All Bangladesh</span>
+                        <div
+                          className={`w-4 h-4 rounded-full flex items-center justify-center transition-all shrink-0 ${
+                            deliveryZone === "outside"
+                              ? "bg-[#4F46E5] text-white shadow-2xs"
+                              : "border border-zinc-300 bg-white"
+                          }`}
+                        >
+                          {deliveryZone === "outside" && <LuCheck className="w-2.5 h-2.5 stroke-[3]" />}
+                        </div>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 font-medium mb-2">All 64 Districts</p>
+                      <div className="flex items-center justify-between text-xs pt-1 border-t border-zinc-200/50">
+                        <span className={`font-extrabold ${outsideRate === 0 ? "text-emerald-700" : "text-[#1E1B4B]"}`}>
+                          {outsideRate === 0 ? "FREE" : formatCurrency(outsideRate)}
+                        </span>
+                        <span className="text-[10px] font-semibold text-zinc-400 bg-white px-1.5 py-0.5 rounded border border-zinc-200/60">
+                          2–4 Days
+                        </span>
+                      </div>
+                    </button>
+                  </div>
                 </div>
 
-                {/* ── Promo Code / Coupon Section ── */}
-                <div className="rounded-2xl border border-dashed border-zinc-200 bg-zinc-50/60 p-3 text-xs space-y-2">
+                {/* ── 2. Payment Method Section ── */}
+                <div className="rounded-2xl border border-zinc-200/90 bg-white p-3.5 sm:p-4 shadow-2xs space-y-3 transition-all">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-7 h-7 rounded-lg bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-200/60">
+                        <LuShieldCheck className="w-3.5 h-3.5" />
+                      </div>
+                      <div>
+                        <h3 className="text-xs font-bold text-zinc-900 leading-tight">Payment Method</h3>
+                        <p className="text-[10px] text-zinc-400">100% Secure doorstep inspection guarantee</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/80 shrink-0">
+                      Verified
+                    </span>
+                  </div>
+
+                  {/* Cash on Delivery Primary Option */}
+                  <div
+                    onClick={() => setPaymentMethod("cod")}
+                    className={`p-3 sm:p-3.5 rounded-xl border-2 transition-all cursor-pointer relative ${
+                      paymentMethod === "cod"
+                        ? "border-[#4F46E5] bg-[#EEF2FF]/40 ring-2 ring-[#4F46E5]/10 shadow-xs"
+                        : "border-zinc-200 bg-white hover:border-zinc-300"
+                    }`}
+                  >
+                    <div className="flex items-start gap-2.5">
+                      <div className="mt-0.5 shrink-0">
+                        <div
+                          className={`w-4.5 h-4.5 rounded-full flex items-center justify-center transition-all ${
+                            paymentMethod === "cod"
+                              ? "bg-[#4F46E5] text-white shadow-2xs"
+                              : "border-2 border-zinc-300 bg-white"
+                          }`}
+                        >
+                          {paymentMethod === "cod" && <LuCheck className="w-2.5 h-2.5 stroke-[3]" />}
+                        </div>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between flex-wrap gap-1 mb-1">
+                          <span className="text-xs font-bold text-zinc-950">
+                            Cash on Delivery (ক্যাশ অন ডেলিভারি)
+                          </span>
+                          <span className="text-[9px] font-extrabold uppercase tracking-wider bg-[#EEF2FF] text-[#4F46E5] border border-indigo-200/60 px-2 py-0.5 rounded-full">
+                            Zero Advance
+                          </span>
+                        </div>
+                        <p className="text-[11px] text-zinc-600 leading-relaxed mb-2">
+                          Pay with cash or mobile money upon receiving and inspecting items at your doorstep. Zero advance payment required.
+                        </p>
+                        <div className="flex items-center gap-3 text-[10px] font-semibold text-zinc-500 pt-1.5 border-t border-indigo-100/60">
+                          <span className="flex items-center gap-1 text-[#4F46E5]">
+                            <LuCheck className="w-3 h-3 stroke-[3]" /> Doorstep Inspection
+                          </span>
+                          <span>•</span>
+                          <span>Pay Courier via Cash / bKash</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Digital Payment / Cards info option */}
+                  <div className="p-3 rounded-xl border border-zinc-200/80 bg-zinc-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <div className="w-4 h-4 rounded-full border border-zinc-300 bg-white shrink-0" />
+                      <div>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-xs font-semibold text-zinc-700">Cards &amp; Mobile Banking</span>
+                        </div>
+                        <p className="text-[10px] text-zinc-400 mt-0.5">
+                          Pay rider via bKash / Nagad QR upon delivery
+                        </p>
+                      </div>
+                    </div>
+                    {/* Logos */}
+                    <div className="flex items-center gap-1.5 shrink-0 pl-6 sm:pl-0">
+                      <span className="px-1.5 py-0.5 bg-white border border-zinc-200 rounded text-[9px] font-extrabold text-[#E2136E]">bKash</span>
+                      <span className="px-1.5 py-0.5 bg-white border border-zinc-200 rounded text-[9px] font-extrabold text-[#ED1C24]">Nagad</span>
+                      <span className="px-1.5 py-0.5 bg-white border border-zinc-200 rounded text-[9px] font-black italic text-[#1A1F71]">VISA</span>
+                      <span className="px-1.5 py-0.5 bg-white border border-zinc-200 rounded text-[9px] font-bold text-zinc-800">Mastercard</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── 3. Promo Code or Voucher Section ── */}
+                <div className="rounded-2xl border border-zinc-200/90 bg-white p-3.5 sm:p-4 shadow-2xs space-y-2.5 transition-all">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-zinc-800 flex items-center gap-1.5">
+                    <span className="font-bold text-xs text-zinc-900 flex items-center gap-2">
                       <LuTag className="w-3.5 h-3.5 text-[#4F46E5]" />
                       Promo Code or Voucher
                     </span>
                     {appliedCoupon && (
-                      <span className="text-[10px] font-extrabold uppercase text-[#4F46E5] bg-indigo-100/70 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-extrabold uppercase text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
                         Applied
                       </span>
                     )}
                   </div>
+
                   {appliedCoupon ? (
-                    <div className="flex items-center justify-between p-2 rounded-xl bg-[#EEF2FF] border border-indigo-200">
-                      <div>
-                        <span className="font-extrabold text-indigo-950 tracking-wider text-xs block">
-                          {appliedCoupon.code}
-                        </span>
-                        <span className="text-[10px] text-[#4F46E5]">
-                          {appliedCoupon.type === "percentage" ? `${appliedCoupon.value}% OFF` : `৳${appliedCoupon.value} OFF`} discount applied
-                        </span>
+                    <div className="flex items-center justify-between p-2.5 rounded-xl bg-emerald-50/80 border border-emerald-200">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                          <LuCheck className="w-3.5 h-3.5 stroke-[3]" />
+                        </div>
+                        <div>
+                          <span className="font-mono font-black text-xs text-emerald-950 tracking-wider uppercase block">
+                            {appliedCoupon.code}
+                          </span>
+                          <span className="text-[10px] text-emerald-700 font-semibold">
+                            {appliedCoupon.type === "percentage" ? `${appliedCoupon.value}% OFF` : `৳${appliedCoupon.value} OFF`} discount applied to your order
+                          </span>
+                        </div>
                       </div>
                       <button
                         type="button"
                         onClick={handleRemoveCoupon}
-                        className="text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:underline cursor-pointer"
+                        className="text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:underline cursor-pointer px-2 py-1"
                       >
                         Remove
                       </button>
@@ -966,14 +922,14 @@ export default function CheckoutPage() {
                         type="text"
                         value={couponInput}
                         onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
-                        placeholder="Enter promo code"
-                        className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-xl text-xs uppercase placeholder:normal-case placeholder:text-zinc-400 focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20"
+                        placeholder="Enter promo code (e.g. NOVAMART)"
+                        className="flex-1 px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-semibold uppercase placeholder:normal-case placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all"
                       />
                       <button
                         type="button"
                         disabled={applyingCoupon || !couponInput.trim()}
                         onClick={handleApplyCoupon}
-                        className="px-3.5 py-2 bg-zinc-900 hover:bg-zinc-800 disabled:opacity-40 text-white font-bold text-xs rounded-xl cursor-pointer transition-colors"
+                        className="px-4.5 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-xs shrink-0 flex items-center justify-center min-w-[72px]"
                       >
                         {applyingCoupon ? <LuLoader className="w-3.5 h-3.5 animate-spin" /> : "Apply"}
                       </button>

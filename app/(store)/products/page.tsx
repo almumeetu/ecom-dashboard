@@ -480,7 +480,7 @@ function ProductsPageContent() {
                   type="checkbox"
                   checked={inStockOnly}
                   onChange={(e) => setInStockOnly(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                  className="w-4 h-4 rounded border-zinc-300 text-[#4F46E5] focus:ring-[#4F46E5] cursor-pointer"
                 />
                 <span className="text-zinc-700 group-hover:text-zinc-900 font-medium">
                   In stock only
@@ -518,7 +518,7 @@ function ProductsPageContent() {
                       onClick={() => handlePricePreset(preset)}
                       className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors cursor-pointer ${
                         isActive
-                          ? 'bg-emerald-600 text-white border-emerald-600'
+                          ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
                           : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
                       }`}
                     >
@@ -538,7 +538,7 @@ function ProductsPageContent() {
                       placeholder="Min"
                       value={minPriceInput}
                       onChange={(e) => setMinPriceInput(e.target.value)}
-                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-emerald-500 bg-white"
+                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5] bg-white"
                     />
                   </div>
                   <div className="relative">
@@ -548,14 +548,14 @@ function ProductsPageContent() {
                       placeholder="Max"
                       value={maxPriceInput}
                       onChange={(e) => setMaxPriceInput(e.target.value)}
-                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-emerald-500 bg-white"
+                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5] bg-white"
                     />
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={applyCustomPrice}
-                  className="w-full py-2 bg-zinc-900 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
+                  className="w-full py-2 bg-zinc-900 hover:bg-[#4F46E5] text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
                 >
                   Apply Price
                 </button>
@@ -593,12 +593,12 @@ function ProductsPageContent() {
                     }}
                     className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
                       isSelected
-                        ? 'bg-emerald-50 text-emerald-700 font-bold'
+                        ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
                         : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                     }`}
                   >
                     <span>{opt}</span>
-                    {isSelected && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
+                    {isSelected && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
                   </button>
                 );
               })}
@@ -632,7 +632,7 @@ function ProductsPageContent() {
                     value={catSearchTerm}
                     onChange={(e) => setCatSearchTerm(e.target.value)}
                     placeholder="Filter categories..."
-                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-emerald-500"
+                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5]"
                   />
                 </div>
               )}
@@ -649,12 +649,12 @@ function ProductsPageContent() {
                         onClick={() => setSelectedCategory(opt)}
                         className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-emerald-50 text-emerald-700 font-bold'
+                            ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
                             : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                         }`}
                       >
                         <span className="truncate">{opt}</span>
-                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
+                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />}
                       </button>
                     );
                   })}
@@ -688,7 +688,7 @@ function ProductsPageContent() {
                     value={brandSearchTerm}
                     onChange={(e) => setBrandSearchTerm(e.target.value)}
                     placeholder="Search brands..."
-                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-emerald-500"
+                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5]"
                   />
                 </div>
               )}
@@ -705,12 +705,12 @@ function ProductsPageContent() {
                         onClick={() => setSelectedBrand(opt)}
                         className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-emerald-50 text-emerald-700 font-bold'
+                            ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
                             : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                         }`}
                       >
                         <span className="truncate">{opt}</span>
-                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
+                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />}
                       </button>
                     );
                   })}
@@ -741,7 +741,7 @@ function ProductsPageContent() {
                   type="checkbox"
                   checked={onSaleOnly}
                   onChange={(e) => setOnSaleOnly(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-300 text-emerald-600 focus:ring-emerald-500 cursor-pointer"
+                  className="w-4 h-4 rounded border-zinc-300 text-[#4F46E5] focus:ring-[#4F46E5] cursor-pointer"
                 />
                 <span className="text-zinc-700 group-hover:text-zinc-900 font-medium flex items-center gap-1.5">
                   <LuTag className="w-3.5 h-3.5 text-rose-500" />
@@ -801,7 +801,7 @@ function ProductsPageContent() {
                     }}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                       isSelected
-                        ? 'bg-emerald-600 text-white shadow-xs font-semibold'
+                        ? 'bg-[#4F46E5] text-white shadow-xs font-semibold'
                         : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200/80'
                     }`}
                   >
@@ -839,10 +839,10 @@ function ProductsPageContent() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold shadow-2xs active:bg-zinc-100 shrink-0"
                   aria-label="Open Filters"
                 >
-                  <LuSlidersHorizontal className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                  <LuSlidersHorizontal className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
                   <span>Filters</span>
                   {activeFilters.length > 0 && (
-                    <span className="w-4.5 h-4.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                    <span className="w-4.5 h-4.5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
                       {activeFilters.length}
                     </span>
                   )}
@@ -883,12 +883,12 @@ function ProductsPageContent() {
                           }}
                           className={`w-full flex items-center justify-between px-3 py-2 text-left text-xs transition-colors cursor-pointer ${
                             selectedSort === opt.value
-                              ? 'bg-emerald-50 text-emerald-700 font-bold'
+                              ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
                               : 'text-zinc-700 hover:bg-zinc-50'
                           }`}
                         >
                           <span>{opt.label}</span>
-                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
+                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
                         </button>
                       ))}
                     </div>
@@ -946,7 +946,7 @@ function ProductsPageContent() {
                   <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
                   <span>{showDesktopSidebar ? 'Hide Filters' : 'Show Filters'}</span>
                   {activeFilters.length > 0 && (
-                    <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center">
                       {activeFilters.length}
                     </span>
                   )}
@@ -961,7 +961,7 @@ function ProductsPageContent() {
                   <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
                   <span>Filters & Sort</span>
                   {activeFilters.length > 0 && (
-                    <span className="w-5 h-5 rounded-full bg-emerald-600 text-white text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center">
                       {activeFilters.length}
                     </span>
                   )}
@@ -1056,12 +1056,12 @@ function ProductsPageContent() {
                           }}
                           className={`w-full flex items-center justify-between px-3.5 py-2 text-left text-xs transition-colors cursor-pointer ${
                             selectedSort === opt.value
-                              ? 'bg-emerald-50 text-emerald-700 font-bold'
+                              ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
                               : 'text-zinc-700 hover:bg-zinc-50'
                           }`}
                         >
                           <span>{opt.label}</span>
-                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
+                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
                         </button>
                       ))}
                     </div>
@@ -1098,7 +1098,7 @@ function ProductsPageContent() {
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="text-[11px] sm:text-xs font-semibold text-emerald-700 hover:text-emerald-800 underline underline-offset-2 ml-1 cursor-pointer transition-colors shrink-0 whitespace-nowrap"
+                className="text-[11px] sm:text-xs font-semibold text-[#4F46E5] hover:text-[#4338CA] underline underline-offset-2 ml-1 cursor-pointer transition-colors shrink-0 whitespace-nowrap"
               >
                 Clear all ({activeFilters.length})
               </button>
@@ -1115,7 +1115,7 @@ function ProductsPageContent() {
               <aside className="hidden lg:block w-[260px] shrink-0 sticky top-[175px] self-start pr-2">
                 <div className="flex items-center justify-between pb-4 mb-2 border-b border-zinc-200">
                   <h3 className="font-extrabold text-sm uppercase tracking-wider text-zinc-900 flex items-center gap-2">
-                    <LuSlidersHorizontal className="w-4 h-4 text-emerald-600" />
+                    <LuSlidersHorizontal className="w-4 h-4 text-[#4F46E5]" />
                     <span>Filter By</span>
                   </h3>
                   {activeFilters.length > 0 && (
@@ -1198,7 +1198,7 @@ function ProductsPageContent() {
               ) : (
                 /* Empty state when filters return 0 results */
                 <div className="flex flex-col items-center justify-center py-12 sm:py-20 text-center px-4 bg-zinc-50/50 rounded-2xl border border-dashed border-zinc-200 my-4">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-50 text-[#4F46E5] flex items-center justify-center mb-4">
                     <LuRotateCcw className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-1">
@@ -1210,7 +1210,7 @@ function ProductsPageContent() {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md shadow-emerald-600/20 active:scale-95"
+                    className="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md shadow-indigo-600/20 active:scale-95"
                   >
                     Clear All Filters
                   </button>
@@ -1236,12 +1236,12 @@ function ProductsPageContent() {
               {/* Drawer Header */}
               <div className="px-4 sm:px-5 py-3.5 border-b border-zinc-200 flex items-center justify-between shrink-0 bg-zinc-50">
                 <div className="flex items-center gap-2">
-                  <LuSlidersHorizontal className="w-4 h-4 text-emerald-600" />
+                  <LuSlidersHorizontal className="w-4 h-4 text-[#4F46E5]" />
                   <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
                     Filters & Sort
                   </h3>
                   {activeFilters.length > 0 && (
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold">
+                    <span className="px-2 py-0.5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold">
                       {activeFilters.length}
                     </span>
                   )}
@@ -1283,12 +1283,12 @@ function ProductsPageContent() {
                         onClick={() => setSelectedSort(opt.value)}
                         className={`px-3 py-2 rounded-lg text-xs font-medium border text-left flex items-center justify-between cursor-pointer transition-colors ${
                           selectedSort === opt.value
-                            ? 'bg-emerald-50 border-emerald-500 text-emerald-700 font-bold'
+                            ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5] font-bold'
                             : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-zinc-100'
                         }`}
                       >
                         <span>{opt.label}</span>
-                        {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-emerald-600" />}
+                        {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
                       </button>
                     ))}
                   </div>
@@ -1311,7 +1311,7 @@ function ProductsPageContent() {
                 <button
                   type="button"
                   onClick={() => setIsMobileFilterOpen(false)}
-                  className="flex-1 py-3 px-4 bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-all cursor-pointer shadow-sm active:scale-[0.99]"
+                  className="flex-1 py-3 px-4 bg-zinc-900 hover:bg-[#4F46E5] text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-all cursor-pointer shadow-sm active:scale-[0.99]"
                 >
                   View ({filteredProducts.length}) Products
                 </button>
@@ -1330,7 +1330,7 @@ export default function ProductsPage() {
     <Suspense
       fallback={
         <div className="flex flex-col items-center justify-center min-h-[50vh] py-20 text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-emerald-600 mb-4" />
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#4F46E5] mb-4" />
           <p className="text-zinc-500 text-xs font-medium uppercase tracking-wider">Loading marketplace products...</p>
         </div>
       }

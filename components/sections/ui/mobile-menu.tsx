@@ -56,7 +56,7 @@ export default function MobileMenu({
       <button
         aria-label="Menu"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="text-zinc-800 hover:text-brand-primary transition-colors cursor-pointer"
+        className="text-zinc-800 hover:text-[#4F46E5] transition-colors cursor-pointer"
       >
         <HiOutlineBars3BottomRight className="w-6 h-6" />
       </button>
@@ -70,11 +70,11 @@ export default function MobileMenu({
               >
                 {item.hasDropdown ? (
                   <>
-                    <div className="w-full flex items-center justify-between font-gotham text-sm text-zinc-800 hover:bg-zinc-50 transition-colors">
+                    <div className="w-full flex items-center justify-between font-gotham text-sm text-zinc-800 hover:bg-[#EEF2FF]/60 transition-colors">
                       <Link
                         href="/products"
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="flex-grow px-4 py-3 font-medium hover:text-brand-primary text-left"
+                        className="flex-grow px-4 py-3 font-medium hover:text-[#4F46E5] text-left"
                       >
                         {item.label}
                       </Link>
@@ -100,7 +100,7 @@ export default function MobileMenu({
                             <div key={category.id} className="border-b border-zinc-100/50 last:border-0">
                               <button
                                 onClick={() => toggleCategory(category.id)}
-                                className="w-full flex items-center justify-between pl-8 pr-4 py-2 font-gotham text-sm text-zinc-700 hover:text-brand-primary transition-colors cursor-pointer"
+                                className="w-full flex items-center justify-between pl-8 pr-4 py-2 font-gotham text-sm text-zinc-700 hover:text-[#4F46E5] transition-colors cursor-pointer"
                               >
                                 <span>{category.name}</span>
                                 {subcategories.length > 0 && (
@@ -123,7 +123,7 @@ export default function MobileMenu({
                                         setMobileDropdownOpen(false);
                                         setActiveMobileCategory(null);
                                       }}
-                                      className="block py-2 font-gotham text-xs text-zinc-650 hover:text-brand-primary transition-colors border-b border-zinc-100 last:border-0"
+                                      className="block py-2 font-gotham text-xs text-zinc-650 hover:text-[#4F46E5] transition-colors border-b border-zinc-100 last:border-0"
                                     >
                                       {subItem.name}
                                     </Link>
@@ -140,7 +140,7 @@ export default function MobileMenu({
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="block px-4 py-3 font-gotham text-sm font-medium text-zinc-800 hover:bg-zinc-50 hover:text-brand-primary transition-colors"
+                    className="block px-4 py-3 font-gotham text-sm font-medium text-zinc-800 hover:bg-[#EEF2FF]/60 hover:text-[#4F46E5] transition-colors"
                   >
                     {item.label}
                   </Link>
@@ -152,7 +152,7 @@ export default function MobileMenu({
               <Link
                 href="/admin/dashboard"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block text-center py-2 px-3 rounded-lg bg-emerald-600 text-white font-gotham text-xs font-bold shadow-xs hover:bg-emerald-700 transition-colors"
+                className="block text-center py-2 px-3 rounded-lg bg-[#4F46E5] text-white font-gotham text-xs font-bold shadow-xs hover:bg-[#4338CA] transition-colors"
               >
                 Admin &amp; Merchant Portal
               </Link>

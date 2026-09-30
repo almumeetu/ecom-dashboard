@@ -144,13 +144,13 @@ export default function AuthModal() {
         </button>
 
         {/* Left Decorative & Info Section (5 cols on md) */}
-        <div className="hidden md:flex md:col-span-5 bg-gradient-to-br from-[#121614] via-[#1A221E] to-[#121614] text-white p-8 flex-col justify-between relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+        <div className="hidden md:flex md:col-span-5 bg-gradient-to-br from-[#0B132B] via-[#1E1B4B] to-[#0B132B] text-white p-8 flex-col justify-between relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-48 h-48 bg-[#4F46E5]/15 rounded-full blur-2xl pointer-events-none" />
 
           <div>
             <Logo variant="light" size="sm" />
 
-            <div className="inline-block mt-4 px-2.5 py-0.5 rounded-full bg-emerald-950 border border-emerald-700/60 text-emerald-400 text-[9px] font-bold tracking-widest uppercase">
+            <div className="inline-block mt-4 px-2.5 py-0.5 rounded-full bg-indigo-950/80 border border-indigo-700/60 text-indigo-300 text-[9px] font-bold tracking-widest uppercase">
               Webdev Software Solutions
             </div>
 
@@ -166,15 +166,15 @@ export default function AuthModal() {
 
             <div className="mt-6 space-y-3">
               <div className="flex items-start gap-2.5">
-                <LuShieldCheck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <LuShieldCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
                 <span className="text-[11px] text-zinc-300">100% Genuine Certified Brands</span>
               </div>
               <div className="flex items-start gap-2.5">
-                <LuTruck className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <LuTruck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
                 <span className="text-[11px] text-zinc-300">Central Logistics &amp; Fast Nationwide Dispatch</span>
               </div>
               <div className="flex items-start gap-2.5">
-                <LuGift className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                <LuGift className="w-4 h-4 text-[#F97316] shrink-0 mt-0.5" />
                 <span className="text-[11px] text-zinc-300">Exclusive Vouchers &amp; Flash Deal Alerts</span>
               </div>
             </div>
@@ -182,7 +182,7 @@ export default function AuthModal() {
 
           <div className="pt-5 border-t border-white/10 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-emerald-500/40 ring-2 ring-emerald-500/20 shrink-0">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#4F46E5]/40 ring-2 ring-[#4F46E5]/20 shrink-0">
                 <Image
                   src="/images/team/Abdullah.jpg"
                   alt="NovaMart Team"
@@ -193,7 +193,7 @@ export default function AuthModal() {
               </div>
               <div className="text-[11px] leading-tight">
                 <div className="text-white font-bold">NovaMart Team</div>
-                <div className="text-[10px] text-emerald-400 font-medium">Founder &amp; CEO</div>
+                <div className="text-[10px] text-[#818CF8] font-medium">Founder &amp; CEO</div>
               </div>
             </div>
             <div className="text-right text-[10px] text-zinc-400">
@@ -201,7 +201,7 @@ export default function AuthModal() {
                 <FiMapPin className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span>Mohadevpur</span>
               </div>
-              <a href="tel:01712345678" className="text-zinc-300 hover:text-emerald-400 font-semibold block mt-0.5">
+              <a href="tel:01712345678" className="text-zinc-300 hover:text-indigo-300 font-semibold block mt-0.5">
                 01712345678
               </a>
             </div>
@@ -224,7 +224,7 @@ export default function AuthModal() {
             <button
               type="button"
               onClick={switchView}
-              className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer shrink-0 pt-1"
+              className="text-xs font-bold text-[#4F46E5] hover:text-[#4338CA] hover:underline cursor-pointer shrink-0 pt-1"
             >
               {view === "login" ? "New? Register" : "Have account? Log in"}
             </button>
@@ -270,7 +270,7 @@ export default function AuthModal() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Saikat Islam"
                   required
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
                 />
               </div>
             )}
@@ -285,7 +285,7 @@ export default function AuthModal() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="yourname@gmail.com"
                 required
-                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
+                className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
               />
             </div>
 
@@ -301,7 +301,7 @@ export default function AuthModal() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
                   />
                   <button
                     type="button"
@@ -325,7 +325,7 @@ export default function AuthModal() {
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="Repeat"
                       required
-                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 transition-all"
+                      className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
                     />
                     <button
                       type="button"
@@ -346,11 +346,11 @@ export default function AuthModal() {
                     type="checkbox"
                     checked={rememberLogin}
                     onChange={(e) => setRememberLogin(e.target.checked)}
-                    className="w-3.5 h-3.5 accent-emerald-600 rounded cursor-pointer"
+                    className="w-3.5 h-3.5 accent-[#4F46E5] rounded cursor-pointer"
                   />
                   <span className="text-zinc-600">Remember login</span>
                 </label>
-                <a href="tel:01712345678" className="text-emerald-600 hover:underline">
+                <a href="tel:01712345678" className="text-[#4F46E5] hover:underline">
                   Need help?
                 </a>
               </div>
@@ -359,7 +359,7 @@ export default function AuthModal() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-emerald-600/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 mt-2"
+              className="w-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-indigo-600/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 mt-2"
             >
               {submitting && <LuLoader className="w-4 h-4 animate-spin" />}
               <span>
@@ -380,7 +380,7 @@ export default function AuthModal() {
                 <button
                   type="button"
                   onClick={switchView}
-                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                  className="font-bold text-[#4F46E5] hover:text-[#4338CA] hover:underline cursor-pointer"
                 >
                   Create one now
                 </button>
@@ -391,7 +391,7 @@ export default function AuthModal() {
                 <button
                   type="button"
                   onClick={switchView}
-                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline cursor-pointer"
+                  className="font-bold text-[#4F46E5] hover:text-[#4338CA] hover:underline cursor-pointer"
                 >
                   Sign in here
                 </button>

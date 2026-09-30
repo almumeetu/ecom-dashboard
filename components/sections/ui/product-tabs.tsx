@@ -351,8 +351,8 @@ export default function ProductTabs({
 
             {[
               {
-                icon: <LuCheck className="w-4 h-4 text-emerald-600" />,
-                bg: 'bg-emerald-50',
+                icon: <LuCheck className="w-4 h-4 text-[#4F46E5]" />,
+                bg: 'bg-[#EEF2FF]',
                 title: 'Authentic & Verified',
                 desc: 'Procured directly from verified suppliers and brand authorized hubs.',
               },
@@ -436,7 +436,7 @@ export default function ProductTabs({
           {/* Express Delivery Card */}
           <div className="p-6 sm:p-8 rounded-3xl bg-white border border-stone-200/90 shadow-2xs space-y-4">
             <div className="flex items-center gap-3 text-zinc-950 font-extrabold text-lg">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center">
                 <LuTruck className="w-5 h-5" />
               </div>
               <div>
@@ -453,25 +453,25 @@ export default function ProductTabs({
             ) : (
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-zinc-600">
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
                   <span>
                     <strong>Dhaka Metropolitan:</strong> Delivered in 1–2 business days ({deliveryInside} delivery charge).
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
                   <span>
                     <strong>All Bangladesh (Outside Dhaka):</strong> Delivered in 2–4 business days via courier ({deliveryOutside} delivery charge).
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
                   <span>
                     <strong>Real-time Tracking:</strong> SMS notifications and courier tracking links dispatched upon handover.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
                   <span>
                     <strong>Inspection Privilege:</strong> External parcel condition check allowed upon delivery before releasing COD payment.
                   </span>
@@ -726,8 +726,8 @@ export default function ProductTabs({
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-extrabold text-zinc-950">{rev.name}</span>
                           {rev.verified && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/80">
-                              <LuShieldCheck className="w-3 h-3 text-emerald-600" />
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-full border border-indigo-200/80">
+                              <LuShieldCheck className="w-3 h-3 text-[#4F46E5]" />
                               Verified Buyer
                             </span>
                           )}
@@ -751,7 +751,7 @@ export default function ProductTabs({
                       onClick={() => toggleHelpful(rev.id)}
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                         helpfulReviews[rev.id]
-                          ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                          ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5]'
                           : 'border-stone-200 hover:bg-stone-50 text-zinc-600'
                       }`}
                     >

@@ -108,8 +108,8 @@ export default function Navigation() {
         className="block"
       >
         {item.hasDropdown ? (
-          <span className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wide px-3.5 py-1.5 rounded-lg transition-all shadow-2xs">
-            <LuLayoutGrid className="w-3.5 h-3.5" />
+          <span className="inline-flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wide px-3.5 py-1.5 rounded-lg transition-all shadow-2xs">
+            <LuLayoutGrid className="w-3.5 h-3.5 text-indigo-200" />
             <span>{item.label}</span>
             <RiArrowDownSLine className={`text-base transition-transform duration-200 ${isTeasHovered ? 'rotate-180' : ''}`} />
           </span>
@@ -117,8 +117,8 @@ export default function Navigation() {
           <span
             className={`text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap transition-colors flex items-center gap-0.5 py-2.5 ${
               isActive(item.href)
-                ? "text-emerald-400 font-bold"
-                : "text-zinc-300 hover:text-white"
+                ? "text-[#818CF8] font-bold"
+                : "text-slate-300 hover:text-white"
             }`}
           >
             {item.label}
@@ -144,10 +144,10 @@ export default function Navigation() {
                   <Link
                     href="/products"
                     onClick={() => setIsTeasHovered(false)}
-                    className="w-full pb-3 mb-3 border-b border-zinc-100 flex items-center justify-between text-left text-zinc-900 hover:text-emerald-600 text-lg font-bold transition-all duration-200"
+                    className="w-full pb-3 mb-3 border-b border-zinc-100 flex items-center justify-between text-left text-zinc-900 hover:text-[#4F46E5] text-lg font-bold transition-all duration-200"
                   >
                     <span>All Categories</span>
-                    <span className="text-xs text-emerald-600 font-semibold">View All →</span>
+                    <span className="text-xs text-[#4F46E5] font-semibold">View All →</span>
                   </Link>
 
                   {categories.map((category) => {
@@ -160,13 +160,13 @@ export default function Navigation() {
                         onClick={() => setIsTeasHovered(false)}
                         className={`w-full py-2.5 flex items-center justify-between text-left transition-all duration-200 cursor-pointer border-none bg-transparent ${
                           isCatActive
-                            ? "text-emerald-700 text-base font-semibold translate-x-1 bg-emerald-50/50 px-3 rounded-lg"
-                            : "text-zinc-600 text-base font-medium hover:text-emerald-700 hover:translate-x-1 px-3"
+                            ? "text-[#4F46E5] text-base font-semibold translate-x-1 bg-[#EEF2FF] px-3 rounded-lg"
+                            : "text-zinc-600 text-base font-medium hover:text-[#4F46E5] hover:bg-[#EEF2FF] hover:translate-x-1 px-3 rounded-lg"
                         }`}
                       >
                         <span>{category.name}</span>
                         {isCatActive && (
-                          <span className="text-emerald-600 text-sm font-semibold">→</span>
+                          <span className="text-[#4F46E5] text-sm font-semibold">→</span>
                         )}
                       </Link>
                     );
@@ -183,19 +183,19 @@ export default function Navigation() {
                         key={subItem.id}
                         href={`/products?category=${encodeURIComponent(subItem.name)}`}
                         onClick={() => setIsTeasHovered(false)}
-                        className="group/sub py-1.5 flex items-center gap-2 text-zinc-600 hover:text-emerald-700 text-sm font-medium transition-all duration-200 hover:translate-x-1.5"
+                        className="group/sub py-1.5 flex items-center gap-2 text-zinc-600 hover:text-[#4F46E5] text-sm font-medium transition-all duration-200 hover:translate-x-1.5"
                       >
                         <span className="transition-transform duration-200">{subItem.name}</span>
-                        <span className="opacity-0 -translate-x-2 text-xs transition-all duration-200 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 text-emerald-600">→</span>
+                        <span className="opacity-0 -translate-x-2 text-xs transition-all duration-200 group-hover/sub:opacity-100 group-hover/sub:translate-x-0 text-[#4F46E5]">→</span>
                       </Link>
                     ))
                   ) : (
                     <div className="flex flex-col gap-2">
-                      <Link href="/products?search=grocery" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">🥦 Organic Fruits & Fresh Vegetables</Link>
-                      <Link href="/products?search=food" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">🥐 Bakery, Snacks & Beverages</Link>
-                      <Link href="/products?category=Fashion" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👗 Women&apos;s &amp; Men&apos;s Apparel</Link>
-                      <Link href="/products?category=Footwear" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">👟 Footwear & Casual Sneakers</Link>
-                      <Link href="/products?category=Accessories" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-emerald-600 text-sm">⌚ Watches, Bags & Sunglasses</Link>
+                      <Link href="/products?search=grocery" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-[#4F46E5] text-sm">🥦 Organic Fruits & Fresh Vegetables</Link>
+                      <Link href="/products?search=food" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-[#4F46E5] text-sm">🥐 Bakery, Snacks & Beverages</Link>
+                      <Link href="/products?category=Fashion" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-[#4F46E5] text-sm">👗 Women&apos;s &amp; Men&apos;s Apparel</Link>
+                      <Link href="/products?category=Footwear" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-[#4F46E5] text-sm">👟 Footwear & Casual Sneakers</Link>
+                      <Link href="/products?category=Accessories" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-[#4F46E5] text-sm">⌚ Watches, Bags & Sunglasses</Link>
                     </div>
                   )}
                 </div>
@@ -217,11 +217,11 @@ export default function Navigation() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover/promo:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-emerald-600 px-2 py-0.5 rounded">
+                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-[#4F46E5] px-2 py-0.5 rounded">
                       Fresh Daily
                     </span>
                   </div>
-                  <div className="text-zinc-800 group-hover/promo:text-emerald-600 font-semibold text-sm transition-colors">
+                  <div className="text-zinc-800 group-hover/promo:text-[#4F46E5] font-semibold text-sm transition-colors">
                     Daily Groceries & Pantry →
                   </div>
                 </Link>
@@ -238,11 +238,11 @@ export default function Navigation() {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover/promo:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-rose-600 px-2 py-0.5 rounded">
+                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-[#EA580C] px-2 py-0.5 rounded">
                       Top Brands
                     </span>
                   </div>
-                  <div className="text-zinc-800 group-hover/promo:text-emerald-600 font-semibold text-sm transition-colors">
+                  <div className="text-zinc-800 group-hover/promo:text-[#4F46E5] font-semibold text-sm transition-colors">
                     Trending Fashion Drops →
                   </div>
                 </Link>
@@ -263,13 +263,13 @@ export default function Navigation() {
       <div className="flex items-center gap-4 text-xs font-semibold">
         <Link
           href="/products"
-          className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 transition-colors uppercase tracking-wider text-[11px] font-bold"
+          className="flex items-center gap-1.5 text-[#F97316] hover:text-[#EA580C] transition-colors uppercase tracking-wider text-[11px] font-bold"
         >
           <span>⚡ Daily Offers</span>
         </Link>
-        <span className="text-zinc-600">|</span>
-        <span className="text-zinc-400 text-[11px] font-medium flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span className="text-slate-600">|</span>
+        <span className="text-slate-300 text-[11px] font-medium flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] animate-pulse"></span>
           Free Shipping ৳999+
         </span>
       </div>

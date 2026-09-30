@@ -69,7 +69,7 @@ export default function MobileStickyBuyBar({
             type="button"
             onClick={onAddToCart}
             disabled={isOutOfStock}
-            className="h-10 px-3.5 bg-white border border-[#E87A18] text-[#E87A18] hover:bg-orange-50 font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 disabled:opacity-40"
+            className="h-10 px-3.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 disabled:opacity-40"
             aria-label="Add to Bag"
           >
             <IoBagCheckOutline className="w-4 h-4" />
@@ -80,10 +80,10 @@ export default function MobileStickyBuyBar({
             type="button"
             onClick={onBuyNow}
             disabled={isOutOfStock}
-            className="h-10 px-4 bg-[#0D7053] hover:bg-[#0B6046] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950/20 active:scale-95 disabled:opacity-40"
+            className="h-10 px-4 bg-[#1E1B4B] hover:bg-[#161338] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-950/20 active:scale-95 disabled:opacity-40"
             aria-label="Buy Now"
           >
-            <IoFlashOutline className="w-3.5 h-3.5 text-amber-300" />
+            <IoFlashOutline className="w-3.5 h-3.5 text-[#F97316]" />
             <span>অর্ডার করুন</span>
           </button>
         </div>

@@ -22,23 +22,23 @@ export default function Button({
   };
 
   const variants: Record<string, { btn: string; arrowBg: string; glow: string }> = {
-    // Primary: Luxury Emerald & Teal Gradient
+    // Primary: Vibrant Indigo Gradient
     primary: {
-      btn: "bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:via-emerald-400 hover:to-teal-500 text-white shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.45)] border border-emerald-400/30",
-      arrowBg: "bg-white/20 text-white group-hover:bg-white group-hover:text-emerald-700",
-      glow: "from-emerald-400/20 to-teal-400/20",
+      btn: "bg-gradient-to-r from-[#4F46E5] via-[#6366F1] to-[#4338CA] hover:from-[#4338CA] hover:via-[#4F46E5] hover:to-[#3730A3] text-white shadow-[0_4px_20px_rgba(79,70,229,0.3)] hover:shadow-[0_8px_30px_rgba(79,70,229,0.45)] border border-indigo-400/30",
+      arrowBg: "bg-white/20 text-white group-hover:bg-white group-hover:text-[#4F46E5]",
+      glow: "from-indigo-400/20 to-purple-400/20",
     },
-    // Secondary: Sleek Midnight Black
+    // Secondary: Sleek Midnight Navy / Ink
     secondary: {
-      btn: "bg-zinc-900 hover:bg-emerald-600 text-white shadow-md hover:shadow-emerald-600/30 border border-zinc-800",
-      arrowBg: "bg-white/10 text-white group-hover:bg-white group-hover:text-zinc-900",
-      glow: "from-zinc-700/20 to-zinc-900/20",
+      btn: "bg-[#1E1B4B] hover:bg-[#4F46E5] text-white shadow-md hover:shadow-indigo-600/30 border border-indigo-950",
+      arrowBg: "bg-white/10 text-white group-hover:bg-white group-hover:text-[#1E1B4B]",
+      glow: "from-indigo-950/20 to-[#1E1B4B]/20",
     },
     // Outline: Clean Bordered Pill
     outline: {
-      btn: "bg-white text-zinc-900 border-2 border-zinc-200 hover:border-emerald-600 hover:text-emerald-700 hover:bg-emerald-50/50 shadow-2xs",
-      arrowBg: "bg-zinc-100 text-zinc-600 group-hover:bg-emerald-600 group-hover:text-white",
-      glow: "from-emerald-100/30 to-teal-100/30",
+      btn: "bg-white text-zinc-900 border-2 border-zinc-200 hover:border-[#4F46E5] hover:text-[#4F46E5] hover:bg-[#EEF2FF]/50 shadow-2xs",
+      arrowBg: "bg-zinc-100 text-zinc-600 group-hover:bg-[#4F46E5] group-hover:text-white",
+      glow: "from-indigo-100/30 to-slate-100/30",
     },
   };
 
@@ -54,7 +54,7 @@ export default function Button({
         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
 
         {/* Optional Sparkle Icon */}
-        <LuSparkles className="w-4 h-4 text-emerald-200 group-hover:rotate-12 transition-transform duration-300 shrink-0" />
+        <LuSparkles className="w-4 h-4 text-[#F97316] group-hover:rotate-12 transition-transform duration-300 shrink-0" />
 
         {/* Button Label */}
         <span className="relative z-10 truncate">{label}</span>

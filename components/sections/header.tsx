@@ -195,7 +195,7 @@ export default function Header() {
                   setShowSuggestions(true);
                 }}
                 onFocus={() => setShowSuggestions(true)}
-                className="w-full h-11 pl-11 pr-28 rounded-full border border-zinc-200 bg-zinc-50/80 text-sm text-zinc-800 placeholder:text-zinc-400 outline-none focus:bg-white focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all shadow-2xs"
+                className="w-full h-11 pl-11 pr-28 rounded-full border border-zinc-200 bg-zinc-50/80 text-sm text-zinc-800 placeholder:text-zinc-400 outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/10 transition-all shadow-2xs"
               />
               {searchQuery && (
                 <button
@@ -213,7 +213,7 @@ export default function Header() {
               <button
                 type="submit"
                 aria-label="Submit Search"
-                className="absolute right-1.5 h-8 px-4.5 rounded-full bg-[#E87A18] hover:bg-[#D46B0E] active:scale-95 text-white text-xs font-bold tracking-wide flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                className="absolute right-1.5 h-8 px-4.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white text-xs font-bold tracking-wide flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
               >
                 <span>Search</span>
               </button>
@@ -224,7 +224,7 @@ export default function Header() {
               <div className="absolute top-full left-0 right-0 mt-2 bg-white text-zinc-800 shadow-2xl border border-zinc-200/80 py-2.5 z-[999] rounded-2xl overflow-hidden animate-fadeIn">
                 {isSearching ? (
                   <div className="flex items-center justify-center py-6 px-4 gap-2 text-sm text-zinc-500">
-                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-emerald-500 border-t-transparent" />
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-[#4F46E5] border-t-transparent" />
                     Searching...
                   </div>
                 ) : suggestions.length > 0 ? (
@@ -253,7 +253,7 @@ export default function Header() {
                             />
                           </div>
                           <div className="flex-grow min-w-0">
-                            <h4 className="text-sm font-medium text-zinc-800 truncate group-hover:text-emerald-600 transition-colors">
+                            <h4 className="text-sm font-medium text-zinc-800 truncate group-hover:text-[#4F46E5] transition-colors">
                               {product.name}
                             </h4>
                             <span className="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">
@@ -272,7 +272,7 @@ export default function Header() {
                           handleSearchSubmit(e);
                           setShowSuggestions(false);
                         }}
-                        className="w-full py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-xs uppercase tracking-wider text-center transition-colors rounded-xl cursor-pointer shadow-xs"
+                        className="w-full py-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold text-xs uppercase tracking-wider text-center transition-colors rounded-xl cursor-pointer shadow-xs"
                       >
                         View All Results
                       </button>
@@ -291,21 +291,21 @@ export default function Header() {
           <div className="flex items-center gap-3.5 xl:gap-5 shrink-0 text-xs font-semibold text-zinc-700">
             <Link
               href="/products"
-              className="hover:text-emerald-700 transition-colors hidden sm:block py-1"
+              className="hover:text-[#4F46E5] transition-colors hidden sm:block py-1"
             >
               Shop
             </Link>
 
             <Link
               href="/profile?tab=track"
-              className="hover:text-emerald-700 transition-colors hidden md:block py-1"
+              className="hover:text-[#4F46E5] transition-colors hidden md:block py-1"
             >
               Track Order
             </Link>
 
             <Link
               href="/cart"
-              className="hover:text-emerald-700 transition-colors py-1"
+              className="hover:text-[#4F46E5] transition-colors py-1"
             >
               My Cart
             </Link>
@@ -314,7 +314,7 @@ export default function Header() {
               <button
                 type="button"
                 onClick={() => setShowAuthModal(true)}
-                className="hover:text-emerald-700 transition-colors cursor-pointer py-1"
+                className="hover:text-[#4F46E5] transition-colors cursor-pointer py-1"
               >
                 Customer Login
               </button>
@@ -327,7 +327,7 @@ export default function Header() {
                   aria-label="User profile menu"
                   aria-expanded={dropdownOpen}
                 >
-                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs overflow-hidden shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-bold text-xs overflow-hidden shrink-0">
                     {user?.avatarUrl || (user as any)?.avatar ? (
                       <img
                         src={user?.avatarUrl || (user as any)?.avatar || undefined}
@@ -366,7 +366,7 @@ export default function Header() {
                   <div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-xl shadow-2xl border border-zinc-200 p-1.5 z-50 font-sans animate-fadeIn">
                     <div className="px-3.5 py-3 border-b border-zinc-100 mb-1">
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
+                        <div className="w-9 h-9 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
                           {user?.avatarUrl || (user as any)?.avatar ? (
                             <img
                               src={user?.avatarUrl || (user as any)?.avatar || undefined}
@@ -435,9 +435,9 @@ export default function Header() {
                       <Link
                         href="/admin/dashboard"
                         onClick={() => setDropdownOpen(false)}
-                        className="flex items-center gap-2.5 w-full text-left px-3.5 py-2.5 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors cursor-pointer border border-emerald-100"
+                        className="flex items-center gap-2.5 w-full text-left px-3.5 py-2.5 text-xs font-semibold text-indigo-900 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition-colors cursor-pointer border border-indigo-100"
                       >
-                        <LuLayoutDashboard className="w-4 h-4 text-emerald-600" />
+                        <LuLayoutDashboard className="w-4 h-4 text-[#4F46E5]" />
                         Admin Dashboard
                       </Link>
                     </div>
@@ -449,7 +449,7 @@ export default function Header() {
                       </p>
                       <a
                         href="tel:01712345678"
-                        className="text-xs font-bold text-emerald-600 hover:underline"
+                        className="text-xs font-bold text-[#4F46E5] hover:underline"
                       >
                         +880 1712-345678
                       </a>
@@ -476,12 +476,12 @@ export default function Header() {
             {/* Cart Icon with Counter */}
             <Link
               href="/cart"
-              className="relative p-2 rounded-xl bg-zinc-100 hover:bg-emerald-50 text-zinc-800 hover:text-emerald-700 transition-colors"
+              className="relative p-2 rounded-xl bg-zinc-100 hover:bg-[#EEF2FF] text-zinc-800 hover:text-[#4F46E5] transition-colors"
               aria-label="Shopping Cart"
             >
               <LuShoppingBag className="w-5 h-5" />
               {mounted && cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-4.5 px-1 rounded-full bg-[#E87A18] text-[10px] font-black text-white shadow-2xs">
+                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-4.5 px-1 rounded-full bg-[#F97316] text-[10px] font-black text-white shadow-2xs">
                   {cartItemCount}
                 </span>
               )}
@@ -491,7 +491,7 @@ export default function Header() {
       </div>
 
       {/* ═══════════════ Desktop Navigation Bar ═══════════════ */}
-      <div className="hidden xl:block bg-[#181D1A] text-white border-t border-white/5">
+      <div className="hidden xl:block bg-[#1E1B4B] text-white border-t border-white/10">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <Navigation />
         </div>
@@ -515,12 +515,12 @@ export default function Header() {
           <div className="flex items-center gap-1 shrink-0">
             <Link
               href="/wishlist"
-              className="relative p-2 text-zinc-700 hover:text-emerald-600 transition-colors"
+              className="relative p-2 text-zinc-700 hover:text-[#4F46E5] transition-colors"
               aria-label="Wishlist"
             >
               <IoHeartOutline className="w-5 h-5" />
               {mounted && wishlistItemCount > 0 && (
-                <span className="absolute top-0.5 right-0.5 flex items-center justify-center min-w-[15px] h-3.5 px-0.5 rounded-full bg-emerald-500 text-[9px] text-white font-bold">
+                <span className="absolute top-0.5 right-0.5 flex items-center justify-center min-w-[15px] h-3.5 px-0.5 rounded-full bg-[#F97316] text-[9px] text-white font-bold">
                   {wishlistItemCount}
                 </span>
               )}
@@ -528,12 +528,12 @@ export default function Header() {
 
             <Link
               href="/cart"
-              className="relative p-2 text-zinc-700 hover:text-emerald-600 transition-colors"
+              className="relative p-2 text-zinc-700 hover:text-[#4F46E5] transition-colors"
               aria-label="Shopping Cart"
             >
               <LuShoppingBag className="w-5 h-5" />
               {mounted && cartItemCount > 0 && (
-                <span className="absolute top-0.5 right-0.5 flex items-center justify-center min-w-[15px] h-3.5 px-0.5 rounded-full bg-emerald-500 text-[9px] text-white font-bold">
+                <span className="absolute top-0.5 right-0.5 flex items-center justify-center min-w-[15px] h-3.5 px-0.5 rounded-full bg-[#F97316] text-[9px] text-white font-bold">
                   {cartItemCount}
                 </span>
               )}
@@ -542,7 +542,7 @@ export default function Header() {
             {!mounted || !isAuthenticated ? (
               <button
                 onClick={() => setShowAuthModal(true)}
-                className="p-2 text-zinc-700 hover:text-emerald-600 transition-colors cursor-pointer"
+                className="p-2 text-zinc-700 hover:text-[#4F46E5] transition-colors cursor-pointer"
                 aria-label="Sign in"
               >
                 <LuUser className="w-5 h-5" />
@@ -551,7 +551,7 @@ export default function Header() {
               <div className="relative" ref={mobileDropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center font-bold text-xs overflow-hidden shrink-0 cursor-pointer"
+                  className="w-7 h-7 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-bold text-xs overflow-hidden shrink-0 cursor-pointer"
                   aria-label="User menu"
                 >
                   {user?.avatarUrl || (user as any)?.avatar ? (
@@ -636,7 +636,7 @@ export default function Header() {
                 setShowSuggestions(true);
               }}
               onFocus={() => setShowSuggestions(true)}
-              className="w-full h-9.5 pl-9 pr-16 rounded-full border border-zinc-200 bg-zinc-50/90 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:bg-white focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all shadow-2xs"
+              className="w-full h-9.5 pl-9 pr-16 rounded-full border border-zinc-200 bg-zinc-50/90 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/20 transition-all shadow-2xs"
             />
             {searchQuery && (
               <button
@@ -654,7 +654,7 @@ export default function Header() {
             <button
               type="submit"
               aria-label="Submit Search"
-              className="absolute right-1 top-1 bottom-1 px-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center justify-center cursor-pointer transition-colors shadow-2xs"
+              className="absolute right-1 top-1 bottom-1 px-3 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-semibold flex items-center justify-center cursor-pointer transition-colors shadow-2xs"
             >
               <IoSearchOutline className="w-3.5 h-3.5" />
             </button>
@@ -665,7 +665,7 @@ export default function Header() {
             <div className="mt-1.5 bg-white text-zinc-800 shadow-xl border border-zinc-200 py-2 z-[999] rounded-lg relative">
               {isSearching ? (
                 <div className="flex items-center justify-center py-5 gap-2 text-sm text-zinc-500">
-                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-emerald-500 border-t-transparent" />
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-[#4F46E5] border-t-transparent" />
                   Searching...
                 </div>
               ) : suggestions.length > 0 ? (

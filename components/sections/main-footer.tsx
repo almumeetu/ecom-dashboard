@@ -103,7 +103,7 @@ export default async function Mainfooter() {
       <div className="border-b border-zinc-100 bg-[#FAF9F5] py-4">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-100">
               <HiTruck className="w-5 h-5" />
             </div>
             <div>
@@ -117,7 +117,7 @@ export default async function Mainfooter() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-100">
               <HiShieldCheck className="w-5 h-5" />
             </div>
             <div>
@@ -131,7 +131,7 @@ export default async function Mainfooter() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-100">
               <FiRefreshCw className="w-4.5 h-4.5" />
             </div>
             <div>
@@ -145,7 +145,7 @@ export default async function Mainfooter() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
+            <div className="w-10 h-10 rounded-xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-100">
               <HiOutlineSupport className="w-5 h-5" />
             </div>
             <div>
@@ -154,7 +154,7 @@ export default async function Mainfooter() {
               </span>
               <a
                 href={`tel:${primaryPhone.replace(/[^\d+]/g, "")}`}
-                className="text-[11px] sm:text-xs text-emerald-700 hover:underline font-semibold block"
+                className="text-[11px] sm:text-xs text-[#4F46E5] hover:underline font-semibold block"
               >
                 Hotline: {primaryPhone}
               </a>
@@ -178,12 +178,12 @@ export default async function Mainfooter() {
             <div className="space-y-2 text-xs text-zinc-600 w-full pt-1">
               {displayedContacts.map((contact, idx) => (
                 <div key={idx} className="flex items-center gap-2.5">
-                  <HiPhone className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <HiPhone className="w-4 h-4 text-[#4F46E5] shrink-0" />
                   <span>
                     {contact.title ? `${contact.title}: ` : "Helpline: "}
                     <a
                       href={`tel:${contact.value.replace(/[^\d+]/g, "")}`}
-                      className="text-zinc-900 font-bold hover:text-emerald-700 transition-colors"
+                      className="text-zinc-900 font-bold hover:text-[#4F46E5] transition-colors"
                     >
                       {contact.value}
                     </a>
@@ -193,12 +193,12 @@ export default async function Mainfooter() {
 
               {finalEmails.map((emailItem, idx) => (
                 <div key={idx} className="flex items-center gap-2.5">
-                  <HiMail className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <HiMail className="w-4 h-4 text-[#4F46E5] shrink-0" />
                   <span>
                     {emailItem.title ? `${emailItem.title}: ` : "Email: "}
                     <a
                       href={`mailto:${emailItem.value}`}
-                      className="text-zinc-700 hover:text-emerald-700 transition-colors"
+                      className="text-zinc-700 hover:text-[#4F46E5] transition-colors"
                     >
                       {emailItem.value}
                     </a>
@@ -207,13 +207,13 @@ export default async function Mainfooter() {
               ))}
             </div>
 
-            {/* Direct WhatsApp Order CTA */}
+            {/* Direct WhatsApp Order CTA (#EA580C Accent) */}
             <div className="pt-2">
               <a
                 href={`https://wa.me/${formattedWhatsapp}?text=Hello%20${encodeURIComponent(shopName)}%2C%20I%20would%20like%20to%20place%20an%20order.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white font-bold text-xs tracking-wide transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#EA580C] hover:bg-[#C2410C] active:scale-95 text-white font-bold text-xs tracking-wide transition-all shadow-xs cursor-pointer"
               >
                 <FaWhatsapp className="w-4 h-4 text-white" />
                 <span>WhatsApp Quick Order</span>
@@ -231,7 +231,7 @@ export default async function Mainfooter() {
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-zinc-600 hover:text-emerald-700 transition-colors block font-medium"
+                    className="text-zinc-600 hover:text-[#4F46E5] transition-colors block font-medium"
                   >
                     {item.label}
                   </Link>
@@ -250,7 +250,7 @@ export default async function Mainfooter() {
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-zinc-600 hover:text-emerald-700 transition-colors block font-medium"
+                    className="text-zinc-600 hover:text-[#4F46E5] transition-colors block font-medium"
                   >
                     {item.label}
                   </Link>
@@ -269,7 +269,7 @@ export default async function Mainfooter() {
                 <li key={idx}>
                   <Link
                     href={item.href}
-                    className="text-zinc-600 hover:text-emerald-700 transition-colors block font-medium"
+                    className="text-zinc-600 hover:text-[#4F46E5] transition-colors block font-medium"
                   >
                     {item.label}
                   </Link>

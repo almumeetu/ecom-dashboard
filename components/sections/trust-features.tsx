@@ -9,7 +9,7 @@ export default function TrustFeatures() {
       title: 'Fast Doorstep Delivery',
       desc: 'Same-day grocery deliveries & rapid shipping for fashion, footwear and electronics.',
       icon: LuTruck,
-      color: 'text-emerald-600 bg-emerald-50 border-emerald-100',
+      color: 'text-[#4F46E5] bg-indigo-50 border-indigo-100',
     },
     {
       title: '100% Authentic Quality',
@@ -27,7 +27,7 @@ export default function TrustFeatures() {
       title: 'Secure Payments & Easy Return',
       desc: 'Encrypted checkout, cash-on-delivery options, and a hassle-free 7-day return policy.',
       icon: LuCreditCard,
-      color: 'text-amber-600 bg-amber-50 border-amber-100',
+      color: 'text-[#EA580C] bg-orange-50 border-orange-100',
     },
   ];
 

@@ -92,14 +92,14 @@ export default function ProductGallery({
           {/* Badges Overlay (Top-Left) */}
           <div className="absolute top-3.5 left-3.5 z-10 flex flex-col gap-1.5 pointer-events-none">
             {discountPercentage && discountPercentage > 0 ? (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-black tracking-wide uppercase bg-[#E53E3E] text-white shadow-xs">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-black tracking-wide uppercase bg-[#EA580C] text-white shadow-xs">
                 -{discountPercentage}%
               </span>
             ) : null}
 
             {badge && (
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-white/95 backdrop-blur-md text-zinc-900 border border-zinc-200 shadow-2xs">
-                <IoSparklesOutline className="w-3 h-3 text-amber-500" />
+                <IoSparklesOutline className="w-3 h-3 text-[#F97316]" />
                 <span>{badge}</span>
               </span>
             )}
@@ -165,7 +165,7 @@ export default function ProductGallery({
                   onClick={() => setActiveIndex(idx)}
                   className={`relative w-16 h-16 sm:w-18 sm:h-18 rounded-xl overflow-hidden bg-white border-2 shrink-0 transition-all cursor-pointer ${
                     isActive
-                      ? 'border-[#0D7053] scale-102 ring-2 ring-[#0D7053]/20 shadow-xs'
+                      ? 'border-[#4F46E5] scale-102 ring-2 ring-[#4F46E5]/20 shadow-xs'
                       : 'border-zinc-200/80 hover:border-zinc-400 opacity-70 hover:opacity-100'
                   }`}
                   aria-label={`View image ${idx + 1}`}

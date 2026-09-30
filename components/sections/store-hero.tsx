@@ -102,8 +102,8 @@ export default function StoreHero({
         {/* ═══════════════ LEFT COLUMN: Shop by Category Sidebar ═══════════════ */}
         <div className="hidden lg:flex lg:col-span-3 flex-col bg-white rounded-2xl border border-zinc-200/90 shadow-2xs overflow-hidden h-[420px] xl:h-[450px]">
           {/* Header */}
-          <div className="bg-[#0D7053] text-white px-4 py-3.5 flex items-center gap-2.5 font-bold text-sm tracking-wide shrink-0">
-            <LuMenu className="w-4 h-4 text-emerald-200" />
+          <div className="bg-[#1E1B4B] text-white px-4 py-3.5 flex items-center gap-2.5 font-bold text-sm tracking-wide shrink-0">
+            <LuMenu className="w-4 h-4 text-[#A5B4FC]" />
             <span>Shop By Category</span>
           </div>
 
@@ -118,8 +118,8 @@ export default function StoreHero({
                   onClick={() => onSelectCategory(cat.name)}
                   className={`w-full px-3.5 py-2.5 flex items-center justify-between text-left transition-all duration-150 group cursor-pointer ${
                     isSelected
-                      ? "bg-emerald-50/80 text-emerald-800 font-bold"
-                      : "text-zinc-700 hover:bg-zinc-50 hover:text-emerald-700"
+                      ? "bg-[#EEF2FF] text-[#4F46E5] font-bold"
+                      : "text-zinc-700 hover:bg-[#EEF2FF] hover:text-[#4F46E5]"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0 pr-2">
@@ -145,8 +145,8 @@ export default function StoreHero({
                   <LuChevronRight
                     className={`w-3.5 h-3.5 shrink-0 transition-transform ${
                       isSelected
-                        ? "text-emerald-600 translate-x-0.5"
-                        : "text-zinc-400 group-hover:text-emerald-600 group-hover:translate-x-0.5"
+                        ? "text-[#4F46E5] translate-x-0.5"
+                        : "text-zinc-400 group-hover:text-[#4F46E5] group-hover:translate-x-0.5"
                     }`}
                   />
                 </button>
@@ -158,7 +158,7 @@ export default function StoreHero({
           <div className="p-2.5 bg-zinc-50 border-t border-zinc-100 shrink-0 text-center">
             <Link
               href="/products"
-              className="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1 transition-colors"
+              className="text-[11px] font-bold text-[#4F46E5] hover:text-[#4338CA] inline-flex items-center gap-1 transition-colors"
             >
               <span>View All Categories</span>
               <LuArrowRight className="w-3 h-3" />
@@ -198,14 +198,14 @@ export default function StoreHero({
                 </div>
 
                 {/* Rich Gradient Overlay for High Readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#07241A]/95 via-[#0A3D2D]/75 to-transparent sm:w-[75%] lg:w-[65%]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0B132B]/95 via-[#1E1B4B]/80 to-transparent sm:w-[75%] lg:w-[65%]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent sm:hidden" />
 
                 {/* Banner Content Container */}
                 <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-10 md:px-14 max-w-xl text-white">
                   {/* Badge */}
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-2 sm:mb-3 w-fit">
-                    <LuSparkles className="w-3 h-3 text-amber-400" />
+                    <LuSparkles className="w-3 h-3 text-[#F97316]" />
                     <span>{camp.badge || "NovaMart Campaign"}</span>
                   </div>
 
@@ -225,14 +225,14 @@ export default function StoreHero({
                   <div className="flex flex-wrap items-center gap-3">
                     <Link
                       href={camp.linkUrl || "/products"}
-                      className="px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full bg-[#E87A18] hover:bg-[#D46B0E] active:scale-95 text-white font-bold text-xs sm:text-sm tracking-wide uppercase shadow-lg shadow-orange-900/30 transition-all flex items-center gap-2 cursor-pointer"
+                      className="px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white font-bold text-xs sm:text-sm tracking-wide uppercase shadow-lg shadow-indigo-950/40 transition-all flex items-center gap-2 cursor-pointer"
                     >
                       <span>{camp.ctaText || "Shop Now"}</span>
                       <LuArrowRight className="w-4 h-4" />
                     </Link>
 
                     <div className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-full bg-black/30 backdrop-blur-md border border-white/10 text-zinc-300 text-xs font-medium">
-                      <LuShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                      <LuShieldCheck className="w-3.5 h-3.5 text-[#818CF8]" />
                       <span>১০০% অরিজিনাল পণ্য</span>
                     </div>
                   </div>
@@ -271,7 +271,7 @@ export default function StoreHero({
                     onClick={() => setCurrentSlide(dotIndex)}
                     className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                       dotIndex === currentSlide
-                        ? "w-6 bg-emerald-400"
+                        ? "w-6 bg-[#4F46E5]"
                         : "w-2 bg-white/50 hover:bg-white/80"
                     }`}
                     aria-label={`Go to slide ${dotIndex + 1}`}

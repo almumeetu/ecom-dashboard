@@ -153,13 +153,13 @@ export default function ProductCard({
   const displayCategory = (category || brand || "NovaMart Genuine").toUpperCase();
 
   return (
-    <div className="group relative flex flex-col justify-between w-full h-full bg-white rounded-xl border border-zinc-200/80 hover:border-emerald-500/40 shadow-2xs hover:shadow-lg transition-all duration-300 overflow-hidden mx-auto">
+    <div className="group relative flex flex-col justify-between w-full h-full bg-white rounded-xl border border-zinc-200/80 hover:border-[#4F46E5]/40 shadow-2xs hover:shadow-lg transition-all duration-300 overflow-hidden mx-auto">
       {/* Top Media & Visual Badge Container */}
       <div className="relative w-full aspect-square bg-[#F8F9FA] overflow-hidden p-3 flex items-center justify-center">
         {/* Floating Left Discount Badge */}
         {discountPercent > 0 && (
           <div className="absolute top-2.5 left-2.5 z-20 pointer-events-none">
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#E53E3E] text-white shadow-2xs tracking-tight">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#EA580C] text-white shadow-2xs tracking-tight">
               -{discountPercent}%
             </span>
           </div>
@@ -204,7 +204,7 @@ export default function ProductCard({
           </p>
 
           {/* Product Title */}
-          <Link href={productUrl} className="block group-hover:text-emerald-700 transition-colors">
+          <Link href={productUrl} className="block group-hover:text-[#4F46E5] transition-colors">
             <h3 className="text-zinc-900 font-bold text-xs sm:text-[13px] leading-snug line-clamp-2 min-h-[2.3rem]">
               {name}
             </h3>
@@ -228,7 +228,7 @@ export default function ProductCard({
           {isVariantProduct ? (
             <Link
               href={productUrl}
-              className="w-full h-9 rounded-lg bg-[#0D8A68] hover:bg-[#0B7558] text-white text-xs font-bold flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs active:scale-98"
+              className="w-full h-9 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs active:scale-98"
             >
               Select Option
             </Link>
@@ -239,7 +239,7 @@ export default function ProductCard({
               className={`w-full h-9 rounded-lg text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer shadow-xs active:scale-98 ${
                 isAdded
                   ? "bg-emerald-600 shadow-emerald-200"
-                  : "bg-[#E87A18] hover:bg-[#D46B0E] shadow-orange-200"
+                  : "bg-[#4F46E5] hover:bg-[#4338CA] shadow-indigo-200"
               }`}
             >
               {isAdded ? (

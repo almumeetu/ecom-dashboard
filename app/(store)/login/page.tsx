@@ -83,7 +83,7 @@ function LoginFormContent() {
       <div className="max-w-5xl mx-auto w-full mb-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-emerald-700 transition-colors uppercase tracking-wider"
+          className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-[#4F46E5] transition-colors uppercase tracking-wider"
         >
           <FiArrowLeft className="w-4 h-4" />
           <span>Back to Marketplace</span>
@@ -92,16 +92,16 @@ function LoginFormContent() {
 
       <div className="max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 bg-white rounded-3xl shadow-2xl border border-zinc-200/80 overflow-hidden">
         {/* Left Column: Brand & Trust Showcase (5 cols) */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-[#121614] via-[#1A221E] to-[#121614] text-white p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden">
+        <div className="lg:col-span-5 bg-gradient-to-br from-[#0B132B] via-[#1E1B4B] to-[#0B132B] text-white p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden">
           {/* Subtle glow effect */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#4F46E5]/15 rounded-full blur-3xl pointer-events-none" />
 
           <div>
             <div className="mb-8">
               <Logo variant="light" size="md" />
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950 border border-emerald-700/60 text-emerald-400 text-[10px] font-bold tracking-widest uppercase mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-700/60 text-indigo-300 text-[10px] font-bold tracking-widest uppercase mb-4">
               <span>Webdev Software Solutions</span>
             </div>
 
@@ -116,7 +116,7 @@ function LoginFormContent() {
             {/* Value bullets */}
             <div className="mt-8 space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-white/10 text-[#4F46E5] flex items-center justify-center shrink-0">
                   <LuShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
@@ -126,7 +126,7 @@ function LoginFormContent() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-white/10 text-[#4F46E5] flex items-center justify-center shrink-0">
                   <LuTruck className="w-4 h-4" />
                 </div>
                 <div>
@@ -136,7 +136,7 @@ function LoginFormContent() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 text-emerald-400 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-white/10 text-[#4F46E5] flex items-center justify-center shrink-0">
                   <LuLock className="w-4 h-4" />
                 </div>
                 <div>
@@ -150,11 +150,11 @@ function LoginFormContent() {
           {/* Location & Support Footer */}
           <div className="pt-8 mt-8 border-t border-white/10 text-xs text-zinc-400 space-y-1.5">
             <div className="flex items-center gap-2 text-zinc-300">
-              <FiMapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <FiMapPin className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
               <span>Banani, Dhaka, Rajshahi</span>
             </div>
             <div className="flex items-center gap-2 text-zinc-300">
-              <FiPhone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <FiPhone className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
               <span>Executive Hotline: 01712345678</span>
             </div>
           </div>
@@ -178,7 +178,7 @@ function LoginFormContent() {
                 <span className="text-zinc-400">New here?</span>
                 <Link
                   href="/signup"
-                  className="font-bold text-emerald-600 hover:text-emerald-700 hover:underline"
+                  className="font-bold text-[#4F46E5] hover:text-[#4F46E5] hover:underline"
                 >
                   Create Account
                 </Link>
@@ -227,7 +227,7 @@ function LoginFormContent() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="e.g. saikat@example.com"
                   required
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
                 />
               </div>
 
@@ -238,7 +238,7 @@ function LoginFormContent() {
                   </label>
                   <a
                     href="tel:01712345678"
-                    className="text-[11px] font-semibold text-emerald-600 hover:underline"
+                    className="text-[11px] font-semibold text-[#4F46E5] hover:underline"
                   >
                     Forgot password?
                   </a>
@@ -250,7 +250,7 @@ function LoginFormContent() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 pr-11 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 transition-all"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 pr-11 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
                   />
                   <button
                     type="button"
@@ -268,7 +268,7 @@ function LoginFormContent() {
                     type="checkbox"
                     checked={rememberLogin}
                     onChange={(e) => setRememberLogin(e.target.checked)}
-                    className="w-4 h-4 accent-emerald-600 rounded cursor-pointer"
+                    className="w-4 h-4 accent-[#4F46E5] rounded cursor-pointer"
                   />
                   <span className="text-xs text-zinc-600 font-medium">Keep me signed in</span>
                 </label>
@@ -281,7 +281,7 @@ function LoginFormContent() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-4 rounded-xl shadow-lg shadow-emerald-600/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60"
+                className="w-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-4 rounded-xl shadow-lg shadow-indigo-600/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60"
               >
                 {submitting && <LuLoader className="w-4 h-4 animate-spin" />}
                 <span>{submitting ? "Signing in..." : "Sign In to Account"}</span>
@@ -303,7 +303,7 @@ export default function LoginPage() {
     <Suspense
       fallback={
         <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
-          <LuLoader className="w-8 h-8 text-emerald-600 animate-spin" />
+          <LuLoader className="w-8 h-8 text-[#4F46E5] animate-spin" />
         </div>
       }
     >

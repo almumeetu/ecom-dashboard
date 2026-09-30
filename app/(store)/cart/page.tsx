@@ -420,7 +420,7 @@ export default function CartPage() {
         ) : items.length === 0 ? (
           /* ── Modern Empty Cart State ── */
           <div className="max-w-2xl mx-auto text-center py-16 px-4">
-            <div className="w-24 h-24 rounded-3xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto mb-6 shadow-sm border border-emerald-100">
+            <div className="w-24 h-24 rounded-3xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center mx-auto mb-6 shadow-sm border border-indigo-100">
               <LuTruck className="w-12 h-12" />
             </div>
 
@@ -434,7 +434,7 @@ export default function CartPage() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/products"
-                className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm px-8 py-3.5 rounded-full shadow-lg shadow-emerald-600/20 transition-all cursor-pointer"
+                className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-sm px-8 py-3.5 rounded-full shadow-lg shadow-indigo-600/20 transition-all cursor-pointer"
               >
                 Browse Marketplace
               </Link>
@@ -454,7 +454,7 @@ export default function CartPage() {
 
             {/* Helpline Callout */}
             <div className="mt-12 p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-xs inline-flex items-center gap-4 text-left">
-              <div className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-full bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0">
                 <IoCallOutline className="w-5 h-5" />
               </div>
               <div>
@@ -463,7 +463,7 @@ export default function CartPage() {
                 </p>
                 <a
                   href="tel:01712345678"
-                  className="text-sm font-extrabold text-zinc-900 hover:text-emerald-600 transition-colors"
+                  className="text-sm font-extrabold text-zinc-900 hover:text-[#4F46E5] transition-colors"
                 >
                   Call Support: 01712345678 (Central Hub)
                 </a>
@@ -497,7 +497,7 @@ export default function CartPage() {
 
                 <Link
                   href="/products"
-                  className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline"
+                  className="text-xs font-bold text-emerald-600 hover:text-[#4338CA] hover:underline"
                 >
                   + Add More Items
                 </Link>
@@ -510,8 +510,8 @@ export default function CartPage() {
                     <div
                       className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-2xs transition-colors ${
                         isDhakaFree || outsideRate === 0
-                          ? "bg-emerald-600 text-white"
-                          : "bg-emerald-100 text-emerald-700"
+                          ? "bg-[#4F46E5] text-white"
+                          : "bg-[#EEF2FF] text-[#4F46E5]"
                       }`}
                     >
                       {isDhakaFree || outsideRate === 0 ? (
@@ -523,17 +523,17 @@ export default function CartPage() {
                     <div className="text-xs">
                       {deliveryZone === "dhaka" ? (
                         isDhakaFree ? (
-                          <span className="font-bold text-emerald-950">
-                            🎉 You unlocked <strong className="text-emerald-700 font-black">FREE Next-Day Delivery</strong> inside Dhaka!
+                          <span className="font-bold text-indigo-950">
+                            🎉 You unlocked <strong className="text-[#4F46E5] font-black">FREE Next-Day Delivery</strong> inside Dhaka!
                           </span>
                         ) : (
                           <span className="text-zinc-700 font-medium">
-                            Add <strong className="font-bold text-zinc-950">৳{(1999 - subtotal).toLocaleString()}</strong> more to unlock <strong className="text-emerald-700 font-black">FREE Delivery</strong>!
+                            Add <strong className="font-bold text-zinc-950">৳{(1999 - subtotal).toLocaleString()}</strong> more to unlock <strong className="text-[#4F46E5] font-black">FREE Delivery</strong>!
                           </span>
                         )
                       ) : outsideRate === 0 ? (
-                        <span className="font-bold text-emerald-950">
-                          🎉 <strong className="text-emerald-700 font-black">FREE Nationwide Delivery</strong> unlocked across All Bangladesh!
+                        <span className="font-bold text-indigo-950">
+                          🎉 <strong className="text-[#4F46E5] font-black">FREE Nationwide Delivery</strong> unlocked across All Bangladesh!
                         </span>
                       ) : (
                         <span className="text-zinc-700 font-medium">
@@ -544,7 +544,7 @@ export default function CartPage() {
                   </div>
 
                   {deliveryZone === "dhaka" && (
-                    <span className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full shrink-0 border border-emerald-200/60">
+                    <span className="text-[11px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-1 rounded-full shrink-0 border border-indigo-200/60">
                       {isDhakaFree ? "100% Qualified" : `৳${subtotal.toLocaleString()} / ৳1,999`}
                     </span>
                   )}
@@ -553,7 +553,7 @@ export default function CartPage() {
                 {deliveryZone === "dhaka" && !isDhakaFree && (
                   <div className="w-full bg-zinc-100 rounded-full h-2 overflow-hidden">
                     <div
-                      className="bg-emerald-600 h-full rounded-full transition-all duration-500 ease-out"
+                      className="bg-[#4F46E5] h-full rounded-full transition-all duration-500 ease-out"
                       style={{
                         width: `${Math.min(100, Math.max(5, Math.round((subtotal / 1999) * 100)))}%`,
                       }}
@@ -601,7 +601,7 @@ export default function CartPage() {
                             <div>
                               <Link
                                 href={productUrl}
-                                className="text-base font-bold text-zinc-900 hover:text-emerald-600 transition-colors line-clamp-1"
+                                className="text-base font-bold text-zinc-900 hover:text-[#4F46E5] transition-colors line-clamp-1"
                               >
                                 {displayName}
                               </Link>
@@ -670,7 +670,7 @@ export default function CartPage() {
                                                           onClick={() => setSelectedOptions((prev) => ({ ...prev, [attrName]: val }))}
                                                           className={`px-2.5 py-1 text-xs rounded-md border transition-all cursor-pointer ${
                                                             isSelected
-                                                              ? "border-emerald-600 bg-emerald-50 text-emerald-700 font-bold"
+                                                              ? "border-[#4F46E5] bg-[#EEF2FF] text-[#4F46E5] font-bold"
                                                               : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
                                                           }`}
                                                         >
@@ -703,7 +703,7 @@ export default function CartPage() {
                                                 type="button"
                                                 disabled={isApplyDisabled(item)}
                                                 onClick={() => handleApplyChange(item)}
-                                                className="flex-1 py-2 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg disabled:opacity-50"
+                                                className="flex-1 py-2 text-xs bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold rounded-lg disabled:opacity-50"
                                               >
                                                 Apply
                                               </button>
@@ -809,7 +809,7 @@ export default function CartPage() {
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
                   <label className="text-[11px] font-extrabold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                    <LuMapPin className="w-3.5 h-3.5 text-emerald-600" />
+                    <LuMapPin className="w-3.5 h-3.5 text-[#4F46E5]" />
                     <span>Delivery Destination</span>
                   </label>
                   <span className="text-[10px] font-bold text-zinc-400">
@@ -824,7 +824,7 @@ export default function CartPage() {
                     onClick={() => setDeliveryZone("dhaka")}
                     className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
                       deliveryZone === "dhaka"
-                        ? "border-emerald-600 bg-emerald-50/70 shadow-xs ring-1 ring-emerald-600/30"
+                        ? "border-[#4F46E5] bg-[#EEF2FF]/70 shadow-xs ring-1 ring-[#4F46E5]/30"
                         : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/60 text-zinc-700"
                     }`}
                   >
@@ -833,7 +833,7 @@ export default function CartPage() {
                       <div
                         className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-all ${
                           deliveryZone === "dhaka"
-                            ? "bg-emerald-600 text-white shadow-2xs"
+                            ? "bg-[#4F46E5] text-white shadow-2xs"
                             : "border-2 border-zinc-300 bg-white"
                         }`}
                       >
@@ -847,7 +847,7 @@ export default function CartPage() {
                           <span className="text-xs font-bold text-zinc-950">
                             Inside Dhaka
                           </span>
-                          <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-full">
                             Next Day
                           </span>
                         </div>
@@ -860,8 +860,8 @@ export default function CartPage() {
                     {/* Right: Price / FREE Badge */}
                     <div className="text-right shrink-0">
                       {isDhakaFree ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-black uppercase tracking-wider shadow-2xs">
-                          <LuSparkles className="w-2.5 h-2.5 text-emerald-600 shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-black uppercase tracking-wider shadow-2xs">
+                          <LuSparkles className="w-2.5 h-2.5 text-[#F97316] shrink-0" />
                           <span>FREE</span>
                         </span>
                       ) : (
@@ -878,7 +878,7 @@ export default function CartPage() {
                     onClick={() => setDeliveryZone("outside")}
                     className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
                       deliveryZone === "outside"
-                        ? "border-emerald-600 bg-emerald-50/70 shadow-xs ring-1 ring-emerald-600/30"
+                        ? "border-[#4F46E5] bg-[#EEF2FF]/70 shadow-xs ring-1 ring-[#4F46E5]/30"
                         : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/60 text-zinc-700"
                     }`}
                   >
@@ -887,7 +887,7 @@ export default function CartPage() {
                       <div
                         className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-all ${
                           deliveryZone === "outside"
-                            ? "bg-emerald-600 text-white shadow-2xs"
+                            ? "bg-[#4F46E5] text-white shadow-2xs"
                             : "border-2 border-zinc-300 bg-white"
                         }`}
                       >
@@ -914,8 +914,8 @@ export default function CartPage() {
                     {/* Right: Price / FREE Badge */}
                     <div className="text-right shrink-0">
                       {outsideRate === 0 ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-black uppercase tracking-wider shadow-2xs">
-                          <LuSparkles className="w-2.5 h-2.5 text-emerald-600 shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-black uppercase tracking-wider shadow-2xs">
+                          <LuSparkles className="w-2.5 h-2.5 text-[#F97316] shrink-0" />
                           <span>FREE</span>
                         </span>
                       ) : (
@@ -933,22 +933,22 @@ export default function CartPage() {
                 <button
                   type="button"
                   onClick={() => setPromoOpen(!promoOpen)}
-                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-zinc-700 hover:text-emerald-600 transition-colors cursor-pointer"
+                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-zinc-700 hover:text-[#4F46E5] transition-colors cursor-pointer"
                 >
                   <span className="flex items-center gap-1.5">
-                    <LuTag className="w-4 h-4 text-emerald-600" />
+                    <LuTag className="w-4 h-4 text-[#4F46E5]" />
                     <span>Have A Promo Code?</span>
                   </span>
                   {promoOpen ? <LuChevronUp className="w-4 h-4" /> : <IoChevronDownOutline className="w-4 h-4" />}
                 </button>
 
                 {appliedCoupon ? (
-                  <div className="mt-3 p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between">
+                  <div className="mt-3 p-3 rounded-xl bg-[#EEF2FF] border border-indigo-200 flex items-center justify-between">
                     <div>
-                      <span className="text-xs font-bold text-emerald-900 block">
+                      <span className="text-xs font-bold text-indigo-950 block">
                         Coupon "{appliedCoupon.code}" Applied
                       </span>
-                      <span className="text-[11px] text-emerald-700">
+                      <span className="text-[11px] text-[#4F46E5]">
                         Saved {formatCurrency(promoDiscount)}
                       </span>
                     </div>
@@ -968,7 +968,7 @@ export default function CartPage() {
                         value={promoInput}
                         onChange={(e) => setPromoInput(e.target.value)}
                         placeholder="Enter promo code"
-                        className="flex-1 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase text-zinc-900 focus:outline-none focus:border-emerald-600"
+                        className="flex-1 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase text-zinc-900 focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20"
                       />
                       <button
                         type="submit"
@@ -1021,7 +1021,7 @@ export default function CartPage() {
                     <span className="text-lg font-black text-zinc-950 block">Grand Total</span>
                     <span className="text-[11px] text-zinc-400">Inclusive of all applicable VAT/Taxes</span>
                   </div>
-                  <span className="text-2xl font-black text-emerald-700">
+                  <span className="text-2xl font-black text-[#1E1B4B]">
                     {formatCurrency(total)}
                   </span>
                 </div>
@@ -1038,7 +1038,7 @@ export default function CartPage() {
                   clearBuyNowItem();
                   router.push("/checkout");
                 }}
-                className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-emerald-600/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full py-4 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-indigo-600/25 transition-all cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>Proceed To Secure Checkout</span>
                 <LuLock className="w-4 h-4" />
@@ -1047,12 +1047,12 @@ export default function CartPage() {
               {/* Trust Badge */}
               <div className="flex items-center justify-center gap-3 text-[11px] text-zinc-400 font-medium">
                 <span className="flex items-center gap-1.5">
-                  <LuLock className="w-3.5 h-3.5 text-emerald-600" />
+                  <LuLock className="w-3.5 h-3.5 text-[#4F46E5]" />
                   <span>256-Bit Secure Checkout</span>
                 </span>
                 <span>•</span>
                 <span className="flex items-center gap-1.5">
-                  <LuTruck className="w-3.5 h-3.5 text-emerald-600" />
+                  <LuTruck className="w-3.5 h-3.5 text-[#4F46E5]" />
                   <span>Verified Delivery</span>
                 </span>
               </div>
@@ -1060,7 +1060,7 @@ export default function CartPage() {
               {/* Support Callout */}
               <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 space-y-2">
                 <div className="flex items-center gap-2">
-                  <IoCallOutline className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <IoCallOutline className="w-4 h-4 text-[#EA580C] shrink-0" />
                   <span>
                     Support: <strong className="text-zinc-900">01712345678</strong> (9 AM – 9 PM)
                   </span>

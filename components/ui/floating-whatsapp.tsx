@@ -49,20 +49,20 @@ export default function FloatingWhatsApp() {
           isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2 pointer-events-none"
         }`}
       >
-        <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
+        <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
         <span>WhatsApp এ অর্ডার বা সাহায্য চান?</span>
       </div>
 
-      {/* Floating Circular WhatsApp Button */}
+      {/* Floating Circular WhatsApp Button (#EA580C Accent) */}
       <a
         href={`https://wa.me/${waNumber}?text=${message}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="relative group w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center shadow-lg shadow-emerald-900/25 hover:shadow-xl hover:shadow-[#25D366]/40 transition-all duration-300 hover:scale-108 active:scale-95 cursor-pointer"
+        className="relative group w-14 h-14 rounded-full bg-[#EA580C] hover:bg-[#C2410C] text-white flex items-center justify-center shadow-lg shadow-orange-950/25 hover:shadow-xl hover:shadow-[#EA580C]/40 transition-all duration-300 hover:scale-108 active:scale-95 cursor-pointer"
       >
         {/* Subtle breathing ripple wave */}
-        <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-35 animate-ping -z-10" />
+        <span className="absolute -inset-1 rounded-full bg-[#EA580C] opacity-35 animate-ping -z-10" />
 
         <FaWhatsapp className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" />
       </a>

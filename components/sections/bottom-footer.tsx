@@ -57,18 +57,18 @@ export default async function Bottomfooter() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-3 pb-3 border-b border-zinc-200/60">
           <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
             <span className="text-xs font-semibold text-zinc-700 uppercase tracking-wider mr-1 flex items-center gap-1.5">
-              <HiLockClosed className="w-3.5 h-3.5 text-emerald-600" />
+              <HiLockClosed className="w-3.5 h-3.5 text-[#4F46E5]" />
               <span>নিরাপদ পেমেন্ট:</span>
             </span>
 
             <div className="flex items-center gap-2 flex-wrap justify-center">
               {/* Cash on Delivery Badge */}
               <div
-                className="h-7.5 px-2.5 bg-emerald-50 border border-emerald-300 rounded-md flex items-center gap-1.5 shadow-2xs hover:bg-emerald-100 transition-all shrink-0 cursor-default select-none"
+                className="h-7.5 px-2.5 bg-indigo-50 border border-indigo-200/80 rounded-md flex items-center gap-1.5 shadow-2xs hover:bg-indigo-100/60 transition-all shrink-0 cursor-default select-none"
                 title="ক্যাশ অন ডেলিভারি সুবিধা সারা দেশে প্রযোজ্য"
               >
-                <HiTruck className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span className="text-[11px] font-bold text-emerald-800">ক্যাশ অন ডেলিভারি</span>
+                <HiTruck className="w-4 h-4 text-[#4F46E5] shrink-0" />
+                <span className="text-[11px] font-bold text-[#1E1B4B]">ক্যাশ অন ডেলিভারি</span>
               </div>
 
               {/* bKash Official Badge */}
@@ -142,7 +142,7 @@ export default async function Bottomfooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-7.5 h-7.5 rounded-full bg-white hover:bg-emerald-600 text-zinc-600 hover:text-white border border-zinc-200 hover:border-emerald-600 transition-all flex items-center justify-center cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                  className="w-7.5 h-7.5 rounded-full bg-white hover:bg-[#4F46E5] text-zinc-600 hover:text-white border border-zinc-200 hover:border-[#4F46E5] transition-all flex items-center justify-center cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
                 >
                   <Icon className="w-3.5 h-3.5" />
                 </Link>

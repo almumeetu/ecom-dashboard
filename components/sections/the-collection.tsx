@@ -123,7 +123,7 @@ export default function TheCollection() {
                 <span className="text-xs font-semibold uppercase tracking-widest text-zinc-300">
                   {cat.tag}
                 </span>
-                <h3 className="text-2xl font-bold font-['Bembo_Std'] tracking-wide text-white mt-1 group-hover:text-emerald-300 transition-colors">
+                <h3 className="text-2xl font-bold font-['Bembo_Std'] tracking-wide text-white mt-1 group-hover:text-indigo-200 transition-colors">
                   {cat.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-3 text-xs font-semibold tracking-wider uppercase text-white/90 group-hover:text-white transition-all">

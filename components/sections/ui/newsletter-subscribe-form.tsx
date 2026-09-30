@@ -70,14 +70,14 @@ export default function NewsletterSubscribeForm() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email address"
           disabled={loading}
-          className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-white/[0.07] border border-white/20 text-white placeholder-zinc-400 text-xs sm:text-sm focus:outline-none focus:border-emerald-400 transition-colors disabled:opacity-60"
+          className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-white/[0.07] border border-white/20 text-white placeholder-zinc-400 text-xs sm:text-sm focus:outline-none focus:border-[#4F46E5] transition-colors disabled:opacity-60"
           required
         />
       </div>
       <button
         type="submit"
         disabled={loading}
-        className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all duration-150 flex items-center justify-center gap-1.5 cursor-pointer shrink-0 shadow-sm disabled:opacity-70"
+        className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all duration-150 flex items-center justify-center gap-1.5 cursor-pointer shrink-0 shadow-sm disabled:opacity-70"
       >
         {subscribed ? (
           <>

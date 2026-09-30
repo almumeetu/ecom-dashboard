@@ -380,7 +380,7 @@ export default function CheckoutPage() {
           </Link>
           <div className="h-0.5 flex-1 mx-3 bg-emerald-600/30" />
           <div className="flex items-center gap-2 text-xs font-extrabold text-zinc-900">
-            <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px] shadow-xs">
+            <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white flex items-center justify-center text-[11px] shadow-xs">
               2
             </span>
             <span>Shipping & Payment</span>
@@ -412,7 +412,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setAddressModalOpen(true)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#4F46E5] bg-[#EEF2FF] hover:bg-indigo-100 rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
                   >
                     <LuMapPin className="w-3.5 h-3.5" />
                     <span>Choose Saved Address ({savedAddresses.length})</span>
@@ -422,9 +422,9 @@ export default function CheckoutPage() {
 
               {/* Login Callout for Guests */}
               {!isAuthenticated && (
-                <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 flex items-center justify-between gap-3 text-xs">
+                <div className="p-4 rounded-2xl bg-[#EEF2FF]/70 border border-indigo-200/80 flex items-center justify-between gap-3 text-xs">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-[#4F46E5] text-white flex items-center justify-center shrink-0">
                       <LuUser className="w-4 h-4" />
                     </div>
                     <div>
@@ -435,7 +435,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setShowAuthModal(true)}
-                    className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-[11px] uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+                    className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold rounded-xl text-[11px] uppercase tracking-wider transition-colors cursor-pointer shrink-0"
                   >
                     Log In
                   </button>
@@ -446,7 +446,7 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
                       1
                     </span>
                     <h2 className="text-base font-bold text-zinc-900 tracking-tight">
@@ -468,7 +468,7 @@ export default function CheckoutPage() {
                         value={address.fullName}
                         onChange={(e) => updateAddressField("fullName", e.target.value)}
                         placeholder="e.g. Tanvir Ahmed"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -485,7 +485,7 @@ export default function CheckoutPage() {
                         value={address.phone}
                         onChange={(e) => updateAddressField("phone", e.target.value)}
                         placeholder="01XXXXXXXXX"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -501,7 +501,7 @@ export default function CheckoutPage() {
                         value={address.email}
                         onChange={(e) => updateAddressField("email", e.target.value)}
                         placeholder="yourname@gmail.com"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
@@ -512,7 +512,7 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-4">
                 <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
                       2
                     </span>
                     <h2 className="text-base font-bold text-zinc-900 tracking-tight">
@@ -522,7 +522,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setMapPickerOpen(true)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-3 py-1.5 rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4F46E5] bg-[#EEF2FF] hover:bg-indigo-100 px-3 py-1.5 rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
                   >
                     <LuMapPin className="w-3.5 h-3.5" />
                     <span>Set from Map</span>
@@ -538,7 +538,7 @@ export default function CheckoutPage() {
                     <select
                       value={address.state}
                       onChange={(e) => updateAddressField("state", e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                     >
                       {BD_DIVISIONS.map((div) => (
                         <option key={div} value={div}>
@@ -558,7 +558,7 @@ export default function CheckoutPage() {
                       value={address.city}
                       onChange={(e) => updateAddressField("city", e.target.value)}
                       placeholder="e.g. Dhaka, Gulshan, or Mirpur"
-                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                     />
                   </div>
 
@@ -571,7 +571,7 @@ export default function CheckoutPage() {
                       value={address.postalCode}
                       onChange={(e) => updateAddressField("postalCode", e.target.value)}
                       placeholder="e.g. Sector 3, 1230"
-                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -586,7 +586,7 @@ export default function CheckoutPage() {
                     value={address.addressLine1}
                     onChange={(e) => updateAddressField("addressLine1", e.target.value)}
                     placeholder="House / Holding number, Road number, Block, Area landmark..."
-                    className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                   />
                 </div>
 
@@ -599,7 +599,7 @@ export default function CheckoutPage() {
                     value={address.addressLine2 || ""}
                     onChange={(e) => updateAddressField("addressLine2", e.target.value)}
                     placeholder="e.g. Apt 4B, Level 4"
-                    className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
                   />
                 </div>
 
@@ -627,7 +627,7 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-emerald-600 text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
                       3
                     </span>
                     <h2 className="text-base font-bold text-zinc-900 tracking-tight">
@@ -639,7 +639,7 @@ export default function CheckoutPage() {
                   value={orderNote}
                   onChange={(e) => setOrderNote(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 bg-zinc-50/70 border border-zinc-200 rounded-2xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/10 focus:outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 bg-zinc-50/70 border border-zinc-200 rounded-2xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all resize-none"
                   placeholder="Any special instructions (e.g. call before delivery, leave with concierge, preferred delivery time)..."
                 />
               </div>
@@ -657,11 +657,11 @@ export default function CheckoutPage() {
                   >
                     <div className="flex items-center gap-2">
                       <h3 className="text-base font-black text-zinc-950 tracking-tight">Order Items</h3>
-                      <span className="text-xs font-extrabold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/70">
+                      <span className="text-xs font-extrabold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-0.5 rounded-full border border-emerald-200/70">
                         {checkoutItems.length} {checkoutItems.length === 1 ? "Item" : "Items"}
                       </span>
                     </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-emerald-700 group-hover:text-emerald-800 transition-colors">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-[#4F46E5] group-hover:text-[#4338CA] transition-colors">
                       <span>{isItemsOpen ? "Hide Details" : "View Details"}</span>
                       <LuChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -719,13 +719,13 @@ export default function CheckoutPage() {
                     className="w-full p-3.5 flex items-center justify-between text-left cursor-pointer hover:bg-zinc-50/80 transition-colors group select-none"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-200/60">
+                      <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-200/60">
                         <LuTruck className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="text-xs font-bold text-zinc-900">Delivery Destination</span>
-                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100/70 px-1.5 py-0.2 rounded">
+                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#4F46E5] bg-indigo-100/70 px-1.5 py-0.2 rounded">
                             {deliveryZone === "dhaka" ? "Inside Dhaka" : "All Bangladesh"}
                           </span>
                         </div>
@@ -736,7 +736,7 @@ export default function CheckoutPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-emerald-700 group-hover:text-emerald-800 shrink-0 ml-2">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-[#4F46E5] group-hover:text-[#4338CA] shrink-0 ml-2">
                       <span>{isDeliveryOpen ? "Done" : "Change"}</span>
                       <LuChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -762,7 +762,7 @@ export default function CheckoutPage() {
                           }}
                           className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer relative flex flex-col justify-between ${
                             deliveryZone === "dhaka"
-                              ? "border-emerald-600 bg-emerald-50/80 text-emerald-950 ring-1 ring-emerald-500/20 shadow-2xs"
+                              ? "border-[#4F46E5] bg-[#EEF2FF]/80 text-[#1E1B4B] ring-1 ring-[#4F46E5]/20 shadow-2xs"
                               : "border-zinc-200 bg-white hover:border-zinc-300 text-zinc-700"
                           }`}
                         >
@@ -771,7 +771,7 @@ export default function CheckoutPage() {
                             <div
                               className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
                                 deliveryZone === "dhaka"
-                                  ? "bg-emerald-600 text-white font-bold"
+                                  ? "bg-[#4F46E5] text-white font-bold"
                                   : "border border-zinc-300 bg-white"
                               }`}
                             >
@@ -795,7 +795,7 @@ export default function CheckoutPage() {
                           }}
                           className={`p-2.5 rounded-xl border text-left transition-all cursor-pointer relative flex flex-col justify-between ${
                             deliveryZone === "outside"
-                              ? "border-emerald-600 bg-emerald-50/80 text-emerald-950 ring-1 ring-emerald-500/20 shadow-2xs"
+                              ? "border-[#4F46E5] bg-[#EEF2FF]/80 text-[#1E1B4B] ring-1 ring-[#4F46E5]/20 shadow-2xs"
                               : "border-zinc-200 bg-white hover:border-zinc-300 text-zinc-700"
                           }`}
                         >
@@ -804,7 +804,7 @@ export default function CheckoutPage() {
                             <div
                               className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
                                 deliveryZone === "outside"
-                                  ? "bg-emerald-600 text-white font-bold"
+                                  ? "bg-[#4F46E5] text-white font-bold"
                                   : "border border-zinc-300 bg-white"
                               }`}
                             >
@@ -833,13 +833,13 @@ export default function CheckoutPage() {
                     className="w-full p-3.5 flex items-center justify-between text-left cursor-pointer hover:bg-zinc-50/80 transition-colors group select-none"
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-200/60">
+                      <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-indigo-200/60">
                         <LuShieldCheck className="w-4 h-4" />
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-center gap-1.5 flex-wrap">
                           <span className="text-xs font-bold text-zinc-900">Payment Method</span>
-                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-800 bg-emerald-100/70 px-1.5 py-0.2 rounded">
+                          <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#4F46E5] bg-indigo-100/70 px-1.5 py-0.2 rounded">
                             Verified
                           </span>
                         </div>
@@ -848,7 +848,7 @@ export default function CheckoutPage() {
                         </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-1 text-xs font-semibold text-emerald-700 group-hover:text-emerald-800 shrink-0 ml-2">
+                    <div className="flex items-center gap-1 text-xs font-semibold text-[#4F46E5] group-hover:text-[#4338CA] shrink-0 ml-2">
                       <span>{isPaymentOpen ? "Close" : "Change"}</span>
                       <LuChevronDown
                         className={`w-3.5 h-3.5 transition-transform duration-200 ${
@@ -869,7 +869,7 @@ export default function CheckoutPage() {
                       <label
                         className={`flex items-start gap-2.5 p-3 rounded-xl border-2 transition-all cursor-pointer relative ${
                           paymentMethod === "cod"
-                            ? "border-emerald-600 bg-emerald-50/70 shadow-2xs"
+                            ? "border-[#4F46E5] bg-[#EEF2FF]/70 shadow-2xs"
                             : "border-zinc-200 bg-white hover:border-zinc-300"
                         }`}
                       >
@@ -877,7 +877,7 @@ export default function CheckoutPage() {
                           <div
                             className={`w-4 h-4 rounded-full border flex items-center justify-center transition-colors ${
                               paymentMethod === "cod"
-                                ? "border-emerald-600 bg-emerald-600 text-white"
+                                ? "border-[#4F46E5] bg-[#4F46E5] text-white"
                                 : "border-zinc-300 bg-white"
                             }`}
                           >
@@ -900,7 +900,7 @@ export default function CheckoutPage() {
                             <span className="text-xs font-bold text-zinc-900">
                               Cash on Delivery
                             </span>
-                            <span className="text-[9px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full">
+                            <span className="text-[9px] font-extrabold uppercase tracking-wider bg-[#EEF2FF] text-[#4F46E5] px-1.5 py-0.5 rounded-full">
                               Zero Prepayment
                             </span>
                           </div>
@@ -933,22 +933,22 @@ export default function CheckoutPage() {
                 <div className="rounded-2xl border border-dashed border-zinc-200 bg-zinc-50/60 p-3 text-xs space-y-2">
                   <div className="flex items-center justify-between">
                     <span className="font-bold text-zinc-800 flex items-center gap-1.5">
-                      <LuTag className="w-3.5 h-3.5 text-emerald-600" />
+                      <LuTag className="w-3.5 h-3.5 text-[#4F46E5]" />
                       Promo Code or Voucher
                     </span>
                     {appliedCoupon && (
-                      <span className="text-[10px] font-extrabold uppercase text-emerald-800 bg-emerald-100/70 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-extrabold uppercase text-[#4F46E5] bg-indigo-100/70 px-2 py-0.5 rounded-full">
                         Applied
                       </span>
                     )}
                   </div>
                   {appliedCoupon ? (
-                    <div className="flex items-center justify-between p-2 rounded-xl bg-emerald-50 border border-emerald-200">
+                    <div className="flex items-center justify-between p-2 rounded-xl bg-[#EEF2FF] border border-indigo-200">
                       <div>
-                        <span className="font-extrabold text-emerald-800 tracking-wider text-xs block">
+                        <span className="font-extrabold text-indigo-950 tracking-wider text-xs block">
                           {appliedCoupon.code}
                         </span>
-                        <span className="text-[10px] text-emerald-600">
+                        <span className="text-[10px] text-[#4F46E5]">
                           {appliedCoupon.type === "percentage" ? `${appliedCoupon.value}% OFF` : `৳${appliedCoupon.value} OFF`} discount applied
                         </span>
                       </div>
@@ -967,7 +967,7 @@ export default function CheckoutPage() {
                         value={couponInput}
                         onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
                         placeholder="Enter promo code"
-                        className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-xl text-xs uppercase placeholder:normal-case placeholder:text-zinc-400 focus:outline-none focus:border-emerald-600"
+                        className="flex-1 px-3 py-2 bg-white border border-zinc-200 rounded-xl text-xs uppercase placeholder:normal-case placeholder:text-zinc-400 focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20"
                       />
                       <button
                         type="button"
@@ -1018,7 +1018,7 @@ export default function CheckoutPage() {
                       <span className="text-base font-black text-zinc-950 block">Total Amount</span>
                       <span className="text-[10px] text-zinc-400">Cash on Delivery</span>
                     </div>
-                    <span className="text-2xl font-black text-emerald-700">
+                    <span className="text-2xl font-black text-[#1E1B4B]">
                       {formatCurrency(total)}
                     </span>
                   </div>
@@ -1034,7 +1034,7 @@ export default function CheckoutPage() {
                         onChange={(e) => setAgreeToTerms(e.target.checked)}
                         className="peer sr-only"
                       />
-                      <div className="w-4 h-4 border border-zinc-300 rounded-md peer-checked:bg-emerald-600 peer-checked:border-emerald-600 flex items-center justify-center transition-colors">
+                      <div className="w-4 h-4 border border-zinc-300 rounded-md peer-checked:bg-[#4F46E5] peer-checked:border-[#4F46E5] flex items-center justify-center transition-colors">
                         {agreeToTerms && <LuCheck className="w-3 h-3 text-white stroke-[3]" />}
                       </div>
                     </div>
@@ -1043,7 +1043,7 @@ export default function CheckoutPage() {
                       <Link
                         href="/terms"
                         target="_blank"
-                        className="text-emerald-700 underline font-semibold hover:text-emerald-800"
+                        className="text-[#4F46E5] underline font-semibold hover:text-[#4338CA]"
                       >
                         terms & conditions
                       </Link>{" "}
@@ -1056,7 +1056,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={submitting || !agreeToTerms}
-                  className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 active:scale-[0.98] text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-emerald-600/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full py-4 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-indigo-600/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {submitting ? (
                     <>
@@ -1074,15 +1074,15 @@ export default function CheckoutPage() {
                 {/* Trust Badges */}
                 <div className="pt-3 border-t border-zinc-100 grid grid-cols-3 gap-2 text-center">
                   <div className="flex flex-col items-center gap-1">
-                    <LuShieldCheck className="w-4 h-4 text-emerald-600" />
+                    <LuShieldCheck className="w-4 h-4 text-[#4F46E5]" />
                     <span className="text-[10px] font-bold text-zinc-500">256-Bit SSL</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
-                    <LuTruck className="w-4 h-4 text-emerald-600" />
+                    <LuTruck className="w-4 h-4 text-[#4F46E5]" />
                     <span className="text-[10px] font-bold text-zinc-500">Doorstep COD</span>
                   </div>
                   <div className="flex flex-col items-center gap-1">
-                    <LuCheck className="w-4 h-4 text-emerald-600 stroke-[3]" />
+                    <LuCheck className="w-4 h-4 text-[#4F46E5] stroke-[3]" />
                     <span className="text-[10px] font-bold text-zinc-500">100% Authentic</span>
                   </div>
                 </div>
@@ -1090,7 +1090,7 @@ export default function CheckoutPage() {
                 {/* Help & Support Callout */}
                 <div className="p-3 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 space-y-1.5">
                   <div className="flex items-center gap-2">
-                    <IoCallOutline className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <IoCallOutline className="w-3.5 h-3.5 text-[#EA580C] shrink-0" />
                     <span>
                       Need help? <strong className="text-zinc-900">01712345678</strong>
                     </span>

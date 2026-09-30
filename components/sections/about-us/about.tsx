@@ -99,8 +99,8 @@ export default function About() {
               
               {/* Left Column: Mission & Narrative */}
               <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold tracking-wider uppercase">
-                  <FiShoppingBag className="w-3.5 h-3.5 text-emerald-600" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF2FF] border border-indigo-200/80 text-[#4F46E5] text-xs font-bold tracking-wider uppercase">
+                  <FiShoppingBag className="w-3.5 h-3.5 text-[#4F46E5]" />
                   <span>About NovaMart Bangladesh</span>
                 </div>
 
@@ -119,7 +119,7 @@ export default function About() {
                 {/* 4 Feature Badges Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
-                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <HiCheckCircle className="w-5 h-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Direct Brand Partnerships</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
@@ -129,7 +129,7 @@ export default function About() {
                   </div>
 
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
-                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <HiCheckCircle className="w-5 h-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Quality Inspection</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
@@ -139,7 +139,7 @@ export default function About() {
                   </div>
 
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
-                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <HiCheckCircle className="w-5 h-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-zinc-900">All 64 Districts</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
@@ -149,7 +149,7 @@ export default function About() {
                   </div>
 
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
-                    <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <HiCheckCircle className="w-5 h-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Customer Helpline</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
@@ -163,7 +163,7 @@ export default function About() {
                 <div className="pt-2 flex flex-wrap items-center gap-3">
                   <Link
                     href="/products"
-                    className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
                   >
                     <span>Browse Catalog</span>
                     <FiArrowRight className="w-4 h-4" />
@@ -173,7 +173,7 @@ export default function About() {
                     href="tel:01712345678"
                     className="inline-flex items-center gap-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-800 font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl border border-zinc-300 shadow-xs transition-all cursor-pointer"
                   >
-                    <FiPhone className="w-4 h-4 text-emerald-600" />
+                    <FiPhone className="w-4 h-4 text-[#4F46E5]" />
                     <span>Hotline: +880 1712-345678</span>
                   </a>
                 </div>
@@ -192,7 +192,7 @@ export default function About() {
                   {/* Bottom Info Card */}
                   <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-lg">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center font-black text-lg shrink-0 shadow-xs">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#4F46E5] to-[#3730A3] text-white flex items-center justify-center font-black text-lg shrink-0 shadow-xs">
                         NM
                       </div>
                       <div>
@@ -202,7 +202,7 @@ export default function About() {
                         <p className="text-xs text-zinc-600 mt-0.5">
                           Multi-Category E-Commerce Mart
                         </p>
-                        <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
+                        <p className="text-[11px] text-[#4F46E5] font-medium mt-0.5">
                           Banani Corporate Hub, Dhaka-1213
                         </p>
                       </div>
@@ -223,8 +223,8 @@ export default function About() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
               <div className="lg:col-span-8 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                  <HiShieldCheck className="w-4 h-4 text-emerald-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-800/80 text-indigo-300 text-xs font-bold uppercase tracking-wider">
+                  <HiShieldCheck className="w-4 h-4 text-[#4F46E5]" />
                   <span>The NovaMart Promise</span>
                 </div>
 
@@ -266,8 +266,8 @@ export default function About() {
                 </div>
               </div>
 
-              <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-emerald-950/30 border border-emerald-500/20 rounded-2xl text-center space-y-3">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md">
+              <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-indigo-950/30 border border-indigo-500/20 rounded-2xl text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-[#4F46E5] text-white flex items-center justify-center shadow-md">
                   <FiPhone className="w-6 h-6" />
                 </div>
                 <div>
@@ -276,7 +276,7 @@ export default function About() {
                 </div>
                 <a
                   href="tel:01712345678"
-                  className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition-colors"
+                  className="w-full py-2.5 px-4 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
                   Call +880 1712-345678
                 </a>
@@ -292,7 +292,7 @@ export default function About() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#4F46E5]">
                 Product Departments
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
@@ -304,7 +304,7 @@ export default function About() {
             </div>
             <Link
               href="/products"
-              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#4F46E5] hover:text-[#4338CA] transition-colors shrink-0"
             >
               <span>View All Products</span>
               <FiArrowRight className="w-4 h-4" />
@@ -330,14 +330,14 @@ export default function About() {
                 </div>
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-base font-bold text-zinc-900 group-hover:text-emerald-600 transition-colors">
+                    <h3 className="text-base font-bold text-zinc-900 group-hover:text-[#4F46E5] transition-colors">
                       {d.title}
                     </h3>
                     <p className="text-xs text-zinc-500 mt-1.5 leading-relaxed">
                       {d.desc}
                     </p>
                   </div>
-                  <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs font-bold text-emerald-600">
+                  <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs font-bold text-[#4F46E5]">
                     <span>Browse Category</span>
                     <FiArrowRight className="w-3.5 h-3.5" />
                   </div>
@@ -352,7 +352,7 @@ export default function About() {
       <section className="py-14 sm:py-20 bg-white border-y border-zinc-200/80">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#4F46E5]">
               Why NovaMart
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
@@ -372,7 +372,7 @@ export default function About() {
                   className="p-5 sm:p-6 rounded-2xl bg-zinc-50/70 border border-zinc-200/70 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-100">
+                    <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center mb-4 border border-indigo-100">
                       <Icon className="w-5 h-5" />
                     </div>
                     <h3 className="text-sm font-bold text-zinc-900 leading-snug mb-1.5">

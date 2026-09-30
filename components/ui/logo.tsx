@@ -67,13 +67,13 @@ export default function Logo({
         >
           <defs>
             <linearGradient id="novamart-base-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0D8A68" />
-              <stop offset="50%" stopColor="#0B7053" />
-              <stop offset="100%" stopColor="#044D38" />
+              <stop offset="0%" stopColor="#6366F1" />
+              <stop offset="50%" stopColor="#4F46E5" />
+              <stop offset="100%" stopColor="#3730A3" />
             </linearGradient>
             <linearGradient id="novamart-spark-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#FBBF24" />
-              <stop offset="100%" stopColor="#E87A18" />
+              <stop offset="0%" stopColor="#FDBA74" />
+              <stop offset="100%" stopColor="#EA580C" />
             </linearGradient>
           </defs>
 
@@ -92,7 +92,7 @@ export default function Logo({
             width="42"
             height="42"
             rx="11"
-            stroke="rgba(255, 255, 255, 0.22)"
+            stroke="rgba(255, 255, 255, 0.25)"
             strokeWidth="1.2"
           />
 
@@ -108,7 +108,7 @@ export default function Logo({
           {/* Dynamic 'M' Right Pillar & Flourish */}
           <path
             d="M24 31V18L31 26.5V31"
-            stroke="#A7F3D0"
+            stroke="#C7D2FE"
             strokeWidth="3.2"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -134,14 +134,14 @@ export default function Logo({
           </span>
           <span
             className={`font-black tracking-tight leading-none ml-1 ${s.mart} ${
-              isLight ? "text-emerald-300" : "text-[#0D7053]"
+              isLight ? "text-indigo-300" : "text-[#4F46E5]"
             }`}
           >
             MART
           </span>
-          {/* Amber Accent Dot */}
+          {/* Amber/Orange Accent Dot */}
           <span
-            className={`rounded-full bg-[#E87A18] ml-1 mb-0.5 shrink-0 ${s.dot}`}
+            className={`rounded-full bg-[#EA580C] ml-1 mb-0.5 shrink-0 ${s.dot}`}
             aria-hidden="true"
           />
         </div>
@@ -149,7 +149,7 @@ export default function Logo({
         {showTagline && (
           <span
             className={`font-extrabold uppercase mt-1 leading-none ${s.tagline} ${
-              isLight ? "text-emerald-300/90" : "text-emerald-800"
+              isLight ? "text-indigo-200/90" : "text-slate-600"
             }`}
           >
             {tagline}

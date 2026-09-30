@@ -28,7 +28,7 @@ export default function BrowseCategories({
         </h2>
         <Link
           href="/products"
-          className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1 group transition-colors"
+          className="text-xs sm:text-sm font-bold text-[#4F46E5] hover:text-[#4338CA] flex items-center gap-1 group transition-colors"
         >
           <span>View all</span>
           <LuArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -55,8 +55,8 @@ export default function BrowseCategories({
               <div
                 className={`w-16 h-16 sm:w-20 sm:h-20 rounded-full sm:rounded-2xl p-2.5 flex items-center justify-center relative overflow-hidden transition-all duration-300 shadow-2xs group-hover:shadow-md group-hover:scale-105 ${
                   isSelected
-                    ? "bg-emerald-50 border-2 border-emerald-600 ring-4 ring-emerald-500/10"
-                    : "bg-white border border-zinc-200/80 group-hover:border-emerald-500/50"
+                    ? "bg-[#EEF2FF] border-2 border-[#4F46E5] ring-4 ring-[#4F46E5]/10"
+                    : "bg-white border border-zinc-200/80 group-hover:border-[#4F46E5]/50 group-hover:bg-[#EEF2FF]"
                 }`}
               >
                 <div className="relative w-full h-full rounded-full overflow-hidden">
@@ -75,8 +75,8 @@ export default function BrowseCategories({
               <span
                 className={`text-[11px] sm:text-xs font-semibold mt-2 line-clamp-1 max-w-[85px] sm:max-w-[105px] transition-colors leading-tight ${
                   isSelected
-                    ? "text-emerald-700 font-bold"
-                    : "text-zinc-800 group-hover:text-emerald-700"
+                    ? "text-[#4F46E5] font-bold"
+                    : "text-zinc-800 group-hover:text-[#4F46E5]"
                 }`}
               >
                 {cat.name}

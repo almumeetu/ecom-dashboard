@@ -61,8 +61,8 @@ export default function Brands({
     <section className={`w-full py-14 sm:py-20 ${bgClassName} border-t border-stone-200/70`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100/80 text-emerald-800 text-[11px] font-bold uppercase tracking-wider mb-3">
-            <LuBadgeCheck className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-bold uppercase tracking-wider mb-3">
+            <LuBadgeCheck className="w-3.5 h-3.5 text-[#F97316]" />
             <span>Multi-Vendor Certified</span>
           </div>
 
@@ -99,7 +99,7 @@ export default function Brands({
             <SwiperSlide key={brand.id || index}>
               <Link
                 href={`/products?search=${encodeURIComponent(brand.name)}`}
-                className="flex flex-col items-center justify-center p-5 rounded-2xl bg-white border border-stone-200/80 hover:border-emerald-500/50 shadow-2xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 group h-32 cursor-pointer"
+                className="flex flex-col items-center justify-center p-5 rounded-2xl bg-white border border-stone-200/80 hover:border-[#4F46E5]/40 shadow-2xs hover:shadow-md hover:-translate-y-1 transition-all duration-300 group h-32 cursor-pointer"
               >
                 {brand.logo ? (
                   <div className="relative h-12 w-full">
@@ -112,10 +112,10 @@ export default function Brands({
                   </div>
                 ) : (
                   <div className="flex flex-col items-center gap-1.5 text-center">
-                    <div className="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
-                      <LuStore className="w-4 h-4 text-emerald-700" />
+                    <div className="w-9 h-9 rounded-full bg-[#EEF2FF] flex items-center justify-center group-hover:bg-indigo-100 transition-colors">
+                      <LuStore className="w-4 h-4 text-[#4F46E5]" />
                     </div>
-                    <span className="font-semibold text-zinc-800 group-hover:text-emerald-700 text-sm sm:text-[15px] transition-colors line-clamp-1">
+                    <span className="font-semibold text-zinc-800 group-hover:text-[#4F46E5] text-sm sm:text-[15px] transition-colors line-clamp-1">
                       {brand.name}
                     </span>
                     <span className="text-[10px] text-zinc-400 font-medium tracking-wide">

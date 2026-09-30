@@ -75,7 +75,7 @@ export default function RelatedCarousel({
 
           <Link
             href="/products"
-            className="text-xs sm:text-sm font-bold text-[#0D7053] hover:text-[#09523D] hover:underline transition-colors shrink-0"
+            className="text-xs sm:text-sm font-bold text-[#4F46E5] hover:text-[#4338CA] hover:underline transition-colors shrink-0"
           >
             Browse all
           </Link>

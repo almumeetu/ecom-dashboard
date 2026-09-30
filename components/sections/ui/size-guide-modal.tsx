@@ -140,7 +140,7 @@ export default function SizeGuideModal({
                         <td className="px-4 py-2.5">{row.usM}</td>
                         <td className="px-4 py-2.5">{row.usW}</td>
                         <td className="px-4 py-2.5">{row.uk}</td>
-                        <td className="px-4 py-2.5 font-medium text-emerald-700">{unit === 'cm' ? row.cm : row.in}</td>
+                        <td className="px-4 py-2.5 font-medium text-[#4F46E5]">{unit === 'cm' ? row.cm : row.in}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -149,7 +149,7 @@ export default function SizeGuideModal({
 
               <div className="p-4 rounded-xl bg-stone-50 border border-stone-200 text-xs space-y-1.5">
                 <div className="font-bold text-zinc-900 flex items-center gap-1.5">
-                  <IoCheckmarkCircleOutline className="w-4 h-4 text-emerald-600" />
+                  <IoCheckmarkCircleOutline className="w-4 h-4 text-[#4F46E5]" />
                   How to Measure Foot Length:
                 </div>
                 <p className="text-zinc-600">

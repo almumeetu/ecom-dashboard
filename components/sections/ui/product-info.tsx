@@ -278,7 +278,7 @@ export default function ProductInfo({
         <span>Category: </span>
         <Link
           href={`/products?category=${encodeURIComponent(category)}`}
-          className="text-[#0D7053] hover:text-[#09523D] font-medium hover:underline transition-colors"
+          className="text-[#4F46E5] hover:text-[#4338CA] font-medium hover:underline transition-colors"
         >
           {category || 'General Essentials'}
         </Link>
@@ -286,12 +286,12 @@ export default function ProductInfo({
 
       {/* ── 3. Status Badges Row (In stock + Fresh & handpicked) ── */}
       <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-[#E8F5E9] text-[#1B5E20] border border-[#C8E6C9]">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#2E7D32]" />
+        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
           <span>In stock</span>
         </span>
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-[#FFF9C4] text-[#F57F17] border border-[#FFF59D]">
+        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-orange-50 text-[#EA580C] border border-orange-200">
           <span>🌿</span>
           <span>Fresh &amp; handpicked</span>
         </span>
@@ -309,7 +309,7 @@ export default function ProductInfo({
 
       {/* ── 4. Price & Discount Row ── */}
       <div className="flex items-baseline gap-3 pt-0.5">
-        <span className="text-2xl sm:text-3xl font-black text-[#0D7053] tracking-tight">
+        <span className="text-2xl sm:text-3xl font-black text-[#1E1B4B] tracking-tight">
           {displayPrice}
         </span>
 
@@ -320,7 +320,7 @@ export default function ProductInfo({
         )}
 
         {discountPercent > 0 && (
-          <span className="px-2 py-0.5 rounded-md text-xs font-bold bg-[#E53935] text-white">
+          <span className="px-2 py-0.5 rounded-md text-xs font-bold bg-[#EA580C] text-white">
             Save {discountPercent}%
           </span>
         )}
@@ -353,23 +353,23 @@ export default function ProductInfo({
           </button>
         </div>
 
-        {/* Orange Add to Bag Button */}
+        {/* Primary CTA: Add to Bag Button (#4F46E5, Hover: #4338CA) */}
         <button
           type="button"
           onClick={handleAddToCart}
           disabled={isOutOfStock}
-          className="flex-1 h-10 px-4 rounded-lg bg-[#E87A18] hover:bg-[#D46B0E] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all disabled:opacity-50"
+          className="flex-1 h-10 px-4 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all disabled:opacity-50"
         >
           <LuShoppingBag className="w-4 h-4" />
           <span>{isAdded ? 'Added ✓' : 'Add to Bag'}</span>
         </button>
 
-        {/* Green Buy Now Button */}
+        {/* Authoritative Buy Now Button (#1E1B4B Dark Indigo / Ink) */}
         <button
           type="button"
           onClick={handleBuyNow}
           disabled={isOutOfStock}
-          className="flex-1 h-10 px-4 rounded-lg bg-[#0D7053] hover:bg-[#0B6046] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all disabled:opacity-50"
+          className="flex-1 h-10 px-4 rounded-lg bg-[#1E1B4B] hover:bg-[#161338] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all disabled:opacity-50"
         >
           <span>Buy Now</span>
         </button>
@@ -381,7 +381,7 @@ export default function ProductInfo({
           Need help or want to order directly?
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          {/* WhatsApp Order */}
+          {/* WhatsApp Order (#EA580C Accent) */}
           <a
             href={`https://wa.me/${formattedWhatsapp}?text=${encodeURIComponent(
               `Hello NovaMart, I want to order this product:\n\n*${name}*\nPrice: ${displayPrice}\nLink: ${
@@ -390,7 +390,7 @@ export default function ProductInfo({
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 px-3.5 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+            className="h-10 px-3.5 rounded-lg bg-[#EA580C] hover:bg-[#C2410C] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
           >
             <FaWhatsapp className="w-4.5 h-4.5" />
             <span>WhatsApp Order</span>
@@ -399,7 +399,7 @@ export default function ProductInfo({
           {/* Call Hotline */}
           <a
             href={`tel:${primaryPhone.replace(/[^\d+]/g, '')}`}
-            className="h-10 px-3.5 rounded-lg border border-[#0D7053] text-[#0D7053] hover:bg-[#0D7053]/5 font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="h-10 px-3.5 rounded-lg border border-[#4F46E5] text-[#4F46E5] hover:bg-[#EEF2FF] font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <IoCallOutline className="w-4.5 h-4.5" />
             <span>Call {primaryPhone}</span>
@@ -416,7 +416,7 @@ export default function ProductInfo({
             onClick={() => setActiveTab('desc')}
             className={`pb-2.5 transition-colors relative cursor-pointer ${
               activeTab === 'desc'
-                ? 'text-[#0D7053] font-bold border-b-2 border-[#0D7053]'
+                ? 'text-[#4F46E5] font-bold border-b-2 border-[#4F46E5]'
                 : 'text-zinc-500 hover:text-zinc-900'
             }`}
           >
@@ -428,7 +428,7 @@ export default function ProductInfo({
             onClick={() => setActiveTab('delivery')}
             className={`pb-2.5 transition-colors relative cursor-pointer ${
               activeTab === 'delivery'
-                ? 'text-[#0D7053] font-bold border-b-2 border-[#0D7053]'
+                ? 'text-[#4F46E5] font-bold border-b-2 border-[#4F46E5]'
                 : 'text-zinc-500 hover:text-zinc-900'
             }`}
           >
@@ -440,7 +440,7 @@ export default function ProductInfo({
             onClick={() => setActiveTab('reviews')}
             className={`pb-2.5 transition-colors relative cursor-pointer ${
               activeTab === 'reviews'
-                ? 'text-[#0D7053] font-bold border-b-2 border-[#0D7053]'
+                ? 'text-[#4F46E5] font-bold border-b-2 border-[#4F46E5]'
                 : 'text-zinc-500 hover:text-zinc-900'
             }`}
           >
@@ -494,7 +494,7 @@ export default function ProductInfo({
           <div className="py-4 text-xs sm:text-[13px] text-zinc-700 leading-relaxed space-y-3">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-zinc-50 p-3.5 rounded-xl border border-zinc-200">
               <div className="flex items-start gap-2.5">
-                <LuTruck className="w-4 h-4 text-[#0D7053] mt-0.5 shrink-0" />
+                <LuTruck className="w-4 h-4 text-[#4F46E5] mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-zinc-900 block">ঢাকা সিটিতে ডেলিভারি:</strong>
                   <span className="text-zinc-600">৳{feeInside} (২৪ থেকে ৪৮ ঘণ্টার মধ্যে ডেলিভারি)</span>
@@ -502,7 +502,7 @@ export default function ProductInfo({
               </div>
 
               <div className="flex items-start gap-2.5">
-                <LuTruck className="w-4 h-4 text-[#0D7053] mt-0.5 shrink-0" />
+                <LuTruck className="w-4 h-4 text-[#4F46E5] mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-zinc-900 block">ঢাকার বাইরে ডেলিভারি:</strong>
                   <span className="text-zinc-600">৳{feeOutside} (২ থেকে ৩ কার্যদিবস)</span>
@@ -532,9 +532,9 @@ export default function ProductInfo({
           <div className="py-4 text-xs sm:text-[13px] text-zinc-700 leading-relaxed space-y-4">
             {/* Reviews Summary */}
             <div className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl border border-zinc-200">
-              <div className="flex text-amber-400">
+              <div className="flex text-[#F97316]">
                 {[...Array(5)].map((_, i) => (
-                  <LuStar key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  <LuStar key={i} className="w-4 h-4 fill-[#F97316] text-[#F97316]" />
                 ))}
               </div>
               <span className="font-bold text-zinc-900 text-sm">4.9 / 5.0</span>
@@ -566,9 +566,9 @@ export default function ProductInfo({
                     <span className="font-bold text-zinc-900">{rev.user?.name || 'Customer'}</span>
                     <span className="text-[11px] text-zinc-400">Verified Buyer</span>
                   </div>
-                  <div className="flex text-amber-400">
+                  <div className="flex text-[#F97316]">
                     {[...Array(rev.rating || 5)].map((_, i) => (
-                      <LuStar key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+                      <LuStar key={i} className="w-3 h-3 fill-[#F97316] text-[#F97316]" />
                     ))}
                   </div>
                   <p className="text-xs text-zinc-600">{rev.comment}</p>
@@ -579,7 +579,7 @@ export default function ProductInfo({
             {/* Quick Review Form */}
             <form onSubmit={handleSubmitReview} className="space-y-2 pt-2 border-t border-zinc-200">
               <p className="font-bold text-zinc-900 text-xs flex items-center gap-1.5">
-                <LuMessageSquare className="w-3.5 h-3.5 text-[#0D7053]" />
+                <LuMessageSquare className="w-3.5 h-3.5 text-[#4F46E5]" />
                 <span>Write a Review</span>
               </p>
               <div className="flex items-center gap-1">
@@ -588,10 +588,10 @@ export default function ProductInfo({
                     key={star}
                     type="button"
                     onClick={() => setNewRating(star)}
-                    className="p-0.5 cursor-pointer text-amber-400"
+                    className="p-0.5 cursor-pointer text-[#F97316]"
                   >
                     <LuStar
-                      className={`w-4 h-4 ${star <= newRating ? 'fill-amber-400' : 'text-zinc-300'}`}
+                      className={`w-4 h-4 ${star <= newRating ? 'fill-[#F97316]' : 'text-zinc-300'}`}
                     />
                   </button>
                 ))}
@@ -601,12 +601,12 @@ export default function ProductInfo({
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Share your experience with this product..."
                 rows={2}
-                className="w-full p-2.5 rounded-lg border border-zinc-300 bg-white text-xs outline-none focus:border-[#0D7053] focus:ring-1 focus:ring-[#0D7053]"
+                className="w-full p-2.5 rounded-lg border border-zinc-300 bg-white text-xs outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]"
               />
               <button
                 type="submit"
                 disabled={isSubmittingReview}
-                className="px-3.5 py-1.5 rounded-lg bg-[#0D7053] hover:bg-[#0B6046] text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                className="px-3.5 py-1.5 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
               >
                 <LuSend className="w-3 h-3" />
                 <span>Submit Review</span>

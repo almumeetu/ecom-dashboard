@@ -16,10 +16,10 @@ export default function PromoBanner() {
               className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
               unoptimized
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/95 via-emerald-950/75 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B132B]/95 via-[#1E1B4B]/80 to-transparent" />
             
             <div className="absolute inset-0 p-5 sm:p-8 md:p-10 flex flex-col justify-between text-white z-10">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-emerald-500 text-white w-fit shadow-xs">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-[#4F46E5] text-white w-fit shadow-xs">
                 DAILY FRESH & ORGANIC
               </span>
 
@@ -33,7 +33,7 @@ export default function PromoBanner() {
 
                 <Link
                   href="/products?search=grocery"
-                  className="inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-full bg-white text-emerald-900 hover:bg-emerald-50 active:scale-95 font-semibold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-md"
+                  className="inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-full bg-white text-[#1E1B4B] hover:bg-[#EEF2FF] hover:text-[#4F46E5] active:scale-95 font-semibold text-xs uppercase tracking-wider transition-all duration-200 cursor-pointer shadow-md"
                 >
                   <span>Shop Groceries</span>
                   <LuArrowRight className="w-4 h-4" />

@@ -90,15 +90,15 @@ export default function PageBanner({
               {showTrustChips && (
                 <div className="flex items-center gap-3.5 text-[11px] font-medium text-stone-500 mb-0.5">
                   <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
                     Free Shipping 999+
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
                     100% Authentic
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
                     Easy Returns
                   </span>
                 </div>

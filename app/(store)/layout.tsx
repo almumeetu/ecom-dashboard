@@ -8,6 +8,7 @@ import { CartProvider } from "@/app/_providers/cart-provider";
 import { WishlistProvider } from "@/app/_providers/wishlist-provider";
 import AuthModal from "@/components/auth-modal";
 import BackToTop from "@/components/ui/back-to-top";
+import FloatingWhatsApp from "@/components/ui/floating-whatsapp";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { Toaster } from "sonner";
 
@@ -29,6 +30,7 @@ export default function StoreLayout({
           <Mainfooter />
           <Bottomfooter />
           <AuthModal />
+          <FloatingWhatsApp />
           <BackToTop />
           <Toaster richColors closeButton position="bottom-right" />
         </CartProvider>

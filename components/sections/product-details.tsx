@@ -337,34 +337,33 @@ export default function ProductDetails({
       {/* ── Minimalist Clean Breadcrumb Strip ───────────────────────── */}
       <div className="w-full border-b border-stone-200/80 bg-stone-50/50">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-3 flex items-center justify-between text-xs text-zinc-500">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap">
+          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap text-xs text-zinc-500">
             <Link
               href="/"
-              className="flex items-center gap-1 text-zinc-500 hover:text-zinc-950 transition-colors font-medium"
+              className="text-zinc-500 hover:text-zinc-900 transition-colors font-medium"
             >
-              <IoHomeOutline className="w-3.5 h-3.5" />
-              <span>Home</span>
+              Home
             </Link>
-            <IoChevronForwardOutline className="w-3 h-3 text-stone-400 shrink-0" />
+            <span className="text-zinc-400">/</span>
             <Link
               href="/products"
-              className="text-zinc-500 hover:text-zinc-950 transition-colors font-medium"
+              className="text-zinc-500 hover:text-zinc-900 transition-colors font-medium"
             >
-              Products
+              Shop
             </Link>
             {product.category && (
               <>
-                <IoChevronForwardOutline className="w-3 h-3 text-stone-400 shrink-0" />
+                <span className="text-zinc-400">/</span>
                 <Link
                   href={`/products?category=${encodeURIComponent(product.category)}`}
-                  className="text-zinc-500 hover:text-zinc-950 transition-colors font-medium"
+                  className="text-zinc-500 hover:text-zinc-900 transition-colors font-medium"
                 >
                   {product.category}
                 </Link>
               </>
             )}
-            <IoChevronForwardOutline className="w-3 h-3 text-stone-400 shrink-0" />
-            <span className="text-zinc-900 font-semibold truncate max-w-[200px] sm:max-w-md">
+            <span className="text-zinc-400">/</span>
+            <span className="text-zinc-800 font-semibold truncate max-w-[200px] sm:max-w-md">
               {product.name}
             </span>
           </nav>
@@ -380,11 +379,11 @@ export default function ProductDetails({
         </div>
       </div>
 
-      {/* ── Main Product Two-Column Layout ──────────────────────────── */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-10 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-start">
-          {/* Gallery Column (Left - 7 cols) */}
-          <div className="lg:col-span-7 w-full lg:sticky lg:top-24">
+      {/* ── Main Product Two-Column Layout (Matching Screenshot) ────── */}
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 lg:py-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-start">
+          {/* Gallery Column (Left - 6 cols) */}
+          <div className="lg:col-span-6 w-full">
             <ProductGallery
               images={galleryImages}
               activeImage={selectedVariant?.image}
@@ -394,8 +393,8 @@ export default function ProductDetails({
             />
           </div>
 
-          {/* Purchasing Info Column (Right - 5 cols) */}
-          <div className="lg:col-span-5 w-full flex flex-col gap-6">
+          {/* Purchasing Info & Inline Tabs Column (Right - 6 cols) */}
+          <div className="lg:col-span-6 w-full">
             <ProductInfo
               name={product.name}
               subtitle={product.subtitle}
@@ -407,6 +406,7 @@ export default function ProductDetails({
               category={product.category}
               brand={product.brand}
               sku={product.sku}
+              description={product.description}
               variants={product.variants}
               onVariantChange={setSelectedVariant}
               onReviewsClick={scrollToReviews}
@@ -422,26 +422,8 @@ export default function ProductDetails({
         </div>
       </div>
 
-      {/* ── Product Deep Dive / Tabs Section (Spacious & Clean) ──────── */}
-      <section className="w-full border-t border-stone-200/80 bg-[#FAF9F6] py-12 sm:py-16">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <ProductTabs
-            productId={product.id}
-            productName={product.name}
-            description={product.description}
-            category={product.category}
-            brand={product.brand}
-            sku={selectedVariant?.sku || product.sku}
-            unit={product.unit}
-            tags={product.tags}
-            stockQuantity={selectedVariant?.stockQuantity}
-            attributes={selectedVariant?.attributes || {}}
-          />
-        </div>
-      </section>
-
-      {/* ── Recommended & Related Products Carousel ─────────────────── */}
-      <RelatedCarousel />
+      {/* ── You May Also Like Section (Clean 5-Column Grid) ─────────── */}
+      <RelatedCarousel currentCategory={product.category} currentProductId={product.id} />
 
       {/* ── Mobile Sticky Buy Bar ───────────────────────────────────── */}
       <MobileStickyBuyBar

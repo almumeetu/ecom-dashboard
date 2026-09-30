@@ -1,28 +1,38 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import type { Swiper as SwiperType } from 'swiper';
-import { Navigation, Autoplay } from 'swiper/modules';
+import Link from 'next/link';
 import ProductCard from './product-card';
-import DiscoverMoreButton from './button';
-import { fetchShopProducts, ShopProduct } from '@/lib/shop-api';
-import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
+import { fetchShopProducts, type ShopProduct } from '@/lib/shop-api';
 
-import 'swiper/css';
-import 'swiper/css/navigation';
+interface RelatedProductsProps {
+  currentCategory?: string;
+  currentProductId?: string;
+}
 
-export default function RelatedCarousel() {
-  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
-  const [activeIndex, setActiveIndex] = useState(2);
+export default function RelatedCarousel({
+  currentCategory,
+  currentProductId,
+}: RelatedProductsProps) {
   const [products, setProducts] = useState<ShopProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function loadProducts() {
       try {
-        const res = await fetchShopProducts({ limit: 12 });
-        setProducts(res.data);
+        const res = await fetchShopProducts({
+          limit: 20,
+        });
+        let filtered = (res.data || []).filter((p) => p.id !== currentProductId);
+        if (currentCategory) {
+          const catMatches = filtered.filter(
+            (p) => (p.category || '').toLowerCase() === currentCategory.toLowerCase()
+          );
+          if (catMatches.length >= 4) {
+            filtered = catMatches;
+          }
+        }
+        setProducts(filtered.slice(0, 10));
       } catch (err) {
         console.error('Failed to fetch related products', err);
       } finally {
@@ -30,19 +40,19 @@ export default function RelatedCarousel() {
       }
     }
     loadProducts();
-  }, []);
+  }, [currentCategory, currentProductId]);
 
   if (isLoading) {
     return (
-      <section className="w-full bg-[#FAF9F5] py-16 sm:py-20 border-t border-stone-200/80 overflow-hidden">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6">
-          <div className="flex flex-col items-center justify-center mb-10 space-y-2">
-            <div className="w-48 h-8 bg-stone-200 animate-pulse rounded-lg" />
-            <div className="w-64 h-4 bg-stone-200 animate-pulse rounded-lg" />
+      <section className="w-full bg-[#FAF9F5] py-10 sm:py-14 border-t border-zinc-200/80">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+          <div className="flex items-center justify-between mb-6">
+            <div className="w-44 h-7 bg-zinc-200 animate-pulse rounded-lg" />
+            <div className="w-20 h-5 bg-zinc-200 animate-pulse rounded-lg" />
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-80 bg-stone-200 animate-pulse rounded-2xl" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="h-80 bg-zinc-100 animate-pulse rounded-xl border border-zinc-200/60" />
             ))}
           </div>
         </div>
@@ -54,93 +64,40 @@ export default function RelatedCarousel() {
     return null;
   }
 
-  // Duplicate to guarantee smooth infinite loop
-  const displayProducts = [
-    ...products,
-    ...products.map((p) => ({ ...p, id: p.id + '-dup' })),
-  ];
-
   return (
-    <section className="w-full bg-[#FAF9F5] py-16 sm:py-20 border-t border-stone-200/80 overflow-hidden">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
-        {/* Header with Navigation Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-10">
-          <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-200/80 text-stone-800 text-[11px] font-bold uppercase tracking-wider mb-2">
-              <span>Handpicked For You</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-zinc-950 font-sans">
-              You May Also Like
-            </h2>
-            <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-              Popular trending items and verified multi-vendor recommendations
-            </p>
-          </div>
+    <section className="w-full bg-[#FAF9F5] py-10 sm:py-14 border-t border-zinc-200/80 font-sans">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
+        {/* Header matching Screenshot: "You may also like" with "Browse all" link */}
+        <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8">
+          <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+            You may also like
+          </h2>
 
-          {/* Navigation Buttons */}
-          <div className="flex items-center gap-2">
-            <button
-              className="related-prev w-11 h-11 rounded-full bg-white border border-stone-200 text-zinc-800 hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all flex items-center justify-center shadow-xs cursor-pointer"
-              aria-label="Previous products"
-            >
-              <IoChevronBackOutline className="w-5 h-5" />
-            </button>
-            <button
-              className="related-next w-11 h-11 rounded-full bg-white border border-stone-200 text-zinc-800 hover:bg-zinc-900 hover:text-white hover:border-zinc-900 transition-all flex items-center justify-center shadow-xs cursor-pointer"
-              aria-label="Next products"
-            >
-              <IoChevronForwardOutline className="w-5 h-5" />
-            </button>
-          </div>
+          <Link
+            href="/products"
+            className="text-xs sm:text-sm font-bold text-[#0D7053] hover:text-[#09523D] hover:underline transition-colors shrink-0"
+          >
+            Browse all
+          </Link>
         </div>
-      </div>
 
-      {/* Swiper Carousel */}
-      <div className="w-full px-4 sm:px-6 md:px-8 max-w-[1440px] mx-auto">
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          onSwiper={setSwiperRef}
-          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          navigation={{
-            prevEl: '.related-prev',
-            nextEl: '.related-next',
-          }}
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          spaceBetween={20}
-          slidesPerView={1.2}
-          centeredSlides={false}
-          loop={true}
-          breakpoints={{
-            480: { slidesPerView: 2, spaceBetween: 16 },
-            768: { slidesPerView: 3, spaceBetween: 20 },
-            1024: { slidesPerView: 4, spaceBetween: 24 },
-          }}
-          className="related-swiper pb-4 w-full"
-        >
-          {displayProducts.map((product) => (
-            <SwiperSlide key={product.id}>
-              <ProductCard
-                id={product.id.replace('-dup', '')}
-                name={product.name}
-                price={`৳${product.price.toLocaleString()}`}
-                originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
-                image={product.image}
-                slug={product.slug}
-                category={product.category}
-                brand={product.team}
-                variantId={product.variantId}
-              />
-            </SwiperSlide>
+        {/* 5-Column Grid matching Screenshot */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4.5">
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={`৳${product.price.toLocaleString()}`}
+              originalPrice={product.originalPrice ? `৳${product.originalPrice.toLocaleString()}` : ''}
+              image={product.image}
+              slug={product.slug}
+              category={product.category}
+              brand={product.team}
+              variantId={product.variantId}
+            />
           ))}
-        </Swiper>
-      </div>
-
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 text-center mt-10">
-        <DiscoverMoreButton href="/products" label="DISCOVER ALL PRODUCTS" variant="primary" />
+        </div>
       </div>
     </section>
   );

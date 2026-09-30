@@ -73,22 +73,19 @@ export default function TopHeader() {
             <TopSlider slogan={shopSettings?.slogan} />
           </div>
 
-          {/* Right: Track Order & Location */}
+          {/* Right: Cash on delivery & Track Order */}
           <div className="flex items-center gap-3.5 shrink-0 text-xs font-normal">
+            <span className="flex items-center gap-1.5 text-emerald-100 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse" />
+              <span>Cash on delivery</span>
+            </span>
+            <span className="text-emerald-500/60">|</span>
             <Link
               href="/profile?tab=track"
-              className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-emerald-100 hover:text-white transition-colors"
             >
-              <LuTruck className="w-3.5 h-3.5 text-emerald-400" />
+              <LuTruck className="w-3.5 h-3.5 text-emerald-300" />
               <span>Track Order</span>
-            </Link>
-            <span className="text-zinc-700">|</span>
-            <Link
-              href="/contact"
-              className="flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors"
-            >
-              <IoLocationOutline className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Banani, Dhaka</span>
             </Link>
           </div>
         </div>

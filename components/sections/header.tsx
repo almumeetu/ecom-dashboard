@@ -188,7 +188,7 @@ export default function Header() {
               <IoSearchOutline className="absolute left-4 w-4.5 h-4.5 text-zinc-400 pointer-events-none" />
               <input
                 type="text"
-                placeholder="Search products, brands, categories..."
+                placeholder="Search honey, ghee, rice, oil, cosmetics, electronics..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);

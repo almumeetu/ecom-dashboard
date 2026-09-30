@@ -29,12 +29,12 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-8 right-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-neutral-dark text-warm-gold border border-warm-gold/30 shadow-[0_0_15px_rgba(180,166,118,0.2)] transition-all duration-300 hover:bg-black hover:scale-110 hover:border-warm-gold focus:outline-none focus:ring-2 focus:ring-warm-gold focus:ring-offset-2 ${
+      className={`fixed bottom-24 right-7 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-zinc-900 text-white border border-zinc-700/60 shadow-lg transition-all duration-300 hover:bg-emerald-600 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer ${
         isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0 pointer-events-none"
       }`}
       aria-label="Back to top"
     >
-      <FiArrowUp className="h-6 w-6 stroke-[1.5]" />
+      <FiArrowUp className="h-5 w-5 stroke-[2]" />
     </button>
   );
 }

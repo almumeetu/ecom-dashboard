@@ -1,5 +1,6 @@
 import About from '@/components/sections/about-us/about';
 import PageBanner from '@/components/ui/page-banner';
+import PolicyNav from '@/components/sections/policy/policy-nav';
 
 export const metadata = {
   title: "About Us | NovaMart — Bangladesh's Premier Multi-Category Shopping Platform",
@@ -16,6 +17,7 @@ export default function AboutPage() {
           { label: "About Us" },
         ]}
       />
+      <PolicyNav currentKey="about" />
       <About />
     </div>
   );

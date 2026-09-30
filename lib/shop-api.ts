@@ -216,10 +216,28 @@ export async function fetchShopProducts(
     );
   }
   if (categoryId) {
-    filtered = filtered.filter((p) => p.categoryId === categoryId || p.category?.id === categoryId);
+    const c = categoryId.toLowerCase().trim();
+    filtered = filtered.filter(
+      (p) =>
+        p.categoryId?.toLowerCase() === c ||
+        p.category?.id?.toLowerCase() === c ||
+        p.category?.slug?.toLowerCase() === c ||
+        p.category?.name?.toLowerCase() === c ||
+        p.category?.slug?.toLowerCase().replace(/-/g, "") === c.replace(/-/g, "") ||
+        p.category?.name?.toLowerCase().includes(c) ||
+        (p.category?.slug && c.includes(p.category.slug.toLowerCase()))
+    );
   }
   if (brandId) {
-    filtered = filtered.filter((p) => p.brandId === brandId || p.brand?.id === brandId);
+    const b = brandId.toLowerCase().trim();
+    filtered = filtered.filter(
+      (p) =>
+        p.brandId?.toLowerCase() === b ||
+        p.brand?.id?.toLowerCase() === b ||
+        p.brand?.slug?.toLowerCase() === b ||
+        p.brand?.name?.toLowerCase() === b ||
+        p.brand?.name?.toLowerCase().includes(b)
+    );
   }
 
   const start = (page - 1) * limit;
@@ -294,6 +312,7 @@ export const DEFAULT_NOVAMART_CATEGORIES: ShopCategory[] = [
   { id: "cat-clothing", name: "Clothing & Fashion", slug: "clothing", imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80" },
   { id: "cat-baby", name: "Baby & Kids Products", slug: "baby-products", imageUrl: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80" },
   { id: "cat-home", name: "Home & Living", slug: "home-living", imageUrl: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-footwear", name: "Footwear & Shoes", slug: "footwear", imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80" },
 ];
 
 export const DEFAULT_NOVAMART_SETTINGS: ShopSettings = {

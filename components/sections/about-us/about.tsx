@@ -25,42 +25,42 @@ export default function About() {
       title: 'Skin Care & Beauty',
       desc: 'Authentic serums, cleansers, dermatological moisturizers, and Korean beauty essentials.',
       image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80',
-      link: '/products?category=Skin+Care',
+      link: '/products?category=skin-care',
       tag: '100% Authentic',
     },
     {
       title: 'Digital Electronics',
       desc: 'Smartwatches, wireless noise-cancelling earbuds, fast power banks, and certified accessories.',
       image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
-      link: '/products?category=Digital+Electronics',
+      link: '/products?category=digital-electronics',
       tag: 'Tech Warranty',
     },
     {
       title: 'Perfumes & Fragrances',
       desc: 'Designer Eau De Parfum, luxury Arabian ouds, and long-lasting artisanal perfume sets.',
       image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80',
-      link: '/products?category=Perfume',
+      link: '/products?category=perfume',
       tag: 'Original Seal',
     },
     {
       title: 'Clothing & Fashion',
       desc: 'Royal silk festive panjabis, combed Supima cotton tees, handloom sarees, and smart formalwear.',
       image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80',
-      link: '/products?category=Clothing',
+      link: '/products?category=clothing',
       tag: 'Premium Fabric',
     },
     {
       title: 'Baby & Kids Care',
       desc: 'Hypoallergenic diapers, BPA-free feeding bottles, organic cotton rompers, and pediatric care.',
       image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80',
-      link: '/products?category=Baby+Products',
+      link: '/products?category=baby-products',
       tag: 'Gentle & Safe',
     },
     {
       title: 'Home & Living',
       desc: 'Ultrasonic aroma diffusers, vacuum-insulated thermal tumblers, and granite cookware sets.',
       image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80',
-      link: '/products?category=Home+%26+Living',
+      link: '/products?category=home-living',
       tag: 'Modern Living',
     },
   ];
@@ -89,7 +89,7 @@ export default function About() {
   ];
 
   return (
-    <div className="w-full bg-[#FAFAFA] text-zinc-900 font-sans">
+    <div className="w-full bg-[#FAF9F5] text-zinc-900 font-sans">
       
       {/* ── 1. Our Story & Purpose Section ── */}
       <section className="py-12 sm:py-16">

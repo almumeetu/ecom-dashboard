@@ -155,9 +155,14 @@ function ProductsPageContent() {
       }
 
       if (cat) {
-        const decodedCat = decodeURIComponent(cat).toLowerCase();
+        const decodedCat = decodeURIComponent(cat).toLowerCase().trim();
         const match = dbCategories.find(
-          (c) => c.name.toLowerCase() === decodedCat || c.slug?.toLowerCase() === decodedCat
+          (c) =>
+            c.name.toLowerCase() === decodedCat ||
+            c.slug?.toLowerCase() === decodedCat ||
+            c.slug?.toLowerCase().replace(/-/g, "") === decodedCat.replace(/-/g, "") ||
+            c.name.toLowerCase().includes(decodedCat) ||
+            decodedCat.includes(c.slug?.toLowerCase() || "")
         );
         if (match) {
           if (!match.parentId) {
@@ -283,19 +288,43 @@ function ProductsPageContent() {
     let result = products.filter((p) => {
       // 1. Collection filter
       if (selectedCollection !== 'All') {
-        const catObj = dbCategories.find((c) => c.name.toLowerCase() === p.category?.toLowerCase());
+        const selLower = selectedCollection.toLowerCase();
+        const selSlug = selLower.replace(/[^a-z0-9]+/g, "-");
+        const prodCat = (p.category || "").toLowerCase();
+        const prodSlug = prodCat.replace(/[^a-z0-9]+/g, "-");
+
+        const catObj = dbCategories.find((c) => c.name.toLowerCase() === prodCat || c.slug === prodSlug);
         const parentObj = catObj?.parentId ? dbCategories.find((c) => c.id === catObj.parentId) : null;
-        if (
-          p.category?.toLowerCase() !== selectedCollection.toLowerCase() &&
-          parentObj?.name.toLowerCase() !== selectedCollection.toLowerCase()
-        ) {
+        const parentName = parentObj?.name.toLowerCase();
+
+        const matchesCollection =
+          prodCat === selLower ||
+          prodSlug === selSlug ||
+          prodCat.includes(selLower) ||
+          selLower.includes(prodCat) ||
+          prodSlug.includes(selSlug) ||
+          selSlug.includes(prodSlug) ||
+          parentName === selLower;
+
+        if (!matchesCollection) {
           return false;
         }
       }
 
       // 2. Category filter
-      if (selectedCategory !== 'All' && p.category?.toLowerCase() !== selectedCategory.toLowerCase()) {
-        return false;
+      if (selectedCategory !== 'All') {
+        const selCatLower = selectedCategory.toLowerCase();
+        const selCatSlug = selCatLower.replace(/[^a-z0-9]+/g, "-");
+        const prodCat = (p.category || "").toLowerCase();
+        const prodSlug = prodCat.replace(/[^a-z0-9]+/g, "-");
+        const matchesCategory =
+          prodCat === selCatLower ||
+          prodSlug === selCatSlug ||
+          prodCat.includes(selCatLower) ||
+          selCatLower.includes(prodCat);
+        if (!matchesCategory) {
+          return false;
+        }
       }
 
       // 3. Brand filter

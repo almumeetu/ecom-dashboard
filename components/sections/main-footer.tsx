@@ -71,28 +71,29 @@ export default async function Mainfooter() {
           })),
         ]
       : [
-          { label: "স্কিন কেয়ার & বিউটি", href: "/products?category=Skin+Care" },
-          { label: "ডিজিটাল ইলেকট্রনিক্স", href: "/products?category=Digital+Electronics" },
-          { label: "পারফিউম & সুগন্ধি", href: "/products?category=Perfume" },
-          { label: "ফ্যাশন & ক্লথিং", href: "/products?category=Clothing" },
-          { label: "বেবি & কিডস প্রোডাক্টস", href: "/products?category=Baby+Products" },
-          { label: "খাঁটি মধু ও অর্গানিক তেল", href: "/products?category=Grocery" },
+          { label: "Skin Care & Beauty", href: "/products?category=skin-care" },
+          { label: "Digital Electronics", href: "/products?category=digital-electronics" },
+          { label: "Perfumes & Fragrances", href: "/products?category=perfume" },
+          { label: "Clothing & Fashion", href: "/products?category=clothing" },
+          { label: "Baby & Kids Products", href: "/products?category=baby-products" },
+          { label: "Home & Living", href: "/products?category=home-living" },
         ];
 
   // Quick Links
   const quickLinks = [
     { label: "Home", href: "/" },
-    { label: "Shop", href: "/products" },
-    { label: "Cart", href: "/cart" },
+    { label: "Shop All", href: "/products" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact Us", href: "/contact" },
     { label: "Track Order", href: "/profile?tab=track" },
     { label: "My Account", href: "/profile" },
   ];
 
   // Standard Policies
   const policyLinks = [
-    { label: "Terms & Conditions", href: "/delivery" },
-    { label: "Privacy Policy", href: "/delivery" },
-    { label: "Returns & Refunds", href: "/delivery" },
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Returns & Refunds", href: "/returns" },
     { label: "Delivery & Shipping Rates", href: "/delivery" },
     { label: "Customer FAQs", href: "/contact" },
   ];

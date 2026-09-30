@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { LuPrinter, LuX } from "react-icons/lu";
 import type { OrderResult } from "@/lib/types";
+import Logo from "@/components/ui/logo";
 
 const COMPANY = {
   name: "NovaMart Bangladesh",
-  logo: "/images/logo/novamart-logo-main.png",
   addressLine: "Level 4, Nova Tower, Plot 18, Road 11, Banani, Dhaka-1213, Bangladesh",
   phone: "+880 1712-345678 (01712345678)",
   email: "support@novamart.com.bd",
@@ -128,21 +128,13 @@ export default function InvoiceModal({
           >
             {/* Header: logo + company / invoice meta */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-6 border-b border-stone-200">
-              <div className="flex items-center gap-4">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={COMPANY.logo}
-                  alt={COMPANY.name}
-                  className="w-16 h-16 object-contain"
-                />
-                <div>
-                  <p className="font-serif text-xl text-stone-800 leading-tight">
-                    {COMPANY.name}
-                  </p>
-                  <p className="font-sans text-xs text-stone-500 mt-1 leading-relaxed max-w-[220px]">
+              <div className="flex flex-col gap-2">
+                <Logo size="md" variant="dark" showTagline={true} />
+                <div className="mt-1">
+                  <p className="font-sans text-xs text-stone-500 leading-relaxed max-w-[240px]">
                     {COMPANY.addressLine}
                   </p>
-                  <p className="font-sans text-xs text-stone-500">{COMPANY.phone}</p>
+                  <p className="font-sans text-xs text-stone-500 mt-1">{COMPANY.phone}</p>
                   <p className="font-sans text-xs text-stone-500">{COMPANY.email}</p>
                 </div>
               </div>

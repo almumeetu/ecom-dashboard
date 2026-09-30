@@ -13,11 +13,11 @@ import {
   IoShieldCheckmarkOutline,
   IoFlashOutline,
   IoRepeatOutline,
-  IoLockClosedOutline,
   IoBagCheckOutline,
   IoLogoWhatsapp,
+  IoCallOutline,
 } from 'react-icons/io5';
-import { LuRuler, LuStar, LuTruck, LuSparkles, LuCheck, LuHeadphones } from 'react-icons/lu';
+import { LuRuler, LuStar, LuTruck, LuSparkles, LuCheck, LuShieldCheck } from 'react-icons/lu';
 import { useCart } from '@/app/_providers/cart-provider';
 import { useWishlist } from '@/app/_providers/wishlist-provider';
 import { useAuth } from '@/app/_providers/auth-provider';
@@ -51,7 +51,7 @@ export interface ProductInfoProps {
   onReviewsClick?: () => void;
 }
 
-// Color name to hex/preview mapping for rich swatches
+// Color name to hex mapping for rich swatches
 const COLOR_MAP: Record<string, string> = {
   black: '#18181b',
   white: '#ffffff',
@@ -108,18 +108,18 @@ export default function ProductInfo({
 
   const insideFeeText = useMemo(() => {
     if (settings?.deliveryChargeInside === undefined || settings?.deliveryChargeInside === null) {
-      return '৳60';
+      return '৳৬০';
     }
     const val = Number(settings.deliveryChargeInside);
-    return val === 0 ? 'FREE' : `৳${val}`;
+    return val === 0 ? 'ফ্রি' : `৳${val}`;
   }, [settings?.deliveryChargeInside]);
 
   const outsideFeeText = useMemo(() => {
     if (settings?.deliveryChargeOutside === undefined || settings?.deliveryChargeOutside === null) {
-      return '৳120';
+      return '৳১২০';
     }
     const val = Number(settings.deliveryChargeOutside);
-    return val === 0 ? 'FREE' : `৳${val}`;
+    return val === 0 ? 'ফ্রি' : `৳${val}`;
   }, [settings?.deliveryChargeOutside]);
 
   const [quantity, setQuantity] = useState(1);
@@ -131,6 +131,7 @@ export default function ProductInfo({
   });
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [isSizeGuideOpen, setIsSizeGuideOpen] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
 
   // Initialize default variant
   useEffect(() => {
@@ -202,7 +203,7 @@ export default function ProductInfo({
   const displayOriginalPrice = selectedVariant ? selectedVariant.originalPriceFormatted : originalPrice;
   const activeVariantId = selectedVariant?.id || variantId || variants?.[0]?.id || '';
 
-  // Calculate discount savings if applicable
+  // Calculate discount savings
   const activePriceNum = selectedVariant ? selectedVariant.priceNum : productData.priceNum;
   const origPriceNum = selectedVariant?.originalPriceFormatted
     ? Number(selectedVariant.originalPriceFormatted.replace(/[^\d.]/g, ''))
@@ -249,11 +250,11 @@ export default function ProductInfo({
     if (isOutOfStock) return;
     try {
       await addItem(buildCartItem(), { silent: true });
-      toast.success(`Added ${productData.name} to your bag!`, {
-        description: `${quantity} item(s) ready in cart.`,
-      });
+      setIsAdded(true);
+      toast.success(`"${productData.name}" কার্টে যুক্ত হয়েছে!`);
+      setTimeout(() => setIsAdded(false), 2000);
     } catch {
-      // Error message handled by CartProvider
+      // Error handled by CartProvider
     }
   };
 
@@ -274,16 +275,9 @@ export default function ProductInfo({
     const attributes = selectedVariant?.attributes ?? {};
     const activeVarId = activeVariantId ?? '';
 
-    const optionSummary = selectedVariant
-      ? Object.values(selectedVariant.attributes).join(', ')
-      : '';
-    const finalName = optionSummary
-      ? `${productData.name} (${optionSummary})`
-      : productData.name;
-
     toggleWishlist({
       id: productId,
-      name: finalName,
+      name: productData.name,
       slug: productSlug ?? productId,
       price: finalPrice,
       image: productData.image,
@@ -296,12 +290,18 @@ export default function ProductInfo({
       attributes,
       ...attributes,
     });
+
+    if (!isItInWishlist) {
+      toast.success('উইশলিস্টে সেভ করা হয়েছে!');
+    } else {
+      toast.info('উইশলিস্ট থেকে সরানো হয়েছে');
+    }
   };
 
   const handleShare = () => {
     if (typeof window !== 'undefined') {
       navigator.clipboard.writeText(window.location.href);
-      toast.success('Product link copied to clipboard!');
+      toast.success('প্রোডাক্ট লিংক কপি করা হয়েছে!');
     }
   };
 
@@ -310,24 +310,26 @@ export default function ProductInfo({
   );
 
   return (
-    <div className="w-full flex flex-col gap-6 select-none">
-      {/* ── Brand, Category & Share Row ─────────────────────────────── */}
+    <div className="w-full flex flex-col gap-5 select-none font-sans text-zinc-900">
+      {/* ── 1. Top Badges & Share Bar ─────────────────────────────── */}
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="flex items-center gap-2.5">
-          {brand && (
-            <Link
-              href={`/products?brand=${encodeURIComponent(brand)}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-stone-100 text-zinc-900 hover:bg-zinc-950 hover:text-white transition-all shadow-2xs"
-            >
+        <div className="flex items-center gap-2">
+          {brand ? (
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+              <LuShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
               <span>{brand}</span>
-              <IoCheckmarkCircle className="w-3.5 h-3.5 text-emerald-600" />
-            </Link>
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+              <LuShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+              <span>NovaMart 100% Genuine</span>
+            </span>
           )}
 
           {category && (
             <Link
               href={`/products?category=${encodeURIComponent(category)}`}
-              className="text-xs text-zinc-500 hover:text-zinc-950 transition-colors uppercase tracking-wider font-semibold"
+              className="text-xs text-zinc-500 hover:text-emerald-700 transition-colors uppercase tracking-wider font-semibold"
             >
               {category}
             </Link>
@@ -337,7 +339,7 @@ export default function ProductInfo({
         {/* Share Button */}
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-950 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-stone-100 border border-transparent hover:border-stone-200"
+          className="inline-flex items-center gap-1.5 text-xs text-zinc-500 hover:text-zinc-950 transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-zinc-100"
           title="Share Product"
         >
           <IoShareSocialOutline className="w-4 h-4" />
@@ -345,50 +347,47 @@ export default function ProductInfo({
         </button>
       </div>
 
-      {/* ── Product Title & Subtitle ─────────────────────────────────── */}
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-950 font-sans leading-[1.25]">
+      {/* ── 2. Product Title & Subtitle ─────────────────────────────────── */}
+      <div className="flex flex-col gap-1.5">
+        <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 leading-[1.25]">
           {name}
         </h1>
         {subtitle && (
-          <p className="text-sm sm:text-base text-zinc-600 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-zinc-500 leading-relaxed font-normal">
             {subtitle}
           </p>
         )}
       </div>
 
-      {/* ── Social Proof & Rating Strip ─────────────────────────────── */}
-      <div className="flex items-center gap-3.5 flex-wrap pb-2 border-b border-stone-100">
+      {/* ── 3. Reviews & Trust Strip ─────────────────────────────── */}
+      <div className="flex items-center gap-3 flex-wrap text-xs pb-1">
         <button
           onClick={onReviewsClick}
           className="flex items-center gap-1.5 group cursor-pointer"
         >
           <div className="flex text-amber-400">
             {[...Array(5)].map((_, i) => (
-              <LuStar
-                key={i}
-                className="w-4 h-4 fill-amber-400 text-amber-400"
-              />
+              <LuStar key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             ))}
           </div>
-          <span className="text-xs font-bold text-zinc-950 ml-0.5">4.9</span>
-          <span className="text-xs text-zinc-500 group-hover:text-emerald-700 underline underline-offset-2 transition-colors">
-            (128 reviews)
+          <span className="font-bold text-zinc-950">4.9</span>
+          <span className="text-zinc-400 group-hover:text-emerald-700 transition-colors">
+            (128 কাস্টমার রিভিউ)
           </span>
         </button>
 
-        <span className="text-stone-300">•</span>
+        <span className="text-zinc-300">•</span>
 
-        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200/80">
-          <IoFlashOutline className="w-3.5 h-3.5 text-emerald-600 animate-pulse" />
-          <span>50+ purchased in the last 24h</span>
-        </div>
+        <span className="text-emerald-700 font-semibold flex items-center gap-1">
+          <IoCheckmarkCircle className="w-3.5 h-3.5" />
+          <span>ভেরিফাইড অরিজিনাল স্টক</span>
+        </span>
       </div>
 
-      {/* ── Price Block ─────────────────────────────────────────────── */}
-      <div className="flex flex-col gap-2.5 p-4 sm:p-5 rounded-2xl bg-[#FAF9F6] border border-stone-200/90 shadow-2xs">
+      {/* ── 4. Price & Discount Card ─────────────────────────────────────── */}
+      <div className="p-4 sm:p-5 rounded-2xl bg-[#F8F9FA] border border-zinc-200/90 flex flex-col gap-2 shadow-2xs">
         <div className="flex items-baseline gap-3 flex-wrap">
-          <span className="text-3xl sm:text-4xl font-extrabold text-zinc-950 font-sans tracking-tight">
+          <span className="text-3xl sm:text-4xl font-black text-zinc-950 tracking-tight">
             {displayPrice}
           </span>
 
@@ -399,40 +398,34 @@ export default function ProductInfo({
           )}
 
           {discountPercent > 0 && (
-            <span className="px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-50 text-rose-700 border border-rose-200/90 shadow-2xs">
-              Save {discountPercent}% {savingsAmount > 0 ? `(৳${savingsAmount.toLocaleString('en-BD')})` : ''}
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-[#E53E3E] text-white shadow-2xs">
+              -{discountPercent}% OFF {savingsAmount > 0 ? `(৳${savingsAmount.toLocaleString('en-BD')} সাশ্রয়)` : ''}
             </span>
           )}
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-zinc-500 pt-0.5">
+        <div className="flex items-center gap-2 text-xs text-zinc-500 pt-1">
           <IoShieldCheckmarkOutline className="w-4 h-4 text-emerald-600 shrink-0" />
-          <span>VAT included • Free express shipping on orders over ৳2,000</span>
+          <span>সারা বাংলাদেশে ক্যাশ অন ডেলিভারি সুবিধা প্রযোজ্য</span>
         </div>
       </div>
 
-      {/* ── Live Inventory Status & SKU ──────────────────────────────── */}
+      {/* ── 5. Live Stock Status & SKU ─────────────────────────────────── */}
       <div className="flex items-center justify-between gap-2 text-xs">
         {isOutOfStock ? (
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-bold">
             <span className="w-2 h-2 rounded-full bg-rose-600" />
             <span>Currently Out of Stock</span>
           </div>
         ) : isLowStock ? (
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 font-semibold">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500" />
-            </span>
-            <span>Only {stockQty} units remaining — order soon!</span>
+            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+            <span>আর মাত্র {stockQty} টি অবশিষ্ট আছে</span>
           </div>
         ) : (
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 font-semibold">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-600" />
-            </span>
-            <span>In Stock — Dispatched within 24 hours</span>
+            <span className="w-2 h-2 rounded-full bg-emerald-600" />
+            <span>ইন-স্টক (২৪ ঘণ্টার মধ্যে ডেলিভারির জন্য প্রস্তুত)</span>
           </div>
         )}
 
@@ -443,19 +436,19 @@ export default function ProductInfo({
         )}
       </div>
 
-      {/* ── Dynamic Variant Selectors ────────────────────────────────── */}
+      {/* ── 6. Dynamic Variant Options (If Any) ────────────────────────── */}
       {Object.keys(allAttributes).length > 0 && (
-        <div className="flex flex-col gap-5 py-4 border-y border-stone-200/90">
+        <div className="flex flex-col gap-4 py-3 border-y border-zinc-200">
           {Object.entries(allAttributes).map(([attrName, values]) => {
             const isColor = attrName.toLowerCase().includes('color') || attrName.toLowerCase().includes('colour');
             const isSize = attrName.toLowerCase().includes('size');
             const currentSelected = selectedOptions[attrName] || values[0];
 
             return (
-              <div key={attrName} className="flex flex-col gap-2.5">
+              <div key={attrName} className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase tracking-wider font-bold text-zinc-900">
-                    {attrName}: <span className="font-semibold text-zinc-950 capitalize ml-1">{currentSelected}</span>
+                    {attrName}: <span className="font-semibold text-emerald-700 capitalize ml-1">{currentSelected}</span>
                   </span>
 
                   {isSize && (
@@ -470,7 +463,7 @@ export default function ProductInfo({
                   )}
                 </div>
 
-                <div className="flex flex-wrap gap-2.5 items-center">
+                <div className="flex flex-wrap gap-2 items-center">
                   {values.map((val) => {
                     const isSelected = selectedOptions[attrName] === val;
                     const colorHex = COLOR_MAP[val.toLowerCase().trim()];
@@ -481,10 +474,10 @@ export default function ProductInfo({
                           key={val}
                           type="button"
                           onClick={() => handleOptionSelect(attrName, val)}
-                          className={`relative w-9 h-9 rounded-full transition-all cursor-pointer flex items-center justify-center ${
+                          className={`relative w-8 h-8 rounded-full transition-all cursor-pointer flex items-center justify-center ${
                             isSelected
-                              ? 'ring-2 ring-zinc-950 ring-offset-2 scale-110 shadow-sm'
-                              : 'hover:scale-105 border border-stone-300'
+                              ? 'ring-2 ring-emerald-600 ring-offset-2 scale-110 shadow-sm'
+                              : 'hover:scale-105 border border-zinc-300'
                           }`}
                           style={{ backgroundColor: colorHex }}
                           title={val}
@@ -508,10 +501,10 @@ export default function ProductInfo({
                         key={val}
                         type="button"
                         onClick={() => handleOptionSelect(attrName, val)}
-                        className={`min-w-[44px] px-4 py-2 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
+                        className={`min-w-[42px] px-3.5 py-1.5 text-xs font-bold rounded-xl border transition-all cursor-pointer ${
                           isSelected
-                            ? 'bg-zinc-950 border-zinc-950 text-white shadow-xs'
-                            : 'bg-white border-stone-300 text-zinc-800 hover:border-zinc-950 hover:text-zinc-950'
+                            ? 'bg-[#0D7053] border-[#0D7053] text-white shadow-xs'
+                            : 'bg-white border-zinc-300 text-zinc-800 hover:border-emerald-600'
                         }`}
                       >
                         {val}
@@ -525,43 +518,57 @@ export default function ProductInfo({
         </div>
       )}
 
-      {/* ── Quantity & High-Conversion Action Controls ────────────────── */}
+      {/* ── 7. Primary Action Controls (High-Conversion & Simple) ──────── */}
       <div className="flex flex-col gap-3 pt-1">
+        {/* Quantity Stepper + Add to Bag + Wishlist */}
         <div className="flex items-center gap-3">
           {/* Quantity Stepper */}
-          <div className="flex items-center border border-stone-300 rounded-xl bg-stone-50 p-1 shrink-0">
+          <div className="flex items-center border border-zinc-300 rounded-xl bg-zinc-50 p-1 shrink-0">
             <button
               type="button"
               onClick={() => handleQuantityChange('dec')}
               disabled={isOutOfStock || quantity <= 1}
-              className="w-9 h-9 rounded-lg bg-white hover:bg-stone-100 flex items-center justify-center text-zinc-700 disabled:opacity-40 transition-colors shadow-2xs cursor-pointer"
+              className="w-9 h-9 rounded-lg bg-white hover:bg-zinc-100 flex items-center justify-center text-zinc-700 disabled:opacity-40 transition-colors shadow-2xs cursor-pointer"
               aria-label="Decrease quantity"
             >
               <IoRemoveOutline className="w-4 h-4" />
             </button>
-            <div className="w-10 text-center font-bold text-sm text-zinc-900">
+            <div className="w-10 text-center font-black text-sm text-zinc-900">
               {quantity}
             </div>
             <button
               type="button"
               onClick={() => handleQuantityChange('inc')}
               disabled={isOutOfStock || quantity >= stockQty}
-              className="w-9 h-9 rounded-lg bg-white hover:bg-stone-100 flex items-center justify-center text-zinc-700 disabled:opacity-40 transition-colors shadow-2xs cursor-pointer"
+              className="w-9 h-9 rounded-lg bg-white hover:bg-zinc-100 flex items-center justify-center text-zinc-700 disabled:opacity-40 transition-colors shadow-2xs cursor-pointer"
               aria-label="Increase quantity"
             >
               <IoAddOutline className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Add to Cart Button */}
+          {/* Add to Bag Button (Warm Orange matching screenshot) */}
           <button
             type="button"
             onClick={handleAddToCart}
             disabled={isOutOfStock}
-            className="flex-1 h-12 px-6 bg-white border-2 border-zinc-950 text-zinc-950 hover:bg-zinc-950 hover:text-white font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-40 disabled:pointer-events-none active:scale-[0.99]"
+            className={`flex-1 h-12 px-6 rounded-xl font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs cursor-pointer disabled:opacity-40 active:scale-98 ${
+              isAdded
+                ? 'bg-emerald-600 text-white'
+                : 'bg-[#E87A18] hover:bg-[#D46B0E] text-white shadow-orange-200'
+            }`}
           >
-            <IoBagCheckOutline className="w-4 h-4" />
-            <span>Add to Bag</span>
+            {isAdded ? (
+              <>
+                <LuCheck className="w-4 h-4" />
+                <span>কার্টে যুক্ত হয়েছে ✓</span>
+              </>
+            ) : (
+              <>
+                <IoBagCheckOutline className="w-4 h-4" />
+                <span>Add to Bag</span>
+              </>
+            )}
           </button>
 
           {/* Wishlist Button */}
@@ -570,108 +577,86 @@ export default function ProductInfo({
             onClick={() =>
               isAuthenticated ? handleToggleWishlist() : setShowAuthModal(true)
             }
-            className={`w-12 h-12 rounded-xl flex items-center justify-center border transition-all cursor-pointer shrink-0 shadow-xs ${
+            className={`w-12 h-12 rounded-xl flex items-center justify-center border transition-all cursor-pointer shrink-0 shadow-2xs ${
               isItInWishlist
                 ? 'bg-rose-50 border-rose-300 text-rose-600'
-                : 'bg-white border-stone-300 text-zinc-700 hover:border-zinc-950 hover:text-zinc-950'
+                : 'bg-white border-zinc-300 text-zinc-600 hover:text-rose-600 hover:border-rose-300'
             }`}
             aria-label="Wishlist"
             title={isItInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
           >
             {isItInWishlist ? (
-              <IoHeart className="w-5 h-5 text-rose-600 animate-in zoom-in-50 duration-150" />
+              <IoHeart className="w-5 h-5 text-rose-600" />
             ) : (
               <IoHeartOutline className="w-5 h-5" />
             )}
           </button>
         </div>
 
-        {/* Buy Now (Direct Instant Checkout) */}
+        {/* Direct Order Now (Instant Cash on Delivery Checkout) */}
         <button
           type="button"
           onClick={handleBuyNow}
           disabled={isOutOfStock}
-          className="w-full h-13 px-8 bg-zinc-950 hover:bg-zinc-800 text-white font-extrabold text-xs uppercase tracking-widest rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-zinc-950/20 transition-all cursor-pointer disabled:opacity-40 disabled:pointer-events-none hover:scale-[1.01] active:scale-[0.99]"
+          className="w-full h-12 px-6 bg-[#0D7053] hover:bg-[#0B6046] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-2 shadow-md shadow-emerald-800/20 transition-all cursor-pointer disabled:opacity-40 active:scale-98"
         >
-          <IoFlashOutline className="w-4 h-4 text-amber-400" />
-          <span>Buy Now — Instant Checkout</span>
+          <IoFlashOutline className="w-4 h-4 text-amber-300" />
+          <span>অর্ডার করুন (ক্যাশ অন ডেলিভারি)</span>
         </button>
+
+        {/* WhatsApp Direct Order Button */}
+        <a
+          href={`https://wa.me/8801712345678?text=${encodeURIComponent(
+            `আসসালামু আলাইকুম NovaMart, আমি এই পণ্যটি অর্ডার করতে চাই:\n\nপণ্য: ${name}\nমূল্য: ${displayPrice}\nলিংক: ${typeof window !== 'undefined' ? window.location.href : ''}`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full h-11 px-4 bg-[#25D366] hover:bg-[#20BD5A] text-white font-bold text-xs rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors cursor-pointer"
+        >
+          <IoLogoWhatsapp className="w-4.5 h-4.5" />
+          <span>WhatsApp এ সরাসরি অর্ডার বা মেসেজ করুন</span>
+        </a>
       </div>
 
-      {/* ── WhatsApp Instant Order & Customer Support ─────────────────── */}
-      <a
-        href={`https://wa.me/8801700000000?text=${encodeURIComponent(
-          `Hi, I have a question about ${name} (ID: ${productId}): ${typeof window !== 'undefined' ? window.location.href : ''}`
-        )}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-between p-3.5 rounded-xl border border-emerald-200/90 bg-emerald-50/60 hover:bg-emerald-50 text-emerald-950 transition-all group shadow-2xs"
-      >
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
-            <IoLogoWhatsapp className="w-4 h-4" />
-          </div>
-          <div>
-            <p className="text-xs font-bold text-emerald-950">Questions about sizing or specs?</p>
-            <p className="text-[11px] text-emerald-700">Chat directly with our support specialists on WhatsApp</p>
-          </div>
+      {/* ── 8. Unified Bangladesh Delivery & Trust Card ─────────────────── */}
+      <div className="p-4 rounded-2xl bg-zinc-50 border border-zinc-200/90 text-xs space-y-3">
+        <div className="font-bold text-zinc-950 flex items-center gap-2 border-b border-zinc-200/80 pb-2">
+          <LuTruck className="w-4 h-4 text-[#0D7053]" />
+          <span>ডেলিভারি ও সেবা সংক্রান্ত তথ্য:</span>
         </div>
-        <span className="text-xs font-bold text-emerald-800 group-hover:underline flex items-center gap-1 shrink-0">
-          Chat Now &rarr;
-        </span>
-      </a>
 
-      {/* ── Delivery Estimator Box ──────────────────────────────────── */}
-      <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/90 text-xs space-y-2.5">
-        <div className="font-bold text-zinc-950 flex items-center gap-2">
-          <LuTruck className="w-4 h-4 text-zinc-950" />
-          <span>Estimated Delivery Timeline:</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-zinc-600">
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
-            <span><strong>Inside Dhaka:</strong> {insideFeeText} (1–2 business days)</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-zinc-700">
+          <div className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5 shrink-0" />
+            <span><strong>ঢাকা সিটিতে:</strong> {insideFeeText} (২৪–৪৮ ঘণ্টা)</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
-            <span><strong>All Bangladesh:</strong> {outsideFeeText} (2–4 business days)</span>
+          <div className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5 shrink-0" />
+            <span><strong>ঢাকার বাইরে:</strong> {outsideFeeText} (২–৩ দিন)</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
-            <span><strong>Cash on Delivery:</strong> Available</span>
+          <div className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5 shrink-0" />
+            <span><strong>ক্যাশ অন ডেলিভারি:</strong> পণ্য দেখে মূল্য পরিশোধ</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0" />
-            <span><strong>Free Shipping:</strong> Orders over ৳2,000</span>
+          <div className="flex items-start gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5 shrink-0" />
+            <span><strong>রিটার্ন পলিসি:</strong> ৭ দিনের সহজ রিপ্লেসমেন্ট</span>
           </div>
         </div>
-      </div>
 
-      {/* ── International Buyer Protection & Trust Guarantees ────────── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
-          <IoShieldCheckmarkOutline className="w-5 h-5 text-emerald-600 mb-1" />
-          <span className="text-[11px] font-bold text-zinc-900">100% Authentic</span>
-          <span className="text-[10px] text-zinc-500">Verified Brand</span>
-        </div>
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
-          <LuTruck className="w-5 h-5 text-blue-600 mb-1" />
-          <span className="text-[11px] font-bold text-zinc-900">Fast Dispatch</span>
-          <span className="text-[10px] text-zinc-500">Doorstep Delivery</span>
-        </div>
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
-          <IoRepeatOutline className="w-5 h-5 text-purple-600 mb-1" />
-          <span className="text-[11px] font-bold text-zinc-900">Easy Returns</span>
-          <span className="text-[10px] text-zinc-500">7-Day Guarantee</span>
-        </div>
-        <div className="flex flex-col items-center text-center p-3 rounded-xl bg-white border border-stone-200/90 shadow-2xs">
-          <IoLockClosedOutline className="w-5 h-5 text-amber-600 mb-1" />
-          <span className="text-[11px] font-bold text-zinc-900">Secure Checkout</span>
-          <span className="text-[10px] text-zinc-500">bKash, Cards, COD</span>
+        <div className="pt-2 border-t border-zinc-200/80 flex items-center justify-between text-zinc-600 text-[11px]">
+          <span className="flex items-center gap-1">
+            <IoShieldCheckmarkOutline className="w-3.5 h-3.5 text-emerald-600" />
+            <span>১০০% আসল পণ্যের গ্যারান্টি</span>
+          </span>
+          <a href="tel:01712345678" className="flex items-center gap-1 text-emerald-700 font-bold hover:underline">
+            <IoCallOutline className="w-3.5 h-3.5" />
+            <span>হটলাইন: 01712-345678</span>
+          </a>
         </div>
       </div>
 
-      {/* Size Guide Modal */}
+      {/* Size Guide Modal (When Applicable) */}
       {hasSizeAttribute && (
         <SizeGuideModal
           isOpen={isSizeGuideOpen}

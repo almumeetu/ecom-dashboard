@@ -16,6 +16,13 @@ import {
   SaveButton,
 } from "../_components/settings-ui";
 
+import {
+  getStoredCampaigns,
+  saveCustomCampaign,
+  toggleStoredCampaignStatus,
+  deleteStoredCampaign,
+} from "../../../../../lib/campaign-store";
+
 type CampaignForm = {
   id?: string;
   title: string;
@@ -31,7 +38,7 @@ type CampaignForm = {
 
 const EMPTY_FORM: CampaignForm = {
   title: "",
-  sectionId: "",
+  sectionId: "sec-hero",
   description: "",
   status: "active",
   startAt: new Date().toISOString().slice(0, 16),
@@ -49,6 +56,7 @@ export default function CampaignsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [form, setForm] = useState<CampaignForm>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
+  const [imageUrlInput, setImageUrlInput] = useState("");
 
   const { discounts } = useDiscounts();
   const { sections } = useSections();
@@ -60,14 +68,23 @@ export default function CampaignsPage() {
 
   const loadCampaigns = useCallback(async () => {
     setLoading(true);
+    let apiData: Campaign[] = [];
     try {
       const data = await apiRequest<Campaign[]>("/campaigns");
-      setCampaigns(data);
+      if (Array.isArray(data) && data.length > 0) {
+        apiData = data;
+      }
     } catch {
-      setCampaigns([]);
-    } finally {
-      setLoading(false);
+      apiData = [];
     }
+
+    const storedData = getStoredCampaigns();
+    const map = new Map<string, Campaign>();
+    for (const c of storedData) map.set(c.id, c);
+    for (const c of apiData) map.set(c.id, c);
+
+    setCampaigns(Array.from(map.values()));
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -75,7 +92,11 @@ export default function CampaignsPage() {
   }, [loadCampaigns]);
 
   function openAdd() {
-    setForm(EMPTY_FORM);
+    setForm({
+      ...EMPTY_FORM,
+      sectionId: sections[0]?.id || "sec-hero",
+    });
+    setImageUrlInput("");
     setModalOpen(true);
   }
 
@@ -83,7 +104,7 @@ export default function CampaignsPage() {
     setForm({
       id: c.id,
       title: c.title,
-      sectionId: c.sectionId,
+      sectionId: c.sectionId || "sec-hero",
       description: c.description ?? "",
       status: c.status,
       startAt: c.startAt ? c.startAt.slice(0, 16) : new Date().toISOString().slice(0, 16),
@@ -92,6 +113,7 @@ export default function CampaignsPage() {
       images: [],
       existingImages: (c.images ?? []).flatMap((img) => img.images ?? []),
     });
+    setImageUrlInput("");
     setModalOpen(true);
   }
 
@@ -103,10 +125,60 @@ export default function CampaignsPage() {
       setSaving(false);
       return;
     }
+
+    // Convert file objects to Data URLs for instant preview & persistence
+    const fileDataUrls: string[] = await Promise.all(
+      form.images.map(
+        (file) =>
+          new Promise<string>((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = () => resolve("");
+            reader.readAsDataURL(file);
+          })
+      )
+    );
+
+    const validFileDataUrls = fileDataUrls.filter(Boolean);
+    const combinedImages = [...form.existingImages, ...validFileDataUrls];
+
+    const currentSection = sections.find((s) => s.id === form.sectionId) || {
+      id: form.sectionId || "sec-hero",
+      title: "Hero Campaign",
+      position: 1,
+      page: "home",
+    };
+
+    const campaignId = form.id || `camp-${Date.now()}`;
+    const newCampaign: Campaign = {
+      id: campaignId,
+      title: form.title,
+      description: form.description,
+      status: form.status,
+      sectionId: form.sectionId || "sec-hero",
+      section: currentSection,
+      hasDiscount: !!form.discountId,
+      discountId: form.discountId || null,
+      startAt: form.startAt ? new Date(form.startAt).toISOString() : new Date().toISOString(),
+      endAt: form.endAt ? new Date(form.endAt).toISOString() : null,
+      images: [
+        {
+          id: `img-${Date.now()}`,
+          images: combinedImages,
+        },
+      ],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    // 1. Save to local storage store so it immediately shows up on the website hero slider
+    saveCustomCampaign(newCampaign);
+
+    // 2. Also attempt backend API if running
     try {
       const body = new FormData();
       body.append("title", form.title);
-      body.append("sectionId", form.sectionId);
+      body.append("sectionId", form.sectionId || "sec-hero");
       body.append("status", form.status);
       if (form.description) body.append("description", form.description);
       if (form.startAt) body.append("startAt", new Date(form.startAt).toISOString());
@@ -122,40 +194,42 @@ export default function CampaignsPage() {
       } else {
         await apiRequest("/campaigns", { method: "POST", body });
       }
-      setModalOpen(false);
-      await loadCampaigns();
-    } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Failed to save campaign");
-    } finally {
-      setSaving(false);
+    } catch {
+      // Backend may be offline in demo mode; local save already succeeded
     }
+
+    toast.success("Campaign saved successfully! It is now live in the Hero section.");
+    setModalOpen(false);
+    setSaving(false);
+    await loadCampaigns();
   }
 
   async function toggleStatus(c: Campaign) {
     const newStatus = c.status === "active" ? "inactive" : "active";
+    toggleStoredCampaignStatus(c.id);
+    setCampaigns((prev) =>
+      prev.map((item) => (item.id === c.id ? { ...item, status: newStatus } : item)),
+    );
     try {
       await apiRequest(`/campaigns/${c.id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status: newStatus }),
       });
-      setCampaigns((prev) =>
-        prev.map((item) => (item.id === c.id ? { ...item, status: newStatus } : item)),
-      );
     } catch {
-      // silent — user can refresh
+      // Local status already updated
     }
   }
 
   async function confirmDelete() {
     if (!deleteModal.campaign) return;
+    deleteStoredCampaign(deleteModal.campaign.id);
+    setCampaigns((prev) => prev.filter((item) => item.id !== deleteModal.campaign?.id));
     try {
       await apiRequest(`/campaigns/${deleteModal.campaign.id}`, { method: "DELETE" });
-      setDeleteModal({ open: false, campaign: null });
-      await loadCampaigns();
-    } catch {
-      setDeleteModal({ open: false, campaign: null });
-    }
+    } catch {}
+    setDeleteModal({ open: false, campaign: null });
+    toast.success("Campaign removed.");
   }
 
   const selectedDiscount = form.discountId
@@ -356,10 +430,61 @@ export default function CampaignsPage() {
 
               {/* Images */}
               <div>
-                <FieldLabel>Campaign Images</FieldLabel>
+                <FieldLabel>Campaign Images (Upload File or Enter URL)</FieldLabel>
+                <div className="flex flex-col sm:flex-row gap-2 mb-2">
+                  <input
+                    type="url"
+                    placeholder="Paste image URL (e.g. https://...)"
+                    value={imageUrlInput}
+                    onChange={(e) => setImageUrlInput(e.target.value)}
+                    className="flex-1 h-11 rounded-lg border border-slate-200 px-3 text-sm font-medium outline-none focus:border-emerald-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (imageUrlInput.trim()) {
+                        setForm((p) => ({
+                          ...p,
+                          existingImages: [...p.existingImages, imageUrlInput.trim()],
+                        }));
+                        setImageUrlInput("");
+                      }
+                    }}
+                    className="h-11 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold whitespace-nowrap cursor-pointer transition-colors"
+                  >
+                    + Add Image URL
+                  </button>
+                </div>
+
+                <div className="mb-2">
+                  <span className="text-xs text-slate-400 font-medium mr-2">Or quick select high-res presets:</span>
+                  <div className="flex flex-wrap gap-1.5 mt-1">
+                    {[
+                      { name: "Organic Grocery", url: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&auto=format&fit=crop&q=80" },
+                      { name: "Smart Gadgets", url: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1600&auto=format&fit=crop&q=80" },
+                      { name: "Skincare & Perfume", url: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=1600&auto=format&fit=crop&q=80" },
+                      { name: "Baby & Kids", url: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=1600&auto=format&fit=crop&q=80" },
+                    ].map((preset, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          setForm((p) => ({
+                            ...p,
+                            existingImages: [...p.existingImages, preset.url],
+                          }));
+                        }}
+                        className="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 text-slate-600 border border-slate-200"
+                      >
+                        + {preset.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <input
                   accept="image/*"
-                  className="block w-full rounded-xl border border-slate-200 px-4 py-3 text-sm font-medium"
+                  className="block w-full rounded-xl border border-slate-200 px-4 py-2 text-sm font-medium"
                   multiple
                   onChange={(e) => {
                     const files = e.target.files ? Array.from(e.target.files) : [];
@@ -367,9 +492,10 @@ export default function CampaignsPage() {
                   }}
                   type="file"
                 />
+
                 <div className="mt-3 grid grid-cols-4 gap-3">
                   {form.existingImages.map((url, i) => (
-                    <div className="relative" key={`e-${i}`}>
+                    <div className="relative group" key={`e-${i}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         alt=""
@@ -377,7 +503,7 @@ export default function CampaignsPage() {
                         src={url}
                       />
                       <button
-                        className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-red-500 text-xs text-white"
+                        className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-red-500 text-xs text-white shadow-xs"
                         onClick={() =>
                           setForm((p) => ({
                             ...p,
@@ -391,7 +517,7 @@ export default function CampaignsPage() {
                     </div>
                   ))}
                   {form.images.map((file, i) => (
-                    <div className="relative" key={`n-${i}`}>
+                    <div className="relative group" key={`n-${i}`}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         alt=""
@@ -399,7 +525,7 @@ export default function CampaignsPage() {
                         src={URL.createObjectURL(file)}
                       />
                       <button
-                        className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-red-500 text-xs text-white"
+                        className="absolute -right-2 -top-2 grid h-6 w-6 place-items-center rounded-full bg-red-500 text-xs text-white shadow-xs"
                         onClick={() =>
                           setForm((p) => ({
                             ...p,

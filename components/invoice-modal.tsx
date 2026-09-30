@@ -6,11 +6,11 @@ import { LuPrinter, LuX } from "react-icons/lu";
 import type { OrderResult } from "@/lib/types";
 
 const COMPANY = {
-  name: "Trust Point Marketplace",
+  name: "NovaMart Bangladesh",
   logo: "/images/logo/novamart-logo-main.png",
-  addressLine: "Mohadevpur, Naogaon, Rajshahi, Bangladesh",
-  phone: "01707819676 (+880 1707-819676)",
-  email: "support@trustpointmart.com",
+  addressLine: "Level 4, Nova Tower, Plot 18, Road 11, Banani, Dhaka-1213, Bangladesh",
+  phone: "+880 1712-345678 (01712345678)",
+  email: "support@novamart.com.bd",
 };
 
 const currency = (n: number) =>

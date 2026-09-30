@@ -24,8 +24,8 @@ export default async function Mainfooter() {
   ]);
 
   // Dynamic Shop Name & Slogan from Admin Dashboard Settings
-  const shopName = settings?.shopName?.trim() || "Trust Point Mart";
-  const shopSlogan = settings?.slogan?.trim() || "YOUR TRUSTED ONLINE MART";
+  const shopName = settings?.shopName?.trim() || "NovaMart";
+  const shopSlogan = settings?.slogan?.trim() || "BANGLADESH'S PREMIER MULTI-CATEGORY MART";
 
   // Dynamic Contact Numbers from Admin Dashboard Settings
   const rawContactEntries = parseContactEntries(settings?.contactNumber);
@@ -36,13 +36,15 @@ export default async function Mainfooter() {
     (c) =>
       !c.value.includes("01722301927") &&
       !c.title.includes("01722301927") &&
-      !c.extra?.includes("Mohammad Abdullah") &&
+      !c.extra?.includes("NovaMart Team") &&
       !c.title?.toLowerCase().includes("executive desk")
   );
 
-  const displayedContacts = validContacts;
+  const displayedContacts = validContacts.length > 0 ? validContacts : [
+    { title: "Hotline Support", value: "+880 1712-345678" }
+  ];
 
-  const primaryPhone = displayedContacts[0]?.value || "01707819676";
+  const primaryPhone = displayedContacts[0]?.value || "+880 1712-345678";
   const rawPhoneDigits = (displayedContacts[0]?.value || primaryPhone).replace(/[^\d]/g, "");
   const formattedWhatsapp = rawPhoneDigits.startsWith("88")
     ? rawPhoneDigits
@@ -54,6 +56,9 @@ export default async function Mainfooter() {
   const displayedEmails = rawEmailEntries.filter(
     (e) => !e.value.toLowerCase().includes("support@webdevsoftware.com") && !e.value.toLowerCase().includes("webdevsoftware")
   );
+  const finalEmails = displayedEmails.length > 0 ? displayedEmails : [
+    { title: "Customer Support", value: "support@novamart.com.bd" }
+  ];
 
   // Dynamic Shop Departments (Categories) synced with Admin Dashboard
   const topCategories = (categories || []).filter((c: ShopCategory) => !c.parentId);
@@ -67,12 +72,12 @@ export default async function Mainfooter() {
           { label: "Browse All Products", href: "/products" },
         ]
       : [
-          { label: "Fresh Groceries & Farm Produce", href: "/products?search=grocery" },
-          { label: "Pantry Staples & Organic Food", href: "/products?search=food" },
-          { label: "Men's Fashion & Apparel", href: "/products?category=Men%27s+Fashion" },
-          { label: "Women's Fashion & Lifestyle", href: "/products?category=Women%27s+Fashion" },
-          { label: "Footwear & Daily Essentials", href: "/products?category=Footwear" },
-          { label: "Smart Tech & Digital Accessories", href: "/products?category=Accessories" },
+          { label: "Skin Care & Beauty", href: "/products?category=Skin+Care" },
+          { label: "Digital Electronics", href: "/products?category=Digital+Electronics" },
+          { label: "Perfumes & Fragrances", href: "/products?category=Perfume" },
+          { label: "Clothing & Fashion", href: "/products?category=Clothing" },
+          { label: "Baby & Kids Products", href: "/products?category=Baby+Products" },
+          { label: "Home & Living Essentials", href: "/products?category=Home+%26+Living" },
           { label: "Browse All Products", href: "/products" },
         ];
 
@@ -187,16 +192,16 @@ export default async function Mainfooter() {
             <Logo variant="light" size="md" tagline={shopSlogan} />
 
             <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed">
-              <strong className="text-white font-semibold">{shopName}</strong> is Bangladesh&apos;s trusted multi-category online hypermarket delivering authentic groceries, farm produce, fashion, footwear, and consumer lifestyle essentials straight to your home.
+              <strong className="text-white font-semibold">{shopName}</strong> is Bangladesh&apos;s premier multi-category online store delivering authentic skin care, digital electronics, luxury perfumes, fashion, baby products, and home essentials directly to your doorstep.
             </p>
 
-            {(displayedContacts.length > 0 || displayedEmails.length > 0) && (
+            {(displayedContacts.length > 0 || finalEmails.length > 0) && (
               <div className="space-y-2 text-xs text-zinc-200 w-full pt-1">
                 {displayedContacts.map((contact, idx) => (
                   <div key={idx} className="flex items-center gap-2.5">
                     <HiPhone className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>
-                      {contact.title ? `${contact.title}: ` : "Desk: "}
+                      {contact.title ? `${contact.title}: ` : "Helpline: "}
                       <a
                         href={`tel:${contact.value.replace(/[^\d+]/g, "")}`}
                         className="text-white font-bold hover:text-emerald-400 transition-colors"
@@ -208,7 +213,7 @@ export default async function Mainfooter() {
                   </div>
                 ))}
 
-                {displayedEmails.map((emailItem, idx) => (
+                {finalEmails.map((emailItem, idx) => (
                   <div key={idx} className="flex items-center gap-2.5">
                     <HiMail className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>

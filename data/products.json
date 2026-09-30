@@ -1,141 +1,510 @@
 [
   {
-    "id": "1",
-    "name": "Rajshahi Himsagar Mango (Export Grade 10kg)",
-    "price": "৳2,450",
-    "originalPrice": "৳2,800",
-    "image": "https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&auto=format&fit=crop&q=80",
-    "collection": "Rajshahi Agro Harvest",
-    "priceNum": 2450,
-    "category": "Fresh Groceries",
-    "origin": "Naogaon, Rajshahi Division, Bangladesh",
-    "subtitle": "Naturally tree-ripened, chemical-free GI-certified Himsagar mangoes directly from Rajshahi orchards.",
-    "description": "Rajshahi Himsagar Mango: Sourced straight from selected orchards in Rajshahi and Naogaon. Known for its silky fiberless pulp, rich sweet aroma, and authentic seasonal flavor. Packed in ventilated eco-crates for nationwide express freshness.",
+    "id": "nm-sk-1",
+    "name": "The Ordinary Niacinamide 10% + Zinc 1% (30ml)",
+    "price": "৳1,150",
+    "originalPrice": "৳1,350",
+    "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80",
+    "collection": "Skin Care & Beauty",
+    "priceNum": 1150,
+    "category": "Skin Care",
+    "origin": "Canada / UK (100% Authentic Import)",
+    "subtitle": "High-strength vitamin and mineral blemish formula for glowing, balanced skin texture.",
+    "description": "The Ordinary Niacinamide 10% + Zinc 1% is a water-based serum that boosts skin brightness, improves skin smoothness, and reinforces the skin barrier over time. Formulated with a high concentration of niacinamide (vitamin B3) supported by zinc PCA to balance visible sebum activity.",
     "teas": [],
     "ingredients": [
-      "100% Naturally Tree-Ripened Himsagar Mangoes",
-      "Zero Carbide & Chemical-Free Guarantee",
-      "Handpicked & Graded for Quality"
+      "10% Niacinamide (Vitamin B3)",
+      "1% Zinc PCA for Sebum Control",
+      "Alcohol-Free, Oil-Free, Silicone-Free"
     ],
     "galleryImages": [
-      "https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1591073113125-e46713c829ed?w=800&auto=format&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1608248597359-0a6e30b02131?w=800&auto=format&fit=crop&q=80"
     ]
   },
   {
-    "id": "2",
-    "name": "Premium Kalijira Aromatic Polao Rice (5kg)",
-    "price": "৳780",
-    "originalPrice": "৳850",
-    "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&auto=format&fit=crop&q=80",
-    "collection": "Pantry Essentials",
-    "priceNum": 780,
-    "category": "Fresh Groceries",
-    "origin": "Dinajpur & Naogaon, Bangladesh",
-    "subtitle": "Naturally aged, extra-long fine grain aromatic rice for biryani, polao, and festive dishes.",
-    "description": "Premium Kalijira Aromatic Rice: Cleaned, sorted, and naturally aged to perfection. Offers an intoxicating scent and fluffy non-sticky grains, perfect for authentic Bangladeshi polao and payesh.",
-    "teas": [],
-    "ingredients": [
-      "100% Pure Kalijira Paddy Grains",
-      "Naturally Aged for Maximum Aroma",
-      "Free of Artificial Polishing Agents"
-    ],
-    "galleryImages": [
-      "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=800&auto=format&fit=crop&q=80"
-    ]
-  },
-  {
-    "id": "3",
-    "name": "Sundarban Natural Wild Raw Honey (500g)",
-    "price": "৳850",
-    "originalPrice": "৳950",
-    "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80",
-    "collection": "Organic Harvest",
-    "priceNum": 850,
-    "category": "Fresh Groceries",
-    "origin": "Sundarbans Mangrove, Bangladesh",
-    "subtitle": "Unfiltered, unprocessed pure mangrove honey collected by traditional Mouals.",
-    "description": "Sundarban Natural Raw Honey: Procured directly from wild bee colonies in the coastal mangrove forests of the Sundarbans. Retains all natural pollen, enzymes, and medicinal antioxidants with zero added sugar.",
-    "teas": [],
-    "ingredients": [
-      "100% Raw Mangrove Wildflower Honey",
-      "Unpasteurized and Unfiltered",
-      "Direct Fair-Pay Sourcing from Mouals"
-    ],
-    "galleryImages": [
-      "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&auto=format&fit=crop&q=80"
-    ]
-  },
-  {
-    "id": "4",
-    "name": "Executive Crisp Cotton Formal Shirt",
+    "id": "nm-sk-2",
+    "name": "CeraVe Daily Moisturizing Lotion (237ml)",
     "price": "৳1,850",
     "originalPrice": "৳2,200",
-    "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80",
-    "collection": "Men's Executive Line",
+    "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80",
+    "collection": "Skin Care & Beauty",
     "priceNum": 1850,
-    "category": "Men's Fashion",
-    "origin": "Dhaka, Bangladesh",
-    "subtitle": "Wrinkle-resistant 100% Egyptian long-staple cotton shirt tailored for business and executive elegance.",
-    "description": "Executive Crisp Cotton Formal Shirt: Designed with precision collar fusing, mother-of-pearl buttons, and breathable fine weave. Ideal for boardroom meetings and formal corporate gatherings.",
+    "category": "Skin Care",
+    "origin": "USA (Dermatologist Recommended)",
+    "subtitle": "Lightweight, oil-free moisturizer with 3 essential ceramides and hyaluronic acid.",
+    "description": "Developed with dermatologists, CeraVe Daily Moisturizing Lotion has a unique, lightweight formula that provides 24-hour hydration and helps restore the protective skin barrier with three essential ceramides (1, 3, 6-II). Utilizes patented MVE delivery technology.",
     "teas": [],
     "ingredients": [
-      "100% Long-Staple Combed Cotton",
-      "Reinforced Stitching at Stress Points",
-      "Wrinkle-Resistant Easy-Iron Finish"
+      "3 Essential Ceramides (1, 3, 6-II)",
+      "Hyaluronic Acid for Deep Hydration",
+      "Fragrance-Free & Non-Comedogenic"
     ],
     "galleryImages": [
-      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-sk-3",
+    "name": "COSRX Advanced Snail 96 Mucin Power Essence (100ml)",
+    "price": "৳1,650",
+    "originalPrice": "৳1,950",
+    "image": "https://images.unsplash.com/photo-1608248597359-0a6e30b02131?w=800&auto=format&fit=crop&q=80",
+    "collection": "Skin Care & Beauty",
+    "priceNum": 1650,
+    "category": "Skin Care",
+    "origin": "South Korea (K-Beauty Certified)",
+    "subtitle": "Lightweight hydrating essence enriched with 96.3% snail secretion filtrate.",
+    "description": "Formulated with 96.3% Snail Secretion Filtrate, this essence protects the skin from moisture loss while improving skin elasticity. Snail mucin helps repair and soothes red, sensitized skin post-breakouts by replenishing moisture.",
+    "teas": [],
+    "ingredients": [
+      "96.3% Snail Secretion Filtrate",
+      "Sodium Hyaluronate & Allantoin",
+      "Cruelty-Free, Paraben-Free"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1608248597359-0a6e30b02131?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-sk-4",
+    "name": "La Roche-Posay Anthelios UVmune 400 SPF50+ (50ml)",
+    "price": "৳2,450",
+    "originalPrice": "৳2,800",
+    "image": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&auto=format&fit=crop&q=80",
+    "collection": "Skin Care & Beauty",
+    "priceNum": 2450,
+    "category": "Skin Care",
+    "origin": "France (European Derm Standard)",
+    "subtitle": "Ultra-long UVA protection, invisible fluid finish with sweat & water resistance.",
+    "description": "La Roche-Posay Anthelios UVmune 400 Invisible Fluid SPF50+ offers the ultimate broad-spectrum protection against UVA and UVB rays, specially designed for sensitive skin in tropical climates.",
+    "teas": [],
+    "ingredients": [
+      "Mexoryl 400 UV Filter Technology",
+      "Netlock Technology for Invisible Texture",
+      "Non-Greasy & Anti-Eye Stinging"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-el-1",
+    "name": "Apple AirPods Pro (2nd Generation) MagSafe Case",
+    "price": "৳24,500",
+    "originalPrice": "৳27,990",
+    "image": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&auto=format&fit=crop&q=80",
+    "collection": "Digital Electronics",
+    "priceNum": 24500,
+    "category": "Digital Electronics",
+    "origin": "Official Apple Global Channel",
+    "subtitle": "Up to 2x more Active Noise Cancellation, Adaptive Audio, and USB-C MagSafe charging.",
+    "description": "AirPods Pro (2nd generation) with USB-C delivers up to 2x more Active Noise Cancellation than the previous generation, with Transparency mode that lets you hear the world around you, and all-new Adaptive Audio that dynamically tailors noise control to your environment.",
+    "teas": [],
+    "ingredients": [
+      "Apple H2 Headphone Chip",
+      "Personalized Spatial Audio with Dynamic Head Tracking",
+      "IP54 Dust, Sweat, and Water Resistant"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-el-2",
+    "name": "Samsung Galaxy Watch 6 Bluetooth (44mm)",
+    "price": "৳21,500",
+    "originalPrice": "৳24,000",
+    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
+    "collection": "Digital Electronics",
+    "priceNum": 21500,
+    "category": "Digital Electronics",
+    "origin": "Samsung Official Distributor",
+    "subtitle": "Super AMOLED Sapphire Crystal display, advanced sleep coaching and ECG heart monitor.",
+    "description": "Start your everyday wellness journey with Samsung Galaxy Watch 6. Featuring a 20% larger screen and a 30% slimmer bezel, complete with personalized HR zones, comprehensive sleep analysis, and fast wireless charging.",
+    "teas": [],
+    "ingredients": [
+      "1.47-inch Sapphire Crystal Super AMOLED",
+      "BioActive Sensor (ECG, Heart Rate, BIA)",
+      "5ATM + IP68 Water and Dust Resistance"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-el-3",
+    "name": "Anker 20,000mAh 22.5W High-Speed Power Bank",
+    "price": "৳3,450",
+    "originalPrice": "৳3,950",
+    "image": "https://images.unsplash.com/photo-1609592424361-9c6dfbe05ef5?w=800&auto=format&fit=crop&q=80",
+    "collection": "Digital Electronics",
+    "priceNum": 3450,
+    "category": "Digital Electronics",
+    "origin": "Anker Official Channel",
+    "subtitle": "Triple-port fast charging power bank with digital battery indicator display.",
+    "description": "Equipped with 22.5W PowerIQ and Power Delivery fast-charging technology. Charge 3 devices simultaneously with 2 USB-A and 1 USB-C ports. Built-in MultiProtect safety system protects your devices from overcurrent and short circuits.",
+    "teas": [],
+    "ingredients": [
+      "20,000mAh High-Density Polymer Battery",
+      "22.5W Max Fast Charging via USB-C PD",
+      "Smart Digital LED Display"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1609592424361-9c6dfbe05ef5?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-el-4",
+    "name": "Sony WH-1000XM5 Wireless ANC Headphones",
+    "price": "৳36,500",
+    "originalPrice": "৳41,000",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
+    "collection": "Digital Electronics",
+    "priceNum": 36500,
+    "category": "Digital Electronics",
+    "origin": "Sony Brand Warranty",
+    "subtitle": "Industry-leading noise cancellation with two processors and 8 microphones.",
+    "description": "Sony's flagship WH-1000XM5 headphones rewrite the rules for distraction-free listening. With 2 processors controlling 8 microphones, Auto NC Optimizer, and an ultra-comfortable lightweight design in soft fit leather.",
+    "teas": [],
+    "ingredients": [
+      "Integrated Processor V1 & HD Noise Cancelling QN1",
+      "30-Hour Battery Life with 3-Min Quick Charge",
+      "High-Resolution Audio Wireless LDAC"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-pf-1",
+    "name": "Dior Sauvage Eau De Parfum (100ml)",
+    "price": "৳14,500",
+    "originalPrice": "৳16,800",
+    "image": "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80",
+    "collection": "Perfumes & Fragrances",
+    "priceNum": 14500,
+    "category": "Perfume",
+    "origin": "France (100% Original Sealed Box)",
+    "subtitle": "Iconic fresh and woody composition with Calabrian bergamot and Papua New Guinean vanilla.",
+    "description": "A powerful and noble fragrance, Dior Sauvage Eau de Parfum unfurls an olfactory score that oscillates between raw freshness and sensual, mysterious warmth. Accents of smoked vanilla absolute enveloped in amber notes create an unmistakable signature.",
+    "teas": [],
+    "ingredients": [
+      "Top Notes: Reggio Bergamot, Mandarin",
+      "Heart Notes: Virginian Cedar, Sri Lankan Sandalwood",
+      "Base Notes: Papua New Guinean Vanilla Absolute"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-pf-2",
+    "name": "Chanel Bleu De Chanel Pour Homme EDP (100ml)",
+    "price": "৳16,200",
+    "originalPrice": "৳18,500",
+    "image": "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&auto=format&fit=crop&q=80",
+    "collection": "Perfumes & Fragrances",
+    "priceNum": 16200,
+    "category": "Perfume",
+    "origin": "France (Authentic Import)",
+    "subtitle": "An aromatic, intensely woody fragrance for the man who defies convention.",
+    "description": "BLEU DE CHANEL Eau de Parfum is an aromatic-woody fragrance with ambery and musky notes. A sensual interpretation in which dry cedar notes lend sensual warmth, while New Caledonian sandalwood brings elegance and depth.",
+    "teas": [],
+    "ingredients": [
+      "Top Notes: Grapefruit, Lemon, Mint, Pink Pepper",
+      "Heart Notes: Ginger, Nutmeg, Jasmine, Iso E Super",
+      "Base Notes: Incense, Vetiver, Cedar, Sandalwood"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-pf-3",
+    "name": "Al Haramain Amber Oud Gold Edition (60ml)",
+    "price": "৳5,850",
+    "originalPrice": "৳6,500",
+    "image": "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&auto=format&fit=crop&q=80",
+    "collection": "Perfumes & Fragrances",
+    "priceNum": 5850,
+    "category": "Perfume",
+    "origin": "United Arab Emirates",
+    "subtitle": "Opulent fruity oriental unisex fragrance with sweet melon, pineapple, and warm vanilla amber.",
+    "description": "Amber Oud Gold Edition is a luxurious oriental fragrance that captures elegance with sweet, sparkling top notes followed by rich amber and sensual musk. Extraordinary longevity and sillage suitable for both daily wear and special occasions.",
+    "teas": [],
+    "ingredients": [
+      "Top Notes: Bergamot, Green Notes",
+      "Heart Notes: Sweet Melon, Pineapple, Amber",
+      "Base Notes: Vanilla, Musk, Woody Accord"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-pf-4",
+    "name": "Bella Vita Luxury Organic Unisex Perfume Set (4x20ml)",
+    "price": "৳1,950",
+    "originalPrice": "৳2,400",
+    "image": "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80",
+    "collection": "Perfumes & Fragrances",
+    "priceNum": 1950,
+    "category": "Perfume",
+    "origin": "Luxury Organic Perfumery",
+    "subtitle": "Gift pack featuring CEO, White Oud, Skai Aquatic, and Fresh luxury travel editions.",
+    "description": "A curated discovery set of premium artisanal EDP perfumes. Perfect for personal gifting and travel, delivering all-day fragrance variety from fresh aquatic morning notes to royal white oud evening sophistication.",
+    "teas": [],
+    "ingredients": [
+      "4 x 20ml Travel EDP Sprays",
+      "Long-lasting 10-12hr Fragrance Oils",
+      "IFRA Certified Skin-Friendly"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-cl-1",
+    "name": "Royal Silk Embroidered Festive Panjabi",
+    "price": "৳3,850",
+    "originalPrice": "৳4,500",
+    "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80",
+    "collection": "Clothing & Fashion",
+    "priceNum": 3850,
+    "category": "Clothing",
+    "origin": "Dhaka & Pabna Weavers, Bangladesh",
+    "subtitle": "Handcrafted pure silk-blend panjabi with intricate zardosi collar embroidery.",
+    "description": "Crafted from fine silk-viscose blended fabric with immaculate hand-embroidered detailing along the placket and collar. Cut in a modern slim fit that exudes timeless cultural elegance for Eid, weddings, and festive gatherings.",
+    "teas": [],
+    "ingredients": [
+      "Fine Silk-Viscose Lurex Blend",
+      "Intricate Mandarin Collar Zardosi Needlework",
+      "Breathable Inner Cotton Facing"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-cl-2",
+    "name": "Heavyweight 220 GSM Supima Cotton T-Shirt",
+    "price": "৳850",
+    "originalPrice": "৳1,100",
+    "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
+    "collection": "Clothing & Fashion",
+    "priceNum": 850,
+    "category": "Clothing",
+    "origin": "Dhaka Apparel Hub, Bangladesh",
+    "subtitle": "Dense, ultra-soft combed Supima cotton with ribbed collar and pre-shrunk finish.",
+    "description": "Constructed with premium 220 GSM long-staple combed cotton for substantial drape and non-translucent durability. Features double-needle coverstitched hems and reactive color dyeing that withstands dozens of washes.",
+    "teas": [],
+    "ingredients": [
+      "100% Combed Compact Supima Cotton (220 GSM)",
+      "Bio-Washed & Silicon Softened",
+      "Seamless Ribbed Crewneck"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-cl-3",
+    "name": "Handloom Floral Georgette Party Saree",
+    "price": "৳4,950",
+    "originalPrice": "৳5,800",
+    "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80",
+    "collection": "Clothing & Fashion",
+    "priceNum": 4950,
+    "category": "Clothing",
+    "origin": "Tangail Handloom Cluster, Bangladesh",
+    "subtitle": "Flowing lightweight pure georgette saree with digital floral prints and scalloped zari border.",
+    "description": "An ethereal blend of traditional Bangladeshi handloom weaving and contemporary pastel floral aesthetics. Light as air and effortlessly drapeable, accompanied by an unstitched contrast designer blouse piece.",
+    "teas": [],
+    "ingredients": [
+      "Premium Pure Georgette Silk Blend",
+      "5.5 Meters Saree + 0.8 Meter Blouse Piece",
+      "Metallic Gold Scalloped Border Embroidery"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-cl-4",
+    "name": "Executive Crisp Slim Fit Oxford Cotton Shirt",
+    "price": "৳1,750",
+    "originalPrice": "৳2,100",
+    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80",
+    "collection": "Clothing & Fashion",
+    "priceNum": 1750,
+    "category": "Clothing",
+    "origin": "Dhaka Tailoring Atelier, Bangladesh",
+    "subtitle": "Wrinkle-resistant 100% Egyptian long-staple cotton shirt tailored for executive sharpness.",
+    "description": "Designed with precision collar fusing, genuine horn buttons, and breathable fine basketweave Oxford texture. Engineered to stay crisp and comfortable through 12-hour workdays in Bangladesh's weather.",
+    "teas": [],
+    "ingredients": [
+      "100% Long-Staple Egyptian Cotton",
+      "Reinforced Gusseted Side Seams",
+      "Easy-Iron Stain-Repellent Coating"
+    ],
+    "galleryImages": [
       "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=800&auto=format&fit=crop&q=80"
     ]
   },
   {
-    "id": "5",
-    "name": "Handcrafted Genuine Leather Loafers",
-    "price": "৳3,650",
-    "originalPrice": "৳4,200",
-    "image": "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=800&auto=format&fit=crop&q=80",
-    "collection": "Artisan Footwear",
-    "priceNum": 3650,
-    "category": "Footwear",
-    "origin": "Hazaribagh & Savar, Bangladesh",
-    "subtitle": "Premium full-grain leather loafers featuring cushioned ortholite insoles and durable welted soles.",
-    "description": "Handcrafted Genuine Leather Loafers: Made from vegetable-tanned Bangladeshi leather by master artisans. Provides seamless comfort for long working days and smart-casual evenings.",
+    "id": "nm-bb-1",
+    "name": "Pampers Premium Protection Diaper Pants (Size 4 Mega)",
+    "price": "৳2,350",
+    "originalPrice": "৳2,700",
+    "image": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
+    "collection": "Baby & Kids Products",
+    "priceNum": 2350,
+    "category": "Baby Products",
+    "origin": "Procter & Gamble Official Import",
+    "subtitle": "Feather-like softness with 360° breathable waistband and up to 12hr leak-lock protection.",
+    "description": "Give your baby the #1 comfort and skin protection from Pampers. Featuring micro-pore air channels that allow air to circulate freely, wetness indicator line, and ultra-stretchy waistbands for easy diaper changes.",
     "teas": [],
     "ingredients": [
-      "100% Full-Grain Cow Leather Upper",
-      "Breathable Soft Leather Lining",
-      "Non-Slip TPR Rubber Outsole"
+      "Dermatologically Tested Hypoallergenic Core",
+      "12-Hour Active Leak-Lock Absorption",
+      "Wetness Indicator & Tear-Away Sides"
     ],
     "galleryImages": [
-      "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80"
     ]
   },
   {
-    "id": "6",
-    "name": "Ultra AMOLED Smart Watch (Fitness Edition)",
-    "price": "৳3,200",
-    "originalPrice": "৳3,800",
-    "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
-    "collection": "Smart Tech & Wearables",
-    "priceNum": 3200,
-    "category": "Accessories",
-    "origin": "Verified Brand Official Channel",
-    "subtitle": "1.43\" HD AMOLED display, Bluetooth calling, heart rate & SpO2 monitor with 10-day battery backup.",
-    "description": "Ultra AMOLED Smart Watch: Equipped with high-precision biometric sensors, 100+ sports tracking modes, IP68 water resistance, and crystal-clear hands-free Bluetooth calling.",
+    "id": "nm-bb-2",
+    "name": "Philips Avent Natural Feeding Bottle Set (260ml x 2)",
+    "price": "৳2,100",
+    "originalPrice": "৳2,500",
+    "image": "https://images.unsplash.com/photo-1584839610506-57c517453dd0?w=800&auto=format&fit=crop&q=80",
+    "collection": "Baby & Kids Products",
+    "priceNum": 2100,
+    "category": "Baby Products",
+    "origin": "Philips Official Channel (BPA Free)",
+    "subtitle": "Wide breast-shaped teat promotes natural latch-on with anti-colic spiral flex design.",
+    "description": "The Philips Avent Natural bottle with ultra-soft teat closely resembles the breast. Wide breast-shaped teat with flexible spiral design and comfort petals promotes natural latch-on and makes it easy to combine breast and bottle feeding.",
     "teas": [],
     "ingredients": [
-      "1.43-inch Always-on AMOLED Screen",
-      "Heart Rate & Blood Oxygen Sensor",
-      "IP68 Waterproof Aerospace Zinc Alloy Body"
+      "100% BPA-Free Food Grade Polypropylene",
+      "Twin Anti-Colic Air Valve Technology",
+      "Ergonomic Easy-Grip Bottle Shape"
     ],
     "galleryImages": [
-      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
-      "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=800&auto=format&fit=crop&q=80"
+      "https://images.unsplash.com/photo-1584839610506-57c517453dd0?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-bb-3",
+    "name": "Johnson's Baby Head-to-Toe Wash & Lotion Set (500ml)",
+    "price": "৳1,450",
+    "originalPrice": "৳1,700",
+    "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80",
+    "collection": "Baby & Kids Products",
+    "priceNum": 1450,
+    "category": "Baby Products",
+    "origin": "Johnson & Johnson Official Channel",
+    "subtitle": "No More Tears gentle formula suitable for newborns and sensitive baby skin.",
+    "description": "Specially formulated to cleanse and nourish baby's delicate skin without drying. Tested with pediatricians and dermatologists to be hypoallergenic and free of harsh parabens, sulfates, and dyes.",
+    "teas": [],
+    "ingredients": [
+      "No More Tears Tearless Cleansing Base",
+      "pH Balanced with Coconut Oil Extract",
+      "Dye-Free, Phthalate-Free, Sulfate-Free"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-bb-4",
+    "name": "Organic Soft Cotton Baby Rompers (3-Pack)",
+    "price": "৳1,250",
+    "originalPrice": "৳1,550",
+    "image": "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=800&auto=format&fit=crop&q=80",
+    "collection": "Baby & Kids Products",
+    "priceNum": 1250,
+    "category": "Baby Products",
+    "origin": "Certified Organic Kids Line",
+    "subtitle": "Ultra-gentle 100% GOTS certified combed organic cotton onesies with nickel-free snaps.",
+    "description": "A set of three newborn to toddler onesies crafted from ultra-soft certified organic cotton. Features expandable lap shoulder necklines and bottom snap closures to simplify dressing and diaper changes.",
+    "teas": [],
+    "ingredients": [
+      "100% GOTS Certified Organic Cotton",
+      "Nickel-Free Reinforced Snap Buttons",
+      "Tagless Neck Label to Prevent Irritation"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1522771930-78848d9293e8?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-hm-1",
+    "name": "Ultrasonic Aroma Essential Oil Diffuser (500ml)",
+    "price": "৳1,850",
+    "originalPrice": "৳2,300",
+    "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80",
+    "collection": "Home & Living",
+    "priceNum": 1850,
+    "category": "Home & Living",
+    "origin": "Smart Home Verified Store",
+    "subtitle": "7-color ambient LED nightlight, whisper-quiet misting with auto shut-off safety.",
+    "description": "Transform your bedroom, living room, or study into a serene oasis. The ultrasonic diffuser atomizes pure water and essential oils without heat, keeping the therapeutic integrity intact while adding gentle humidity to air-conditioned rooms.",
+    "teas": [],
+    "ingredients": [
+      "500ml Large Water Capacity (10-12hr Mist)",
+      "BPA-Free Medical Grade PP Material",
+      "Wireless Remote Control Included"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-hm-2",
+    "name": "Double Wall Vacuum Insulated Tumbler (750ml)",
+    "price": "৳1,150",
+    "originalPrice": "৳1,450",
+    "image": "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=800&auto=format&fit=crop&q=80",
+    "collection": "Home & Living",
+    "priceNum": 1150,
+    "category": "Home & Living",
+    "origin": "EcoLiving Lifestyle",
+    "subtitle": "18/8 food-grade stainless steel with 24hr cold / 12hr hot temperature retention.",
+    "description": "Engineered with double-wall vacuum insulation and sweat-proof powder coating. Keeps your iced beverages frosty cold for 24 hours or steaming hot coffee fresh for 12 hours. Fits seamlessly into car cup holders.",
+    "teas": [],
+    "ingredients": [
+      "Premium 18/8 Pro-Grade Stainless Steel",
+      "Leak-Proof Magnetic Slider Sip Lid",
+      "Rust-Resistant & Dishwasher Safe"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=800&auto=format&fit=crop&q=80"
+    ]
+  },
+  {
+    "id": "nm-hm-3",
+    "name": "Non-Stick Granite Marble Master Pan Set",
+    "price": "৳4,600",
+    "originalPrice": "৳5,400",
+    "image": "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80",
+    "collection": "Home & Living",
+    "priceNum": 4600,
+    "category": "Home & Living",
+    "origin": "Culinary Pro Kitchens",
+    "subtitle": "PFOA-free 5-layer German granite coating with induction compatible base.",
+    "description": "Upgrade your kitchen with effortless non-stick performance. Heavy-gauge die-cast aluminum body provides rapid, even heat distribution with zero hot spots. Compatible with gas, electric, ceramic, and induction stoves.",
+    "teas": [],
+    "ingredients": [
+      "5-Layer Scratch-Resistant Granite Coating",
+      "Stay-Cool Soft-Touch Ergonomic Bakelite Handle",
+      "PFOA, Lead, and Cadmium Free"
+    ],
+    "galleryImages": [
+      "https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?w=800&auto=format&fit=crop&q=80"
     ]
   }
 ]

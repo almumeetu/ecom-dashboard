@@ -24,13 +24,13 @@ export default function Quality() {
             </h2>
             
             <p className="mx-auto mt-6 font-['Gotham'] text-sm leading-6 md:text-lg font-normal">
-                We follow a strict clean confidentiality and quality control policy governing our operations. Trust Point Mart is{" "}
+                We follow a strict clean confidentiality and quality control policy governing our operations. NovaMart is{" "}
                 <span className="font-['Snell_Roundhand_LT_Std'] italic font-">committed to verified consumer protection, authentic origin validation</span>{" "}
                 and transparent ethical trading practices across Bangladesh.
             </p>
             
             <p className="mx-auto mt-4 font-['Gotham'] text-xs text-zinc-500">
-                Trust Point Mart is verified and certified with
+                NovaMart is verified and certified with
             </p>
             </div>
             {/* Certification Logos */}

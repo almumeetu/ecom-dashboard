@@ -19,7 +19,7 @@ export default function Prestige() {
               <p 
                 className="text-sm md:text-base leading-relaxed text-stone-gray font-['Bembo_Std']"
               >
-                Rooted in the agricultural hubs of Mohadevpur, Naogaon and Rajshahi Division, Trust Point Mart bridges the gap between verified producers and modern consumers. Built upon uncompromising quality and transparent origin, we position every selection not as a commodity, but as a trusted expression of authenticity.
+                Rooted in the agricultural hubs of Banani, Dhaka and Rajshahi Division, NovaMart bridges the gap between verified producers and modern consumers. Built upon uncompromising quality and transparent origin, we position every selection not as a commodity, but as a trusted expression of authenticity.
               </p>
 
               {/* Exceptional Quality Quote Banner */}
@@ -36,7 +36,7 @@ export default function Prestige() {
                   Verified Quality
                 </h4>
                 <blockquote className="font-['Snell_Roundhand_LT_Std'] italic text-2xl md:text-3xl text-stone-700 leading-relaxed">
-                  &ldquo;For those who value authenticity at the highest level, Trust Point Mart is the choice without compromise.&rdquo;
+                  &ldquo;For those who value authenticity at the highest level, NovaMart is the choice without compromise.&rdquo;
                 </blockquote>
               </div>
             </div>

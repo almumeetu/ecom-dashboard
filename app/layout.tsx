@@ -64,12 +64,12 @@ const gotham = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Trust Point Mart | Multi-Category E-Commerce & Lifestyle Hypermarket",
-  description: "Trust Point Mart — Bangladesh's trusted online hypermarket for authentic groceries, fresh farm produce, fashion apparel, footwear, and consumer lifestyle essentials. Founded by Mohammad Abdullah (Mohadevpur, Naogaon, Rajshahi).",
+  title: "NovaMart | Bangladesh's Premier Multi-Category E-Commerce Store",
+  description: "NovaMart — Bangladesh's premier online store for authentic skin care, digital electronics, luxury perfumes, fashion apparel, baby products, and home lifestyle essentials.",
   icons: {
-    icon: "/images/logo.svg",
-    shortcut: "/images/logo.svg",
-    apple: "/images/logo.svg",
+    icon: "/images/logo/novamart-logo-main.png",
+    shortcut: "/images/logo/novamart-logo-main.png",
+    apple: "/images/logo/novamart-logo-main.png",
   },
 };
 

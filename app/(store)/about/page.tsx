@@ -2,16 +2,16 @@ import About from '@/components/sections/about-us/about';
 import PageBanner from '@/components/ui/page-banner';
 
 export const metadata = {
-  title: "About Us | Trust Point Mart — Defining Bangladesh's Multi-Category E-Commerce Standard",
-  description: "Learn about Trust Point Mart, founded by entrepreneur Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi. Discover our mission to deliver authentic groceries, lifestyle fashion, tech, and verified consumer goods nationwide.",
+  title: "About Us | NovaMart — Bangladesh's Premier Multi-Category Shopping Platform",
+  description: "Discover NovaMart, Bangladesh's modern e-commerce destination for authentic skin care, digital electronics, luxury perfumes, fashion, baby care, and home essentials delivered nationwide.",
 };
 
 export default function AboutPage() {
   return (
     <div className="w-full">
       <PageBanner
-        title="About Trust Point Mart"
-        subtitle="Bangladesh's trusted multi-category online hypermarket. Built on direct sourcing, zero middleman markups, and verified authenticity. Founded by Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi."
+        title="About NovaMart"
+        subtitle="Bangladesh's premier multi-category online shopping destination. Delivering 100% genuine products with fast doorstep delivery and buyer protection across all 64 districts."
         breadcrumbs={[
           { label: "About Us" },
         ]}

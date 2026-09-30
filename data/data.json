@@ -2,16 +2,16 @@
   "help": {
     "text": "Help & Support",
     "phone": {
-      "full": "+880 1707-819676",
-      "short": "01707819676",
-      "label": "Executive Support"
+      "full": "+880 1712-345678",
+      "short": "01712345678",
+      "label": "Hotline Support"
     }
   },
   "slider": {
     "slides": [
-      "🛒 Welcome to Trust Point Mart — Groceries, Fashion, Tech & Daily Essentials!",
-      "🌾 Direct Farmgate Sourcing — Authentic Rajshahi Produce & Fresh Agro Essentials",
-      "✨ 100% Genuine Guaranteed — Nationwide Fast Delivery Across 64 Districts"
+      "🛒 Welcome to NovaMart — Skin Care, Digital Electronics, Perfumes, Fashion & Baby Essentials!",
+      "⚡ Express Nationwide Delivery to all 64 Districts in Bangladesh | Cash on Delivery Available",
+      "✨ 100% Genuine Guaranteed — Direct Authentic Imports • Hotline: 01712-345678"
     ],
     "autoplayDelay": 3500,
     "speed": 500
@@ -36,164 +36,100 @@
   "products": {
     "newArrivals": [
       {
-        "id": "1",
-        "name": "Rajshahi Himsagar Mango (10kg Export Pack)",
-        "price": 2450,
-        "originalPrice": 2800,
-        "image": "https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&auto=format&fit=crop&q=80",
-        "badge": "FRESH"
+        "id": "nm-sk-1",
+        "name": "The Ordinary Niacinamide 10% + Zinc 1% (30ml)",
+        "price": 1150,
+        "originalPrice": 1350,
+        "image": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80",
+        "badge": "SKINCARE"
       },
       {
-        "id": "2",
-        "name": "Premium Kalijira Aromatic Polao Rice (5kg)",
-        "price": 780,
-        "originalPrice": 850,
-        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=800&auto=format&fit=crop&q=80",
-        "badge": "ORGANIC"
-      },
-      {
-        "id": "3",
-        "name": "Sundarban Natural Wild Raw Honey (500g)",
-        "price": 850,
-        "originalPrice": 950,
-        "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80",
-        "badge": "100% PURE"
-      },
-      {
-        "id": "4",
-        "name": "Executive Crisp Cotton Formal Shirt",
+        "id": "nm-sk-2",
+        "name": "CeraVe Daily Moisturizing Lotion (237ml)",
         "price": 1850,
         "originalPrice": 2200,
-        "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80",
+        "image": "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&auto=format&fit=crop&q=80",
+        "badge": "HYDRATION"
+      },
+      {
+        "id": "nm-el-1",
+        "name": "Apple AirPods Pro (2nd Generation) USB-C",
+        "price": 24500,
+        "originalPrice": 27990,
+        "image": "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&auto=format&fit=crop&q=80",
+        "badge": "TECH DROP"
+      },
+      {
+        "id": "nm-el-2",
+        "name": "Samsung Galaxy Watch 6 Bluetooth (44mm)",
+        "price": 21500,
+        "originalPrice": 24000,
+        "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
+        "badge": "SMARTWATCH"
+      },
+      {
+        "id": "nm-pf-1",
+        "name": "Dior Sauvage Eau De Parfum for Men (100ml)",
+        "price": 14500,
+        "originalPrice": 16800,
+        "image": "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80",
+        "badge": "LUXURY"
+      },
+      {
+        "id": "nm-pf-3",
+        "name": "Al Haramain Amber Oud Gold Edition (60ml)",
+        "price": 5850,
+        "originalPrice": 6500,
+        "image": "https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?w=800&auto=format&fit=crop&q=80",
         "badge": "BESTSELLER"
       },
       {
-        "id": "5",
-        "name": "Handcrafted Genuine Leather Loafers",
-        "price": 3650,
-        "originalPrice": 4200,
-        "image": "https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=800&auto=format&fit=crop&q=80",
-        "badge": "PREMIUM"
-      },
-      {
-        "id": "6",
-        "name": "Ultra AMOLED Smart Watch (Fitness Edition)",
-        "price": 3200,
-        "originalPrice": 3800,
-        "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80",
-        "badge": "TRENDING"
-      },
-      {
-        "id": "7",
-        "name": "100% Pure Cold-Pressed Mustard Oil (1L)",
-        "price": 380,
-        "originalPrice": 420,
-        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&auto=format&fit=crop&q=80",
-        "badge": "ORGANIC"
-      },
-      {
-        "id": "8",
-        "name": "Traditional Handloom Silk Saree",
-        "price": 4500,
-        "originalPrice": 5200,
-        "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80",
-        "badge": "FESTIVE"
-      },
-      {
-        "id": "9",
-        "name": "Premium Embroidered Cotton Panjabi",
-        "price": 2800,
-        "originalPrice": 3200,
-        "image": "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=800&auto=format&fit=crop&q=80",
+        "id": "nm-cl-1",
+        "name": "Royal Silk Embroidered Festive Panjabi",
+        "price": 3850,
+        "originalPrice": 4500,
+        "image": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80",
         "badge": "EID DROP"
       },
       {
-        "id": "10",
-        "name": "Air Cushion Running Sport Sneakers",
-        "price": 4200,
-        "originalPrice": 4800,
-        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80",
-        "badge": "POPULAR"
+        "id": "nm-cl-2",
+        "name": "Heavyweight 220 GSM Supima Cotton T-Shirt",
+        "price": 850,
+        "originalPrice": 1100,
+        "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=800&auto=format&fit=crop&q=80",
+        "badge": "100% COTTON"
       },
       {
-        "id": "11",
-        "name": "True Wireless ANC Bluetooth Earbuds",
-        "price": 2600,
-        "originalPrice": 3100,
-        "image": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&auto=format&fit=crop&q=80",
-        "badge": "GADGET"
+        "id": "nm-cl-3",
+        "name": "Handloom Floral Georgette Party Saree",
+        "price": 4950,
+        "originalPrice": 5800,
+        "image": "https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=800&auto=format&fit=crop&q=80",
+        "badge": "HANDLOOM"
       },
       {
-        "id": "12",
-        "name": "Full-Grain Leather Bi-Fold Wallet",
-        "price": 1250,
-        "originalPrice": 1500,
-        "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?w=800&auto=format&fit=crop&q=80",
-        "badge": "HANDMADE"
-      },
-      {
-        "id": "13",
-        "name": "Designer Floral Wrap Summer Dress",
-        "price": 2400,
-        "originalPrice": 2900,
-        "image": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=800&auto=format&fit=crop&q=80",
-        "badge": "CHIC"
-      },
-      {
-        "id": "14",
-        "name": "Classic Denim Trucker Jacket",
-        "price": 3200,
-        "originalPrice": 3800,
-        "image": "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&auto=format&fit=crop&q=80",
-        "badge": "ICONIC"
-      },
-      {
-        "id": "15",
-        "name": "Farm-Fresh Pure Cow Ghee (500g Tin)",
-        "price": 750,
-        "originalPrice": 850,
-        "image": "https://images.unsplash.com/photo-1589985270826-4b7bb135bc9d?w=800&auto=format&fit=crop&q=80",
-        "badge": "PURE AGRO"
-      },
-      {
-        "id": "16",
-        "name": "Polarized UV400 Aviator Sunglasses",
-        "price": 1450,
-        "originalPrice": 1800,
-        "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80",
-        "badge": "SUMMER"
-      },
-      {
-        "id": "17",
-        "name": "Breathable Pique Cotton Polo Shirt",
-        "price": 1100,
-        "originalPrice": 1350,
-        "image": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&auto=format&fit=crop&q=80",
-        "badge": "CASUAL"
-      },
-      {
-        "id": "18",
-        "name": "Casual Breathable Canvas Walking Shoes",
-        "price": 1850,
-        "originalPrice": 2200,
-        "image": "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=800&auto=format&fit=crop&q=80",
-        "badge": "COMFORT"
-      },
-      {
-        "id": "19",
-        "name": "Water-Resistant Canvas Laptop Backpack",
-        "price": 2250,
+        "id": "nm-bb-1",
+        "name": "Pampers Premium Protection Diaper Pants Mega",
+        "price": 2350,
         "originalPrice": 2700,
-        "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800&auto=format&fit=crop&q=80",
-        "badge": "DURABLE"
+        "image": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80",
+        "badge": "BABY CARE"
       },
       {
-        "id": "20",
-        "name": "65W GaN Multi-Port Fast Charger",
+        "id": "nm-bb-2",
+        "name": "Philips Avent Natural Feeding Bottle Set (260ml)",
+        "price": 2100,
+        "originalPrice": 2500,
+        "image": "https://images.unsplash.com/photo-1584839610506-57c517453dd0?w=800&auto=format&fit=crop&q=80",
+        "badge": "BPA FREE"
+      },
+      {
+        "id": "nm-hm-1",
+        "name": "Ultrasonic Aroma Essential Oil Diffuser (500ml)",
         "price": 1850,
-        "originalPrice": 2200,
-        "image": "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&auto=format&fit=crop&q=80",
-        "badge": "FAST CHARGE"
+        "originalPrice": 2300,
+        "image": "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80",
+        "badge": "LIFESTYLE"
       }
     ]
   }

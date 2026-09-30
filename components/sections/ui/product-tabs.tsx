@@ -264,7 +264,7 @@ export default function ProductTabs({
   }, [productName, brand, category, sku, unit, stockQuantity, tags, origin, attributes]);
 
   // Dynamic Delivery charges from settings
-  const shopName = settings?.shopName?.trim() || 'Trust Point Mart';
+  const shopName = settings?.shopName?.trim() || 'NovaMart';
   const deliveryInside =
     settings?.deliveryChargeInside !== undefined && settings?.deliveryChargeInside !== null
       ? Number(settings.deliveryChargeInside) === 0

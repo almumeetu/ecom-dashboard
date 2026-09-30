@@ -1,93 +1,90 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import {
-  HiShieldCheck,
-  HiTruck,
-  HiBadgeCheck,
-  HiOutlineSupport,
-  HiLocationMarker,
-  HiPhone,
-  HiMail,
-  HiCheckCircle,
-} from "react-icons/hi";
-import {
+  FiCheckCircle,
+  FiTruck,
+  FiShield,
+  FiPhone,
   FiArrowRight,
   FiShoppingBag,
-  FiLayers,
   FiRefreshCw,
-  FiClock,
-} from "react-icons/fi";
-import { FaWhatsapp, FaQuoteLeft } from "react-icons/fa6";
-import ScrollAnimate from "@/components/ui/scroll-animate";
+  FiAward,
+  FiPackage,
+  FiHeart,
+} from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa6';
+import { HiCheckCircle, HiShieldCheck, HiSparkles } from 'react-icons/hi';
+import ScrollAnimate from '@/components/ui/scroll-animate';
 
 export default function About() {
   const departments = [
     {
-      title: "Fresh Groceries & Farm Produce",
-      desc: "Cold-pressed oils, pure natural honey, unadulterated spices, organic grains, and seasonal harvests sourced directly from growers.",
-      image: "https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&auto=format&fit=crop&q=80",
-      tag: "Pantry & Organic",
-      link: "/products?search=grocery",
+      title: 'Skin Care & Beauty',
+      desc: 'Authentic serums, cleansers, dermatological moisturizers, and Korean beauty essentials.',
+      image: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80',
+      link: '/products?category=Skin+Care',
+      tag: '100% Authentic',
     },
     {
-      title: "Men's Fashion & Apparel",
-      desc: "Traditional panjabis, executive formal shirts, comfortable casual tees, denim, and modern everyday essentials.",
-      image: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=800&auto=format&fit=crop&q=80",
-      tag: "Apparel",
-      link: "/products?category=Men's+Fashion",
+      title: 'Digital Electronics',
+      desc: 'Smartwatches, wireless noise-cancelling earbuds, fast power banks, and certified accessories.',
+      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80',
+      link: '/products?category=Digital+Electronics',
+      tag: 'Tech Warranty',
     },
     {
-      title: "Women's Fashion & Lifestyle",
-      desc: "Contemporary ethnic wear, festive kurtis, comfortable casuals, and modern lifestyle fashion accessories.",
-      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop&q=80",
-      tag: "Fashion",
-      link: "/products?category=Women's+Fashion",
+      title: 'Perfumes & Fragrances',
+      desc: 'Designer Eau De Parfum, luxury Arabian ouds, and long-lasting artisanal perfume sets.',
+      image: 'https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80',
+      link: '/products?category=Perfume',
+      tag: 'Original Seal',
     },
     {
-      title: "Footwear & Daily Essentials",
-      desc: "Handcrafted genuine leather footwear, comfortable walking sneakers, casual sandals, and formal shoes.",
-      image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&auto=format&fit=crop&q=80",
-      tag: "Footwear",
-      link: "/products?category=Footwear",
+      title: 'Clothing & Fashion',
+      desc: 'Royal silk festive panjabis, combed Supima cotton tees, handloom sarees, and smart formalwear.',
+      image: 'https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80',
+      link: '/products?category=Clothing',
+      tag: 'Premium Fabric',
     },
     {
-      title: "Electronics, Audio & Smart Gadgets",
-      desc: "Smart wearables, high-fidelity wireless audio, fast-charging hubs, power accessories, and tech essentials.",
-      image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&auto=format&fit=crop&q=80",
-      tag: "Electronics",
-      link: "/products?category=Accessories",
+      title: 'Baby & Kids Care',
+      desc: 'Hypoallergenic diapers, BPA-free feeding bottles, organic cotton rompers, and pediatric care.',
+      image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80',
+      link: '/products?category=Baby+Products',
+      tag: 'Gentle & Safe',
     },
     {
-      title: "Home, Kitchen & Living Essentials",
-      desc: "Durable kitchenware, storage organizers, home utility goods, and essentials designed for modern family living.",
-      image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
-      tag: "Home & Living",
-      link: "/products",
+      title: 'Home & Living',
+      desc: 'Ultrasonic aroma diffusers, vacuum-insulated thermal tumblers, and granite cookware sets.',
+      image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80',
+      link: '/products?category=Home+%26+Living',
+      tag: 'Modern Living',
     },
   ];
 
   const commitments = [
     {
-      icon: HiShieldCheck,
-      title: "100% Genuine & Verified Quality",
-      desc: "Every product in our catalog is procured through verified channels and primary producers, guaranteeing absolute authenticity.",
+      icon: FiShield,
+      title: '100% Genuine Guaranteed',
+      desc: 'Zero tolerance for counterfeit items. Every product is sourced directly from authorized distributors and certified importers.',
     },
     {
-      icon: FiLayers,
-      title: "Direct Sourcing & Fair Pricing",
-      desc: "By bypassing traditional multi-tier broker networks, we connect growers and manufacturers directly to consumers at transparent prices.",
-    },
-    {
-      icon: HiTruck,
-      title: "Nationwide Doorstep Delivery",
-      desc: "Comprehensive logistics network servicing all 64 districts in Bangladesh with secure packaging and reliable tracking.",
+      icon: FiTruck,
+      title: 'Nationwide Delivery',
+      desc: 'Express 24-48 hours inside Dhaka (৳60) and 2-4 business days across all 64 districts in Bangladesh (৳120). Free on ৳1,999+.',
     },
     {
       icon: FiRefreshCw,
-      title: "Buyer Protection & 7-Day Returns",
-      desc: "Transparent return and exchange policies paired with secure payment gateways and Cash on Delivery options.",
+      title: '7-Day Easy Returns',
+      desc: 'Hassle-free replacement or refund policy if an item arrives damaged, defective, or incorrect upon delivery.',
+    },
+    {
+      icon: FiPhone,
+      title: 'Dedicated Helpline Support',
+      desc: 'Friendly customer service available via call and WhatsApp to assist with product inquiries and real-time order tracking.',
     },
   ];
 
@@ -104,19 +101,19 @@ export default function About() {
               <div className="lg:col-span-7 space-y-5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-800 text-xs font-bold tracking-wider uppercase">
                   <FiShoppingBag className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>About Trust Point Mart</span>
+                  <span>About NovaMart Bangladesh</span>
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-zinc-950 tracking-tight leading-tight">
-                  Direct Sourcing, Authentic Quality &amp; Transparent Commerce Across Bangladesh
+                  Authentic Quality &amp; Multi-Category Convenience Across Bangladesh
                 </h2>
 
                 <p className="text-sm sm:text-base text-zinc-700 leading-relaxed">
-                  <strong className="text-zinc-950 font-bold">Trust Point Mart</strong> is a dedicated multi-category online hypermarket and marketplace platform founded by entrepreneur <strong className="text-zinc-950 font-bold">Mohammad Abdullah</strong>, originating from <strong className="text-zinc-950 font-bold">Mohadevpur, Naogaon, Rajshahi Division</strong>.
+                  <strong className="text-zinc-950 font-bold">NovaMart</strong> is Bangladesh&apos;s premier multi-category online shopping platform, built with one clear mission: to provide families across Bangladesh with guaranteed genuine products, transparent pricing, and dependable doorstep delivery.
                 </p>
 
                 <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
-                  Our core mission is straightforward: to eliminate unnecessary middlemen markups, address counterfeit concerns in the retail market, and deliver genuine daily essentials—from pantry staples and farm-fresh produce to lifestyle fashion, footwear, and consumer goods—directly to families across all 64 districts.
+                  From international dermatological skin care and cutting-edge digital gadgets to luxury perfumes, contemporary lifestyle fashion, and baby care essentials—we eliminate counterfeit risks and unnecessary retail markups by partnering directly with verified brand distributors and authorized importers.
                 </p>
 
                 {/* 4 Feature Badges Grid */}
@@ -124,9 +121,9 @@ export default function About() {
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
                     <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Direct From Source</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Direct Brand Partnerships</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
-                        Connecting primary producers with households at fair prices.
+                        Authorized distribution channels with 100% authenticity guarantee.
                       </p>
                     </div>
                   </div>
@@ -134,9 +131,9 @@ export default function About() {
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
                     <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Verified Quality</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Quality Inspection</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
-                        Carefully checked and packaged before nationwide dispatch.
+                        Every order is sealed and verified before courier dispatch.
                       </p>
                     </div>
                   </div>
@@ -146,7 +143,7 @@ export default function About() {
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-zinc-900">All 64 Districts</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
-                        Reliable courier delivery with end-to-end tracking updates.
+                        Cash on Delivery available nationwide with live SMS tracking.
                       </p>
                     </div>
                   </div>
@@ -154,9 +151,9 @@ export default function About() {
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
                     <HiCheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Customer Support</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Customer Helpline</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
-                        Direct executive desk and 24/7 customer care helpline.
+                        Direct support team ready to assist via call and WhatsApp.
                       </p>
                     </div>
                   </div>
@@ -168,16 +165,16 @@ export default function About() {
                     href="/products"
                     className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-sm transition-all cursor-pointer"
                   >
-                    <span>Explore Products</span>
+                    <span>Browse Catalog</span>
                     <FiArrowRight className="w-4 h-4" />
                   </Link>
 
                   <a
-                    href="tel:01707819676"
+                    href="tel:01712345678"
                     className="inline-flex items-center gap-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-800 font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl border border-zinc-300 shadow-xs transition-all cursor-pointer"
                   >
-                    <HiPhone className="w-4 h-4 text-emerald-600" />
-                    <span>Executive Desk: 01707819676</span>
+                    <FiPhone className="w-4 h-4 text-emerald-600" />
+                    <span>Hotline: +880 1712-345678</span>
                   </a>
                 </div>
               </div>
@@ -187,7 +184,7 @@ export default function About() {
                 <div className="relative rounded-2xl overflow-hidden shadow-xl border border-zinc-200 bg-zinc-900 aspect-[4/5] sm:aspect-square lg:aspect-[4/5] group">
                   <img
                     src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000&auto=format&fit=crop&q=80"
-                    alt="Trust Point Mart Products & Operations"
+                    alt="NovaMart Fulfillment & Operations"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/90 via-zinc-950/20 to-transparent" />
@@ -196,17 +193,17 @@ export default function About() {
                   <div className="absolute bottom-5 left-5 right-5 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-white/40 shadow-lg">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center font-black text-lg shrink-0 shadow-xs">
-                        TP
+                        NM
                       </div>
                       <div>
                         <h4 className="text-sm font-bold text-zinc-950 leading-tight">
-                          Trust Point Mart
+                          NovaMart Bangladesh
                         </h4>
                         <p className="text-xs text-zinc-600 mt-0.5">
-                          Multi-Category E-Commerce &amp; Hypermarket
+                          Multi-Category E-Commerce Mart
                         </p>
                         <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
-                          Headquarters: Mohadevpur, Naogaon, Rajshahi Division
+                          Banani Corporate Hub, Dhaka-1213
                         </p>
                       </div>
                     </div>
@@ -219,126 +216,70 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── 2. Executive Leadership: Founder & CEO ── */}
-      <section className="py-14 sm:py-20 bg-[#0B0F17] text-white">
+      {/* ── 2. Operational Standard & Standards Strip ── */}
+      <section className="py-12 sm:py-16 bg-[#0B0F17] text-white">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <div className="bg-zinc-900/90 border border-white/10 rounded-2xl p-6 sm:p-10 shadow-xl">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="bg-zinc-900/90 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
-              {/* Portrait & Contact */}
-              <div className="lg:col-span-5 flex flex-col items-center">
-                <div className="relative w-full max-w-xs sm:max-w-sm rounded-2xl overflow-hidden bg-zinc-950 border border-white/20 aspect-square shadow-xl">
-                  <Image
-                    src="/images/team/Abdullah.jpg"
-                    alt="Mohammad Abdullah - Founder & CEO of Trust Point Mart"
-                    width={960}
-                    height={957}
-                    priority
-                    className="w-full h-full object-cover object-top"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent" />
-                  
-                  <div className="absolute bottom-4 left-4 right-4 text-left">
-                    <div className="text-white font-bold text-base sm:text-lg leading-snug">
-                      Mohammad Abdullah
-                    </div>
-                    <div className="text-emerald-400 text-xs font-medium flex items-center gap-1 mt-0.5">
-                      <HiLocationMarker className="w-3.5 h-3.5 shrink-0" />
-                      <span>Mohadevpur, Naogaon, Rajshahi Division</span>
-                    </div>
-                  </div>
+              <div className="lg:col-span-8 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                  <HiShieldCheck className="w-4 h-4 text-emerald-400" />
+                  <span>The NovaMart Promise</span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2.5 w-full max-w-xs sm:max-w-sm mt-4">
-                  <a
-                    href="tel:01707819676"
-                    className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all"
-                  >
-                    <HiPhone className="w-4 h-4 shrink-0" />
-                    <span>Call Desk</span>
-                  </a>
+                <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                  Authenticity First, Customer Always
+                </h3>
 
-                  <a
-                    href="https://wa.me/8801707819676?text=Hello%20Mohammad%20Abdullah%2C%20I%20am%20contacting%20you%20from%20Trust%20Point%20Mart."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white font-bold text-xs uppercase tracking-wider transition-all"
-                  >
-                    <FaWhatsapp className="w-4 h-4 shrink-0 text-white" />
-                    <span>WhatsApp</span>
-                  </a>
+                <p className="text-sm text-zinc-300 leading-relaxed">
+                  We believe that online shopping in Bangladesh deserves uncompromised confidence. When you shop on NovaMart, you receive genuine merchandise backed by verifiable manufacturer warranties, protective packaging, transparent return windows, and attentive customer service.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
+                    <h5 className="text-xs font-bold text-white uppercase tracking-wide">
+                      100% Genuine
+                    </h5>
+                    <p className="text-[11px] text-zinc-400 mt-0.5">
+                      Batch verified directly from official brand suppliers.
+                    </p>
+                  </div>
+
+                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
+                    <h5 className="text-xs font-bold text-white uppercase tracking-wide">
+                      Fair Pricing
+                    </h5>
+                    <p className="text-[11px] text-zinc-400 mt-0.5">
+                      No deceptive discounts or hidden checkout fees.
+                    </p>
+                  </div>
+
+                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
+                    <h5 className="text-xs font-bold text-white uppercase tracking-wide">
+                      7-Day Guarantee
+                    </h5>
+                    <p className="text-[11px] text-zinc-400 mt-0.5">
+                      Easy doorstep return and replacement assistance.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* Founder Profile & Governance */}
-              <div className="lg:col-span-7 space-y-5">
+              <div className="lg:col-span-4 flex flex-col items-center justify-center p-6 bg-emerald-950/30 border border-emerald-500/20 rounded-2xl text-center space-y-3">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center shadow-md">
+                  <FiPhone className="w-6 h-6" />
+                </div>
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-800/80 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
-                    <HiBadgeCheck className="w-4 h-4 text-emerald-400" />
-                    <span>Executive Leadership</span>
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    Mohammad Abdullah
-                  </h3>
-                  <p className="text-emerald-400 text-xs sm:text-sm font-medium mt-0.5">
-                    Founder &amp; Chief Executive Officer • Trust Point Mart
-                  </p>
+                  <h4 className="text-sm font-bold text-white">Need Support or Corporate Bulk Order?</h4>
+                  <p className="text-xs text-zinc-400 mt-0.5">Our team is available daily 9 AM – 10 PM</p>
                 </div>
-
-                {/* Quote Block */}
-                <div className="bg-zinc-950/60 border-l-4 border-emerald-500 rounded-r-xl p-4 sm:p-5">
-                  <FaQuoteLeft className="w-5 h-5 text-emerald-500/30 mb-1.5" />
-                  <p className="text-xs sm:text-sm text-zinc-200 italic leading-relaxed">
-                    &ldquo;Commerce is an enduring covenant of trust. Whether we are packing daily groceries, fresh regional harvests, or contemporary lifestyle fashion, our standard is absolute honesty. By connecting sources directly to homes, we ensure families across Bangladesh receive genuine products at fair prices.&rdquo;
-                  </p>
-                </div>
-
-                {/* 3 Core Points */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold mb-2">
-                      <HiShieldCheck className="w-4 h-4" />
-                    </div>
-                    <h5 className="text-xs font-bold text-white uppercase tracking-wide">
-                      Authenticity
-                    </h5>
-                    <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
-                      Zero tolerance for counterfeits or adulteration.
-                    </p>
-                  </div>
-
-                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold mb-2">
-                      <HiLocationMarker className="w-4 h-4" />
-                    </div>
-                    <h5 className="text-xs font-bold text-white uppercase tracking-wide">
-                      Northern Hub
-                    </h5>
-                    <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
-                      Headquarters in Mohadevpur, Naogaon.
-                    </p>
-                  </div>
-
-                  <div className="bg-zinc-800/60 border border-white/5 rounded-xl p-3.5">
-                    <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold mb-2">
-                      <HiPhone className="w-4 h-4" />
-                    </div>
-                    <h5 className="text-xs font-bold text-white uppercase tracking-wide">
-                      Direct Access
-                    </h5>
-                    <p className="text-[11px] text-zinc-400 mt-0.5 leading-relaxed">
-                      Direct desk: 01707819676 for corporate orders.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Contact desk details */}
-                <div className="pt-2 border-t border-white/10 flex flex-wrap items-center gap-4 text-xs text-zinc-300">
-                  <span>Founder Desk: <a href="tel:01707819676" className="text-white font-bold hover:text-emerald-400">01707819676</a></span>
-                  <span className="hidden sm:inline">•</span>
-                  <span>WhatsApp Direct: <a href="https://wa.me/8801707819676" className="text-emerald-400 font-semibold hover:underline">01707819676</a></span>
-                </div>
-
+                <a
+                  href="tel:01712345678"
+                  className="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-wider transition-colors"
+                >
+                  Call +880 1712-345678
+                </a>
               </div>
 
             </div>
@@ -358,7 +299,7 @@ export default function About() {
                 Explore Our Core Categories
               </h2>
               <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-                Curated everyday essentials, pantry goods, fashion, footwear, and consumer technology.
+                Curated skin care, digital electronics, luxury perfumes, fashion, and baby essentials.
               </p>
             </div>
             <Link
@@ -397,7 +338,7 @@ export default function About() {
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center justify-between text-xs font-bold text-emerald-600">
-                    <span>Browse Department</span>
+                    <span>Browse Category</span>
                     <FiArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
@@ -412,13 +353,13 @@ export default function About() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-widest text-emerald-600">
-              Why Trust Point Mart
+              Why NovaMart
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
               Our Core Service Commitments
             </h2>
             <p className="text-xs sm:text-sm text-zinc-500 mt-1.5 leading-relaxed">
-              Built on transparency, verified supply chains, and customer-first accountability.
+              Built on transparency, verified authenticity, and reliable customer service across Bangladesh.
             </p>
           </div>
 
@@ -444,117 +385,6 @@ export default function About() {
                 </div>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── 5. Operations & Customer Support Hub ── */}
-      <section className="py-14 sm:py-18 bg-[#101318] text-white">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            <div className="lg:col-span-6 space-y-4">
-              <span className="inline-block text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-800/80 px-3 py-1 rounded-full">
-                Operations &amp; Logistics
-              </span>
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight">
-                Central Operations in Mohadevpur, Naogaon
-              </h2>
-
-              <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                Trust Point Mart operates its central logistics and procurement hub in Mohadevpur, Naogaon, Rajshahi Division. From here, our team oversees direct sourcing partnerships with regional agricultural hubs, quality inspection, parcel packaging, and nationwide courier routing.
-              </p>
-
-              <div className="space-y-3 pt-2 text-xs text-zinc-300">
-                <div className="flex items-start gap-3">
-                  <HiLocationMarker className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white block font-semibold">Central Logistics Hub:</strong>
-                    <span>Mohadevpur, Naogaon, Rajshahi Division, Bangladesh</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <HiPhone className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-white block font-semibold">Direct Founder &amp; Executive Desk:</strong>
-                    <span>Call / WhatsApp: <a href="tel:01707819676" className="text-emerald-400 font-bold hover:underline">01707819676</a></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Support Schedule Card */}
-            <div className="lg:col-span-6 bg-zinc-900/90 border border-white/10 rounded-2xl p-6 sm:p-8 space-y-4">
-              <div className="flex items-center gap-2 text-sm font-bold text-white">
-                <FiClock className="w-4 h-4 text-emerald-400" />
-                <span>Ordering &amp; Customer Care Schedule</span>
-              </div>
-
-              <div className="space-y-2.5 text-xs text-zinc-300">
-                <div className="flex justify-between py-1.5 border-b border-white/10">
-                  <span>Saturday – Thursday (Support Desk)</span>
-                  <span className="font-semibold text-white">9:00 AM – 10:00 PM</span>
-                </div>
-                <div className="flex justify-between py-1.5 border-b border-white/10">
-                  <span>Friday (Customer Desk)</span>
-                  <span className="font-semibold text-white">2:00 PM – 10:00 PM</span>
-                </div>
-                <div className="flex justify-between py-1.5">
-                  <span>Online Store Ordering</span>
-                  <span className="font-semibold text-emerald-400">Open 24 Hours / 365 Days</span>
-                </div>
-              </div>
-
-              <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row gap-3">
-                <a
-                  href="https://wa.me/8801707819676?text=Hello%20Trust%20Point%20Mart%2C%20I%20would%20like%20to%20inquire%20about%20an%20order."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-center text-xs tracking-wider transition-colors cursor-pointer"
-                >
-                  WhatsApp Support
-                </a>
-                <Link
-                  href="/contact"
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-center text-xs tracking-wider transition-colors cursor-pointer"
-                >
-                  Contact Page
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* ── 6. Call to Action Banner ── */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-          <div className="bg-gradient-to-r from-emerald-900 to-zinc-950 rounded-2xl p-8 sm:p-12 text-white text-center shadow-lg border border-emerald-800/30">
-            <div className="max-w-xl mx-auto space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white leading-tight">
-                Shop with Confidence at Trust Point Mart
-              </h2>
-              <p className="text-xs sm:text-sm text-emerald-100/90 leading-relaxed">
-                Discover verified groceries, fashion, footwear, and consumer goods backed by our direct-sourcing guarantee.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
-                <Link
-                  href="/products"
-                  className="bg-white hover:bg-zinc-100 text-zinc-950 font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-xs transition-transform hover:scale-105 active:scale-95 cursor-pointer"
-                >
-                  Start Shopping
-                </Link>
-                <Link
-                  href="/contact"
-                  className="bg-emerald-950/70 hover:bg-emerald-950 text-white border border-emerald-400/30 font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl transition-colors cursor-pointer"
-                >
-                  Customer Support
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </section>

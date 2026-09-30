@@ -28,7 +28,7 @@ export default function CorporateFAQ() {
     },
     {
       q: 'Do you provide official Mushak-6.3 VAT Challans and Tax Invoices?',
-      a: 'Yes. Trust Point Mart operates under complete regulatory compliance in Bangladesh. Every corporate order receives an official VAT Challan (Mushak-6.3) and commercial tax invoice suitable for enterprise accounting and audits.',
+      a: 'Yes. NovaMart operates under complete regulatory compliance in Bangladesh. Every corporate order receives an official VAT Challan (Mushak-6.3) and commercial tax invoice suitable for enterprise accounting and audits.',
     },
     {
       q: 'Can we inspect a sample box before finalizing a large corporate order?',
@@ -103,14 +103,14 @@ export default function CorporateFAQ() {
 
             <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0 w-full md:w-auto">
               <a
-                href="tel:01707819676"
+                href="tel:01712345678"
                 className="px-6 py-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2"
               >
                 <FiPhone className="w-4 h-4" />
-                <span>Call Executive: 01707819676</span>
+                <span>Call Executive: 01712345678</span>
               </a>
               <a
-                href="https://wa.me/8801707819676?text=Hello%2C%20I%20would%20like%20to%20discuss%20a%20corporate%20order%20for%20our%20company."
+                href="https://wa.me/8801712345678?text=Hello%2C%20I%20would%20like%20to%20discuss%20a%20corporate%20order%20for%20our%20company."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2"

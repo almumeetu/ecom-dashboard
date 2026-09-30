@@ -92,7 +92,7 @@ export default function StorefrontFooter() {
         </div>
 
         <div className="mt-12 border-t border-neutral-300 pt-10 text-xs font-medium text-neutral-400">
-          © {new Date().getFullYear()} Trust Point Mart | All Rights Reserved. Founded by Mohammad Abdullah.
+          © {new Date().getFullYear()} NovaMart | All Rights Reserved. Founded by NovaMart Team.
         </div>
       </div>
     </footer>

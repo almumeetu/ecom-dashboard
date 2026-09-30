@@ -34,7 +34,7 @@ export default function LuxuryHero() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src="/images/icons/icon-3.svg" 
-            alt="Trust Point Crest" 
+            alt="NovaMart Crest" 
             className="w-12 h-14 object-contain opacity-90" 
           />
         </div>

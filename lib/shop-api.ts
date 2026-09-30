@@ -287,16 +287,74 @@ async function safeFetchJson<T>(url: string, fallback: T): Promise<T> {
   }
 }
 
-export function fetchShopBrands(): Promise<ShopBrand[]> {
-  return safeFetchJson<ShopBrand[]>(`${API_BASE_URL}/brands`, []);
+export const DEFAULT_NOVAMART_CATEGORIES: ShopCategory[] = [
+  { id: "cat-skincare", name: "Skin Care & Beauty", slug: "skin-care", imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-electronics", name: "Digital Electronics", slug: "digital-electronics", imageUrl: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-perfume", name: "Perfumes & Fragrances", slug: "perfume", imageUrl: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-clothing", name: "Clothing & Fashion", slug: "clothing", imageUrl: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-baby", name: "Baby & Kids Products", slug: "baby-products", imageUrl: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-home", name: "Home & Living", slug: "home-living", imageUrl: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80" },
+];
+
+export const DEFAULT_NOVAMART_SETTINGS: ShopSettings = {
+  id: "novamart-settings-default",
+  shopName: "NovaMart",
+  slogan: "YOUR PREMIER MULTI-CATEGORY ONLINE STORE",
+  contactNumber: [
+    { title: "Hotline Support", value: "+880 1712-345678" },
+    { title: "Customer Care", value: "01712345678" },
+  ],
+  email: [
+    { title: "Customer Support", value: "support@novamart.com.bd" },
+    { title: "Corporate Inquiries", value: "sales@novamart.com.bd" },
+  ],
+  socialContact: {
+    whatsapp: "8801712345678",
+    facebook: "https://facebook.com/novamart.bd",
+    instagram: "https://instagram.com/novamart.bd",
+    youtube: "https://youtube.com/@novamartbd",
+  },
+  currency: "BDT",
+  language: "en",
+  deliveryChargeInside: 60,
+  deliveryChargeOutside: 120,
+  deliveryChargeNearCity: 80,
+  branchName: "NovaMart Central Flagship & Fulfillment",
+  branchAddress: "Level 4, Nova Tower, Plot 18, Road 11, Banani, Dhaka-1213, Bangladesh",
+  copyrightYear: "2026",
+  parentCompany: "NovaMart Retail Bangladesh Limited",
+  parentCompanyLink: "https://novamart.com.bd",
+  logo: "/images/logo/novamart-logo-main.png",
+  isTopBarVisible: true,
+  hideOutOfStock: false,
+};
+
+export const DEFAULT_NOVAMART_BRANDS: ShopBrand[] = [
+  { id: "b-apple", name: "Apple", slug: "apple" },
+  { id: "b-samsung", name: "Samsung", slug: "samsung" },
+  { id: "b-dior", name: "Dior", slug: "dior" },
+  { id: "b-chanel", name: "Chanel", slug: "chanel" },
+  { id: "b-theordinary", name: "The Ordinary", slug: "the-ordinary" },
+  { id: "b-cerave", name: "CeraVe", slug: "cerave" },
+  { id: "b-pampers", name: "Pampers", slug: "pampers" },
+  { id: "b-philips", name: "Philips Avent", slug: "philips-avent" },
+  { id: "b-anker", name: "Anker", slug: "anker" },
+  { id: "b-sony", name: "Sony", slug: "sony" },
+];
+
+export async function fetchShopBrands(): Promise<ShopBrand[]> {
+  const result = await safeFetchJson<ShopBrand[]>(`${API_BASE_URL}/brands`, []);
+  return result && result.length > 0 ? result : DEFAULT_NOVAMART_BRANDS;
 }
 
-export function fetchShopCategories(): Promise<ShopCategory[]> {
-  return safeFetchJson<ShopCategory[]>(`${API_BASE_URL}/category`, []);
+export async function fetchShopCategories(): Promise<ShopCategory[]> {
+  const result = await safeFetchJson<ShopCategory[]>(`${API_BASE_URL}/category`, []);
+  return result && result.length > 0 ? result : DEFAULT_NOVAMART_CATEGORIES;
 }
 
-export function fetchShopSettings(): Promise<ShopSettings | null> {
-  return safeFetchJson<ShopSettings | null>(`${API_BASE_URL}/settings`, null);
+export async function fetchShopSettings(): Promise<ShopSettings | null> {
+  const result = await safeFetchJson<ShopSettings | null>(`${API_BASE_URL}/settings`, null);
+  return result ?? DEFAULT_NOVAMART_SETTINGS;
 }
 
 export function fetchShopTags(): Promise<any[]> {
@@ -326,8 +384,31 @@ export interface StorePolicies {
 }
 
 /** Fetches all policies from the API. Safe – never throws; returns null on failure. */
-export function fetchStorePolicies(): Promise<StorePolicies | null> {
-  return safeFetchJson<StorePolicies | null>(`${API_BASE_URL}/policies`, null);
+export async function fetchStorePolicies(): Promise<StorePolicies | null> {
+  const result = await safeFetchJson<StorePolicies | null>(`${API_BASE_URL}/policies`, null);
+  if (result) return result;
+  return {
+    delivery: {
+      title: "Nationwide Doorstep Delivery",
+      content: "Inside Dhaka Metropolitan: ৳60 (24 to 48 hours). All other 63 districts across Bangladesh: ৳120 (2 to 4 days). Free delivery on orders over ৳1,999. Cash on Delivery is supported nationwide.",
+    },
+    return: {
+      title: "7-Day Return & Replacement Policy",
+      content: "If your item is damaged, defective, or incorrect upon delivery, you may request a free return or replacement within 7 days. Customer helpline: +880 1712-345678.",
+    },
+    refund: {
+      title: "Instant Refund Guarantee",
+      content: "Refunds for returned or canceled orders are processed within 24 to 48 business hours via your original payment method (bKash, Nagad, Card, or Bank transfer).",
+    },
+    privacy: {
+      title: "Data Privacy & Security",
+      content: "NovaMart respects your privacy and utilizes SSL bank-grade encryption to protect customer payment and personal information.",
+    },
+    terms: {
+      title: "Terms & Conditions",
+      content: "All purchases made on NovaMart Bangladesh are backed by authentic brand guarantees, valid commercial VAT invoices, and consumer protection regulations.",
+    },
+  };
 }
 
 /** Fetches all active campaigns */

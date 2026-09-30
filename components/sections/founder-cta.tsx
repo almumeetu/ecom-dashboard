@@ -24,17 +24,17 @@ export default function FounderCta() {
     });
   }, []);
 
-  const shopName = settings?.shopName?.trim() || "Trust Point Mart";
+  const shopName = settings?.shopName?.trim() || "NovaMart";
   const contactEntries = parseContactEntries(settings?.contactNumber);
-  const primaryPhone = contactEntries[0]?.value || "01707819676";
-  const cleanPhone = primaryPhone.replace(/[^\d+]/g, "") || "01707819676";
+  const primaryPhone = contactEntries[0]?.value || "01712345678";
+  const cleanPhone = primaryPhone.replace(/[^\d+]/g, "") || "01712345678";
   const rawWhatsapp = settings?.socialContact?.whatsapp || primaryPhone;
-  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, "") || "8801707819676";
+  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, "") || "8801712345678";
   const fullWhatsapp = whatsappNumber.startsWith("88")
     ? whatsappNumber
     : `88${whatsappNumber.replace(/^0+/, "")}`;
   const address =
-    settings?.branchAddress?.trim() || "Mohadevpur, Naogaon • Rajshahi Division, Bangladesh";
+    settings?.branchAddress?.trim() || "Banani, Dhaka • Rajshahi Division, Bangladesh";
 
   return (
     <section className="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-[#0A0D12] via-[#0F141C] to-[#141A23] overflow-hidden relative">
@@ -51,7 +51,7 @@ export default function FounderCta() {
             <div className="lg:col-span-5 relative h-[320px] sm:h-[400px] md:h-[460px] lg:h-auto lg:min-h-[540px]">
               <Image
                 src="/images/team/Abdullah.jpg"
-                alt={`Mohammad Abdullah — Founder & CEO of ${shopName}`}
+                alt={`NovaMart Team — Founder & CEO of ${shopName}`}
                 fill
                 priority
                 className="object-cover object-top"
@@ -79,7 +79,7 @@ export default function FounderCta() {
                     <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-emerald-400/60 shrink-0">
                       <Image
                         src="/images/team/abdullah-2.jpg"
-                        alt="Mohammad Abdullah"
+                        alt="NovaMart Team"
                         width={40}
                         height={40}
                         className="object-cover w-full h-full"
@@ -87,7 +87,7 @@ export default function FounderCta() {
                     </div>
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-white text-xs sm:text-sm font-bold truncate">Mohammad Abdullah</span>
+                        <span className="text-white text-xs sm:text-sm font-bold truncate">NovaMart Team</span>
                         <LuBadgeCheck className="w-4 h-4 text-emerald-400 shrink-0" />
                       </div>
                       <p className="text-zinc-300 text-[11px] truncate">Founder & CEO, {shopName}</p>
@@ -133,14 +133,14 @@ export default function FounderCta() {
                 <div className="relative w-13 h-13 rounded-full overflow-hidden border-2 border-emerald-500/40 shadow-lg shadow-emerald-500/20 shrink-0 ring-4 ring-emerald-500/10">
                   <Image
                     src="/images/team/abdullah-2.jpg"
-                    alt="Mohammad Abdullah — Founder & CEO"
+                    alt="NovaMart Team — Founder & CEO"
                     fill
                     className="object-cover"
                   />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <span className="text-white font-bold text-base">Mohammad Abdullah</span>
+                    <span className="text-white font-bold text-base">NovaMart Team</span>
                     <LuBadgeCheck className="w-4.5 h-4.5 text-blue-400 shrink-0" />
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-semibold border border-emerald-500/25">
                       Verified Founder

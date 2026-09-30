@@ -462,10 +462,10 @@ export default function CartPage() {
                   Need Help Finding Something?
                 </p>
                 <a
-                  href="tel:01707819676"
+                  href="tel:01712345678"
                   className="text-sm font-extrabold text-zinc-900 hover:text-emerald-600 transition-colors"
                 >
-                  Call Support: 01707819676 (Central Hub)
+                  Call Support: 01712345678 (Central Hub)
                 </a>
               </div>
             </div>
@@ -1062,13 +1062,13 @@ export default function CartPage() {
                 <div className="flex items-center gap-2">
                   <IoCallOutline className="w-4 h-4 text-emerald-600 shrink-0" />
                   <span>
-                    Support: <strong className="text-zinc-900">01707819676</strong> (9 AM – 9 PM)
+                    Support: <strong className="text-zinc-900">01712345678</strong> (9 AM – 9 PM)
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <FaWhatsapp className="w-4 h-4 text-green-600 shrink-0" />
                   <a
-                    href="https://wa.me/8801707819676"
+                    href="https://wa.me/8801712345678"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-700 hover:underline font-semibold"

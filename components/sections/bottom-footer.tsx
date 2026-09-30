@@ -99,7 +99,7 @@ export default async function Bottomfooter() {
   const displaySocials = activeSocials.length > 0 ? activeSocials : (["facebook", "instagram", "youtube"] as SocialKey[]);
 
   // Dynamic Shop & Company Metadata from Admin Settings
-  const shopName = settings?.shopName?.trim() || "Trust Point Mart";
+  const shopName = settings?.shopName?.trim() || "NovaMart";
   const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
   const parentCompany = settings?.parentCompany?.trim();
   const parentCompanyLink = settings?.parentCompanyLink?.trim();

@@ -12,7 +12,7 @@ export default function Invitation() {
     },
     {
       icon: "/images/invitation/Invitation-3.svg",
-      description: "Refined Craft — Curated with the uncompromising quality standards of Trust Point Mart",
+      description: "Refined Craft — Curated with the uncompromising quality standards of NovaMart",
     },
   ];
 

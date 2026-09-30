@@ -10,8 +10,8 @@ import ScrollAnimate from '@/components/ui/scroll-animate';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Corporate & Wholesale Orders | Trust Point Marketplace',
-  description: 'Custom corporate gifting, bulk wholesale orders, seasonal Rajshahi harvest crates, and employee celebration packages across all categories with nationwide dispatch.',
+  title: 'Corporate & Wholesale Orders | NovaMart Bangladesh',
+  description: 'Custom corporate gifting, bulk wholesale orders, employee celebration packages, and business supply across all categories with nationwide dispatch from NovaMart.',
 };
 
 export default function CorporateOrderPage() {

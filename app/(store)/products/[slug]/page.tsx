@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!product) {
     return {
-      title: "Product Not Found | Trust Point Marketplace",
+      title: "Product Not Found | NovaMart",
     };
   }
 
@@ -26,12 +26,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : undefined;
 
   return {
-    title: `${product.metaTitle ?? product.name} | Trust Point Marketplace`,
+    title: `${product.metaTitle ?? product.name} | NovaMart`,
     description:
       product.metaDescription ??
       product.shortDescription ??
       product.description ??
-      `Shop authentic ${product.name} with express delivery and verified buyer protection from Trust Point.`,
+      `Shop authentic ${product.name} with express delivery and verified buyer protection from NovaMart.`,
     keywords: product.metaKeywords ?? undefined,
     openGraph: {
       title: product.metaTitle ?? product.name,

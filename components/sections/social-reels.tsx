@@ -63,7 +63,7 @@ export default function SocialReels() {
           </h2>
 
           <p className="max-w-2xl text-zinc-400 text-sm sm:text-base leading-relaxed">
-            Stay connected with Trust Point Mart — watch product unboxings, fresh arrivals, behind-the-scenes looks, and customer stories from our Facebook page.
+            Stay connected with NovaMart — watch product unboxings, fresh arrivals, behind-the-scenes looks, and customer stories from our Facebook page.
           </p>
         </div>
 

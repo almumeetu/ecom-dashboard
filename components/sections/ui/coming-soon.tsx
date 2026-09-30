@@ -27,7 +27,7 @@ export default function ComingSoon({ title, subtitle }: ComingSoonProps) {
         <div className="w-16 h-20">
           <Image
             src="/images/icons/icon-3.svg"
-            alt="Trust Point Crest"
+            alt="NovaMart Crest"
             width={64}
             height={80}
             className="object-contain opacity-80"

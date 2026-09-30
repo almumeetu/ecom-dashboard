@@ -14,13 +14,13 @@ import { useWishlist } from "@/app/_providers/wishlist-provider";
 import { fetchShopProducts, fetchShopCategories, type ShopProduct, type ShopCategory } from "@/lib/shop-api";
 import Logo from "@/components/ui/logo";
 
-const sylhetiTeaItems = [
-  { label: "Fresh Groceries", href: "/products?search=grocery" },
-  { label: "Women's Fashion", href: "/products?category=Women's+Fashion" },
-  { label: "Men's Fashion", href: "/products?category=Men's+Fashion" },
-  { label: "Footwear & Shoes", href: "/products?category=Footwear" },
-  { label: "Bags & Accessories", href: "/products?category=Accessories" },
-  { label: "Artisan Food & Drinks", href: "/products?search=food" },
+const novaMartCategoryItems = [
+  { label: "Skin Care & Beauty", href: "/products?category=Skin+Care" },
+  { label: "Digital Electronics", href: "/products?category=Digital+Electronics" },
+  { label: "Perfumes & Fragrances", href: "/products?category=Perfume" },
+  { label: "Clothing & Fashion", href: "/products?category=Clothing" },
+  { label: "Baby & Kids Products", href: "/products?category=Baby+Products" },
+  { label: "Home & Living", href: "/products?category=Home+%26+Living" },
 ];
 
 export default function Header() {
@@ -55,9 +55,9 @@ export default function Header() {
 
   const dynamicNavItems = useMemo(() => {
     const top3 = (categories.length > 0 ? categories : [
-      { id: 'cat-grocery', name: 'Groceries', slug: 'groceries' },
-      { id: 'cat-fashion', name: "Fashion", slug: 'fashion' },
-      { id: 'cat-footwear', name: 'Footwear', slug: 'footwear' },
+      { id: 'cat-skincare', name: 'Skin Care', slug: 'skin-care' },
+      { id: 'cat-electronics', name: "Electronics", slug: 'digital-electronics' },
+      { id: 'cat-perfume', name: 'Perfume', slug: 'perfume' },
     ]).slice(0, 3);
 
     return [
@@ -213,7 +213,7 @@ export default function Header() {
               <button
                 type="submit"
                 aria-label="Submit Search"
-                className="absolute right-1.5 h-8 px-4.5 rounded-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-xs font-semibold tracking-wide flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
+                className="absolute right-1.5 h-8 px-4.5 rounded-full bg-[#E87A18] hover:bg-[#D46B0E] active:scale-95 text-white text-xs font-bold tracking-wide flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer"
               >
                 <span>Search</span>
               </button>
@@ -287,54 +287,36 @@ export default function Header() {
             )}
           </div>
 
-          {/* Right Actions */}
-          <div className="flex items-center gap-2 shrink-0">
+          {/* Right Actions matching Screenshot */}
+          <div className="flex items-center gap-3.5 xl:gap-5 shrink-0 text-xs font-semibold text-zinc-700">
             <Link
-              href="/profile?tab=track"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-zinc-600 hover:text-emerald-600 hover:bg-zinc-50 transition-colors rounded-xl text-xs font-semibold"
+              href="/products"
+              className="hover:text-emerald-700 transition-colors hidden sm:block py-1"
             >
-              <LuTruck className="w-4 h-4 text-emerald-500" />
-              <span>Track Order</span>
+              Shop
             </Link>
 
             <Link
-              href="/wishlist"
-              className="relative flex flex-col items-center justify-center px-3 py-1.5 text-zinc-600 hover:text-emerald-600 hover:bg-zinc-50 transition-colors rounded-xl"
-              aria-label="Wishlist"
+              href="/profile?tab=track"
+              className="hover:text-emerald-700 transition-colors hidden md:block py-1"
             >
-              <IoHeartOutline className="w-5 h-5" />
-              <span className="text-[10px] mt-0.5 font-medium">Wishlist</span>
-              {mounted && wishlistItemCount > 0 && (
-                <span className="absolute top-0.5 right-1.5 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-emerald-500 text-[9px] font-bold text-white shadow-2xs">
-                  {wishlistItemCount}
-                </span>
-              )}
+              Track Order
             </Link>
 
             <Link
               href="/cart"
-              className="relative flex flex-col items-center justify-center px-3 py-1.5 text-zinc-600 hover:text-emerald-600 hover:bg-zinc-50 transition-colors rounded-xl"
-              aria-label="Shopping Cart"
+              className="hover:text-emerald-700 transition-colors py-1"
             >
-              <LuShoppingBag className="w-5 h-5" />
-              <span className="text-[10px] mt-0.5 font-medium">Cart</span>
-              {mounted && cartItemCount > 0 && (
-                <span className="absolute top-0.5 right-1.5 flex items-center justify-center min-w-[16px] h-4 px-1 rounded-full bg-emerald-500 text-[9px] font-bold text-white shadow-2xs">
-                  {cartItemCount}
-                </span>
-              )}
+              My Cart
             </Link>
-
-            <div className="w-px h-6 bg-zinc-200 mx-1" />
 
             {!mounted || !isAuthenticated ? (
               <button
+                type="button"
                 onClick={() => setShowAuthModal(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 hover:bg-emerald-600 text-white text-xs font-semibold transition-all shadow-2xs cursor-pointer"
-                aria-label="Login or Sign Up"
+                className="hover:text-emerald-700 transition-colors cursor-pointer py-1"
               >
-                <LuUser className="w-4 h-4" />
-                <span>Sign In</span>
+                Customer Login
               </button>
             ) : (
               <div className="relative" ref={desktopDropdownRef}>
@@ -466,10 +448,10 @@ export default function Header() {
                         Customer Support
                       </p>
                       <a
-                        href="tel:01707819676"
+                        href="tel:01712345678"
                         className="text-xs font-bold text-emerald-600 hover:underline"
                       >
-                        01707819676
+                        +880 1712-345678
                       </a>
                     </div>
 
@@ -490,6 +472,20 @@ export default function Header() {
                 )}
               </div>
             )}
+
+            {/* Cart Icon with Counter */}
+            <Link
+              href="/cart"
+              className="relative p-2 rounded-xl bg-zinc-100 hover:bg-emerald-50 text-zinc-800 hover:text-emerald-700 transition-colors"
+              aria-label="Shopping Cart"
+            >
+              <LuShoppingBag className="w-5 h-5" />
+              {mounted && cartItemCount > 0 && (
+                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-4.5 px-1 rounded-full bg-[#E87A18] text-[10px] font-black text-white shadow-2xs">
+                  {cartItemCount}
+                </span>
+              )}
+            </Link>
           </div>
         </div>
       </div>
@@ -508,7 +504,7 @@ export default function Header() {
           <div className="flex items-center shrink-0">
             <MobileMenu
               navItems={dynamicNavItems}
-              sylhetiTeaItems={sylhetiTeaItems}
+              sylhetiTeaItems={novaMartCategoryItems}
             />
           </div>
 

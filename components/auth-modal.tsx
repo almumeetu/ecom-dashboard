@@ -185,14 +185,14 @@ export default function AuthModal() {
               <div className="relative w-10 h-10 rounded-full overflow-hidden border border-emerald-500/40 ring-2 ring-emerald-500/20 shrink-0">
                 <Image
                   src="/images/team/Abdullah.jpg"
-                  alt="Mohammad Abdullah"
+                  alt="NovaMart Team"
                   width={40}
                   height={40}
                   className="w-full h-full object-cover object-top"
                 />
               </div>
               <div className="text-[11px] leading-tight">
-                <div className="text-white font-bold">Mohammad Abdullah</div>
+                <div className="text-white font-bold">NovaMart Team</div>
                 <div className="text-[10px] text-emerald-400 font-medium">Founder &amp; CEO</div>
               </div>
             </div>
@@ -201,8 +201,8 @@ export default function AuthModal() {
                 <FiMapPin className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span>Mohadevpur</span>
               </div>
-              <a href="tel:01707819676" className="text-zinc-300 hover:text-emerald-400 font-semibold block mt-0.5">
-                01707819676
+              <a href="tel:01712345678" className="text-zinc-300 hover:text-emerald-400 font-semibold block mt-0.5">
+                01712345678
               </a>
             </div>
           </div>
@@ -350,7 +350,7 @@ export default function AuthModal() {
                   />
                   <span className="text-zinc-600">Remember login</span>
                 </label>
-                <a href="tel:01707819676" className="text-emerald-600 hover:underline">
+                <a href="tel:01712345678" className="text-emerald-600 hover:underline">
                   Need help?
                 </a>
               </div>

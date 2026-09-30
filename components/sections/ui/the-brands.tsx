@@ -17,11 +17,11 @@ export default function TheBrands() {
               </h2>
               
               <p className="mt-6 font-['Bembo_Std'] text-lg font-normal leading-6">
-                Trust Point Mart is an innovative multi-category hypermarket and marketplace platform founded by entrepreneur <span className="italic">Mohammad Abdullah</span>. Originating from Mohadevpur, Naogaon, Rajshahi Division, we bridge the gap between primary producers, agro-farms, and consumer households with authentic goods, fair pricing, and transparent standards.
+                NovaMart is an innovative multi-category hypermarket and marketplace platform founded by entrepreneur <span className="italic">NovaMart Team</span>. Originating from Banani, Dhaka, Rajshahi Division, we bridge the gap between primary producers, agro-farms, and consumer households with authentic goods, fair pricing, and transparent standards.
               </p>
               
               <p className="mt-4 font-['Bembo_Std'] text-lg font-normal">
-                No one delivers that kind of multi-category shopping experience with such care and authenticity quite like Trust Point Mart.
+                No one delivers that kind of multi-category shopping experience with such care and authenticity quite like NovaMart.
               </p>
 
               {/* Two Small Images with Our Promise */}
@@ -69,12 +69,12 @@ export default function TheBrands() {
           <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div>
               <p className="font-['Bembo_Std'] text-lg font-normal leading-6">
-                Trust Point Mart presents an exceptional vision for digital commerce in Bangladesh. Serving the growing demand for authentic groceries, lifestyle fashion, and modern tech, Trust Point Mart operates a cost-efficient supply chain directly from farmgate and verified manufacturers.
+                NovaMart presents an exceptional vision for digital commerce in Bangladesh. Serving the growing demand for authentic groceries, lifestyle fashion, and modern tech, NovaMart operates a cost-efficient supply chain directly from farmgate and verified manufacturers.
               </p>
             </div>
             <div>
               <p className="font-['Bembo_Std'] text-lg font-normal leading-6">
-                Trust Point Mart offers depth of quality and verified authenticity across all departments. With expanding logistics hubs and nationwide delivery across all 64 districts, Trust Point Mart is poised for sustainable growth, ethical commerce, and trusted customer relationships.
+                NovaMart offers depth of quality and verified authenticity across all departments. With expanding logistics hubs and nationwide delivery across all 64 districts, NovaMart is poised for sustainable growth, ethical commerce, and trusted customer relationships.
               </p>
             </div>
           </div>

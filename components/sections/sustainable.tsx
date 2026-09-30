@@ -36,7 +36,7 @@ export default function Sustainable() {
           </h3>
 
           <p className="mt-8 max-w-4xl font-['Bembo_Std'] text-sm leading-6 md:text-lg">
-            Trust Point Mart has built a sustainable, transparent and ethical multi-category sourcing supply chain. We work directly with farmers, agro-growers, certified manufacturers, and local craftsmen to ensure due diligence and fair pay across our network. Every purchase on Trust Point Mart directly empowers ethical commerce and dignified livelihoods.
+            NovaMart has built a sustainable, transparent and ethical multi-category sourcing supply chain. We work directly with farmers, agro-growers, certified manufacturers, and local craftsmen to ensure due diligence and fair pay across our network. Every purchase on NovaMart directly empowers ethical commerce and dignified livelihoods.
           </p>
         </div>
       </div>

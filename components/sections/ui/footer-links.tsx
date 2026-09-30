@@ -37,14 +37,14 @@ export default async function FooterLinks() {
           <div className="flex items-center gap-1 sm:gap-1.5 text-xs text-white md:w-[160px] md:justify-end">
             <IoLocationOutline className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0 text-white" />
             <span className="font-['Gotham'] text-[11px] sm:text-xs whitespace-nowrap">
-              Pan Pacific Sonargaon
+              Banani, Dhaka
             </span>
           </div>
         </div>
 
         <div className="text-center">
           <p className="font-['Gotham'] text-white text-xs">
-            © {new Date().getFullYear()} Trust Point (ট্রাস্ট পয়েন্ট). All rights reserved.
+            © {new Date().getFullYear()} NovaMart (নোভামার্ট). All rights reserved.
           </p>
         </div>
       </div>

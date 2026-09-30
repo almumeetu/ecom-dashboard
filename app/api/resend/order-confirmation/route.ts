@@ -32,12 +32,12 @@ export async function POST(request: Request) {
         `).join('');
 
         const { error } = await resend.emails.send({
-            from: `Trust Point Marketplace <${fromEmail}>`,
+            from: `NovaMart <${fromEmail}>`,
             to: [toEmail],
-            subject: 'New Order Placed From Trust Point Marketplace',
+            subject: 'New Order Placed From NovaMart',
             html: `
                 <div style="font-family: sans-serif; line-height: 1.6; color: #333;">
-                    <h1 style="color: #000;">New Order Placed From Trust Point Marketplace</h1>
+                    <h1 style="color: #000;">New Order Placed From NovaMart</h1>
                     <p>Someone just placed a new order!</p>     
                     <h2 style="color: #000; font-size: 16px;">Order Summary</h2>
                     <table style="border-collapse: collapse; width: 100%;">

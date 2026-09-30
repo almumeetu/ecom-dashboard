@@ -45,7 +45,7 @@ export default function CharterHero() {
         <ScrollAnimate variant="fade-in-up">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 backdrop-blur-md">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Trust Point Marketplace Ethical Standards
+            NovaMart Ethical Standards
           </div>
         </ScrollAnimate>
 

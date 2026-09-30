@@ -189,7 +189,7 @@ export default function Testimonial() {
         {/* Trust badge */}
         <div className="flex items-center justify-center gap-2 mt-8 text-xs text-zinc-400">
           <LuShieldCheck className="w-4 h-4 text-emerald-500" />
-          <span>All reviews are from verified purchasers on Trust Point Mart</span>
+          <span>All reviews are from verified purchasers on NovaMart</span>
         </div>
       </div>
     </section>

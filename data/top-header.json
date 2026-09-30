@@ -2,16 +2,16 @@
   "help": {
     "text": "Help & Support",
     "phone": {
-      "full": "+880 1707-819676",
-      "short": "01707819676",
-      "label": "Executive Support"
+      "full": "+880 1712-345678",
+      "short": "01712345678",
+      "label": "Hotline Support"
     }
   },
   "slider": {
     "slides": [
-      "🛒 Welcome to Trust Point Mart — Groceries, Fashion, Tech & Daily Essentials!",
-      "⚡ Express Nationwide Delivery to all 64 Districts in Bangladesh | 100% Genuine Guaranteed",
-      "⭐ Direct Sourcing with Zero Middleman Inflation • Executive Desk: 01707819676 • 24/7 Support"
+      "🛒 Welcome to NovaMart — Skin Care, Digital Electronics, Perfumes, Fashion & Baby Essentials!",
+      "⚡ Express Delivery in Dhaka (৳60) & Nationwide to All 64 Districts (৳120) | Cash on Delivery Available",
+      "✨ 100% Original & Authentic Products Guaranteed • Hotline: 01712-345678"
     ],
     "autoplayDelay": 3500,
     "speed": 600

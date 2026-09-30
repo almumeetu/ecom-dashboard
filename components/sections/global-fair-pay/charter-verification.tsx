@@ -14,7 +14,7 @@ export default function CharterVerification() {
     {
       step: "01",
       title: "Pre-Listing Supplier Audit",
-      desc: "Before any merchant, manufacturer, or farming cooperative lists products on Trust Point Mart, they submit verified payroll documentation and agree to our Fair Wage Protocol.",
+      desc: "Before any merchant, manufacturer, or farming cooperative lists products on NovaMart, they submit verified payroll documentation and agree to our Fair Wage Protocol.",
       icon: HiSearch,
     },
     {

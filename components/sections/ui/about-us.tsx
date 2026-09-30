@@ -33,7 +33,7 @@ export default function AboutUs() {
                 </p>
               </div>
               <p className="text-white text-3xl sm:text-4xl font-normal font-['Bembo_Std'] leading-9 sm:leading-10">
-                Founded by entrepreneur Mohammad Abdullah in Mohadevpur, Naogaon, Rajshahi Division, Trust Point Mart brings verified authenticity to Bangladesh&apos;s e-commerce landscape. Sourcing directly from regional farms, artisan clusters, and official brand distributors, we guarantee 100% genuine products with fair pricing and nationwide doorstep delivery.
+                Founded by entrepreneur NovaMart Team in Banani, Dhaka, Rajshahi Division, NovaMart brings verified authenticity to Bangladesh&apos;s e-commerce landscape. Sourcing directly from regional farms, artisan clusters, and official brand distributors, we guarantee 100% genuine products with fair pricing and nationwide doorstep delivery.
               </p>
             </div>
 
@@ -42,7 +42,7 @@ export default function AboutUs() {
               <div className="relative w-full max-w-[450px] aspect-square overflow-hidden border border-stone-800 shadow-2xl">
                 <Image
                   src="/images/about/about.png"
-                  alt="Trust Point Mart Operations"
+                  alt="NovaMart Operations"
                   fill
                   className="object-cover hover:scale-105 transition-transform duration-700"
                 />

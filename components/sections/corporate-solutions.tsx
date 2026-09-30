@@ -19,7 +19,7 @@ export default function CorporateSolutions() {
     {
       title: 'Seasonal Rajshahi Mango Crates',
       subtitle: 'Fresh Harvest Corporate Gifting',
-      desc: 'Direct from Mohadevpur, Naogaon and Rajshahi orchards. Chemical-free export quality Khirsapat, Langra, and Amrapali mangoes in branded ventilated gift crates.',
+      desc: 'Direct from Banani, Dhaka and Rajshahi orchards. Chemical-free export quality Khirsapat, Langra, and Amrapali mangoes in branded ventilated gift crates.',
       image: 'https://images.unsplash.com/photo-1553279768-865429fa0078?w=800&auto=format&fit=crop&q=80',
       tag: 'Seasonal Exclusive',
       benefits: ['100% Zero-carbide guaranteed', 'Custom engraved wooden crates', 'Overnight direct orchard delivery'],
@@ -79,7 +79,7 @@ export default function CorporateSolutions() {
               Curated Corporate Solutions
             </h2>
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Whether you are rewarding 50 executives, sending 2,000 Eid gift hampers, or sourcing wholesale inventory, Trust Point Mart delivers uncompromising quality and verified origin.
+              Whether you are rewarding 50 executives, sending 2,000 Eid gift hampers, or sourcing wholesale inventory, NovaMart delivers uncompromising quality and verified origin.
             </p>
           </div>
         </ScrollAnimate>

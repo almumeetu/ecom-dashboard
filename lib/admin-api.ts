@@ -431,6 +431,9 @@ export type Campaign = {
   sectionId: string;
   section?: CampaignSection;
   images?: CampaignImage[];
+  badge?: string;
+  linkUrl?: string;
+  ctaText?: string;
   createdAt?: string;
   updatedAt?: string;
 };
@@ -636,7 +639,7 @@ export type ReportOverview = {
   purchases: ReportOverviewPurchases;
 };
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api/v1";
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api/v1";
 
 export function isAllowedAdminRole(role: unknown): boolean {
   if (!role) return false;

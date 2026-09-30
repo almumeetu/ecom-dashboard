@@ -80,7 +80,7 @@ function ProfilePageContent() {
             <TrackOrderView />
           </div>
           <div className="flex items-center justify-between p-4 bg-emerald-50/70 border border-emerald-200/80 rounded-2xl text-xs">
-            <span className="text-zinc-600 font-medium">Already have an account with Trust Point?</span>
+            <span className="text-zinc-600 font-medium">Already have an account with NovaMart?</span>
             <button
               onClick={() => {
                 setActiveTab("details");
@@ -180,8 +180,8 @@ function ProfilePageContent() {
               <div className="mt-6 text-xs text-zinc-500 flex items-center justify-center gap-2">
                 <FiPhone className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Need assistance? Call Support:</span>
-                <a href="tel:01707819676" className="font-bold text-zinc-900 hover:underline">
-                  01707819676
+                <a href="tel:01712345678" className="font-bold text-zinc-900 hover:underline">
+                  01712345678
                 </a>
               </div>
             </div>
@@ -264,7 +264,7 @@ function ProfilePageContent() {
                     <FiPhone className="w-4 h-4 text-emerald-600" />
                     {(() => {
                       const contacts = parseContactEntries(settings?.contactNumber);
-                      const phone = contacts[0]?.value || "01707819676";
+                      const phone = contacts[0]?.value || "01712345678";
                       return (
                         <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} className="hover:underline">
                           {phone}

@@ -406,7 +406,7 @@ Corporate Gifting / Event Inquiry Details:
                     {submitting ? 'SUBMITTING INQUIRY...' : 'Submit Corporate Inquiry'}
                   </button>
                   <span className="text-[11px] text-stone-400 text-center sm:text-right">
-                    Direct Desk: 01707819676 (Mohammad Abdullah)
+                    Direct Desk: 01712345678 (NovaMart Team)
                   </span>
                 </div>
 

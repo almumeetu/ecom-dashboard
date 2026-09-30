@@ -65,7 +65,7 @@ export default function CharterIntro() {
           <div className="lg:col-span-5">
             <ScrollAnimate variant="fade-in-up" delay={120}>
               <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-                Behind every order fulfilled on Trust Point Mart is a network of hardworking individuals. Our charter converts ethical values into contractual guarantees — protecting livelihoods from farmgate to final doorstep.
+                Behind every order fulfilled on NovaMart is a network of hardworking individuals. Our charter converts ethical values into contractual guarantees — protecting livelihoods from farmgate to final doorstep.
               </p>
             </ScrollAnimate>
           </div>

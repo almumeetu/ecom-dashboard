@@ -17,7 +17,7 @@ export default function WishlistPage() {
     <main className="flex-grow bg-white w-full min-h-screen">
       <PageBanner
         title="Saved Wishlist"
-        subtitle={`Keep track of your favorite items (${itemCount}) from verified sellers across Trust Point.`}
+        subtitle={`Keep track of your favorite items (${itemCount}) from verified collections across NovaMart.`}
         breadcrumbs={[
           { label: "Products", href: "/products" },
           { label: "Wishlist" },

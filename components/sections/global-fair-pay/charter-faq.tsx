@@ -6,8 +6,8 @@ import ScrollAnimate from "@/components/ui/scroll-animate";
 
 const faqs = [
   {
-    q: "What is Trust Point Mart's Global Fair Pay Charter?",
-    a: "The Global Fair Pay Charter is our core ethical operating framework. It legally commits Trust Point Mart and all onboarded multi-vendors to guarantee living wages, safe working environments, equal gender pay, prompt payouts, and dignified treatment for everyone involved in producing and delivering goods.",
+    q: "What is NovaMart's Global Fair Pay Charter?",
+    a: "The Global Fair Pay Charter is our core ethical operating framework. It legally commits NovaMart and all onboarded multi-vendors to guarantee living wages, safe working environments, equal gender pay, prompt payouts, and dignified treatment for everyone involved in producing and delivering goods.",
   },
   {
     q: "How do we verify that independent vendors pay living wages?",

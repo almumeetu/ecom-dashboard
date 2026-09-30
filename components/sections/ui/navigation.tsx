@@ -8,9 +8,12 @@ import { LuLayoutGrid } from "react-icons/lu";
 import { fetchShopCategories, type ShopCategory } from "@/lib/shop-api";
 
 const initialFallbackCats: ShopCategory[] = [
-  { id: 'cat-grocery', name: 'Groceries & Produce', slug: 'groceries' },
-  { id: 'cat-fashion', name: "Fashion & Apparel", slug: 'fashion' },
-  { id: 'cat-footwear', name: 'Footwear & Shoes', slug: 'footwear' },
+  { id: 'cat-skincare', name: 'Skin Care & Beauty', slug: 'skin-care' },
+  { id: 'cat-electronics', name: 'Digital Electronics', slug: 'digital-electronics' },
+  { id: 'cat-perfume', name: 'Perfumes & Fragrances', slug: 'perfume' },
+  { id: 'cat-clothing', name: 'Clothing & Fashion', slug: 'clothing' },
+  { id: 'cat-baby', name: 'Baby & Kids', slug: 'baby-products' },
+  { id: 'cat-home', name: 'Home & Living', slug: 'home-living' },
 ];
 
 export interface NavLinkItem {
@@ -22,7 +25,7 @@ export interface NavLinkItem {
 export default function Navigation() {
   const pathname = usePathname();
   const [categories, setCategories] = useState<ShopCategory[]>(initialFallbackCats);
-  const [activeCategory, setActiveCategory] = useState<string>("cat-grocery");
+  const [activeCategory, setActiveCategory] = useState<string>("cat-skincare");
   const [isTeasHovered, setIsTeasHovered] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 

@@ -99,7 +99,7 @@ export default function CharterPrinciples() {
           </ScrollAnimate>
           <ScrollAnimate variant="fade-in-up" delay={160}>
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Every merchant, supplier, partner warehouse, and delivery affiliate in the Trust Point Mart network operates under these eight binding principles.
+              Every merchant, supplier, partner warehouse, and delivery affiliate in the NovaMart network operates under these eight binding principles.
             </p>
           </ScrollAnimate>
         </div>

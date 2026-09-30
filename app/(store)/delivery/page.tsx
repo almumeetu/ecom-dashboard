@@ -42,7 +42,7 @@ export default function DeliveryPage() {
     });
   }, []);
 
-  const shopName = settings?.shopName?.trim() || 'Trust Point Mart';
+  const shopName = settings?.shopName?.trim() || 'NovaMart';
   const deliveryInside =
     settings?.deliveryChargeInside !== undefined && settings?.deliveryChargeInside !== null
       ? Number(settings.deliveryChargeInside) === 0
@@ -62,10 +62,10 @@ export default function DeliveryPage() {
         : `৳${settings.deliveryChargeNearCity}`
       : '৳80';
   const contactEntries = parseContactEntries(settings?.contactNumber);
-  const primaryPhone = contactEntries[0]?.value || '01707819676';
-  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01707819676';
+  const primaryPhone = contactEntries[0]?.value || '+880 1712-345678';
+  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01712345678';
   const rawWhatsapp = settings?.socialContact?.whatsapp || primaryPhone;
-  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801707819676';
+  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801712345678';
   const fullWhatsapp = whatsappNumber.startsWith('88')
     ? whatsappNumber
     : `88${whatsappNumber.replace(/^0+/, '')}`;
@@ -84,8 +84,8 @@ export default function DeliveryPage() {
       a: 'Yes! We offer 100% Cash on Delivery across all 64 districts and 495+ Upazilas in Bangladesh. You may inspect the outer parcel integrity at your doorstep before handing payment to the delivery rider.',
     },
     {
-      q: 'How do you transport fresh Rajshahi mangoes and perishable groceries without damage?',
-      a: 'Perishables and seasonal harvests from Mohadevpur, Naogaon and Rajshahi orchards are harvested early morning, packed into heavy-duty ventilated shock-absorbing crates with food-grade cushioning, and transferred through express direct transport routes. We guarantee zero chemical ripening and 100% fresh arrival.',
+      q: 'How are sensitive skin care, perfumes, and electronics packaged for nationwide shipping?',
+      a: 'All fragile and sensitive items—including liquid serums, perfumes, glass bottles, and electronics—are packed with multi-layer bubble wrap, moisture-resistant sealing, and shock-absorbing corrugated boxes to ensure 100% damage-free delivery.',
     },
     {
       q: 'How do I qualify for 100% Free Delivery?',
@@ -93,11 +93,11 @@ export default function DeliveryPage() {
     },
     {
       q: 'What should I do if a product is damaged or defective upon arrival?',
-      a: 'Under our 7-Day Return & Replacement Guarantee, simply call our support desk at 01707819676 or message our WhatsApp team with a picture of the item. We will arrange a free reverse courier pickup and dispatch an immediate replacement or full refund.',
+      a: `Under our 7-Day Return & Replacement Guarantee, simply call our support desk at ${primaryPhone} or message our WhatsApp team with a picture of the item. We will arrange a free reverse courier pickup and dispatch an immediate replacement or full refund.`,
     },
     {
       q: 'Can I track my parcel live after placing an order?',
-      a: 'Yes. As soon as your parcel is packed and handed over to our verified logistics partner, an SMS is automatically dispatched containing your tracking ID and a live real-time tracking link. You can also view real-time status from your Trust Point account under Profile → Orders.',
+      a: 'Yes. As soon as your parcel is packed and handed over to our verified logistics partner, an SMS is automatically dispatched containing your tracking ID and a live real-time tracking link. You can also view real-time status from your NovaMart account under Profile → Orders.',
     },
   ];
 
@@ -106,7 +106,7 @@ export default function DeliveryPage() {
       {/* ── Page Banner ── */}
       <PageBanner
         title="Shipping & Delivery Information"
-        subtitle="Prompt, secure, and nationwide delivery for all marketplace categories — fresh groceries, apparel, footwear & lifestyle."
+        subtitle="Prompt, secure, and nationwide delivery for all marketplace categories — skin care, digital electronics, perfumes, fashion & baby products."
         breadcrumbs={[{ label: 'Delivery Information' }]}
         showTrustChips={true}
       />
@@ -142,7 +142,7 @@ export default function DeliveryPage() {
             </p>
 
             <p className="text-stone-700 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto mt-4 font-normal">
-              Trust Point offers nationwide delivery across all 64 districts in Bangladesh, ensuring that fresh mangoes, groceries, fashion, and authentic products reach your home safely.
+              NovaMart offers nationwide delivery across all 64 districts in Bangladesh, ensuring that authentic skin care, digital electronics, perfumes, fashion, and baby care reach your home safely.
             </p>
 
             {/* Quick Stat Badges */}
@@ -326,7 +326,7 @@ export default function DeliveryPage() {
                 <ul className="space-y-2.5 text-xs sm:text-sm text-stone-600 border-t border-stone-100 pt-5">
                   <li className="flex items-start gap-2.5">
                     <FiCheck className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                    <span>Harvested at peak maturity in Mohadevpur, Naogaon &amp; Rajshahi</span>
+                    <span>Harvested at peak maturity in Banani, Dhaka &amp; Rajshahi</span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <FiCheck className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
@@ -464,10 +464,10 @@ export default function DeliveryPage() {
                 01
               </span>
               <h3 className="text-base font-bold text-stone-900 mb-2">
-                Order Verification &amp; Farm Picking
+                Order Verification &amp; Item Reservation
               </h3>
               <p className="text-stone-500 text-xs sm:text-sm leading-relaxed">
-                As soon as your order is confirmed, our central hub in Mohadevpur or verified vendor partner reserves your items. Orders before 2 PM enter the daily queue immediately.
+                As soon as your order is confirmed, our central logistics hub in Banani, Dhaka or verified partner brand reserves your items. Orders placed before 2 PM enter express daily dispatch immediately.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-stone-100 flex items-center gap-2 text-xs font-semibold text-emerald-700">
@@ -567,14 +567,14 @@ export default function DeliveryPage() {
 
             <div className="flex flex-col sm:flex-row lg:flex-col gap-3 w-full lg:w-auto shrink-0">
               <a
-                href="tel:01707819676"
+                href="tel:01712345678"
                 className="px-6 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs sm:text-sm tracking-wide text-center transition-all shadow-sm flex items-center justify-center gap-2"
               >
                 <FiPhone className="w-4 h-4" />
-                <span>Call Support: 01707819676</span>
+                <span>Call Support: 01712345678</span>
               </a>
               <a
-                href="https://wa.me/8801707819676?text=Hello%20Trust%20Point%20Delivery%20Support%2C%20I%20need%20assistance%20with%20my%20delivery."
+                href="https://wa.me/8801712345678?text=Hello%20Trust%20Point%20Delivery%20Support%2C%20I%20need%20assistance%20with%20my%20delivery."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs sm:text-sm tracking-wide text-center transition-all shadow-sm flex items-center justify-center gap-2"
@@ -622,13 +622,13 @@ export default function DeliveryPage() {
               <h3 className="text-xs uppercase font-bold text-stone-400 tracking-wider">
                 Support Hotline
               </h3>
-              <h4 className="text-base font-bold text-stone-900 mt-1">01707819676</h4>
+              <h4 className="text-base font-bold text-stone-900 mt-1">01712345678</h4>
               <p className="text-xs text-stone-500 mt-2 leading-relaxed">
                 Immediate phone support for urgent address updates, courier coordination, or questions.
               </p>
             </div>
             <a
-              href="tel:01707819676"
+              href="tel:01712345678"
               className="mt-6 text-xs font-bold text-blue-600 hover:text-blue-700 inline-flex items-center gap-1.5"
             >
               <span>Call Support Now</span>
@@ -651,7 +651,7 @@ export default function DeliveryPage() {
               </p>
             </div>
             <a
-              href="https://wa.me/8801707819676"
+              href="https://wa.me/8801712345678"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-6 text-xs font-bold text-green-600 hover:text-green-700 inline-flex items-center gap-1.5"
@@ -670,7 +670,7 @@ export default function DeliveryPage() {
               <h3 className="text-xs uppercase font-bold text-stone-400 tracking-wider">
                 Logistics Center
               </h3>
-              <h4 className="text-base font-bold text-stone-900 mt-1">Mohadevpur, Naogaon</h4>
+              <h4 className="text-base font-bold text-stone-900 mt-1">Banani, Dhaka</h4>
               <p className="text-xs text-stone-500 mt-2 leading-relaxed">
                 Direct regional distribution hub in Rajshahi Division with express dispatch links across Bangladesh.
               </p>

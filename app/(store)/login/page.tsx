@@ -151,11 +151,11 @@ function LoginFormContent() {
           <div className="pt-8 mt-8 border-t border-white/10 text-xs text-zinc-400 space-y-1.5">
             <div className="flex items-center gap-2 text-zinc-300">
               <FiMapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>Mohadevpur, Naogaon, Rajshahi</span>
+              <span>Banani, Dhaka, Rajshahi</span>
             </div>
             <div className="flex items-center gap-2 text-zinc-300">
               <FiPhone className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-              <span>Executive Hotline: 01707819676</span>
+              <span>Executive Hotline: 01712345678</span>
             </div>
           </div>
         </div>
@@ -237,7 +237,7 @@ function LoginFormContent() {
                     Password
                   </label>
                   <a
-                    href="tel:01707819676"
+                    href="tel:01712345678"
                     className="text-[11px] font-semibold text-emerald-600 hover:underline"
                   >
                     Forgot password?
@@ -289,7 +289,7 @@ function LoginFormContent() {
             </form>
 
             <p className="mt-8 text-center text-[11px] text-zinc-400">
-              Questions? Call customer support: <strong className="text-zinc-600">01707819676</strong>
+              Questions? Call customer support: <strong className="text-zinc-600">01712345678</strong>
             </p>
           </div>
         </div>

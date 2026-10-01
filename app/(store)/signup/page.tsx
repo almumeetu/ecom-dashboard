@@ -169,7 +169,7 @@ function SignUpFormContent() {
             </div>
             <div className="flex items-center gap-2 text-zinc-300">
               <FiPhone className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
-              <span>Hotline: 01712345678</span>
+              <span>Hotline: 01722301927</span>
             </div>
           </div>
         </div>
@@ -320,7 +320,7 @@ function SignUpFormContent() {
             </form>
 
             <p className="mt-8 text-center text-[11px] text-zinc-400">
-              Need help? Hotline: <strong className="text-zinc-600">01712345678</strong>
+              Need help? Hotline: <strong className="text-zinc-600">01722301927</strong>
             </p>
           </div>
         </div>

@@ -5,7 +5,7 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { fetchShopSettings } from "@/lib/shop-api";
 
 export default function FloatingWhatsApp() {
-  const [phone, setPhone] = useState("+880 1712-345678");
+  const [phone, setPhone] = useState("+880 1722-301927");
   const [shopName, setShopName] = useState("NovaMart");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -19,7 +19,7 @@ export default function FloatingWhatsApp() {
         else if (Array.isArray(contact) && contact[0]?.value) num = contact[0].value;
         else if (contact?.entries?.[0]?.value) num = contact?.entries[0].value;
 
-        if (num && !num.includes("01722301927")) {
+        if (num) {
           setPhone(num);
         }
       })

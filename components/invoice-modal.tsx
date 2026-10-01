@@ -9,7 +9,7 @@ import Logo from "@/components/ui/logo";
 const COMPANY = {
   name: "NovaMart Bangladesh",
   addressLine: "Level 4, Nova Tower, Plot 18, Road 11, Banani, Dhaka-1213, Bangladesh",
-  phone: "+880 1712-345678 (01712345678)",
+  phone: "+880 1722-301927 (01722301927)",
   email: "support@novamart.com.bd",
 };
 

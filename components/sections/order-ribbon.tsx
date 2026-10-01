@@ -4,8 +4,8 @@ import { IoCall } from "react-icons/io5";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function OrderRibbon() {
-  const hotline = "+880 1712-345678";
-  const hotlineClean = "01712345678";
+  const hotline = "+880 1722-301927";
+  const hotlineClean = "01722301927";
 
   return (
     <div className="w-full bg-[#F8FAFC] border-b border-slate-200/80 py-2 sm:py-2.5 px-4 text-center select-none shadow-2xs">
@@ -23,7 +23,7 @@ export default function OrderRibbon() {
           </a>
           <span className="text-zinc-400">/</span>
           <a
-            href={`https://wa.me/8801712345678?text=Hello%20NovaMart,%20I%20would%20like%20to%20place%20an%20order`}
+            href={`https://wa.me/8801722301927?text=Hello%20NovaMart,%20I%20would%20like%20to%20place%20an%20order`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#EA580C] hover:bg-[#C2410C] text-white text-[11px] font-bold shadow-2xs transition-colors"

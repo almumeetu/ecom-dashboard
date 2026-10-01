@@ -31,20 +31,18 @@ export default async function Mainfooter() {
   const rawContactEntries = parseContactEntries(settings?.contactNumber);
   const rawEmailEntries = parseContactEntries(settings?.email);
 
-  // Filter out dummy helpline 01722301927 or unwanted desk entries
+  // Contact Numbers from Admin Dashboard Settings
   const validContacts = rawContactEntries.filter(
     (c) =>
-      !c.value.includes("01722301927") &&
-      !c.title.includes("01722301927") &&
       !c.extra?.includes("NovaMart Team") &&
       !c.title?.toLowerCase().includes("executive desk")
   );
 
   const displayedContacts = validContacts.length > 0 ? validContacts : [
-    { title: "Hotline", value: "+880 1712-345678" }
+    { title: "Hotline Support", value: "+880 1722-301927" }
   ];
 
-  const primaryPhone = displayedContacts[0]?.value || "+880 1712-345678";
+  const primaryPhone = displayedContacts[0]?.value || "+880 1722-301927";
   const rawPhoneDigits = (displayedContacts[0]?.value || primaryPhone).replace(/[^\d]/g, "");
   const formattedWhatsapp = rawPhoneDigits.startsWith("88")
     ? rawPhoneDigits

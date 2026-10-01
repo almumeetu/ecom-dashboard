@@ -156,14 +156,19 @@ export default function ProductCard({
     <div className="group relative flex flex-col justify-between w-full h-full bg-white rounded-xl border border-zinc-200/80 hover:border-[#4F46E5]/40 shadow-2xs hover:shadow-lg transition-all duration-300 overflow-hidden mx-auto">
       {/* Top Media & Visual Badge Container */}
       <div className="relative w-full aspect-square bg-[#F8F9FA] overflow-hidden p-3 flex items-center justify-center">
-        {/* Floating Left Discount Badge */}
-        {discountPercent > 0 && (
-          <div className="absolute top-2.5 left-2.5 z-20 pointer-events-none">
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-[#EA580C] text-white shadow-2xs tracking-tight">
+        {/* Floating Left Badges (Dynamic Discount & Special Tag) */}
+        <div className="absolute top-2.5 left-2.5 z-20 pointer-events-none flex flex-col gap-1 items-start">
+          {discountPercent > 0 && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-[#EA580C] text-white shadow-xs tracking-tight">
               -{discountPercent}%
             </span>
-          </div>
-        )}
+          )}
+          {badge && !badge.startsWith("-") && badge !== "NEW" && badge !== "HOT" && (
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#1E1B4B]/90 backdrop-blur-xs text-white shadow-2xs tracking-wider uppercase">
+              {badge}
+            </span>
+          )}
+        </div>
 
         {/* Floating Interactive Wishlist Button (Right) */}
         <div className="absolute top-2.5 right-2.5 z-20">

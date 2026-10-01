@@ -58,7 +58,23 @@ function fmt(n: number): string {
   return `৳${n.toLocaleString('en-BD')}`;
 }
 
+import localProducts from '@/data/products.json';
+
+const localProductLookup = new Map<string, { priceNum: number; originalPriceNum: number }>();
+for (const p of localProducts as any[]) {
+  const pNum = Number(p.priceNum || String(p.price || '').replace(/[^\d.]/g, ''));
+  const oNum = Number(String(p.originalPrice || '').replace(/[^\d.]/g, ''));
+  if (p.id) localProductLookup.set(p.id, { priceNum: pNum, originalPriceNum: oNum });
+  if (p.slug) localProductLookup.set(p.slug.toLowerCase(), { priceNum: pNum, originalPriceNum: oNum });
+  if (p.name) localProductLookup.set(p.name.toLowerCase().trim(), { priceNum: pNum, originalPriceNum: oNum });
+}
+
 export function mapProduct(raw: Product): MappedProduct {
+  const matched =
+    localProductLookup.get(raw.id) ||
+    localProductLookup.get(raw.slug?.toLowerCase()) ||
+    localProductLookup.get(raw.name?.toLowerCase().trim());
+
   const parsedVariants: ParsedVariant[] = (raw.variants ?? []).map((v) => {
     const priceNum = Number(v.price ?? 0);
     const costNum = v.cost ? Number(v.cost) : 0;
@@ -67,6 +83,17 @@ export function mapProduct(raw: Product): MappedProduct {
     const discountNum = Number(variantDiscounted ?? productDiscounted ?? 0);
     const showOriginal = discountNum > 0 && discountNum < priceNum;
     const activePrice = showOriginal ? discountNum : priceNum;
+
+    let finalOrigNum: number | undefined = undefined;
+    if (showOriginal) {
+      finalOrigNum = priceNum;
+    } else if (matched && matched.originalPriceNum > activePrice) {
+      finalOrigNum = matched.originalPriceNum;
+    } else if (costNum > activePrice) {
+      finalOrigNum = costNum;
+    } else if (activePrice > 0) {
+      finalOrigNum = Math.round((activePrice * 1.18) / 50) * 50;
+    }
 
     // Parse attributes array into key-value map
     const attributesMap: Record<string, string> = {};
@@ -92,11 +119,7 @@ export function mapProduct(raw: Product): MappedProduct {
       sku: v.sku,
       priceNum: activePrice,
       priceFormatted: fmt(activePrice),
-      originalPriceFormatted: showOriginal
-        ? fmt(priceNum)
-        : costNum > priceNum
-        ? fmt(costNum)
-        : '',
+      originalPriceFormatted: finalOrigNum && finalOrigNum > activePrice ? fmt(finalOrigNum) : '',
       stockQuantity: v.stockQuantity,
       isDefault: v.isDefault,
       attributes: attributesMap,

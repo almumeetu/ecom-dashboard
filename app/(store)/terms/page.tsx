@@ -145,11 +145,11 @@ export default function TermsPage() {
                 </p>
                 <div className="mt-3 flex flex-col gap-2">
                   <a
-                    href="tel:01712345678"
+                    href="tel:01722301927"
                     className="w-full py-2.5 px-4 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold text-center transition-all flex items-center justify-center gap-2"
                   >
                     <FiPhone className="w-3.5 h-3.5" />
-                    <span>Helpline: +880 1712-345678</span>
+                    <span>Helpline: +880 1722-301927</span>
                   </a>
                   <a
                     href="mailto:support@novamart.com.bd"

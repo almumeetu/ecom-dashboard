@@ -278,7 +278,7 @@ export default function Home() {
             href="/products"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-indigo-900/25 active:scale-95 transition-all"
           >
-            <span>Explore Complete NovaMart Catalog</span>
+            <span>Explore All Products</span>
             <LuArrowRight className="w-4 h-4" />
           </Link>
         </div>

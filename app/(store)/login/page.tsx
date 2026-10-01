@@ -155,7 +155,7 @@ function LoginFormContent() {
             </div>
             <div className="flex items-center gap-2 text-zinc-300">
               <FiPhone className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
-              <span>Executive Hotline: 01712345678</span>
+              <span>Executive Hotline: 01722301927</span>
             </div>
           </div>
         </div>
@@ -237,7 +237,7 @@ function LoginFormContent() {
                     Password
                   </label>
                   <a
-                    href="tel:01712345678"
+                    href="tel:01722301927"
                     className="text-[11px] font-semibold text-[#4F46E5] hover:underline"
                   >
                     Forgot password?
@@ -289,7 +289,7 @@ function LoginFormContent() {
             </form>
 
             <p className="mt-8 text-center text-[11px] text-zinc-400">
-              Questions? Call customer support: <strong className="text-zinc-600">01712345678</strong>
+              Questions? Call customer support: <strong className="text-zinc-600">01722301927</strong>
             </p>
           </div>
         </div>

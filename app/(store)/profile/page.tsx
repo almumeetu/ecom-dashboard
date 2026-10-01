@@ -180,8 +180,8 @@ function ProfilePageContent() {
               <div className="mt-6 text-xs text-zinc-500 flex items-center justify-center gap-2">
                 <FiPhone className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Need assistance? Call Support:</span>
-                <a href="tel:01712345678" className="font-bold text-zinc-900 hover:underline">
-                  01712345678
+                <a href="tel:01722301927" className="font-bold text-zinc-900 hover:underline">
+                  01722301927
                 </a>
               </div>
             </div>
@@ -264,7 +264,7 @@ function ProfilePageContent() {
                     <FiPhone className="w-4 h-4 text-emerald-600" />
                     {(() => {
                       const contacts = parseContactEntries(settings?.contactNumber);
-                      const phone = contacts[0]?.value || "01712345678";
+                      const phone = contacts[0]?.value || "01722301927";
                       return (
                         <a href={`tel:${phone.replace(/[^\d+]/g, "")}`} className="hover:underline">
                           {phone}

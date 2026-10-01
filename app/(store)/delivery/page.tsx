@@ -63,10 +63,10 @@ export default function DeliveryPage() {
       : '৳80';
 
   const contactEntries = parseContactEntries(settings?.contactNumber);
-  const primaryPhone = contactEntries[0]?.value || '+880 1712-345678';
-  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01712345678';
+  const primaryPhone = contactEntries[0]?.value || '+880 1722-301927';
+  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01722301927';
   const rawWhatsapp = settings?.socialContact?.whatsapp || primaryPhone;
-  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801712345678';
+  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801722301927';
   const fullWhatsapp = whatsappNumber.startsWith('88')
     ? whatsappNumber
     : `88${whatsappNumber.replace(/^0+/, '')}`;

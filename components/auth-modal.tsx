@@ -201,8 +201,8 @@ export default function AuthModal() {
                 <FiMapPin className="w-3 h-3 text-emerald-400 shrink-0" />
                 <span>Mohadevpur</span>
               </div>
-              <a href="tel:01712345678" className="text-zinc-300 hover:text-indigo-300 font-semibold block mt-0.5">
-                01712345678
+              <a href="tel:01722301927" className="text-zinc-300 hover:text-indigo-300 font-semibold block mt-0.5">
+                01722301927
               </a>
             </div>
           </div>
@@ -350,7 +350,7 @@ export default function AuthModal() {
                   />
                   <span className="text-zinc-600">Remember login</span>
                 </label>
-                <a href="tel:01712345678" className="text-[#4F46E5] hover:underline">
+                <a href="tel:01722301927" className="text-[#4F46E5] hover:underline">
                   Need help?
                 </a>
               </div>

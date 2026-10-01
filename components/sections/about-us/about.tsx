@@ -170,11 +170,11 @@ export default function About() {
                   </Link>
 
                   <a
-                    href="tel:01712345678"
+                    href="tel:01722301927"
                     className="inline-flex items-center gap-2 bg-white hover:bg-zinc-100 active:scale-95 text-zinc-800 font-semibold text-xs sm:text-sm px-6 py-3 rounded-xl border border-zinc-300 shadow-xs transition-all cursor-pointer"
                   >
                     <FiPhone className="w-4 h-4 text-[#4F46E5]" />
-                    <span>Hotline: +880 1712-345678</span>
+                    <span>Hotline: +880 1722-301927</span>
                   </a>
                 </div>
               </div>
@@ -275,10 +275,10 @@ export default function About() {
                   <p className="text-xs text-zinc-400 mt-0.5">Our team is available daily 9 AM – 10 PM</p>
                 </div>
                 <a
-                  href="tel:01712345678"
+                  href="tel:01722301927"
                   className="w-full py-2.5 px-4 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider transition-colors"
                 >
-                  Call +880 1712-345678
+                  Call +880 1722-301927
                 </a>
               </div>
 

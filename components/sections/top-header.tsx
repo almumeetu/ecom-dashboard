@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { LuTruck } from "react-icons/lu";
+import { FaWhatsapp } from "react-icons/fa6";
 import TopSlider from "./ui/topslider";
 import { fetchShopSettings } from "@/lib/shop-api";
 import data from "@/data/data.json";
@@ -34,12 +35,23 @@ export default function TopHeader() {
       ? shopSettings.contactNumber
       : [];
 
-  const contactEntries = rawContactEntries.filter(
-    (c) => !c.value.includes("01722301927") && !c.title.includes("01722301927")
-  );
+  const contactEntries = rawContactEntries;
 
-  const primaryPhone = contactEntries[0]?.value || "+880 1712-345678";
-  const primaryPhoneClean = primaryPhone.replace(/[^\d+]/g, "") || "01712345678";
+  const primaryPhone = contactEntries[0]?.value || "+880 1722-301927";
+  const primaryPhoneClean = primaryPhone.replace(/[^\d+]/g, "") || "01722301927";
+
+  const rawWa = shopSettings?.socialContact?.whatsapp || primaryPhoneClean;
+  const waDigits = String(rawWa).replace(/[^\d]/g, "");
+  const whatsappNumber = waDigits.startsWith("88")
+    ? waDigits
+    : waDigits.startsWith("0")
+    ? `88${waDigits}`
+    : `880${waDigits}`;
+
+  const secondaryPhone = contactEntries[1]?.value;
+  const isDifferentSecondary =
+    secondaryPhone &&
+    secondaryPhone.replace(/[^\d]/g, "") !== primaryPhoneClean.replace(/[^\d]/g, "");
 
   return (
     <section className="w-full bg-[#0B132B] text-[#94A3B8] text-xs border-b border-[#1E293B] relative z-40 select-none">
@@ -59,13 +71,19 @@ export default function TopHeader() {
             </a>
             <span className="text-slate-700">|</span>
             <a
-              href="https://wa.me/8801712345678"
+              href={`https://wa.me/${whatsappNumber}?text=Hello%20NovaMart`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-[#94A3B8] hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-[#94A3B8] hover:text-white transition-colors font-medium group"
             >
-              <span className="text-[#F97316] font-semibold">WhatsApp:</span>{" "}
-              <strong className="text-white font-medium">{primaryPhone}</strong>
+              <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366] group-hover:scale-110 transition-transform" />
+              {isDifferentSecondary ? (
+                <span>
+                  WhatsApp: <strong className="text-white font-medium">{secondaryPhone}</strong>
+                </span>
+              ) : (
+                <span className="text-[#25D366] font-semibold hover:underline">WhatsApp</span>
+              )}
             </a>
           </div>
 

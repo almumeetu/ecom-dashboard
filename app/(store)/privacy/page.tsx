@@ -146,11 +146,11 @@ export default function PrivacyPage() {
                     <span>privacy@novamart.com.bd</span>
                   </a>
                   <a
-                    href="tel:01712345678"
+                    href="tel:01722301927"
                     className="w-full py-2.5 px-4 rounded-xl bg-zinc-50 hover:bg-zinc-100 text-zinc-800 text-xs font-bold text-center border border-zinc-200 transition-all flex items-center justify-center gap-2"
                   >
                     <FiPhone className="w-3.5 h-3.5 text-[#4F46E5]" />
-                    <span>Call Helpline: +880 1712-345678</span>
+                    <span>Call Helpline: +880 1722-301927</span>
                   </a>
                 </div>
               </div>

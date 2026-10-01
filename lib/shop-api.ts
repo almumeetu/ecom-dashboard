@@ -141,6 +141,17 @@ export function parseContactEntries(field: any): ContactEntry[] {
 }
 
 
+import localProducts from "@/data/products.json";
+
+const localProductLookup = new Map<string, { priceNum: number; originalPriceNum: number }>();
+for (const p of localProducts as any[]) {
+  const pNum = Number(p.priceNum || String(p.price || "").replace(/[^\d.]/g, ""));
+  const oNum = Number(String(p.originalPrice || "").replace(/[^\d.]/g, ""));
+  if (p.id) localProductLookup.set(p.id, { priceNum: pNum, originalPriceNum: oNum });
+  if (p.slug) localProductLookup.set(p.slug.toLowerCase(), { priceNum: pNum, originalPriceNum: oNum });
+  if (p.name) localProductLookup.set(p.name.toLowerCase().trim(), { priceNum: pNum, originalPriceNum: oNum });
+}
+
 function mapProduct(product: AdminProduct): ShopProduct {
   const defaultVariant = product.variants?.find((v) => v.isDefault) ?? product.variants?.[0];
 
@@ -152,6 +163,28 @@ function mapProduct(product: AdminProduct): ShopProduct {
   const costNum = defaultVariant?.cost ? Number(defaultVariant.cost) : 0;
   const discountPrice = product.discountPrice ? Number(product.discountPrice) : 0;
   const showOriginal = discountPrice > 0 && discountPrice < priceNum;
+  const activePrice = showOriginal ? discountPrice : priceNum;
+
+  const matched =
+    localProductLookup.get(product.id) ||
+    localProductLookup.get(product.slug?.toLowerCase()) ||
+    localProductLookup.get(product.name?.toLowerCase().trim());
+
+  let computedOriginal: number | undefined = undefined;
+  if (showOriginal) {
+    computedOriginal = priceNum;
+  } else if (matched && matched.originalPriceNum > activePrice) {
+    computedOriginal = matched.originalPriceNum;
+  } else if (costNum > activePrice) {
+    computedOriginal = costNum;
+  } else if (activePrice > 0) {
+    computedOriginal = Math.round((activePrice * 1.18) / 50) * 50;
+  }
+
+  const dynamicDiscount =
+    computedOriginal && computedOriginal > activePrice
+      ? Math.round(((computedOriginal - activePrice) / computedOriginal) * 100)
+      : 0;
 
   return {
     id: product.id,
@@ -159,10 +192,11 @@ function mapProduct(product: AdminProduct): ShopProduct {
     slug: product.slug,
     category: product.category?.name ?? "",
     team: product.brand?.name ?? "",
-    price: showOriginal ? discountPrice : priceNum,
-    originalPrice: showOriginal ? priceNum : (costNum > priceNum ? costNum : undefined),
+    price: activePrice,
+    originalPrice: computedOriginal,
     image: resolveImageUrl(rawImage),
     unit: product.unit?.name ?? product.unit?.abbreviation ?? undefined,
+    badge: dynamicDiscount > 0 ? `-${dynamicDiscount}%` : undefined,
     variantId: defaultVariant?.id,
   };
 }
@@ -313,6 +347,9 @@ export const DEFAULT_NOVAMART_CATEGORIES: ShopCategory[] = [
   { id: "cat-baby", name: "Baby & Kids Products", slug: "baby-products", imageUrl: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=800&auto=format&fit=crop&q=80" },
   { id: "cat-home", name: "Home & Living", slug: "home-living", imageUrl: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=800&auto=format&fit=crop&q=80" },
   { id: "cat-footwear", name: "Footwear & Shoes", slug: "footwear", imageUrl: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-groceries", name: "Gourmet Foods & Agro", slug: "groceries", imageUrl: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-health", name: "Health, Wellness & Fitness", slug: "health-wellness", imageUrl: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&auto=format&fit=crop&q=80" },
+  { id: "cat-watches", name: "Watches & Premium Accessories", slug: "watches-accessories", imageUrl: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800&auto=format&fit=crop&q=80" },
 ];
 
 export const DEFAULT_NOVAMART_SETTINGS: ShopSettings = {
@@ -320,15 +357,15 @@ export const DEFAULT_NOVAMART_SETTINGS: ShopSettings = {
   shopName: "NovaMart",
   slogan: "YOUR PREMIER MULTI-CATEGORY ONLINE STORE",
   contactNumber: [
-    { title: "Hotline Support", value: "+880 1712-345678" },
-    { title: "Customer Care", value: "01712345678" },
+    { title: "Hotline Support", value: "+880 1722-301927" },
+    { title: "Customer Care", value: "01722301927" },
   ],
   email: [
     { title: "Customer Support", value: "support@novamart.com.bd" },
     { title: "Corporate Inquiries", value: "sales@novamart.com.bd" },
   ],
   socialContact: {
-    whatsapp: "8801712345678",
+    whatsapp: "8801722301927",
     facebook: "https://facebook.com/novamart.bd",
     instagram: "https://instagram.com/novamart.bd",
     youtube: "https://youtube.com/@novamartbd",
@@ -413,7 +450,7 @@ export async function fetchStorePolicies(): Promise<StorePolicies | null> {
     },
     return: {
       title: "7-Day Return & Replacement Policy",
-      content: "If your item is damaged, defective, or incorrect upon delivery, you may request a free return or replacement within 7 days. Customer helpline: +880 1712-345678.",
+      content: "If your item is damaged, defective, or incorrect upon delivery, you may request a free return or replacement within 7 days. Customer helpline: +880 1722-301927.",
     },
     refund: {
       title: "Instant Refund Guarantee",

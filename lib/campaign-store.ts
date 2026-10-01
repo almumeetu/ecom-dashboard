@@ -2,7 +2,7 @@
 
 import { type Campaign, API_BASE_URL, resolveImageUrl } from "./admin-api";
 
-export const CAMPAIGNS_STORAGE_KEY = "novamart_campaigns_v1";
+export const CAMPAIGNS_STORAGE_KEY = "novamart_campaigns_v2";
 export const CAMPAIGNS_UPDATED_EVENT = "novamart_campaigns_updated";
 
 /**
@@ -12,8 +12,8 @@ export const CAMPAIGNS_UPDATED_EVENT = "novamart_campaigns_updated";
 export const DEFAULT_HERO_CAMPAIGNS: Campaign[] = [
   {
     id: "camp-hero-1",
-    title: "ভালো বাজারে আপনাকে স্বাগতম",
-    description: "বিশ্বস্ত উৎসের ১০০% অরিজিনাল পণ্য • সারা বাংলাদেশে দ্রুত ক্যাশ অন ডেলিভারি",
+    title: "NovaMart-এ আপনাকে স্বাগতম",
+    description: "বিশ্বস্ত উৎসের ১০০% অথেনটিক পণ্য • সারা বাংলাদেশে দ্রুত ক্যাশ অন ডেলিভারি",
     status: "active",
     startAt: new Date().toISOString(),
     endAt: null,

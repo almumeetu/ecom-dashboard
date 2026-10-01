@@ -164,9 +164,8 @@ export default function ProductInfo({
       : 0;
 
   // Contact info
-  const rawContactEntries = parseContactEntries(settings?.contactNumber);
-  const validContacts = rawContactEntries.filter((c) => !c.value.includes('01722301927'));
-  const primaryPhone = validContacts[0]?.value || '+880 1712-345678';
+  const validContacts = parseContactEntries(settings?.contactNumber);
+  const primaryPhone = validContacts[0]?.value || '+880 1722-301927';
   const rawPhoneDigits = primaryPhone.replace(/[^\d]/g, '');
   const formattedWhatsapp = rawPhoneDigits.startsWith('88')
     ? rawPhoneDigits

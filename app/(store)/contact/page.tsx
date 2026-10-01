@@ -32,10 +32,10 @@ export default function ContactPage() {
 
   const shopName = settings?.shopName?.trim() || 'NovaMart';
   const contactEntries = parseContactEntries(settings?.contactNumber);
-  const primaryPhone = contactEntries[0]?.value || '+880 1712-345678';
-  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01712345678';
+  const primaryPhone = contactEntries[0]?.value || '+880 1722-301927';
+  const cleanPhone = primaryPhone.replace(/[^\d+]/g, '') || '01722301927';
   const rawWhatsapp = settings?.socialContact?.whatsapp || primaryPhone;
-  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801712345678';
+  const whatsappNumber = rawWhatsapp.replace(/[^\d]/g, '') || '8801722301927';
   const fullWhatsapp = whatsappNumber.startsWith('88') ? whatsappNumber : `88${whatsappNumber.replace(/^0+/, '')}`;
   const emailEntries = parseContactEntries(settings?.email);
   const primaryEmail = emailEntries[0]?.value || 'support@novamart.com.bd';
@@ -299,7 +299,7 @@ export default function ContactPage() {
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleInputChange}
-                    placeholder="01712345678"
+                    placeholder="01722301927"
                     required
                     className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all placeholder:text-zinc-400"
                   />

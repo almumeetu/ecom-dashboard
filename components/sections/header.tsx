@@ -448,10 +448,10 @@ export default function Header() {
                         Customer Support
                       </p>
                       <a
-                        href="tel:01712345678"
+                        href="tel:01722301927"
                         className="text-xs font-bold text-[#4F46E5] hover:underline"
                       >
-                        +880 1712-345678
+                        +880 1722-301927
                       </a>
                     </div>
 

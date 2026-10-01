@@ -462,10 +462,10 @@ export default function CartPage() {
                   Need Help Finding Something?
                 </p>
                 <a
-                  href="tel:01712345678"
+                  href="tel:01722301927"
                   className="text-sm font-extrabold text-zinc-900 hover:text-[#4F46E5] transition-colors"
                 >
-                  Call Support: 01712345678 (Central Hub)
+                  Call Support: 01722301927 (Central Hub)
                 </a>
               </div>
             </div>
@@ -501,65 +501,6 @@ export default function CartPage() {
                 >
                   + Add More Items
                 </Link>
-              </div>
-
-              {/* Free Shipping Alert Banner with Progress Bar */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-white border border-zinc-200/90 shadow-2xs space-y-3">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-2xs transition-colors ${
-                        isDhakaFree || outsideRate === 0
-                          ? "bg-[#4F46E5] text-white"
-                          : "bg-[#EEF2FF] text-[#4F46E5]"
-                      }`}
-                    >
-                      {isDhakaFree || outsideRate === 0 ? (
-                        <LuSparkles className="w-4 h-4" />
-                      ) : (
-                        <LuTruck className="w-4 h-4" />
-                      )}
-                    </div>
-                    <div className="text-xs">
-                      {deliveryZone === "dhaka" ? (
-                        isDhakaFree ? (
-                          <span className="font-bold text-indigo-950">
-                            🎉 You unlocked <strong className="text-[#4F46E5] font-black">FREE Next-Day Delivery</strong> inside Dhaka!
-                          </span>
-                        ) : (
-                          <span className="text-zinc-700 font-medium">
-                            Add <strong className="font-bold text-zinc-950">৳{(1999 - subtotal).toLocaleString()}</strong> more to unlock <strong className="text-[#4F46E5] font-black">FREE Delivery</strong>!
-                          </span>
-                        )
-                      ) : outsideRate === 0 ? (
-                        <span className="font-bold text-indigo-950">
-                          🎉 <strong className="text-[#4F46E5] font-black">FREE Nationwide Delivery</strong> unlocked across All Bangladesh!
-                        </span>
-                      ) : (
-                        <span className="text-zinc-700 font-medium">
-                          Nationwide doorstep courier delivery (2–4 business days).
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {deliveryZone === "dhaka" && (
-                    <span className="text-[11px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-1 rounded-full shrink-0 border border-indigo-200/60">
-                      {isDhakaFree ? "100% Qualified" : `৳${subtotal.toLocaleString()} / ৳1,999`}
-                    </span>
-                  )}
-                </div>
-
-                {deliveryZone === "dhaka" && !isDhakaFree && (
-                  <div className="w-full bg-zinc-100 rounded-full h-2 overflow-hidden">
-                    <div
-                      className="bg-[#4F46E5] h-full rounded-full transition-all duration-500 ease-out"
-                      style={{
-                        width: `${Math.min(100, Math.max(5, Math.round((subtotal / 1999) * 100)))}%`,
-                      }}
-                    />
-                  </div>
-                )}
               </div>
 
               {/* Items Card List */}
@@ -1062,13 +1003,13 @@ export default function CartPage() {
                 <div className="flex items-center gap-2">
                   <IoCallOutline className="w-4 h-4 text-[#EA580C] shrink-0" />
                   <span>
-                    Support: <strong className="text-zinc-900">01712345678</strong> (9 AM – 9 PM)
+                    Support: <strong className="text-zinc-900">01722301927</strong> (9 AM – 9 PM)
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <FaWhatsapp className="w-4 h-4 text-green-600 shrink-0" />
                   <a
-                    href="https://wa.me/8801712345678"
+                    href="https://wa.me/8801722301927"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-700 hover:underline font-semibold"

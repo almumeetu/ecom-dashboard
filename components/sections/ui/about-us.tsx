@@ -33,7 +33,7 @@ export default function AboutUs() {
                 </p>
               </div>
               <p className="text-white text-3xl sm:text-4xl font-normal font-['Bembo_Std'] leading-9 sm:leading-10">
-                Founded by entrepreneur NovaMart Team in Banani, Dhaka, Rajshahi Division, NovaMart brings verified authenticity to Bangladesh&apos;s e-commerce landscape. Sourcing directly from regional farms, artisan clusters, and official brand distributors, we guarantee 100% genuine products with fair pricing and nationwide doorstep delivery.
+                Founded by entrepreneur NovaMart Team in Banani, Dhaka, NovaMart brings verified authenticity to Bangladesh&apos;s e-commerce landscape. Sourcing directly from regional farms, artisan clusters, and official brand distributors, we guarantee 100% genuine products with fair pricing and nationwide doorstep delivery.
               </p>
             </div>
 

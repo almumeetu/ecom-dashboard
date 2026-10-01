@@ -19,7 +19,7 @@ export default function Prestige() {
               <p 
                 className="text-sm md:text-base leading-relaxed text-stone-gray font-['Bembo_Std']"
               >
-                Rooted in the agricultural hubs of Banani, Dhaka and Rajshahi Division, NovaMart bridges the gap between verified producers and modern consumers. Built upon uncompromising quality and transparent origin, we position every selection not as a commodity, but as a trusted expression of authenticity.
+                Headquartered in Banani, Dhaka, NovaMart bridges the gap between verified producers and modern consumers. Built upon uncompromising quality and transparent origin, we position every selection not as a commodity, but as a trusted expression of authenticity.
               </p>
 
               {/* Exceptional Quality Quote Banner */}

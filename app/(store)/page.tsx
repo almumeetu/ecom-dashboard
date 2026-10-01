@@ -35,7 +35,7 @@ export default function Home() {
       try {
         const [cats, prods] = await Promise.all([
           fetchShopCategories(),
-          fetchShopProducts({ page: 1, limit: 30 }),
+          fetchShopProducts({ page: 1, limit: 200 }),
         ]);
 
         if (cats && cats.length > 0) {
@@ -148,7 +148,7 @@ export default function Home() {
               <span>Verified Authentic Catalog</span>
             </div>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-zinc-950 tracking-tight mt-0.5">
-              {selectedCategory === "All" ? "Featured Picks" : selectedCategory}
+              {selectedCategory === "All" ? "All Products" : selectedCategory}
               <span className="text-xs sm:text-sm font-medium text-zinc-400 ml-2.5">
                 ({displayedProducts.length} items)
               </span>

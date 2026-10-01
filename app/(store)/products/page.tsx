@@ -53,7 +53,7 @@ function ProductsPageContent() {
 
   // Display & UI state
   const [showDesktopSidebar, setShowDesktopSidebar] = useState(true);
-  const [viewMode, setViewMode] = useState<'grid1' | 'grid2' | 'grid3' | 'grid4'>('grid3');
+  const [viewMode, setViewMode] = useState<'grid1' | 'grid2' | 'grid3' | 'grid4'>('grid4');
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
 

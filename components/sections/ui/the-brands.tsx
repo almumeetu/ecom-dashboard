@@ -17,7 +17,7 @@ export default function TheBrands() {
               </h2>
               
               <p className="mt-6 font-['Bembo_Std'] text-lg font-normal leading-6">
-                NovaMart is an innovative multi-category hypermarket and marketplace platform founded by entrepreneur <span className="italic">NovaMart Team</span>. Originating from Banani, Dhaka, Rajshahi Division, we bridge the gap between primary producers, agro-farms, and consumer households with authentic goods, fair pricing, and transparent standards.
+                NovaMart is an innovative multi-category hypermarket and marketplace platform founded by entrepreneur <span className="italic">NovaMart Team</span>. Originating from Banani, Dhaka, we bridge the gap between primary producers, agro-farms, and consumer households with authentic goods, fair pricing, and transparent standards.
               </p>
               
               <p className="mt-4 font-['Bembo_Std'] text-lg font-normal">

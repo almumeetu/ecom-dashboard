@@ -56,6 +56,11 @@ const nextConfig: NextConfig = {
         port: "5010",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "api-novamart.webdevss.tech",
+        pathname: "/**",
+      },
     ],
   },
   async rewrites() {
@@ -75,6 +80,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      {
+        source: "/shop",
+        destination: "/products",
+        permanent: true,
+      },
       {
         source: "/account",
         destination: "/profile",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent, Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/app/_providers/auth-provider";
@@ -162,14 +163,31 @@ function SignUpFormContent() {
             </div>
           </div>
 
-          <div className="pt-8 mt-8 border-t border-white/10 text-xs text-zinc-400 space-y-1.5">
-            <div className="flex items-center gap-2 text-zinc-300">
-              <FiMapPin className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
-              <span>Banani, Dhaka, Rajshahi</span>
+          {/* Founder & Location Footer */}
+          <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#4F46E5]/40 ring-2 ring-[#4F46E5]/20 shrink-0">
+                <Image
+                  src="/images/team/abdullah-2.jpg"
+                  alt="NovaMart Team"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
+              <div className="text-[11px] leading-tight">
+                <div className="text-white font-bold">NovaMart Team</div>
+                <div className="text-[10px] text-[#818CF8] font-medium">Founder &amp; CEO</div>
+              </div>
             </div>
-            <div className="flex items-center gap-2 text-zinc-300">
-              <FiPhone className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
-              <span>Hotline: 01722301927</span>
+            <div className="text-right text-[10px] text-zinc-400">
+              <div className="flex items-center justify-end gap-1 text-zinc-300">
+                <FiMapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Dhaka</span>
+              </div>
+              <a href="tel:01722301927" className="text-zinc-300 hover:text-indigo-300 font-semibold block mt-0.5">
+                01722301927
+              </a>
             </div>
           </div>
         </div>

@@ -184,7 +184,7 @@ export default function AuthModal() {
             <div className="flex items-center gap-2.5">
               <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#4F46E5]/40 ring-2 ring-[#4F46E5]/20 shrink-0">
                 <Image
-                  src="/images/team/Abdullah.jpg"
+                  src="/images/team/abdullah-2.jpg"
                   alt="NovaMart Team"
                   width={40}
                   height={40}
@@ -199,7 +199,7 @@ export default function AuthModal() {
             <div className="text-right text-[10px] text-zinc-400">
               <div className="flex items-center justify-end gap-1 text-zinc-300">
                 <FiMapPin className="w-3 h-3 text-emerald-400 shrink-0" />
-                <span>Mohadevpur</span>
+                <span>Dhaka</span>
               </div>
               <a href="tel:01722301927" className="text-zinc-300 hover:text-indigo-300 font-semibold block mt-0.5">
                 01722301927

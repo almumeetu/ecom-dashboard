@@ -34,7 +34,7 @@ export default function FounderCta() {
     ? whatsappNumber
     : `88${whatsappNumber.replace(/^0+/, "")}`;
   const address =
-    settings?.branchAddress?.trim() || "Banani, Dhaka • Rajshahi Division, Bangladesh";
+    settings?.branchAddress?.trim() || "Banani, Dhaka, Bangladesh";
 
   return (
     <section className="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-[#0A0D12] via-[#0F141C] to-[#141A23] overflow-hidden relative">
@@ -50,7 +50,7 @@ export default function FounderCta() {
             {/* ══════════ Left: Founder Image ══════════ */}
             <div className="lg:col-span-5 relative h-[320px] sm:h-[400px] md:h-[460px] lg:h-auto lg:min-h-[540px]">
               <Image
-                src="/images/team/Abdullah.jpg"
+                src="/images/team/abdullah-2.jpg"
                 alt={`NovaMart Team — Founder & CEO of ${shopName}`}
                 fill
                 priority

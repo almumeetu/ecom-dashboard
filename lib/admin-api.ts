@@ -639,7 +639,10 @@ export type ReportOverview = {
   purchases: ReportOverviewPurchases;
 };
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "/api/v1";
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE_URL && !process.env.NEXT_PUBLIC_API_BASE_URL.includes("localhost")
+    ? process.env.NEXT_PUBLIC_API_BASE_URL
+    : "/api/v1";
 
 export function isAllowedAdminRole(role: unknown): boolean {
   if (!role) return false;
@@ -989,19 +992,19 @@ export function resolveImageUrl(url?: string | null): string {
   }
 
   // ── 5. Derive backend origin from env ─────────────────────────────
-  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "https://api-ecom.bornobyte.com/api/v1";
-  let apiOrigin = "https://api-ecom.bornobyte.com";
+  const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "/api/v1";
+  let apiOrigin = "";
   try {
-    if (apiBaseUrl.startsWith("http://") || apiBaseUrl.startsWith("https://")) {
+    if ((apiBaseUrl.startsWith("http://") || apiBaseUrl.startsWith("https://")) && !apiBaseUrl.includes("localhost")) {
       apiOrigin = new URL(apiBaseUrl).origin;
     }
   } catch {
-    apiOrigin = "https://api-ecom.bornobyte.com";
+    apiOrigin = "";
   }
 
   // ── 6. Relative paths (with or without leading slash) ─────────────
   const cleanPath = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
-  return `${apiOrigin}${cleanPath}`;
+  return apiOrigin ? `${apiOrigin}${cleanPath}` : cleanPath;
 }
 
 // ─── News / Blog ───────────────────────────────────────────────────────────

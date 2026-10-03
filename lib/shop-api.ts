@@ -3,7 +3,11 @@ import { type PaginatedProducts, type Product as AdminProduct, type Campaign, re
 const API_BASE_URL =
   typeof window === "undefined"
     ? (process.env.API_BASE_URL ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1")
-    : (process.env.NEXT_PUBLIC_API_BASE_URL ?? "https://api-ecom.bornobyte.com/api/v1");
+    : (
+        process.env.NEXT_PUBLIC_API_BASE_URL && !process.env.NEXT_PUBLIC_API_BASE_URL.includes("localhost")
+          ? process.env.NEXT_PUBLIC_API_BASE_URL
+          : "/api/v1"
+      );
 
 export type ShopProduct = {
   id: string;
@@ -229,10 +233,21 @@ export async function fetchShopProducts(
 
     if (res.status === 200) {
       const paginated: PaginatedProducts = await res.json();
-      return {
-        data: (paginated.data ?? []).map(mapProduct),
-        total: paginated.meta?.total ?? 0,
-      };
+      const mapped = (paginated.data ?? []).map(mapProduct);
+      if (mapped.length > 0) {
+        return {
+          data: mapped,
+          total: paginated.meta?.total ?? mapped.length,
+        };
+      }
+      // If the backend has products in the database (total > 0), but this specific search/filter
+      // returned 0 results, return empty so empty state shows properly for valid empty searches.
+      if (paginated.meta?.total && paginated.meta.total > 0 && (search || categoryId || brandId)) {
+        return {
+          data: [],
+          total: 0,
+        };
+      }
     }
   } catch (err) {
     console.warn("API product fetch failed, using fallback:", err);

@@ -122,11 +122,11 @@ export default function GiftsPage() {
           <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             {/* Header */}
             <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-16">
-              <h2 className="inline-flex justify-center flex-wrap items-center gap-1.5">
-                <span className="text-[#C6B485] text-4xl md:text-5xl lg:text-6xl font-normal font-['Bembo_Std'] leading-tight lg:leading-[56px]">Curated</span>
-                <span className="text-[#8E866B] text-4xl md:text-5xl lg:text-6xl font-normal font-['Snell_Roundhand_LT_Std'] leading-tight lg:leading-[56px]">Collections</span>
+              <h2 className="inline-flex justify-center flex-wrap items-center gap-2">
+                <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">Curated</span>
+                <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">Collections</span>
               </h2>
-              <p className="max-w-[700px] text-center text-[#83847e] text-base lg:text-lg font-normal font-['Bembo_Std'] leading-6 mx-auto">
+              <p className="max-w-[700px] text-center text-zinc-500 text-sm lg:text-base font-normal leading-relaxed mx-auto">
                 Designed to make a lasting impression for corporate, seasonal, and personal gifting.
               </p>
             </div>
@@ -169,9 +169,9 @@ export default function GiftsPage() {
               
               {/* Left Title Panel */}
               <div className="lg:col-span-5 flex flex-col justify-start items-start gap-4">
-                <h2 className="text-[#C5B382] text-2xl sm:text-4xl md:text-5xl font-normal font-['Bembo_Std'] leading-tight tracking-wide whitespace-nowrap">
+                <h2 className="text-zinc-900 text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
                   Give More Than Gifts—
-                  <span className="block mt-2 font-['Snell_Roundhand_LT_Std'] italic text-[#1C1C1C] text-3xl sm:text-5xl md:text-6xl leading-none whitespace-nowrap">
+                  <span className="block mt-2 text-[#4F46E5] text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
                     Share a Heritage
                   </span>
                 </h2>
@@ -194,10 +194,10 @@ export default function GiftsPage() {
                     {/* Text details (only if title is defined) */}
                     {item.title && (
                       <div className="space-y-2">
-                        <h4 className="font-['Snell_Roundhand_LT_Std'] italic text-2xl text-[#C5B382] tracking-wide font-normal leading-tight lowercase">
+                        <h4 className="font-bold text-base text-zinc-900 tracking-tight leading-snug">
                           {item.title}
                         </h4>
-                        <p className="font-['Bembo_Std'] text-zinc-650 text-xs sm:text-sm leading-relaxed font-light">
+                        <p className="text-zinc-500 text-xs sm:text-sm leading-relaxed">
                           {item.desc}
                         </p>
                       </div>

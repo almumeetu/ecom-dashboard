@@ -75,7 +75,7 @@ export default function CorporateSolutions() {
             <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider inline-block mb-2">
               Tailored Enterprise Capabilities
             </span>
-            <h2 className="font-['Bembo_Std'] text-3xl sm:text-4xl md:text-5xl text-stone-900 font-semibold mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-zinc-900 font-extrabold tracking-tight mb-4">
               Curated Corporate Solutions
             </h2>
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">

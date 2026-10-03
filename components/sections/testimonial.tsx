@@ -75,7 +75,7 @@ export default function Testimonial() {
             <span>Customer Reviews</span>
           </div>
 
-          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
             Trusted by Thousands
           </h2>
 

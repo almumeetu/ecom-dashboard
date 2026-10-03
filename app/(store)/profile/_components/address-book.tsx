@@ -120,10 +120,10 @@ export default function AddressBookView() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className={SECTION_LABEL}>Address Book</p>
-          <h2 className="font-['Bembo_Std'] text-2xl text-zinc-850 font-normal mt-1">
+          <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
             Saved Addresses
           </h2>
-          <p className="font-['Bembo_Std'] text-zinc-400 text-sm italic mt-0.5">
+          <p className="text-zinc-500 text-sm mt-0.5">
             Manage your billing and shipping locations.
           </p>
         </div>
@@ -143,7 +143,7 @@ export default function AddressBookView() {
       ) : addresses.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 border border-dashed border-stone-200 rounded-xl">
           <FiMapPin className="text-4xl text-zinc-200 mb-4" />
-          <p className="font-['Bembo_Std'] text-zinc-400 text-base italic">No saved addresses yet.</p>
+          <p className="text-zinc-500 text-sm font-medium">No saved addresses yet.</p>
           <button
             onClick={openNew}
             className="mt-4 font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-[#C5B382] hover:text-zinc-800 transition cursor-pointer"
@@ -204,7 +204,7 @@ export default function AddressBookView() {
             <div className="flex items-start justify-between px-7 py-5 border-b border-stone-100">
               <div>
                 <p className={SECTION_LABEL}>{editing ? "Edit Address" : "New Address"}</p>
-                <h3 className="font-['Bembo_Std'] text-xl text-zinc-850 mt-0.5">
+                <h3 className="text-xl font-bold text-zinc-900 tracking-tight mt-0.5">
                   {editing ? "Update shipping address" : "Add a new address"}
                 </h3>
               </div>

@@ -109,7 +109,7 @@ export default function FounderCta() {
               </div>
 
               {/* Heading */}
-              <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight font-['Bembo_Std'] mb-3 sm:mb-4 leading-tight sm:leading-snug">
+              <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3 sm:mb-4 leading-tight sm:leading-snug">
                 Built on Trust,{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-indigo-300 to-[#A5B4FC]">
                   Delivered with Care

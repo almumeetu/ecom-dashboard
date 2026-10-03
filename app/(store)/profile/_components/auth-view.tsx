@@ -47,7 +47,7 @@ export default function AuthView() {
   return (
     <main className="min-h-[70vh] flex items-center justify-center bg-[#FAF9F5] py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-[450px] bg-white border border-stone-200 p-8 shadow-sm flex flex-col items-center rounded-lg animate-fadeIn">
-        <h1 className="font-['Bembo_Std'] text-3xl font-normal text-zinc-800 tracking-wide mb-6">
+        <h1 className="text-3xl font-extrabold text-zinc-900 tracking-tight mb-6">
           {authView === "login" ? "Login" : "Sign Up"}
         </h1>
         

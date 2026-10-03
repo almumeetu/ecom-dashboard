@@ -43,16 +43,16 @@ export default function GiftItem() {
       <div className="relative z-10 container mx-auto px-4 sm:px-6">
         {/* Title Section */}
         <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-12 md:mb-16">
-          <h2 className="inline-flex justify-center flex-wrap items-center gap-1.5">
-            <span className="text-white text-4xl md:text-5xl lg:text-6xl font-normal font-['Bembo_Std'] leading-tight lg:leading-[56px]">
+          <h2 className="inline-flex justify-center flex-wrap items-center gap-2">
+            <span className="text-white text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
               Gift
             </span>
-            <span className="text-white text-4xl md:text-5xl lg:text-6xl font-normal font-['Snell_Roundhand_LT_Std'] leading-tight lg:leading-[56px]">
+            <span className="text-[#818CF8] text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
               Ideas
             </span>
           </h2>
-          <p className="max-w-[750px] text-center text-white text-base lg:text-lg font-normal font-['Bembo_Std'] leading-relaxed mx-auto">
-            Explore our delightful selection of tea gift ideas perfect for every tea lover in your life! From unique blends to premium accessories, we have something special for everyone. Shop our collection now and find the perfect gift that will warm their hearts and elevate their tea experience!
+          <p className="max-w-[750px] text-center text-zinc-300 text-sm lg:text-base font-normal leading-relaxed mx-auto">
+            Explore our delightful selection of gift sets perfect for every occasion. From curated bundles to premium lifestyle essentials, find the perfect gift that will delight your friends and family.
           </p>
         </div>
 

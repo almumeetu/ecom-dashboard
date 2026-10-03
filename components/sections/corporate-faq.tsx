@@ -49,7 +49,7 @@ export default function CorporateFAQ() {
             <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
               Corporate Guidelines
             </span>
-            <h2 className="font-['Bembo_Std'] text-3xl sm:text-4xl text-stone-900 mt-1">
+            <h2 className="text-3xl sm:text-4xl text-zinc-900 font-extrabold tracking-tight mt-1">
               Corporate &amp; Wholesale FAQs
             </h2>
             <p className="text-stone-500 text-xs sm:text-sm mt-2">
@@ -93,7 +93,7 @@ export default function CorporateFAQ() {
               <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 block mb-1">
                 Need Fast Proposal or Custom Budgeting?
               </span>
-              <h3 className="font-['Bembo_Std'] text-2xl text-stone-900 font-semibold mb-2">
+              <h3 className="text-2xl text-zinc-900 font-bold tracking-tight mb-2">
                 Connect Directly with Our Executive Desk
               </h3>
               <p className="text-stone-600 text-xs sm:text-sm leading-relaxed max-w-lg">

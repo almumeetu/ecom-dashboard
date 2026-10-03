@@ -95,13 +95,13 @@ export default function OrdersView() {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Purchase History</p>
-        <h2 className="font-['Bembo_Std'] text-2xl text-zinc-850 font-normal mt-1">
+        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
           My Orders
           {orders.length > 0 && (
             <span className="ml-3 font-sans text-sm font-normal text-zinc-400">({orders.length})</span>
           )}
         </h2>
-        <p className="font-['Bembo_Std'] text-zinc-400 text-sm italic mt-0.5">
+        <p className="text-zinc-500 text-sm mt-0.5">
           Review and track all your store purchases.
         </p>
       </div>
@@ -114,7 +114,7 @@ export default function OrdersView() {
       ) : orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 border border-dashed border-stone-200 rounded-xl">
           <FiShoppingBag className="text-4xl text-zinc-200 mb-4" />
-          <p className="font-['Bembo_Std'] text-zinc-400 text-base italic">No orders placed yet.</p>
+          <p className="text-zinc-500 text-sm font-medium">No orders placed yet.</p>
           <p className="font-sans text-xs text-zinc-300 mt-1">
             Your order history will appear here after your first purchase.
           </p>
@@ -175,7 +175,7 @@ export default function OrdersView() {
             <div className="flex items-start justify-between px-7 py-5 border-b border-stone-100">
               <div>
                 <p className={SECTION_LABEL}>Order Details</p>
-                <h3 className="font-['Bembo_Std'] text-xl text-zinc-850 mt-0.5">{selected.orderNumber}</h3>
+                <h3 className="text-xl font-bold text-zinc-900 tracking-tight mt-0.5">{selected.orderNumber}</h3>
                 <p className="font-sans text-[10px] text-zinc-400 mt-0.5">
                   Placed{" "}
                   {new Date(selected.placedAt || selected.createdAt).toLocaleDateString("en-US", {
@@ -249,7 +249,7 @@ export default function OrdersView() {
                 <p className="font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-zinc-400">
                   Total Paid
                 </p>
-                <p className="font-['Bembo_Std'] text-xl text-zinc-850">
+                <p className="font-bold text-xl text-zinc-900 tracking-tight">
                   ৳{Number(selected.total).toLocaleString()}
                 </p>
               </div>

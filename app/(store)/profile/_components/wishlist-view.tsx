@@ -43,13 +43,13 @@ export default function WishlistView() {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Saved Items</p>
-        <h2 className="font-['Bembo_Std'] text-2xl text-zinc-850 font-normal mt-1">
+        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
           My Wishlist
           {items.length > 0 && (
             <span className="ml-3 font-sans text-sm font-normal text-zinc-400">({items.length})</span>
           )}
         </h2>
-        <p className="font-['Bembo_Std'] text-zinc-400 text-sm italic mt-0.5">
+        <p className="text-zinc-500 text-sm mt-0.5">
           Your curated selection of premium items.
         </p>
       </div>
@@ -58,7 +58,7 @@ export default function WishlistView() {
       {items.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 border border-dashed border-stone-200 rounded-xl">
           <FiHeart className="text-4xl text-zinc-200 mb-4" />
-          <p className="font-['Bembo_Std'] text-zinc-400 text-base italic">Your wishlist is empty.</p>
+          <p className="text-zinc-500 text-sm font-medium">Your wishlist is empty.</p>
           <p className="font-sans text-xs text-zinc-300 mt-1">
             Browse our collections and save items you love.
           </p>

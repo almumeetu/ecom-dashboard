@@ -57,14 +57,14 @@ export default function TeaLifestyle() {
         {/* Section Title */}
         <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden text-center">
           <h2 className="inline-flex justify-center flex-wrap items-center gap-2">
-            <span className="text-[#C6B485] text-4xl md:text-5xl lg:text-6xl font-normal font-['Bembo_Std'] leading-tight">
-              Tea
-            </span>
-            <span className="text-[#8E866B] text-4xl md:text-5xl lg:text-6xl font-normal font-['Snell_Roundhand_LT_Std'] italic leading-tight">
+            <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
               Lifestyle
             </span>
+            <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+              Journal
+            </span>
           </h2>
-          <p className="max-w-[700px] text-center text-[#83847e] text-base lg:text-lg font-normal font-['Bembo_Std'] leading-relaxed">
+          <p className="max-w-[700px] text-center text-zinc-500 text-sm lg:text-base font-normal leading-relaxed">
             Discover recipes, wellness benefits, and preparation guides from our team of tea specialists.
           </p>
         </div>
@@ -88,11 +88,11 @@ export default function TeaLifestyle() {
 
               {/* Card Body */}
               <div className="flex-1 p-8 flex flex-col justify-between items-start gap-6 min-h-[250px]">
-                <div className="flex flex-col gap-3">
-                  <h3 className="font-['Bembo_Std'] text-2xl md:text-3xl font-normal tracking-wide">
+                <div className="flex flex-col gap-2">
+                  <h3 className="font-bold text-xl md:text-2xl tracking-tight text-zinc-900">
                     {item.title}
                   </h3>
-                  <p className="font-['Bembo_Std'] text-sm md:text-base leading-relaxed opacity-90">
+                  <p className="font-sans text-xs md:text-sm text-zinc-600 leading-relaxed">
                     {item.description}
                   </p>
                 </div>

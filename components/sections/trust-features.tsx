@@ -39,7 +39,7 @@ export default function TrustFeatures() {
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-200/80 text-stone-800 text-[11px] font-bold uppercase tracking-wider mb-3">
             <span>Marketplace Promise</span>
           </div>
-          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
             Why Shop On Our Marketplace
           </h2>
           <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">

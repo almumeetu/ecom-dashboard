@@ -96,10 +96,10 @@ export default function TrackOrderView() {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Shipment</p>
-        <h2 className="font-['Bembo_Std'] text-2xl text-zinc-850 font-normal mt-1">
+        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
           Track Your Order
         </h2>
-        <p className="font-['Bembo_Std'] text-zinc-400 text-sm italic mt-0.5">
+        <p className="text-zinc-500 text-sm mt-0.5">
           Enter your invoice ID to see real-time shipment status.
         </p>
       </div>
@@ -259,7 +259,7 @@ export default function TrackOrderView() {
           ) : (
             <div className="flex flex-col items-center justify-center py-16 border border-dashed border-stone-200 rounded-xl">
               <FiSearch className="text-3xl text-zinc-200 mb-4" />
-              <p className="font-['Bembo_Std'] text-zinc-500 text-base italic">Order not found.</p>
+              <p className="text-zinc-600 text-sm font-medium">Order not found.</p>
               <p className="font-sans text-xs text-zinc-300 mt-1 text-center max-w-xs">
                 Please verify your Invoice ID or Order Number and try again.
               </p>

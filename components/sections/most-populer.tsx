@@ -40,7 +40,7 @@ export default function MostPopuler() {
             <span>Customer Favorites</span>
           </div>
 
-          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
             Most Popular & Best Sellers
           </h2>
 

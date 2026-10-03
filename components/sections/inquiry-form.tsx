@@ -137,7 +137,7 @@ Corporate Gifting / Event Inquiry Details:
               <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
                 Direct Enterprise Desk
               </span>
-              <h2 className="font-['Bembo_Std'] text-3xl sm:text-4xl text-[#1C1C1C] font-normal leading-tight">
+              <h2 className="font-sans font-medium text-3xl sm:text-4xl text-[#1C1C1C] font-normal leading-tight">
                 Let&apos;s Curate Something Worth Remembering
               </h2>
               <p className="font-gotham text-stone-600 text-xs sm:text-sm leading-relaxed">
@@ -161,7 +161,7 @@ Corporate Gifting / Event Inquiry Details:
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="font-['Bembo_Std'] text-sm text-[#1C1C1C] font-semibold tracking-wide">
+                  <h4 className="font-sans font-medium text-sm text-[#1C1C1C] font-semibold tracking-wide">
                     Executive Gourmet Hamper
                   </h4>
                   <p className="text-[11px] text-stone-500">Cold-pressed oils, honey &amp; organic sweets</p>
@@ -177,7 +177,7 @@ Corporate Gifting / Event Inquiry Details:
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="font-['Bembo_Std'] text-sm text-[#1C1C1C] font-semibold tracking-wide">
+                  <h4 className="font-sans font-medium text-sm text-[#1C1C1C] font-semibold tracking-wide">
                     Artisanal Celebration Box
                   </h4>
                   <p className="text-[11px] text-stone-500">Festive Eid, milestone &amp; onboarding</p>
@@ -210,7 +210,7 @@ Corporate Gifting / Event Inquiry Details:
           <div className="lg:col-span-7">
             <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-stone-200">
               <div className="mb-8">
-                <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl text-[#1C1C1C] font-semibold mb-2">
+                <h3 className="font-sans font-medium text-2xl sm:text-3xl text-[#1C1C1C] font-semibold mb-2">
                   Tell Us About Your Requirement
                 </h3>
                 <p className="font-gotham text-xs text-stone-500 leading-relaxed">
@@ -229,7 +229,7 @@ Corporate Gifting / Event Inquiry Details:
                   {/* Row 1 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Full Name <span className="text-red-500">*</span></label>
+                      <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Full Name <span className="text-red-500">*</span></label>
                       <input
                         type="text"
                         name="fullName"
@@ -243,7 +243,7 @@ Corporate Gifting / Event Inquiry Details:
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Organisation / Company <span className="text-red-500">*</span></label>
+                      <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Organisation / Company <span className="text-red-500">*</span></label>
                       <input
                         type="text"
                         name="organisation"
@@ -260,7 +260,7 @@ Corporate Gifting / Event Inquiry Details:
 
                   {/* Row 2 */}
                   <div className="space-y-1.5">
-                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Official Email Address <span className="text-red-500">*</span></label>
+                    <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Official Email Address <span className="text-red-500">*</span></label>
                     <input
                       type="email"
                       name="email"
@@ -276,7 +276,7 @@ Corporate Gifting / Event Inquiry Details:
 
                   {/* Row 3 */}
                   <div className="space-y-1.5">
-                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Phone Number <span className="text-red-500">*</span></label>
+                    <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Phone Number <span className="text-red-500">*</span></label>
                     <div className="flex border border-stone-200 rounded-xl overflow-hidden focus-within:border-emerald-600">
                       <select
                         name="countryCode"
@@ -313,7 +313,7 @@ Corporate Gifting / Event Inquiry Details:
                   {/* Row 4 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Purpose of Inquiry <span className="text-red-500">*</span></label>
+                      <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Purpose of Inquiry <span className="text-red-500">*</span></label>
                       <select
                         name="purpose"
                         value={formData.purpose}
@@ -332,7 +332,7 @@ Corporate Gifting / Event Inquiry Details:
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Preferred Category / Solution</label>
+                      <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Preferred Category / Solution</label>
                       <select
                         name="preferredCollection"
                         value={formData.preferredCollection}
@@ -352,7 +352,7 @@ Corporate Gifting / Event Inquiry Details:
                   {/* Row 5 */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Target Delivery Date <span className="text-red-500">*</span></label>
+                      <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Target Delivery Date <span className="text-red-500">*</span></label>
                       <input
                         type="date"
                         name="deliveryDate"
@@ -365,7 +365,7 @@ Corporate Gifting / Event Inquiry Details:
                       )}
                     </div>
                     <div className="space-y-1.5">
-                      <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Estimated Quantity (Units/Boxes) <span className="text-red-500">*</span></label>
+                      <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Estimated Quantity (Units/Boxes) <span className="text-red-500">*</span></label>
                       <input
                         type="text"
                         name="quantity"
@@ -382,7 +382,7 @@ Corporate Gifting / Event Inquiry Details:
 
                   {/* Row 6 */}
                   <div className="space-y-1.5">
-                    <label className="font-['Bembo_Std'] text-xs uppercase tracking-wide text-stone-700">Special Instructions / Customization Details</label>
+                    <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Special Instructions / Customization Details</label>
                     <textarea
                       name="requirements"
                       value={formData.requirements}

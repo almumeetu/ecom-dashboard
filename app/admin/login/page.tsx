@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
         <div className="mb-4">
           <Logo variant="dark" size="lg" />
         </div>
-        <h1 className="font-['Bembo_Std'] text-2xl font-normal text-zinc-800 tracking-wide mb-6">
+        <h1 className="text-2xl font-black text-zinc-900 tracking-tight mb-6">
           Vendor & Admin Portal
         </h1>
 

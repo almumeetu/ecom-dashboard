@@ -24,7 +24,7 @@ export default function PromoBanner() {
               </span>
 
               <div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-['Bembo_Std'] leading-tight mb-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight mb-2">
                   Farm Fresh Groceries & Pantry
                 </h3>
                 <p className="text-zinc-200 text-xs sm:text-sm max-w-sm mb-4 sm:mb-5 leading-relaxed">
@@ -59,7 +59,7 @@ export default function PromoBanner() {
               </span>
 
               <div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold font-['Bembo_Std'] leading-tight mb-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight mb-2">
                   New Season Designer Drops
                 </h3>
                 <p className="text-zinc-200 text-xs sm:text-sm max-w-sm mb-4 sm:mb-5 leading-relaxed">

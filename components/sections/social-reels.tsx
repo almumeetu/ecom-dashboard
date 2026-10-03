@@ -58,7 +58,7 @@ export default function SocialReels() {
             <span>Follow Us on Facebook</span>
           </div>
 
-          <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight font-['Bembo_Std'] mb-3">
+          <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
             Watch Our Latest Reels
           </h2>
 

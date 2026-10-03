@@ -27,15 +27,15 @@ export default function Sustainable() {
 
         {/* Content */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <h2 className="font-['Bembo_Std'] text-5xl md:text-6xl">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
             Sustainable
           </h2>
 
-          <h3 className="mt-2 font-['Snell_Roundhand_LT_Std'] text-4xl italic md:text-6xl">
+          <h3 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-emerald-400">
             and ethical sourcing
           </h3>
 
-          <p className="mt-8 max-w-4xl font-['Bembo_Std'] text-sm leading-6 md:text-lg">
+          <p className="mt-6 max-w-3xl font-sans text-sm md:text-base leading-relaxed text-zinc-200">
             NovaMart has built a sustainable, transparent and ethical multi-category sourcing supply chain. We work directly with farmers, agro-growers, certified manufacturers, and local craftsmen to ensure due diligence and fair pay across our network. Every purchase on NovaMart directly empowers ethical commerce and dignified livelihoods.
           </p>
         </div>

@@ -102,35 +102,44 @@ export default function StoreHero({
         {/* ═══════════════ LEFT COLUMN: Shop by Category Sidebar ═══════════════ */}
         <div className="hidden lg:flex lg:col-span-3 flex-col bg-white rounded-2xl border border-zinc-200/90 shadow-2xs overflow-hidden h-[420px] xl:h-[450px]">
           {/* Header */}
-          <div className="bg-[#1E1B4B] text-white px-4 py-3.5 flex items-center gap-2.5 font-bold text-sm tracking-wide shrink-0">
-            <LuMenu className="w-4 h-4 text-[#A5B4FC]" />
-            <span>Shop By Category</span>
+          <div className="bg-[#1E1B4B] text-white px-4 py-3 flex items-center justify-between font-bold text-sm tracking-wide shrink-0">
+            <div className="flex items-center gap-2">
+              <LuMenu className="w-4 h-4 text-[#A5B4FC]" />
+              <span>Shop By Category</span>
+            </div>
+            <span className="text-[10px] bg-indigo-500/30 text-indigo-200 px-2 py-0.5 rounded-full font-bold">
+              {sidebarCategories.length} Depts
+            </span>
           </div>
 
           {/* Categories List */}
-          <div className="flex-1 overflow-y-auto divide-y divide-zinc-100 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex-1 overflow-y-auto divide-y divide-zinc-100/80 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {sidebarCategories.map((cat) => {
               const isSelected = selectedCategory.toLowerCase() === cat.name.toLowerCase();
               return (
                 <button
                   key={cat.id}
                   type="button"
-                  onClick={() => onSelectCategory(cat.name)}
-                  className={`w-full px-3.5 py-2.5 flex items-center justify-between text-left transition-all duration-150 group cursor-pointer ${
+                  onClick={() => {
+                    onSelectCategory(cat.name);
+                    const el = document.getElementById("featured-picks-section");
+                    if (el) el.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className={`w-full px-3.5 py-2.5 flex items-center justify-between text-left transition-all duration-200 group cursor-pointer ${
                     isSelected
                       ? "bg-[#EEF2FF] text-[#4F46E5] font-bold"
-                      : "text-zinc-700 hover:bg-[#EEF2FF] hover:text-[#4F46E5]"
+                      : "text-zinc-700 hover:bg-[#EEF2FF]/80 hover:text-[#4F46E5]"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                    <div className="w-7 h-7 rounded-full overflow-hidden bg-zinc-100 shrink-0 relative border border-zinc-200/60 flex items-center justify-center text-xs">
+                    <div className="w-8 h-8 rounded-xl overflow-hidden bg-gradient-to-br from-indigo-50 to-zinc-100 shrink-0 relative border border-zinc-200/80 shadow-2xs group-hover:scale-105 transition-transform flex items-center justify-center text-xs">
                       {cat.imageUrl ? (
                         <Image
                           src={cat.imageUrl}
                           alt={cat.name}
                           fill
-                          sizes="28px"
-                          className="object-cover group-hover:scale-110 transition-transform"
+                          sizes="32px"
+                          className="object-cover group-hover:scale-110 transition-transform duration-300"
                           unoptimized={cat.imageUrl.includes("unsplash.com")}
                         />
                       ) : (
@@ -145,8 +154,8 @@ export default function StoreHero({
                   <LuChevronRight
                     className={`w-3.5 h-3.5 shrink-0 transition-transform ${
                       isSelected
-                        ? "text-[#4F46E5] translate-x-0.5"
-                        : "text-zinc-400 group-hover:text-[#4F46E5] group-hover:translate-x-0.5"
+                        ? "text-[#4F46E5] translate-x-1"
+                        : "text-zinc-400 group-hover:text-[#4F46E5] group-hover:translate-x-1"
                     }`}
                   />
                 </button>

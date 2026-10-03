@@ -44,10 +44,10 @@ export default function LuxuryHero() {
           <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-stone-850/80 mb-2">
             Enterprise &amp; Institutional Solutions
           </span>
-          <h1 className="font-['Bembo_Std'] font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[46px] text-[#2A2A2A] tracking-wide leading-tight">
+          <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[44px] text-zinc-900 tracking-tight leading-tight">
             Bespoke Corporate Gifting &amp; Wholesale for Those
           </h1>
-          <h2 className="font-['Snell_Roundhand_LT_Std'] italic text-3xl sm:text-4xl md:text-5xl lg:text-[52px] text-[#2A2A2A] mt-1 block">
+          <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-[#4F46E5] mt-1 block tracking-tight">
             Who Represent Excellence
           </h2>
         </div>

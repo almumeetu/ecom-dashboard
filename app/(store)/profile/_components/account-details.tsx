@@ -125,7 +125,7 @@ export default function AccountDetailsView() {
       {/* ── Page Header ──────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Personal Information</p>
-        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
+        <h2 className="text-2xl font-medium text-zinc-900 tracking-tight mt-1">
           Account Details
         </h2>
         <p className="text-zinc-500 text-sm mt-0.5">

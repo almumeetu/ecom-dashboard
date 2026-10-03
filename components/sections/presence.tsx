@@ -10,14 +10,14 @@ export default function Presence() {
           }}
         >
           <div className="presence-content text-center flex flex-col items-center gap-5 lg:gap-8">
-            <p className="text-zinc-600 text-xs md:text-sm font-bold tracking-widest uppercase">
+            <p className="text-zinc-600 text-xs md:text-sm font-medium tracking-widest uppercase">
               The Grand Passage
             </p>
             <h2 className="flex flex-row flex-wrap items-center justify-center gap-x-2 sm:gap-x-3 gap-y-1">
-              <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+              <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
                 From the Gardens of Sylhet to
               </span>
-              <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+              <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
                 Tables Across the World
               </span>
             </h2>

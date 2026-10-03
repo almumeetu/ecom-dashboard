@@ -92,7 +92,7 @@ export default function ConfirmationPage() {
           <div className="w-14 h-14 bg-zinc-100 rounded-xl flex items-center justify-center mx-auto mb-5 text-zinc-400">
             <LuPackage className="w-6 h-6" />
           </div>
-          <h1 className="text-2xl font-black text-zinc-900 tracking-tight mb-2">
+          <h1 className="text-2xl font-medium text-zinc-900 tracking-tight mb-2">
             No Order Found
           </h1>
           <p className="text-xs text-zinc-500 mb-7 leading-relaxed">
@@ -179,7 +179,7 @@ export default function ConfirmationPage() {
             <span>Order Verified &amp; Confirmed</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-zinc-950 tracking-tight mb-2">
+          <h1 className="text-3xl sm:text-4xl font-normal text-zinc-900 tracking-tight mb-2">
             Thank You for Your Order!
           </h1>
           <p className="text-xs sm:text-sm text-zinc-500 max-w-md mx-auto leading-relaxed">

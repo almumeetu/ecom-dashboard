@@ -96,7 +96,7 @@ export default function TrackOrderView() {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Shipment</p>
-        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
+        <h2 className="text-2xl font-medium text-zinc-900 tracking-tight mt-1">
           Track Your Order
         </h2>
         <p className="text-zinc-500 text-sm mt-0.5">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..600;1,9..40,300..600&family=Plus+Jakarta+Sans:ital,wght@0,300..600;1,300..600&display=swap');
 @import "tailwindcss";
 @import "./animations.css";
 
@@ -56,12 +56,12 @@
   --color-border: var(--color-pearl-gray);
   --color-border-dark: var(--color-greenish-gray);
 
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-bembo: 'Outfit', 'Inter', system-ui, sans-serif;
-  --font-snell: 'Outfit', 'Inter', system-ui, sans-serif;
-  --font-gotham: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-bembo: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  --font-snell: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
+  --font-gotham: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -90,14 +90,27 @@ body {
   color: #18181b;
   background-color: #faf9f5;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-weight: 400;
 }
 
+/* Headings: Clean, modern, avoiding bold/chunky appearance */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
-  letter-spacing: -0.02em;
+  font-weight: 500;
+  letter-spacing: -0.015em;
 }
 
-/* Universal clean & legible font overrides replacing legacy serif & cursive scripts */
+/* Tone down bold font weights across the store for clean, refined, airy typography */
+.font-black,
+.font-extrabold {
+  font-weight: 500 !important;
+}
+
+.font-bold {
+  font-weight: 500 !important;
+}
+
+/* Universal clean font overrides replacing legacy serif & cursive scripts */
 [class*="font-['Bembo_Std']"],
 [class*='font-["Bembo_Std"]'],
 [class*="font-['Snell_Roundhand_LT_Std']"],
@@ -108,12 +121,14 @@ h1, h2, h3, h4, h5, h6 {
 [class*='font-["Gotham"]'],
 .font-serif {
   font-family: var(--font-heading), var(--font-sans), sans-serif !important;
+  font-weight: 500 !important;
 }
 
 /* Neutralize cursive handwriting slant */
 [class*="font-['Snell_Roundhand_LT_Std']"],
 [class*="font-['Snell_Roundhand']"] {
   font-style: normal !important;
+  font-weight: 400 !important;
 }
 
 .lte-section {
@@ -160,16 +175,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .lte-hero-title {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 700;
+  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+  font-weight: 500;
   line-height: 1.15;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .lte-hero-script {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 600;
+  font-size: clamp(1.75rem, 3.5vw, 3rem);
+  font-weight: 400;
   font-style: normal;
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -177,17 +192,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .lte-section-title {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
-  font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 500;
   line-height: 1.25;
   text-align: center;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
 .lte-section-script {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
-  font-weight: 600;
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  font-weight: 400;
   font-style: normal;
   line-height: 1.3;
   text-align: center;
@@ -196,7 +211,7 @@ h1, h2, h3, h4, h5, h6 {
 .lte-section-subtitle {
   font-family: var(--font-sans), sans-serif;
   font-size: 0.8125rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.5rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -204,8 +219,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .lte-card-title {
   font-family: var(--font-sans), sans-serif;
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
   line-height: 1.45rem;
   letter-spacing: -0.01em;
   display: -webkit-box;
@@ -216,8 +231,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .lte-price {
   font-family: var(--font-sans), sans-serif;
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 500;
   line-height: 1.5rem;
   letter-spacing: -0.01em;
 }

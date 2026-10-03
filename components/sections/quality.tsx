@@ -18,14 +18,14 @@ export default function Quality() {
         <div className="container mx-auto">
             {/* Header */}
             <div className="mb-12 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-zinc-900 tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-zinc-900 tracking-tight">
                 <span>Quality</span>
                 <span className="text-[#4F46E5]"> Standard</span>
             </h2>
             
             <p className="mx-auto mt-6 font-sans text-sm leading-relaxed md:text-base font-normal text-zinc-600 max-w-3xl">
                 We follow a strict clean confidentiality and quality control policy governing our operations. NovaMart is{" "}
-                <span className="font-semibold text-zinc-900">committed to verified consumer protection, authentic origin validation</span>{" "}
+                <span className="font-medium text-zinc-900">committed to verified consumer protection, authentic origin validation</span>{" "}
                 and transparent ethical trading practices across Bangladesh.
             </p>
             

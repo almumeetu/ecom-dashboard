@@ -15,7 +15,7 @@ export default function Philosophy() {
         <div className="container mx-auto py-12 pb-16">
             <div className="philosophy-content">
                 <p className="text-white text-sm uppercase mb-4">Product Philosophy</p>
-                <h2 className="text-white text-3xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+                <h2 className="text-white text-3xl md:text-5xl lg:text-6xl font-normal leading-tight tracking-tight">
                   From Origin to Elegance—Where
                   Intention Meets Restraint
                 </h2>

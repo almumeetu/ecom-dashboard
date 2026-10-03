@@ -33,18 +33,18 @@ export default function BrowseCategories({
       {/* ── Header ── */}
       <div className="flex items-center justify-between mb-5 sm:mb-6">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-[#4F46E5] text-[11px] font-bold uppercase tracking-wider mb-1">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100 text-[#4F46E5] text-[11px] font-medium uppercase tracking-wider mb-1">
             <LuSparkles className="w-3 h-3 text-[#F97316]" />
             <span>Shop By Category</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-zinc-950 tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-medium text-zinc-900 tracking-tight">
             Browse All Categories
           </h2>
         </div>
 
         <Link
           href="/products"
-          className="text-xs sm:text-sm font-bold text-[#4F46E5] hover:text-[#4338CA] flex items-center gap-1 group transition-colors"
+          className="text-xs sm:text-sm font-medium text-[#4F46E5] hover:text-[#4338CA] flex items-center gap-1 group transition-colors"
         >
           <span>View all</span>
           <LuArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -99,7 +99,7 @@ export default function BrowseCategories({
 
               {/* Just Category Name Underneath */}
               <span
-                className={`text-[11px] sm:text-xs font-bold mt-2.5 line-clamp-2 leading-tight transition-colors duration-200 ${
+                className={`text-[11px] sm:text-xs font-medium mt-2.5 line-clamp-2 leading-tight transition-colors duration-200 ${
                   isSelected
                     ? "text-[#4F46E5]"
                     : "text-zinc-800 group-hover:text-[#4F46E5]"

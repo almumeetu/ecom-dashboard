@@ -7,7 +7,7 @@ export default function Prestige() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center ">
             <div className="text-center lg:text-left border-r border-stone-200">
               <h2 
-                className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-zinc-900"
+                className="text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-zinc-900"
               >
                 Recognized Where Taste
                 Becomes Prestige
@@ -32,10 +32,10 @@ export default function Prestige() {
                     backgroundSize: '100px 100px',
                   }}
                 />
-                <h4 className="font-sans text-xs uppercase tracking-widest text-[#4F46E5] mb-2 font-bold">
+                <h4 className="font-sans text-xs uppercase tracking-widest text-[#4F46E5] mb-2 font-medium">
                   Verified Quality
                 </h4>
-                <blockquote className="font-sans font-medium text-lg md:text-xl text-zinc-800 leading-relaxed">
+                <blockquote className="font-sans font-normal text-base md:text-lg text-zinc-800 leading-relaxed">
                   &ldquo;For those who value authenticity at the highest level, NovaMart is the choice without compromise.&rdquo;
                 </blockquote>
               </div>

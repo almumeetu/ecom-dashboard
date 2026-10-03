@@ -159,12 +159,12 @@ export default function ProductCard({
         {/* Floating Left Badges (Dynamic Discount & Special Tag) */}
         <div className="absolute top-2.5 left-2.5 z-20 pointer-events-none flex flex-col gap-1 items-start">
           {discountPercent > 0 && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black bg-[#EA580C] text-white shadow-xs tracking-tight">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#EA580C] text-white shadow-xs tracking-tight">
               -{discountPercent}%
             </span>
           )}
           {badge && !badge.startsWith("-") && badge !== "NEW" && badge !== "HOT" && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#1E1B4B]/90 backdrop-blur-xs text-white shadow-2xs tracking-wider uppercase">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-medium bg-[#1E1B4B]/90 backdrop-blur-xs text-white shadow-2xs tracking-wider uppercase">
               {badge}
             </span>
           )}
@@ -210,14 +210,14 @@ export default function ProductCard({
 
           {/* Product Title */}
           <Link href={productUrl} className="block group-hover:text-[#4F46E5] transition-colors">
-            <h3 className="text-zinc-900 font-bold text-xs sm:text-[13px] leading-snug line-clamp-2 min-h-[2.3rem]">
+            <h3 className="text-zinc-800 font-normal text-xs sm:text-[13px] leading-snug line-clamp-2 min-h-[2.3rem]">
               {name}
             </h3>
           </Link>
 
           {/* Price Row */}
           <div className="flex items-baseline gap-2 mt-2">
-            <span className="text-sm sm:text-base font-black text-zinc-950 tracking-tight">
+            <span className="text-sm sm:text-base font-medium text-zinc-900 tracking-tight">
               {price}
             </span>
             {originalPrice && (
@@ -233,7 +233,7 @@ export default function ProductCard({
           {isVariantProduct ? (
             <Link
               href={productUrl}
-              className="w-full h-9 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs active:scale-98"
+              className="w-full h-9 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-medium flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs active:scale-98"
             >
               Select Option
             </Link>
@@ -241,7 +241,7 @@ export default function ProductCard({
             <button
               type="button"
               onClick={handleAddToCart}
-              className={`w-full h-9 rounded-lg text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer shadow-xs active:scale-98 ${
+              className={`w-full h-9 rounded-lg text-white text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer shadow-xs active:scale-98 ${
                 isAdded
                   ? "bg-emerald-600 shadow-emerald-200"
                   : "bg-[#4F46E5] hover:bg-[#4338CA] shadow-indigo-200"

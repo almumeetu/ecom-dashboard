@@ -27,11 +27,11 @@ export default function Sustainable() {
 
         {/* Content */}
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight">
             Sustainable
           </h2>
 
-          <h3 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-emerald-400">
+          <h3 className="mt-2 text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-emerald-400">
             and ethical sourcing
           </h3>
 

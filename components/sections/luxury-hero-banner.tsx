@@ -41,13 +41,13 @@ export default function LuxuryHero() {
 
         {/* Headings */}
         <div className="flex flex-col items-center text-center">
-          <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-stone-850/80 mb-2">
+          <span className="text-[11px] sm:text-xs font-medium uppercase tracking-widest text-stone-850/80 mb-2">
             Enterprise &amp; Institutional Solutions
           </span>
-          <h1 className="font-bold text-3xl sm:text-4xl md:text-5xl lg:text-[44px] text-zinc-900 tracking-tight leading-tight">
+          <h1 className="font-normal text-3xl sm:text-4xl md:text-5xl lg:text-[44px] text-zinc-900 tracking-tight leading-tight">
             Bespoke Corporate Gifting &amp; Wholesale for Those
           </h1>
-          <h2 className="font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-[#4F46E5] mt-1 block tracking-tight">
+          <h2 className="font-medium text-3xl sm:text-4xl md:text-5xl lg:text-[48px] text-[#4F46E5] mt-1 block tracking-tight">
             Who Represent Excellence
           </h2>
         </div>

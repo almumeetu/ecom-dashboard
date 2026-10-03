@@ -123,8 +123,8 @@ export default function GiftsPage() {
             {/* Header */}
             <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-16">
               <h2 className="inline-flex justify-center flex-wrap items-center gap-2">
-                <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">Curated</span>
-                <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">Collections</span>
+                <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">Curated</span>
+                <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">Collections</span>
               </h2>
               <p className="max-w-[700px] text-center text-zinc-500 text-sm lg:text-base font-normal leading-relaxed mx-auto">
                 Designed to make a lasting impression for corporate, seasonal, and personal gifting.
@@ -169,9 +169,9 @@ export default function GiftsPage() {
               
               {/* Left Title Panel */}
               <div className="lg:col-span-5 flex flex-col justify-start items-start gap-4">
-                <h2 className="text-zinc-900 text-2xl sm:text-3xl md:text-4xl font-extrabold leading-tight tracking-tight">
+                <h2 className="text-zinc-900 text-2xl sm:text-3xl md:text-4xl font-normal leading-tight tracking-tight">
                   Give More Than Gifts—
-                  <span className="block mt-2 text-[#4F46E5] text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight">
+                  <span className="block mt-2 text-[#4F46E5] text-2xl sm:text-4xl md:text-5xl font-normal leading-tight">
                     Share a Heritage
                   </span>
                 </h2>

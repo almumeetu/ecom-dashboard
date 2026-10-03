@@ -19,12 +19,12 @@ export default function PromoBanner() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0B132B]/95 via-[#1E1B4B]/80 to-transparent" />
             
             <div className="absolute inset-0 p-5 sm:p-8 md:p-10 flex flex-col justify-between text-white z-10">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-[#4F46E5] text-white w-fit shadow-xs">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-medium tracking-wider uppercase bg-[#4F46E5] text-white w-fit shadow-xs">
                 DAILY FRESH & ORGANIC
               </span>
 
               <div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight mb-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-medium tracking-tight leading-tight mb-2">
                   Farm Fresh Groceries & Pantry
                 </h3>
                 <p className="text-zinc-200 text-xs sm:text-sm max-w-sm mb-4 sm:mb-5 leading-relaxed">
@@ -54,12 +54,12 @@ export default function PromoBanner() {
             <div className="absolute inset-0 bg-gradient-to-r from-zinc-950/95 via-zinc-950/75 to-transparent" />
 
             <div className="absolute inset-0 p-5 sm:p-8 md:p-10 flex flex-col justify-between text-white z-10">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-rose-600 text-white w-fit shadow-xs">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-medium tracking-wider uppercase bg-rose-600 text-white w-fit shadow-xs">
                 TRENDING FASHION
               </span>
 
               <div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-tight mb-2">
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-medium tracking-tight leading-tight mb-2">
                   New Season Designer Drops
                 </h3>
                 <p className="text-zinc-200 text-xs sm:text-sm max-w-sm mb-4 sm:mb-5 leading-relaxed">

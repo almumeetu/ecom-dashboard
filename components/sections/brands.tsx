@@ -61,12 +61,12 @@ export default function Brands({
     <section className={`w-full py-14 sm:py-20 ${bgClassName} border-t border-stone-200/70`}>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-bold uppercase tracking-wider mb-3">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-medium uppercase tracking-wider mb-3">
             <LuBadgeCheck className="w-3.5 h-3.5 text-[#F97316]" />
             <span>Multi-Vendor Certified</span>
           </div>
 
-          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3">
+          <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight mb-3">
             Featured Brands & Verified Vendors
           </h2>
 

@@ -103,13 +103,13 @@ export default function FounderCta() {
             {/* ══════════ Right: Founder's Story & CTAs ══════════ */}
             <div className="lg:col-span-7 p-5 sm:p-8 md:p-10 lg:p-12 xl:p-14 flex flex-col justify-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#4F46E5]/15 border border-emerald-500/25 text-indigo-300 text-[11px] font-bold uppercase tracking-wider w-fit mb-3.5 sm:mb-4 shadow-[0_0_15px_rgba(16,185,129,0.12)]">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#4F46E5]/15 border border-emerald-500/25 text-indigo-300 text-[11px] font-medium uppercase tracking-wider w-fit mb-3.5 sm:mb-4 shadow-[0_0_15px_rgba(16,185,129,0.12)]">
                 <LuShieldCheck className="w-3.5 h-3.5 text-indigo-300" />
                 <span>Founder&apos;s Personal Promise</span>
               </div>
 
               {/* Heading */}
-              <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3 sm:mb-4 leading-tight sm:leading-snug">
+              <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight mb-3 sm:mb-4 leading-tight sm:leading-snug">
                 Built on Trust,{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-indigo-300 to-[#A5B4FC]">
                   Delivered with Care

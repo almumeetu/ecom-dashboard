@@ -120,7 +120,7 @@ export default function AddressBookView() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className={SECTION_LABEL}>Address Book</p>
-          <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
+          <h2 className="text-2xl font-medium text-zinc-900 tracking-tight mt-1">
             Saved Addresses
           </h2>
           <p className="text-zinc-500 text-sm mt-0.5">
@@ -204,7 +204,7 @@ export default function AddressBookView() {
             <div className="flex items-start justify-between px-7 py-5 border-b border-stone-100">
               <div>
                 <p className={SECTION_LABEL}>{editing ? "Edit Address" : "New Address"}</p>
-                <h3 className="text-xl font-bold text-zinc-900 tracking-tight mt-0.5">
+                <h3 className="text-xl font-medium text-zinc-900 tracking-tight mt-0.5">
                   {editing ? "Update shipping address" : "Add a new address"}
                 </h3>
               </div>

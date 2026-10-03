@@ -95,7 +95,7 @@ export default function OrdersView() {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Purchase History</p>
-        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
+        <h2 className="text-2xl font-medium text-zinc-900 tracking-tight mt-1">
           My Orders
           {orders.length > 0 && (
             <span className="ml-3 font-sans text-sm font-normal text-zinc-400">({orders.length})</span>
@@ -175,7 +175,7 @@ export default function OrdersView() {
             <div className="flex items-start justify-between px-7 py-5 border-b border-stone-100">
               <div>
                 <p className={SECTION_LABEL}>Order Details</p>
-                <h3 className="text-xl font-bold text-zinc-900 tracking-tight mt-0.5">{selected.orderNumber}</h3>
+                <h3 className="text-xl font-medium text-zinc-900 tracking-tight mt-0.5">{selected.orderNumber}</h3>
                 <p className="font-sans text-[10px] text-zinc-400 mt-0.5">
                   Placed{" "}
                   {new Date(selected.placedAt || selected.createdAt).toLocaleDateString("en-US", {

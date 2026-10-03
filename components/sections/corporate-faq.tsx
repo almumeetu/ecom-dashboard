@@ -49,7 +49,7 @@ export default function CorporateFAQ() {
             <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
               Corporate Guidelines
             </span>
-            <h2 className="text-3xl sm:text-4xl text-zinc-900 font-extrabold tracking-tight mt-1">
+            <h2 className="text-3xl sm:text-4xl text-zinc-900 font-normal tracking-tight mt-1">
               Corporate &amp; Wholesale FAQs
             </h2>
             <p className="text-stone-500 text-xs sm:text-sm mt-2">

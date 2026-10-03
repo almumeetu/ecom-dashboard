@@ -43,7 +43,7 @@ export default function WishlistView() {
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div>
         <p className={SECTION_LABEL}>Saved Items</p>
-        <h2 className="text-2xl font-bold text-zinc-900 tracking-tight mt-1">
+        <h2 className="text-2xl font-medium text-zinc-900 tracking-tight mt-1">
           My Wishlist
           {items.length > 0 && (
             <span className="ml-3 font-sans text-sm font-normal text-zinc-400">({items.length})</span>

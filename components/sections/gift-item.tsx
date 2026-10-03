@@ -44,10 +44,10 @@ export default function GiftItem() {
         {/* Title Section */}
         <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-12 md:mb-16">
           <h2 className="inline-flex justify-center flex-wrap items-center gap-2">
-            <span className="text-white text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+            <span className="text-white text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">
               Gift
             </span>
-            <span className="text-[#818CF8] text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
+            <span className="text-[#818CF8] text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">
               Ideas
             </span>
           </h2>

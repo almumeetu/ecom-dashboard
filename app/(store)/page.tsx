@@ -143,11 +143,11 @@ export default function Home() {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5 pb-3 border-b border-zinc-200/80">
           <div>
-            <div className="flex items-center gap-1.5 text-xs font-bold text-[#4F46E5] uppercase tracking-widest">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
               <LuSparkles className="w-3.5 h-3.5 text-[#F97316]" />
               <span>Verified Authentic Catalog</span>
             </div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-zinc-950 tracking-tight mt-0.5">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-zinc-900 tracking-tight mt-0.5">
               {selectedCategory === "All" ? "All Products" : selectedCategory}
               <span className="text-xs sm:text-sm font-medium text-zinc-400 ml-2.5">
                 ({displayedProducts.length} items)
@@ -203,7 +203,7 @@ export default function Home() {
                 key={tab.id}
                 type="button"
                 onClick={() => setSelectedCategory(tab.slug)}
-                className={`px-3.5 sm:px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 shadow-2xs ${
+                className={`px-3.5 sm:px-4 py-2 rounded-full text-xs font-medium whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-1.5 shadow-2xs ${
                   isActive
                     ? "bg-[#4F46E5] text-white shadow-sm"
                     : "bg-white text-zinc-700 hover:bg-[#EEF2FF] hover:text-[#4F46E5] border border-zinc-200/80"
@@ -276,7 +276,7 @@ export default function Home() {
         <div className="mt-12 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-indigo-900/25 active:scale-95 transition-all"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-medium text-xs uppercase tracking-wider shadow-md shadow-indigo-900/25 active:scale-95 transition-all"
           >
             <span>Explore All Products</span>
             <LuArrowRight className="w-4 h-4" />

@@ -213,13 +213,13 @@ export default function StoreHero({
                 {/* Banner Content Container */}
                 <div className="absolute inset-0 z-20 flex flex-col justify-center px-6 sm:px-10 md:px-14 max-w-xl text-white">
                   {/* Badge */}
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-bold tracking-wider uppercase mb-2 sm:mb-3 w-fit">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs font-medium tracking-wider uppercase mb-2 sm:mb-3 w-fit">
                     <LuSparkles className="w-3 h-3 text-[#F97316]" />
                     <span>{camp.badge || "NovaMart Campaign"}</span>
                   </div>
 
                   {/* Campaign Title */}
-                  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[40px] font-black tracking-tight leading-[1.15] text-white mb-2 sm:mb-3 drop-shadow-md">
+                  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-[40px] font-medium tracking-tight leading-[1.15] text-white mb-2 sm:mb-3 drop-shadow-md">
                     {camp.title}
                   </h2>
 
@@ -234,7 +234,7 @@ export default function StoreHero({
                   <div className="flex flex-wrap items-center gap-3">
                     <Link
                       href={camp.linkUrl || "/products"}
-                      className="px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white font-bold text-xs sm:text-sm tracking-wide uppercase shadow-lg shadow-indigo-950/40 transition-all flex items-center gap-2 cursor-pointer"
+                      className="px-5 sm:px-7 py-2.5 sm:py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white font-medium text-xs sm:text-sm tracking-wide uppercase shadow-lg shadow-indigo-950/40 transition-all flex items-center gap-2 cursor-pointer"
                     >
                       <span>{camp.ctaText || "Shop Now"}</span>
                       <LuArrowRight className="w-4 h-4" />

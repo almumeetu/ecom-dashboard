@@ -17,7 +17,7 @@ export default function Presence() {
               <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
                 From the Gardens of Sylhet to
               </span>
-              <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
+              <span className="text-[#174A76] text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
                 Tables Across the World
               </span>
             </h2>

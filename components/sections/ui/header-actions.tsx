@@ -30,12 +30,12 @@ export default function HeaderActions() {
         aria-label={`Wishlist${wishlistCount > 0 ? `, ${wishlistCount} items` : ''}`}
       >
         {wishlistCount > 0 ? (
-          <IoHeart className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-[#C5A880]" />
+          <IoHeart className="w-5 h-5 sm:w-[22px] sm:h-[22px] text-rose-600" />
         ) : (
           <IoHeartOutline className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
         )}
         {wishlistCount > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 bg-[#C5A880] text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
+          <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 bg-[#8B4F2B] text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
             {wishlistCount > 99 ? '99+' : wishlistCount}
           </span>
         )}
@@ -49,7 +49,7 @@ export default function HeaderActions() {
       >
         <LuShoppingBag className="w-5 h-5 sm:w-[22px] sm:h-[22px]" />
         {cartCount > 0 && (
-          <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 bg-[#C5A880] text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
+          <span className="absolute -top-1.5 -right-1.5 min-w-[16px] h-4 px-0.5 bg-[#8B4F2B] text-white text-[9px] font-bold rounded-full flex items-center justify-center leading-none">
             {cartCount > 99 ? '99+' : cartCount}
           </span>
         )}
@@ -62,7 +62,7 @@ export default function HeaderActions() {
         aria-label={isAuthenticated ? 'My account' : 'Sign in'}
       >
         {isAuthenticated ? (
-          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#C5B382] text-zinc-950 flex items-center justify-center font-bold text-[10px] sm:text-xs overflow-hidden border border-white/20">
+          <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-store-primary text-white flex items-center justify-center font-bold text-[10px] sm:text-xs overflow-hidden border border-white/20">
             {user?.avatarUrl || (user as any)?.avatar ? (
               <img
                 src={user?.avatarUrl || (user as any)?.avatar}

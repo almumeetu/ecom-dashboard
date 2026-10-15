@@ -35,7 +35,7 @@ export default function TeaCollection() {
                     />
                     </div>
                     {/* Text */}
-                    <p className="text-[#d2c494] text-xl font-normal font-gotham leading-6 max-w-[180px]">
+                    <p className="text-[#8B4F2B] text-xl font-normal font-gotham leading-6 max-w-[180px]">
                     {feature.description}
                     </p>
                 </div>

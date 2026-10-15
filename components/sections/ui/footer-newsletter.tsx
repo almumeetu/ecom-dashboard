@@ -42,20 +42,24 @@ export default function FooterNewsletter() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center w-full mx-auto bg-white p-2" noValidate>
+    <form onSubmit={handleSubmit} className="flex w-full flex-col gap-2 sm:flex-row" noValidate>
+      <label className="sr-only" htmlFor="footer-newsletter-email">Email address</label>
       <input
+        id="footer-newsletter-email"
+        name="email"
         type="email"
-        placeholder="Join Our Newsletter Now"
+        autoComplete="email"
+        placeholder="Your email address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 bg-white px-3 md:px-6 py-2 md:py-3 font-['Gotham'] text-sm text-rich-black placeholder:text-rich-black outline-none border-r-brand-5 border-r transition-colors"
+        className="h-12 min-w-0 flex-1 rounded-xl border border-white/15 bg-[#122638]/60 px-4 text-sm text-white placeholder:text-white/45 outline-none transition focus:border-store-light focus:ring-4 focus:ring-store-light/15"
       />
       <button
         type="submit"
         disabled={isSubmitting}
-        className="bg-white text-rich-black px-4 md:px-8 py-2 md:py-3 font-['Gotham'] text-sm md:text-base font-medium uppercase transition-colors whitespace-nowrap cursor-pointer disabled:opacity-75"
+        className="h-12 shrink-0 rounded-xl bg-white px-5 text-sm font-semibold text-store-deep transition hover:bg-store-surface active:scale-[0.98] disabled:cursor-wait disabled:opacity-65"
       >
-        {isSubmitting ? "SUBSCRIBING..." : "SUBSCRIBE"}
+        {isSubmitting ? "Joining…" : "Join the list"}
       </button>
     </form>
   );

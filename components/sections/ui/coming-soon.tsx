@@ -8,7 +8,7 @@ interface ComingSoonProps {
 
 export default function ComingSoon({ title, subtitle }: ComingSoonProps) {
   return (
-    <section className="relative min-h-[80vh] w-full flex items-center justify-center bg-[#FAF9F5] overflow-hidden">
+    <section className="relative min-h-[80vh] w-full flex items-center justify-center bg-[#F7FAFD] overflow-hidden">
       {/* Repeating background pattern */}
       <div
         className="absolute inset-0 z-0 pointer-events-none opacity-20"
@@ -35,7 +35,7 @@ export default function ComingSoon({ title, subtitle }: ComingSoonProps) {
         </div>
 
         {/* Label */}
-        <p className="font-gotham text-xs sm:text-sm uppercase tracking-[0.25em] text-[#8E866B]">
+        <p className="font-gotham text-xs sm:text-sm uppercase tracking-[0.25em] text-[#8B4F2B]">
           Coming Soon
         </p>
 
@@ -43,16 +43,16 @@ export default function ComingSoon({ title, subtitle }: ComingSoonProps) {
         <h1 className="inline-flex flex-col items-center gap-1">
           {title ? (
             <>
-              <span className="font-['Bembo_Std'] text-[#C6B485] text-4xl sm:text-5xl md:text-6xl font-normal leading-none">
+              <span className="font-['Bembo_Std'] text-[#8B4F2B] text-4xl sm:text-5xl md:text-6xl font-normal leading-none">
                 {title}
               </span>
             </>
           ) : (
             <>
-              <span className="font-['Bembo_Std'] text-[#C6B485] text-4xl sm:text-5xl md:text-6xl font-normal leading-none">
+              <span className="font-['Bembo_Std'] text-[#8B4F2B] text-4xl sm:text-5xl md:text-6xl font-normal leading-none">
                 This Page is
               </span>
-              <span className="font-['Snell_Roundhand_LT_Std'] italic text-[#8E866B] text-4xl sm:text-5xl md:text-6xl font-normal leading-none lowercase">
+              <span className="font-['Snell_Roundhand_LT_Std'] italic text-[#8B4F2B] text-4xl sm:text-5xl md:text-6xl font-normal leading-none lowercase">
                 being crafted
               </span>
             </>
@@ -60,22 +60,22 @@ export default function ComingSoon({ title, subtitle }: ComingSoonProps) {
         </h1>
 
         {/* Subtitle */}
-        <p className="font-['Bembo_Std'] text-[#83847e] text-sm sm:text-base md:text-lg max-w-xl leading-relaxed">
+        <p className="font-['Bembo_Std'] text-[#5F7489] text-sm sm:text-base md:text-lg max-w-xl leading-relaxed">
           {subtitle ||
             'We are carefully curating this experience for you. Check back soon for something extraordinary.'}
         </p>
 
         {/* Thin divider */}
         <div className="flex items-center gap-4 w-full max-w-xs">
-          <div className="flex-1 h-px bg-[#C6B485]/30" />
-          <div className="w-1.5 h-1.5 rounded-full bg-[#C6B485]/50" />
-          <div className="flex-1 h-px bg-[#C6B485]/30" />
+          <div className="flex-1 h-px bg-[#8B4F2B]/30" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#8B4F2B]/50" />
+          <div className="flex-1 h-px bg-[#8B4F2B]/30" />
         </div>
 
         {/* Back to home */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 px-10 py-3.5 border border-[#C6B485] text-[#8E866B] font-gotham text-xs uppercase tracking-widest hover:bg-[#C6B485] hover:text-white transition-all duration-300"
+          className="inline-flex items-center gap-2 px-10 py-3.5 border border-[#8B4F2B] text-[#8B4F2B] font-gotham text-xs uppercase tracking-widest hover:bg-[#8B4F2B] hover:text-white transition-all duration-300"
         >
           Return Home
         </Link>

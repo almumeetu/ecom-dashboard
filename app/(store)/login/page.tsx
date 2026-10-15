@@ -79,12 +79,12 @@ function LoginFormContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
+    <div className="min-h-screen bg-store-page flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 font-sans">
       {/* Top back button */}
       <div className="max-w-5xl mx-auto w-full mb-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-[#4F46E5] transition-colors uppercase tracking-wider"
+          className="inline-flex items-center gap-2 text-xs font-bold text-zinc-500 hover:text-store-primary transition-colors uppercase tracking-wider"
         >
           <FiArrowLeft className="w-4 h-4" />
           <span>Back to Marketplace</span>
@@ -93,16 +93,16 @@ function LoginFormContent() {
 
       <div className="max-w-5xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 bg-white rounded-3xl shadow-2xl border border-zinc-200/80 overflow-hidden">
         {/* Left Column: Brand & Trust Showcase (5 cols) */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-[#0B132B] via-[#1E1B4B] to-[#0B132B] text-white p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden">
+        <div className="lg:col-span-5 bg-gradient-to-br from-store-ink via-store-deep to-store-ink text-white p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden">
           {/* Subtle glow effect */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#4F46E5]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-64 h-64 bg-store-primary/15 rounded-full blur-3xl pointer-events-none" />
 
           <div>
             <div className="mb-8">
               <Logo variant="light" size="md" />
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-700/60 text-indigo-300 text-[10px] font-bold tracking-widest uppercase mb-4">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-store-deep/90 border border-store-light/40 text-store-light text-[10px] font-bold tracking-widest uppercase mb-4">
               <span>Webdev Software Solutions</span>
             </div>
 
@@ -117,7 +117,7 @@ function LoginFormContent() {
             {/* Value bullets */}
             <div className="mt-8 space-y-4">
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 text-[#4F46E5] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-white/10 text-store-primary flex items-center justify-center shrink-0">
                   <LuShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
@@ -127,7 +127,7 @@ function LoginFormContent() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 text-[#4F46E5] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-white/10 text-store-primary flex items-center justify-center shrink-0">
                   <LuTruck className="w-4 h-4" />
                 </div>
                 <div>
@@ -137,7 +137,7 @@ function LoginFormContent() {
               </div>
 
               <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/10 text-[#4F46E5] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-white/10 text-store-primary flex items-center justify-center shrink-0">
                   <LuLock className="w-4 h-4" />
                 </div>
                 <div>
@@ -151,7 +151,7 @@ function LoginFormContent() {
           {/* Founder & Location Footer */}
           <div className="pt-6 mt-6 border-t border-white/10 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#4F46E5]/40 ring-2 ring-[#4F46E5]/20 shrink-0">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-store-primary/40 ring-2 ring-store-primary/20 shrink-0">
                 <Image
                   src="/images/team/abdullah-2.jpg"
                   alt="NovaMart Team"
@@ -162,7 +162,7 @@ function LoginFormContent() {
               </div>
               <div className="text-[11px] leading-tight">
                 <div className="text-white font-bold">NovaMart Team</div>
-                <div className="text-[10px] text-[#818CF8] font-medium">Founder &amp; CEO</div>
+                <div className="text-[10px] text-store-light font-medium">Founder &amp; CEO</div>
               </div>
             </div>
             <div className="text-right text-[10px] text-zinc-400">
@@ -170,7 +170,7 @@ function LoginFormContent() {
                 <FiMapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                 <span>Dhaka</span>
               </div>
-              <a href="tel:01722301927" className="text-zinc-300 hover:text-indigo-300 font-semibold block mt-0.5">
+              <a href="tel:01722301927" className="text-zinc-300 hover:text-store-light font-semibold block mt-0.5">
                 01722301927
               </a>
             </div>
@@ -195,7 +195,7 @@ function LoginFormContent() {
                 <span className="text-zinc-400">New here?</span>
                 <Link
                   href="/signup"
-                  className="font-bold text-[#4F46E5] hover:text-[#4F46E5] hover:underline"
+                  className="font-bold text-store-primary hover:text-store-primary hover:underline"
                 >
                   Create Account
                 </Link>
@@ -244,7 +244,7 @@ function LoginFormContent() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="e.g. saikat@example.com"
                   required
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary/20 transition-all"
                 />
               </div>
 
@@ -255,7 +255,7 @@ function LoginFormContent() {
                   </label>
                   <a
                     href="tel:01722301927"
-                    className="text-[11px] font-semibold text-[#4F46E5] hover:underline"
+                    className="text-[11px] font-semibold text-store-primary hover:underline"
                   >
                     Forgot password?
                   </a>
@@ -267,7 +267,7 @@ function LoginFormContent() {
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 pr-11 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20 transition-all"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-3 pr-11 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary/20 transition-all"
                   />
                   <button
                     type="button"
@@ -285,7 +285,7 @@ function LoginFormContent() {
                     type="checkbox"
                     checked={rememberLogin}
                     onChange={(e) => setRememberLogin(e.target.checked)}
-                    className="w-4 h-4 accent-[#4F46E5] rounded cursor-pointer"
+                    className="w-4 h-4 accent-store-primary rounded cursor-pointer"
                   />
                   <span className="text-xs text-zinc-600 font-medium">Keep me signed in</span>
                 </label>
@@ -298,7 +298,7 @@ function LoginFormContent() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-4 rounded-xl shadow-lg shadow-indigo-600/25 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60"
+                className="w-full bg-store-primary hover:bg-store-hover active:scale-[0.98] text-white font-extrabold text-xs uppercase tracking-wider py-4 rounded-xl shadow-lg shadow-store-primary/15 transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60"
               >
                 {submitting && <LuLoader className="w-4 h-4 animate-spin" />}
                 <span>{submitting ? "Signing in..." : "Sign In to Account"}</span>
@@ -319,8 +319,8 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
-          <LuLoader className="w-8 h-8 text-[#4F46E5] animate-spin" />
+        <div className="min-h-screen flex items-center justify-center bg-store-page">
+          <LuLoader className="w-8 h-8 text-store-primary animate-spin" />
         </div>
       }
     >

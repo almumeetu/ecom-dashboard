@@ -20,7 +20,7 @@ export default function Quality() {
             <div className="mb-12 text-center">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-normal text-zinc-900 tracking-tight">
                 <span>Quality</span>
-                <span className="text-[#4F46E5]"> Standard</span>
+                <span className="text-[#174A76]"> Standard</span>
             </h2>
             
             <p className="mx-auto mt-6 font-sans text-sm leading-relaxed md:text-base font-normal text-zinc-600 max-w-3xl">

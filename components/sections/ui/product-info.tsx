@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
+import MobileStickyBuyBar from './mobile-sticky-buy-bar';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
@@ -56,14 +57,12 @@ export interface ProductInfoProps {
 
 export default function ProductInfo({
   name,
-  subtitle,
   price,
   originalPrice,
   productId,
   variantId,
   productSlug,
   category = '',
-  brand = '',
   sku = '',
   description = '',
   variants = [],
@@ -83,7 +82,6 @@ export default function ProductInfo({
     }
     return null;
   });
-  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [isAdded, setIsAdded] = useState(false);
 
   // Reviews State
@@ -128,12 +126,6 @@ export default function ProductInfo({
     }
   }, [selectedVariant, onVariantChange]);
 
-  useEffect(() => {
-    if (selectedVariant) {
-      setSelectedOptions(selectedVariant.attributes);
-    }
-  }, [selectedVariant]);
-
   const handleQuantityChange = (type: 'inc' | 'dec') => {
     if (type === 'dec') {
       setQuantity((q) => (q > 1 ? q - 1 : 1));
@@ -149,19 +141,6 @@ export default function ProductInfo({
   const displayPrice = selectedVariant ? selectedVariant.priceFormatted : price;
   const displayOriginalPrice = selectedVariant ? selectedVariant.originalPriceFormatted : originalPrice;
   const activeVariantId = selectedVariant?.id || variantId || variants?.[0]?.id || '';
-
-  // Calculate discount percentage
-  const activePriceNum = selectedVariant ? selectedVariant.priceNum : productData.priceNum;
-  const origPriceNum = selectedVariant?.originalPriceFormatted
-    ? Number(selectedVariant.originalPriceFormatted.replace(/[^\d.]/g, ''))
-    : originalPrice
-    ? Number(originalPrice.replace(/[^\d.]/g, ''))
-    : 0;
-
-  const discountPercent =
-    origPriceNum > activePriceNum
-      ? Math.round(((origPriceNum - activePriceNum) / origPriceNum) * 100)
-      : 0;
 
   // Contact info
   const validContacts = parseContactEntries(settings?.contactNumber);
@@ -253,21 +232,15 @@ export default function ProductInfo({
   const cleanDescription = description || productData.description || '';
 
   return (
-    <div className="w-full flex flex-col gap-4 font-sans text-zinc-900 select-none">
-      {/* ── 1. Title + SKU Row ── */}
-      <div className="flex items-start justify-between gap-4">
-        <h1 className="text-xl sm:text-2xl lg:text-[26px] font-bold text-zinc-950 leading-tight">
+    <div className="min-w-0 w-full flex flex-col gap-6 font-sans text-zinc-900">
+      <div className="min-w-0 space-y-3">
+        <h1 className="text-2xl sm:text-3xl font-medium text-zinc-950 leading-snug break-words">
           {name}
         </h1>
-
         {sku && (
-          <div className="text-right shrink-0">
-            <span className="text-[10px] text-zinc-400 uppercase tracking-wider block font-semibold">
-              SKU
-            </span>
-            <span className="text-xs text-zinc-600 font-mono font-medium">
-              {selectedVariant?.sku || sku}
-            </span>
+          <div className="text-xs text-zinc-500 break-all">
+            <span>SKU: </span>
+            <span className="font-mono">{selectedVariant?.sku || sku}</span>
           </div>
         )}
       </div>
@@ -277,63 +250,70 @@ export default function ProductInfo({
         <span>Category: </span>
         <Link
           href={`/products?category=${encodeURIComponent(category)}`}
-          className="text-[#4F46E5] hover:text-[#4338CA] font-medium hover:underline transition-colors"
+          className="text-store-primary hover:text-store-accent font-medium hover:underline transition-colors"
         >
           {category || 'General Essentials'}
         </Link>
       </div>
 
-      {/* ── 3. Status Badges Row (In stock + Fresh & handpicked) ── */}
-      <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-          <span>In stock</span>
+      <div className="flex items-center justify-between gap-3">
+        <span className={`inline-flex items-center gap-2 text-sm ${isOutOfStock ? 'text-zinc-500' : 'text-emerald-700'}`}>
+          <span className={`w-1.5 h-1.5 rounded-full ${isOutOfStock ? 'bg-zinc-400' : 'bg-emerald-600'}`} />
+          <span>{isOutOfStock ? 'Out of stock' : 'In stock'}</span>
         </span>
-
-        <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-orange-50 text-[#EA580C] border border-orange-200">
-          <span>🌿</span>
-          <span>Fresh &amp; handpicked</span>
-        </span>
-
-        {/* Share Button */}
         <button
+          type="button"
           onClick={handleShare}
-          className="ml-auto inline-flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-700 transition-colors cursor-pointer"
-          title="Share product link"
+          className="inline-flex min-h-11 items-center gap-2 px-2 text-sm text-zinc-500 hover:text-zinc-700 transition-colors cursor-pointer"
+          aria-label="Share product link"
         >
-          <IoShareSocialOutline className="w-3.5 h-3.5" />
+          <IoShareSocialOutline className="w-4 h-4" />
           <span>Share</span>
         </button>
       </div>
 
-      {/* ── 4. Price & Discount Row ── */}
-      <div className="flex items-baseline gap-3 pt-0.5">
-        <span className="text-2xl sm:text-3xl font-black text-[#1E1B4B] tracking-tight">
+      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+        <span className="text-3xl font-semibold text-store-price tracking-tight break-words">
           {displayPrice}
         </span>
-
         {displayOriginalPrice && (
-          <span className="text-base sm:text-lg text-zinc-400 line-through font-normal">
-            {displayOriginalPrice}
-          </span>
-        )}
-
-        {discountPercent > 0 && (
-          <span className="px-2 py-0.5 rounded-md text-xs font-bold bg-[#EA580C] text-white">
-            Save {discountPercent}%
-          </span>
+          <span className="text-base text-zinc-400 line-through">{displayOriginalPrice}</span>
         )}
       </div>
 
+      {variants.length > 1 && (
+        <div className="space-y-2">
+          <label htmlFor={`product-option-${productId}`} className="block text-sm font-medium text-zinc-700">
+            Choose option
+          </label>
+          <select
+            id={`product-option-${productId}`}
+            value={selectedVariant?.id || activeVariantId}
+            onChange={(event) => {
+              setSelectedVariant(variants.find((variant) => variant.id === event.target.value) ?? null);
+              setQuantity(1);
+            }}
+            className="min-h-12 w-full rounded-lg border border-zinc-200 bg-white px-3 text-sm text-zinc-900"
+          >
+            {variants.map((variant) => (
+              <option key={variant.id} value={variant.id}>
+                {Object.values(variant.attributes).join(' / ') || variant.sku || 'Default'}
+                {variant.stockQuantity <= 0 ? ' — Out of stock' : ''}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+
       {/* ── 5. Action Row: Stepper + Add to Bag + Buy Now ── */}
-      <div className="flex items-center gap-2.5 sm:gap-3 pt-1">
+      <div className="grid grid-cols-2 items-center gap-3 sm:grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)]">
         {/* Stepper */}
-        <div className="flex items-center border border-zinc-300 rounded-lg bg-white p-0.5 shrink-0">
+        <div className="col-span-2 sm:col-span-1 flex w-fit items-center border border-zinc-200 rounded-lg bg-white p-0.5">
           <button
             type="button"
             onClick={() => handleQuantityChange('dec')}
             disabled={isOutOfStock || quantity <= 1}
-            className="w-8 h-8 rounded-md hover:bg-zinc-100 flex items-center justify-center text-zinc-700 disabled:opacity-30 cursor-pointer font-bold transition-colors"
+            className="w-11 h-11 rounded-md hover:bg-zinc-100 flex items-center justify-center text-zinc-700 disabled:opacity-30 cursor-pointer font-bold transition-colors"
             aria-label="Decrease quantity"
           >
             -
@@ -345,42 +325,39 @@ export default function ProductInfo({
             type="button"
             onClick={() => handleQuantityChange('inc')}
             disabled={isOutOfStock || quantity >= stockQty}
-            className="w-8 h-8 rounded-md hover:bg-zinc-100 flex items-center justify-center text-zinc-700 disabled:opacity-30 cursor-pointer font-bold transition-colors"
+            className="w-11 h-11 rounded-md hover:bg-zinc-100 flex items-center justify-center text-zinc-700 disabled:opacity-30 cursor-pointer font-bold transition-colors"
             aria-label="Increase quantity"
           >
             +
           </button>
         </div>
 
-        {/* Primary CTA: Add to Bag Button (#4F46E5, Hover: #4338CA) */}
+        {/* Primary action follows the storefront accent palette. */}
         <button
           type="button"
           onClick={handleAddToCart}
           disabled={isOutOfStock}
-          className="flex-1 h-10 px-4 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all disabled:opacity-50"
+          className="min-w-0 min-h-12 px-3 rounded-lg bg-store-primary hover:bg-store-accent text-white font-medium text-sm flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50"
         >
           <LuShoppingBag className="w-4 h-4" />
           <span>{isAdded ? 'Added ✓' : 'Add to Bag'}</span>
         </button>
 
-        {/* Authoritative Buy Now Button (#1E1B4B Dark Indigo / Ink) */}
+        {/* Authoritative Buy Now Button (#324d64 Dark Indigo / Ink) */}
         <button
           type="button"
           onClick={handleBuyNow}
           disabled={isOutOfStock}
-          className="flex-1 h-10 px-4 rounded-lg bg-[#1E1B4B] hover:bg-[#161338] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs cursor-pointer active:scale-98 transition-all disabled:opacity-50"
+          className="min-w-0 min-h-12 px-3 rounded-lg bg-store-deep hover:bg-store-hover text-white font-medium text-sm flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50"
         >
           <span>Buy Now</span>
         </button>
       </div>
 
       {/* ── 6. Direct Order Section (WhatsApp + Hotline) ── */}
-      <div className="flex flex-col gap-2 pt-2 border-t border-zinc-100">
-        <p className="text-xs text-zinc-500 font-medium">
-          Need help or want to order directly?
-        </p>
+      <div className="pt-5 border-t border-zinc-100">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          {/* WhatsApp Order (#EA580C Accent) */}
+          {/* WhatsApp Order (#8B4F2B Accent) */}
           <a
             href={`https://wa.me/${formattedWhatsapp}?text=${encodeURIComponent(
               `Hello NovaMart, I want to order this product:\n\n*${name}*\nPrice: ${displayPrice}\nLink: ${
@@ -389,33 +366,34 @@ export default function ProductInfo({
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="h-10 px-3.5 rounded-lg bg-[#EA580C] hover:bg-[#C2410C] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
+            className="min-h-11 px-3 rounded-lg border border-zinc-200 text-zinc-700 hover:bg-zinc-50 font-medium text-sm flex items-center justify-center gap-2 shadow-2xs transition-colors cursor-pointer"
           >
-            <FaWhatsapp className="w-4.5 h-4.5" />
+            <FaWhatsapp className="w-4.5 h-4.5 text-emerald-600 shrink-0" />
             <span>WhatsApp Order</span>
           </a>
 
           {/* Call Hotline */}
           <a
             href={`tel:${primaryPhone.replace(/[^\d+]/g, '')}`}
-            className="h-10 px-3.5 rounded-lg border border-[#4F46E5] text-[#4F46E5] hover:bg-[#EEF2FF] font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="min-h-11 px-3 rounded-lg border border-zinc-200 text-zinc-700 hover:bg-zinc-50 font-medium text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <IoCallOutline className="w-4.5 h-4.5" />
-            <span>Call {primaryPhone}</span>
+            <span className="break-all">Call {primaryPhone}</span>
           </a>
         </div>
       </div>
 
       {/* ── 7. Inline Tabs (Description, Delivery & info, Reviews) ── */}
-      <div className="pt-3 border-t border-zinc-200">
+      <div id="product-details-tabs" className="min-w-0 scroll-mt-36 pt-2 border-t border-zinc-200">
         {/* Tab Headers */}
-        <div className="flex items-center gap-6 border-b border-zinc-200 text-xs sm:text-sm font-semibold select-none">
+        <div className="storefront-scroll-track flex items-center gap-5 overflow-x-auto border-b border-zinc-200 text-sm font-medium select-none">
           <button
             type="button"
             onClick={() => setActiveTab('desc')}
-            className={`pb-2.5 transition-colors relative cursor-pointer ${
+            aria-pressed={activeTab === 'desc'}
+            className={`shrink-0 min-h-11 whitespace-nowrap py-3 transition-colors relative cursor-pointer ${
               activeTab === 'desc'
-                ? 'text-[#4F46E5] font-bold border-b-2 border-[#4F46E5]'
+                ? 'text-store-primary font-bold border-b-2 border-store-primary'
                 : 'text-zinc-500 hover:text-zinc-900'
             }`}
           >
@@ -425,9 +403,10 @@ export default function ProductInfo({
           <button
             type="button"
             onClick={() => setActiveTab('delivery')}
-            className={`pb-2.5 transition-colors relative cursor-pointer ${
+            aria-pressed={activeTab === 'delivery'}
+            className={`shrink-0 min-h-11 whitespace-nowrap py-3 transition-colors relative cursor-pointer ${
               activeTab === 'delivery'
-                ? 'text-[#4F46E5] font-bold border-b-2 border-[#4F46E5]'
+                ? 'text-store-primary font-bold border-b-2 border-store-primary'
                 : 'text-zinc-500 hover:text-zinc-900'
             }`}
           >
@@ -437,9 +416,10 @@ export default function ProductInfo({
           <button
             type="button"
             onClick={() => setActiveTab('reviews')}
-            className={`pb-2.5 transition-colors relative cursor-pointer ${
+            aria-pressed={activeTab === 'reviews'}
+            className={`shrink-0 min-h-11 whitespace-nowrap py-3 transition-colors relative cursor-pointer ${
               activeTab === 'reviews'
-                ? 'text-[#4F46E5] font-bold border-b-2 border-[#4F46E5]'
+                ? 'text-store-primary font-bold border-b-2 border-store-primary'
                 : 'text-zinc-500 hover:text-zinc-900'
             }`}
           >
@@ -449,7 +429,7 @@ export default function ProductInfo({
 
         {/* Tab 1: Description Content */}
         {activeTab === 'desc' && (
-          <div className="py-4 text-xs sm:text-[13px] text-zinc-700 leading-relaxed space-y-3">
+          <div className="storefront-rich-content py-5 text-sm text-zinc-600 space-y-4">
             {cleanDescription ? (
               cleanDescription.includes('<') && cleanDescription.includes('>') ? (
                 <div
@@ -490,10 +470,10 @@ export default function ProductInfo({
 
         {/* Tab 2: Delivery & info Content */}
         {activeTab === 'delivery' && (
-          <div className="py-4 text-xs sm:text-[13px] text-zinc-700 leading-relaxed space-y-3">
+          <div className="storefront-rich-content py-5 text-sm text-zinc-600 space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-zinc-50 p-3.5 rounded-xl border border-zinc-200">
               <div className="flex items-start gap-2.5">
-                <LuTruck className="w-4 h-4 text-[#4F46E5] mt-0.5 shrink-0" />
+                <LuTruck className="w-4 h-4 text-store-primary mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-zinc-900 block">ঢাকা সিটিতে ডেলিভারি:</strong>
                   <span className="text-zinc-600">৳{feeInside} (২৪ থেকে ৪৮ ঘণ্টার মধ্যে ডেলিভারি)</span>
@@ -501,7 +481,7 @@ export default function ProductInfo({
               </div>
 
               <div className="flex items-start gap-2.5">
-                <LuTruck className="w-4 h-4 text-[#4F46E5] mt-0.5 shrink-0" />
+                <LuTruck className="w-4 h-4 text-store-primary mt-0.5 shrink-0" />
                 <div>
                   <strong className="text-zinc-900 block">ঢাকার বাইরে ডেলিভারি:</strong>
                   <span className="text-zinc-600">৳{feeOutside} (২ থেকে ৩ কার্যদিবস)</span>
@@ -528,12 +508,12 @@ export default function ProductInfo({
 
         {/* Tab 3: Reviews Content */}
         {activeTab === 'reviews' && (
-          <div className="py-4 text-xs sm:text-[13px] text-zinc-700 leading-relaxed space-y-4">
+          <div className="py-5 text-sm text-zinc-600 leading-7 space-y-4">
             {/* Reviews Summary */}
-            <div className="flex items-center gap-3 p-3 bg-zinc-50 rounded-xl border border-zinc-200">
-              <div className="flex text-[#F97316]">
+            <div className="flex flex-wrap items-center gap-3 p-4 bg-zinc-50 rounded-xl border border-zinc-200">
+              <div className="flex text-[#E88443]">
                 {[...Array(5)].map((_, i) => (
-                  <LuStar key={i} className="w-4 h-4 fill-[#F97316] text-[#F97316]" />
+                  <LuStar key={i} className="w-4 h-4 fill-[#E88443] text-[#E88443]" />
                 ))}
               </div>
               <span className="font-bold text-zinc-900 text-sm">4.9 / 5.0</span>
@@ -565,9 +545,9 @@ export default function ProductInfo({
                     <span className="font-bold text-zinc-900">{rev.user?.name || 'Customer'}</span>
                     <span className="text-[11px] text-zinc-400">Verified Buyer</span>
                   </div>
-                  <div className="flex text-[#F97316]">
+                  <div className="flex text-[#E88443]">
                     {[...Array(rev.rating || 5)].map((_, i) => (
-                      <LuStar key={i} className="w-3 h-3 fill-[#F97316] text-[#F97316]" />
+                      <LuStar key={i} className="w-3 h-3 fill-[#E88443] text-[#E88443]" />
                     ))}
                   </div>
                   <p className="text-xs text-zinc-600">{rev.comment}</p>
@@ -578,7 +558,7 @@ export default function ProductInfo({
             {/* Quick Review Form */}
             <form onSubmit={handleSubmitReview} className="space-y-2 pt-2 border-t border-zinc-200">
               <p className="font-bold text-zinc-900 text-xs flex items-center gap-1.5">
-                <LuMessageSquare className="w-3.5 h-3.5 text-[#4F46E5]" />
+                <LuMessageSquare className="w-3.5 h-3.5 text-store-primary" />
                 <span>Write a Review</span>
               </p>
               <div className="flex items-center gap-1">
@@ -586,26 +566,29 @@ export default function ProductInfo({
                   <button
                     key={star}
                     type="button"
+                    aria-label={`Rate ${star} out of 5`}
+                    aria-pressed={newRating === star}
                     onClick={() => setNewRating(star)}
-                    className="p-0.5 cursor-pointer text-[#F97316]"
+                    className="flex h-11 w-11 items-center justify-center cursor-pointer text-[#E88443]"
                   >
                     <LuStar
-                      className={`w-4 h-4 ${star <= newRating ? 'fill-[#F97316]' : 'text-zinc-300'}`}
+                      className={`w-4 h-4 ${star <= newRating ? 'fill-[#E88443]' : 'text-zinc-300'}`}
                     />
                   </button>
                 ))}
               </div>
               <textarea
+                aria-label="Your product review"
                 value={newComment}
                 onChange={(e) => setNewComment(e.target.value)}
                 placeholder="Share your experience with this product..."
                 rows={2}
-                className="w-full p-2.5 rounded-lg border border-zinc-300 bg-white text-xs outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]"
+                className="w-full p-3 rounded-lg border border-zinc-200 bg-white text-sm outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary"
               />
               <button
                 type="submit"
                 disabled={isSubmittingReview}
-                className="px-3.5 py-1.5 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
+                className="min-h-11 px-4 rounded-lg bg-store-primary hover:bg-store-accent text-white font-medium text-sm flex items-center gap-1.5 transition-colors cursor-pointer disabled:opacity-50"
               >
                 <LuSend className="w-3 h-3" />
                 <span>Submit Review</span>
@@ -614,6 +597,13 @@ export default function ProductInfo({
           </div>
         )}
       </div>
+      <MobileStickyBuyBar
+        name={name}
+        priceFormatted={displayPrice || ''}
+        onAddToCart={handleAddToCart}
+        onBuyNow={handleBuyNow}
+        isOutOfStock={isOutOfStock}
+      />
     </div>
   );
 }

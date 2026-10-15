@@ -66,13 +66,13 @@ export default function CorporateSolutions() {
   ];
 
   return (
-    <section className="w-full bg-[#FAF9F5] py-16 sm:py-24 border-t border-stone-200">
+    <section className="w-full bg-store-page py-16 sm:py-24 border-t border-stone-200">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         
         {/* Section Header */}
         <ScrollAnimate variant="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs uppercase font-medium text-emerald-700 tracking-wider inline-block mb-2">
+            <span className="text-xs uppercase font-medium text-store-primary tracking-wider inline-block mb-2">
               Tailored Enterprise Capabilities
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-zinc-900 font-normal tracking-tight mb-4">
@@ -105,7 +105,7 @@ export default function CorporateSolutions() {
 
                 <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 block mb-1">
+                    <span className="text-xs font-bold uppercase tracking-wider text-store-primary block mb-1">
                       {item.subtitle}
                     </span>
                     <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl text-stone-900 font-semibold mb-3">
@@ -118,7 +118,7 @@ export default function CorporateSolutions() {
                     <div className="space-y-2 border-t border-stone-100 pt-4 mb-6">
                       {item.benefits.map((b, bIdx) => (
                         <div key={bIdx} className="flex items-center gap-2 text-xs text-stone-700 font-medium">
-                          <FiCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                          <FiCheck className="w-4 h-4 text-store-accent shrink-0" />
                           <span>{b}</span>
                         </div>
                       ))}
@@ -127,7 +127,7 @@ export default function CorporateSolutions() {
 
                   <a
                     href="#inquiry-form"
-                    className="w-full py-3 rounded-xl bg-stone-50 hover:bg-emerald-50 text-stone-800 hover:text-emerald-700 border border-stone-200 font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                    className="w-full py-3 rounded-xl bg-stone-50 hover:bg-store-surface text-stone-800 hover:text-store-primary border border-stone-200 font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
                   >
                     <span>Request Quotation for {item.title}</span>
                     <FiArrowRight className="w-3.5 h-3.5" />
@@ -141,7 +141,7 @@ export default function CorporateSolutions() {
         {/* 4-Step Process Section */}
         <div className="bg-white rounded-3xl p-8 sm:p-12 md:p-16 border border-stone-200 shadow-sm mb-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
+            <span className="text-xs uppercase font-bold text-store-primary tracking-wider">
               Seamless Execution
             </span>
             <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl md:text-4xl text-stone-900 font-semibold mt-1">
@@ -155,7 +155,7 @@ export default function CorporateSolutions() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((st, i) => (
               <div key={i} className="relative p-5 rounded-2xl bg-stone-50/80 border border-stone-200/70">
-                <span className="text-3xl font-black text-emerald-600/30 block mb-2 font-mono">
+                <span className="text-3xl font-black text-store-primary/30 block mb-2 font-mono">
                   {st.num}
                 </span>
                 <h4 className="text-sm font-bold text-stone-900 mb-2">{st.title}</h4>
@@ -168,22 +168,22 @@ export default function CorporateSolutions() {
         {/* B2B Assurance Bar */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
           <div className="bg-white p-5 rounded-2xl border border-stone-200 flex flex-col items-center">
-            <FiFileText className="w-6 h-6 text-emerald-600 mb-2" />
+            <FiFileText className="w-6 h-6 text-store-accent mb-2" />
             <h4 className="text-sm font-bold text-stone-900">VAT / Mushak 6.3</h4>
             <p className="text-xs text-stone-500 mt-0.5">Compliant tax challans provided</p>
           </div>
           <div className="bg-white p-5 rounded-2xl border border-stone-200 flex flex-col items-center">
-            <FiUsers className="w-6 h-6 text-emerald-600 mb-2" />
+            <FiUsers className="w-6 h-6 text-store-accent mb-2" />
             <h4 className="text-sm font-bold text-stone-900">Dedicated Account Exec</h4>
             <p className="text-xs text-stone-500 mt-0.5">Single point of contact 24/7</p>
           </div>
           <div className="bg-white p-5 rounded-2xl border border-stone-200 flex flex-col items-center">
-            <FiTruck className="w-6 h-6 text-emerald-600 mb-2" />
+            <FiTruck className="w-6 h-6 text-store-accent mb-2" />
             <h4 className="text-sm font-bold text-stone-900">Multi-Address Dispatch</h4>
             <p className="text-xs text-stone-500 mt-0.5">Direct to employee home doorsteps</p>
           </div>
           <div className="bg-white p-5 rounded-2xl border border-stone-200 flex flex-col items-center">
-            <FiShield className="w-6 h-6 text-emerald-600 mb-2" />
+            <FiShield className="w-6 h-6 text-store-accent mb-2" />
             <h4 className="text-sm font-bold text-stone-900">100% Quality Guaranteed</h4>
             <p className="text-xs text-stone-500 mt-0.5">Direct origin verification</p>
           </div>

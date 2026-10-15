@@ -8,7 +8,7 @@ import CharterCTA from "@/components/sections/global-fair-pay/charter-cta";
 
 export default function GlobalFairPayCharter() {
   return (
-    <div className="w-full bg-[#FAF9F6] min-h-screen text-stone-900 font-sans">
+    <div className="w-full bg-[#F7FAFD] min-h-screen text-stone-900 font-sans">
       {/* 1. Hero Section */}
       <CharterHero />
 

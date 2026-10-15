@@ -46,7 +46,7 @@ export default function CorporateFAQ() {
         
         <ScrollAnimate variant="fade-in-up">
           <div className="text-center mb-12 sm:mb-16">
-            <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
+            <span className="text-xs uppercase font-bold text-store-primary tracking-wider">
               Corporate Guidelines
             </span>
             <h2 className="text-3xl sm:text-4xl text-zinc-900 font-normal tracking-tight mt-1">
@@ -69,7 +69,7 @@ export default function CorporateFAQ() {
                 <button
                   type="button"
                   onClick={() => toggle(idx)}
-                  className="w-full text-left px-5 sm:px-6 py-4 flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-stone-900 hover:text-emerald-700 transition-colors cursor-pointer"
+                  className="w-full text-left px-5 sm:px-6 py-4 flex items-center justify-between gap-4 font-semibold text-sm sm:text-base text-stone-900 hover:text-store-primary transition-colors cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   <span className="shrink-0 text-stone-400">
@@ -88,9 +88,9 @@ export default function CorporateFAQ() {
 
         {/* Direct Corporate Desk Contact Card */}
         <ScrollAnimate variant="fade-in-up">
-          <div className="bg-[#FAF9F5] rounded-3xl p-8 sm:p-10 border border-stone-200 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="bg-store-page rounded-3xl p-8 sm:p-10 border border-stone-200 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 block mb-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-store-deep block mb-1">
                 Need Fast Proposal or Custom Budgeting?
               </span>
               <h3 className="text-2xl text-zinc-900 font-bold tracking-tight mb-2">
@@ -104,7 +104,7 @@ export default function CorporateFAQ() {
             <div className="flex flex-col sm:flex-row md:flex-col gap-3 shrink-0 w-full md:w-auto">
               <a
                 href="tel:01722301927"
-                className="px-6 py-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-bold text-xs uppercase tracking-wider text-center transition-all flex items-center justify-center gap-2"
+                className="px-6 py-3 rounded-xl bg-store-primary hover:bg-store-hover text-white font-bold text-sm text-center transition-colors flex items-center justify-center gap-2"
               >
                 <FiPhone className="w-4 h-4" />
                 <span>Call Executive: 01722301927</span>

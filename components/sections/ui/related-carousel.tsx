@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import ProductCard from './product-card';
+import ProductCard, { ProductCardSkeleton } from './product-card';
 import { fetchShopProducts, type ShopProduct } from '@/lib/shop-api';
 
 interface RelatedProductsProps {
@@ -44,15 +44,15 @@ export default function RelatedCarousel({
 
   if (isLoading) {
     return (
-      <section className="w-full bg-[#FAF9F5] py-10 sm:py-14 border-t border-zinc-200/80">
+      <section className="w-full bg-store-page py-10 sm:py-14 border-t border-zinc-200/80">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="flex items-center justify-between mb-6">
             <div className="w-44 h-7 bg-zinc-200 animate-pulse rounded-lg" />
             <div className="w-20 h-5 bg-zinc-200 animate-pulse rounded-lg" />
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3.5 sm:gap-4">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="h-80 bg-zinc-100 animate-pulse rounded-xl border border-zinc-200/60" />
+              <ProductCardSkeleton key={i} />
             ))}
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function RelatedCarousel({
   }
 
   return (
-    <section className="w-full bg-[#FAF9F5] py-10 sm:py-14 border-t border-zinc-200/80 font-sans">
+    <section className="w-full bg-store-page py-10 sm:py-14 border-t border-zinc-200/80 font-sans">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Header matching Screenshot: "You may also like" with "Browse all" link */}
         <div className="flex items-center justify-between gap-4 mb-6 sm:mb-8">
@@ -75,14 +75,14 @@ export default function RelatedCarousel({
 
           <Link
             href="/products"
-            className="text-xs sm:text-sm font-bold text-[#4F46E5] hover:text-[#4338CA] hover:underline transition-colors shrink-0"
+            className="text-xs sm:text-sm font-bold text-store-primary hover:text-store-accent hover:underline transition-colors shrink-0"
           >
             Browse all
           </Link>
         </div>
 
         {/* 5-Column Grid matching Screenshot */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5 sm:gap-4.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 lg:gap-5">
           {products.map((product) => (
             <ProductCard
               key={product.id}

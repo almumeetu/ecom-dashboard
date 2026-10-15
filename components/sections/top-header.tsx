@@ -54,7 +54,7 @@ export default function TopHeader() {
     secondaryPhone.replace(/[^\d]/g, "") !== primaryPhoneClean.replace(/[^\d]/g, "");
 
   return (
-    <section className="w-full bg-[#0B132B] text-[#94A3B8] text-xs border-b border-[#1E293B] relative z-40 select-none">
+    <section className="w-full bg-store-primary text-store-light text-xs border-b border-store-accent relative z-40 select-none">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Desktop & Tablet bar (single clean row) */}
         <div className="hidden md:flex items-center justify-between h-9 gap-4">
@@ -62,19 +62,19 @@ export default function TopHeader() {
           <div className="flex items-center gap-3 shrink-0 text-xs font-normal">
             <a
               href={`tel:${primaryPhoneClean}`}
-              className="flex items-center gap-1.5 text-[#94A3B8] hover:text-white transition-colors font-medium"
+              className="flex items-center gap-1.5 text-store-light hover:text-white transition-colors font-medium"
             >
-              <IoCallOutline className="w-3.5 h-3.5 text-[#94A3B8]" />
+              <IoCallOutline className="w-3.5 h-3.5 text-white/80" />
               <span>
                 Hotline: <strong className="text-white font-semibold">{primaryPhone}</strong>
               </span>
             </a>
-            <span className="text-slate-700">|</span>
+            <span className="text-white/40">|</span>
             <a
               href={`https://wa.me/${whatsappNumber}?text=Hello%20NovaMart`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-[#94A3B8] hover:text-white transition-colors font-medium group"
+              className="flex items-center gap-1.5 text-store-light hover:text-white transition-colors font-medium group"
             >
               <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366] group-hover:scale-110 transition-transform" />
               {isDifferentSecondary ? (
@@ -89,21 +89,21 @@ export default function TopHeader() {
 
           {/* Center: Announcement Slider */}
           <div className="flex-1 max-w-xl mx-4 overflow-hidden">
-            <TopSlider slogan={shopSettings?.slogan} />
+            <TopSlider />
           </div>
 
           {/* Right: Cash on delivery & Track Order */}
           <div className="flex items-center gap-3.5 shrink-0 text-xs font-normal">
-            <span className="flex items-center gap-1.5 text-[#94A3B8] font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F97316] animate-pulse" />
+            <span className="flex items-center gap-1.5 text-store-light font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ffd18e] animate-pulse" />
               <span>Cash on delivery</span>
             </span>
-            <span className="text-slate-700">|</span>
+            <span className="text-white/40">|</span>
             <Link
               href="/profile?tab=track"
-              className="flex items-center gap-1.5 text-[#94A3B8] hover:text-white transition-colors font-medium"
+              className="flex items-center gap-1.5 text-store-light hover:text-white transition-colors font-medium"
             >
-              <LuTruck className="w-3.5 h-3.5 text-[#94A3B8]" />
+              <LuTruck className="w-3.5 h-3.5 text-white/80" />
               <span>Track Order</span>
             </Link>
           </div>
@@ -113,23 +113,23 @@ export default function TopHeader() {
         <div className="md:hidden flex items-center justify-between py-1.5 gap-2">
           <a
             href={`tel:${primaryPhoneClean}`}
-            className="flex items-center gap-1 text-[11px] text-[#94A3B8] hover:text-white shrink-0 font-medium"
+            className="flex items-center gap-1 text-[11px] text-store-light hover:text-white shrink-0 font-medium"
             aria-label="Hotline call"
           >
-            <IoCallOutline className="w-3.5 h-3.5 text-[#94A3B8]" />
+            <IoCallOutline className="w-3.5 h-3.5 text-white/80" />
             <span>{primaryPhone}</span>
           </a>
 
           <div className="flex-1 overflow-hidden px-1">
-            <TopSlider slogan={shopSettings?.slogan} />
+            <TopSlider />
           </div>
 
           <Link
             href="/profile?tab=track"
-            className="flex items-center gap-1 text-[11px] text-[#94A3B8] hover:text-white shrink-0 font-medium"
+            className="flex items-center gap-1 text-[11px] text-store-light hover:text-white shrink-0 font-medium"
             aria-label="Track order"
           >
-            <LuTruck className="w-3.5 h-3.5 text-[#94A3B8]" />
+            <LuTruck className="w-3.5 h-3.5 text-white/80" />
             <span className="hidden xs:inline">Track</span>
           </Link>
         </div>

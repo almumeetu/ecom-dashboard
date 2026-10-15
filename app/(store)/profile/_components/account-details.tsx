@@ -8,11 +8,11 @@ import { uploadAvatar, deleteAvatar, changePassword } from "@/lib/storefront-api
 import ResolvedImage from "./image-resolver";
 
 // ─── Shared design tokens ────────────────────────────────────────────────────
-const SECTION_LABEL = "text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400";
-const FIELD_LABEL   = "block text-[10px] font-bold tracking-[0.14em] uppercase text-zinc-400 mb-1.5";
+const SECTION_LABEL = "text-xs font-bold tracking-wider uppercase text-zinc-400";
+const FIELD_LABEL   = "block text-xs font-bold tracking-wider uppercase text-zinc-400 mb-1.5";
 const INPUT_BASE    = "w-full border border-stone-200 bg-white px-4 py-3 text-sm font-sans text-zinc-800 outline-none transition focus:border-stone-400 focus:ring-0 rounded-lg placeholder:text-zinc-300";
-const BTN_PRIMARY   = "inline-flex items-center gap-2 bg-[#1A1A1A] hover:bg-stone-800 text-white font-sans text-[10px] font-bold tracking-[0.16em] uppercase px-10 py-3.5 rounded-full transition cursor-pointer shadow-sm disabled:opacity-50";
-const BTN_SECONDARY = "inline-flex items-center gap-2 bg-white hover:bg-stone-50 border border-stone-200 text-zinc-700 font-sans text-[10px] font-bold tracking-[0.16em] uppercase px-10 py-3.5 rounded-full transition cursor-pointer shadow-sm disabled:opacity-50";
+const BTN_PRIMARY   = "inline-flex items-center gap-2 bg-store-primary hover:bg-stone-800 text-white font-sans text-xs font-bold tracking-wider uppercase px-10 py-3.5 rounded-full transition cursor-pointer shadow-sm disabled:opacity-50";
+const BTN_SECONDARY = "inline-flex items-center gap-2 bg-white hover:bg-stone-50 border border-stone-200 text-zinc-700 font-sans text-xs font-bold tracking-wider uppercase px-10 py-3.5 rounded-full transition cursor-pointer shadow-sm disabled:opacity-50";
 // ─────────────────────────────────────────────────────────────────────────────
 
 export default function AccountDetailsView() {
@@ -138,7 +138,7 @@ export default function AccountDetailsView() {
         <div className="relative w-20 h-20 shrink-0">
           <div className="w-full h-full rounded-full overflow-hidden border-2 border-stone-100 bg-stone-50 shadow-sm flex items-center justify-center">
             {uploadingAvatar ? (
-              <FiLoader className="w-6 h-6 text-[#C5B382] animate-spin" />
+              <FiLoader className="w-6 h-6 text-store-accent animate-spin" />
             ) : (
               <ResolvedImage
                 src={avatarUrl}
@@ -150,10 +150,10 @@ export default function AccountDetailsView() {
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="absolute -bottom-1 -right-1 w-7 h-7 bg-[#1A1A1A] text-white rounded-full flex items-center justify-center shadow hover:bg-stone-700 transition cursor-pointer"
+            className="absolute -bottom-1 -right-1 w-7 h-7 bg-store-primary text-white rounded-full flex items-center justify-center shadow hover:bg-stone-700 transition cursor-pointer"
             title="Change photo"
           >
-            <FiCamera className="text-[11px]" />
+            <FiCamera className="text-xs" />
           </button>
         </div>
 
@@ -164,7 +164,7 @@ export default function AccountDetailsView() {
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="font-sans text-[10px] font-bold tracking-wider uppercase text-[#C5B382] hover:text-stone-800 transition cursor-pointer"
+              className="font-sans text-xs font-bold tracking-wider uppercase text-store-accent hover:text-stone-800 transition cursor-pointer"
             >
               Change Photo
             </button>
@@ -174,9 +174,9 @@ export default function AccountDetailsView() {
                 <button
                   type="button"
                   onClick={handleDeleteAvatar}
-                  className="font-sans text-[10px] font-bold tracking-wider uppercase text-red-400 hover:text-red-600 transition cursor-pointer flex items-center gap-1"
+                  className="font-sans text-xs font-bold tracking-wider uppercase text-red-400 hover:text-red-600 transition cursor-pointer flex items-center gap-1"
                 >
-                  <FiTrash2 className="text-[10px]" /> Remove
+                  <FiTrash2 className="text-xs" /> Remove
                 </button>
               </>
             )}
@@ -226,7 +226,7 @@ export default function AccountDetailsView() {
                   <option value="+91">🇮🇳 +91</option>
                   <option value="+86">🇨🇳 +86</option>
                 </select>
-                <FiChevronDown className="absolute right-1.5 text-zinc-400 text-[10px] pointer-events-none" />
+                <FiChevronDown className="absolute right-1.5 text-zinc-400 text-xs pointer-events-none" />
               </div>
               <input
                 type="tel"

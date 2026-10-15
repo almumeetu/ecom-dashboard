@@ -9,30 +9,30 @@ export default function TrustFeatures() {
       title: 'Fast Doorstep Delivery',
       desc: 'Same-day grocery deliveries & rapid shipping for fashion, footwear and electronics.',
       icon: LuTruck,
-      color: 'text-[#4F46E5] bg-indigo-50 border-indigo-100',
+      color: 'text-store-primary bg-store-surface border-store-border',
     },
     {
       title: '100% Authentic Quality',
       desc: 'All products sourced directly from verified manufacturers and official brand partners.',
       icon: LuShieldCheck,
-      color: 'text-blue-600 bg-blue-50 border-blue-100',
+      color: 'text-store-primary bg-store-surface border-store-border',
     },
     {
       title: 'Certified Multi-Vendors',
       desc: 'Strict seller compliance, background verification, and continuous rating audits.',
       icon: LuStore,
-      color: 'text-purple-600 bg-purple-50 border-purple-100',
+      color: 'text-store-primary bg-store-surface border-store-border',
     },
     {
       title: 'Secure Payments & Easy Return',
       desc: 'Encrypted checkout, cash-on-delivery options, and a hassle-free 7-day return policy.',
       icon: LuCreditCard,
-      color: 'text-[#EA580C] bg-orange-50 border-orange-100',
+      color: 'text-store-primary bg-store-surface border-store-border',
     },
   ];
 
   return (
-    <section className="w-full bg-[#FAF9F5] py-16 sm:py-20 border-t border-stone-200/70 overflow-hidden">
+    <section className="w-full bg-store-page py-16 sm:py-20 border-t border-stone-200/70 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 w-full flex flex-col items-center">
         {/* Title */}
         <div className="text-center max-w-2xl mb-12">

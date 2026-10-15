@@ -32,7 +32,7 @@ export default function Prestige() {
                     backgroundSize: '100px 100px',
                   }}
                 />
-                <h4 className="font-sans text-xs uppercase tracking-widest text-[#4F46E5] mb-2 font-medium">
+                <h4 className="font-sans text-xs uppercase tracking-widest text-[#174A76] mb-2 font-medium">
                   Verified Quality
                 </h4>
                 <blockquote className="font-sans font-normal text-base md:text-lg text-zinc-800 leading-relaxed">

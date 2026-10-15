@@ -127,17 +127,17 @@ Corporate Gifting / Event Inquiry Details:
   };
  
   return (
-    <section id="inquiry-form" className="w-full bg-[#FAF9F6] py-16 sm:py-24 px-4 sm:px-6 md:px-12 border-t border-stone-200">
+    <section id="inquiry-form" className="w-full bg-store-page py-16 sm:py-24 px-4 sm:px-6 md:px-12 border-t border-stone-200">
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
           {/* Left Column (Content) */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <div className="space-y-4">
-              <span className="text-xs uppercase font-bold text-emerald-700 tracking-wider">
+              <span className="text-xs uppercase font-bold text-store-primary tracking-wider">
                 Direct Enterprise Desk
               </span>
-              <h2 className="font-sans font-medium text-3xl sm:text-4xl text-[#1C1C1C] font-normal leading-tight">
+              <h2 className="font-sans text-3xl sm:text-4xl text-store-ink font-medium leading-tight">
                 Let&apos;s Curate Something Worth Remembering
               </h2>
               <p className="font-gotham text-stone-600 text-xs sm:text-sm leading-relaxed">
@@ -161,7 +161,7 @@ Corporate Gifting / Event Inquiry Details:
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="font-sans font-medium text-sm text-[#1C1C1C] font-semibold tracking-wide">
+                  <h4 className="font-sans text-sm text-store-ink font-semibold tracking-wide">
                     Executive Gourmet Hamper
                   </h4>
                   <p className="text-[11px] text-stone-500">Cold-pressed oils, honey &amp; organic sweets</p>
@@ -177,7 +177,7 @@ Corporate Gifting / Event Inquiry Details:
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <h4 className="font-sans font-medium text-sm text-[#1C1C1C] font-semibold tracking-wide">
+                  <h4 className="font-sans text-sm text-store-ink font-semibold tracking-wide">
                     Artisanal Celebration Box
                   </h4>
                   <p className="text-[11px] text-stone-500">Festive Eid, milestone &amp; onboarding</p>
@@ -188,19 +188,19 @@ Corporate Gifting / Event Inquiry Details:
             {/* Reassurance points */}
             <div className="space-y-3 pt-4 border-t border-stone-200 text-xs text-stone-600">
               <div className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-store-primary" />
                 <span>Dedicated account manager assigned within 2 business hours</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-store-primary" />
                 <span>Custom logo printing on ribbons, cards &amp; rigid gift packaging</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-store-primary" />
                 <span>Multi-address individual doorstep delivery to 64 districts</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-store-primary" />
                 <span>Full VAT / Mushak-6.3 Tax Challan provided with every invoice</span>
               </div>
             </div>
@@ -210,7 +210,7 @@ Corporate Gifting / Event Inquiry Details:
           <div className="lg:col-span-7">
             <div className="bg-white rounded-3xl p-8 sm:p-10 shadow-lg border border-stone-200">
               <div className="mb-8">
-                <h3 className="font-sans font-medium text-2xl sm:text-3xl text-[#1C1C1C] font-semibold mb-2">
+                <h3 className="font-sans text-2xl sm:text-3xl text-store-ink font-semibold mb-2">
                   Tell Us About Your Requirement
                 </h3>
                 <p className="font-gotham text-xs text-stone-500 leading-relaxed">
@@ -222,7 +222,7 @@ Corporate Gifting / Event Inquiry Details:
                 
                 {/* Contact Information Divider */}
                 <div className="space-y-4">
-                  <h4 className="font-gotham text-[10px] font-bold uppercase tracking-widest text-emerald-800">
+                  <h4 className="font-gotham text-xs font-bold uppercase tracking-wider text-store-deep">
                     Organization &amp; Contact Details
                   </h4>
                   
@@ -236,7 +236,7 @@ Corporate Gifting / Event Inquiry Details:
                         value={formData.fullName}
                         onChange={handleInputChange}
                         placeholder="Enter full name"
-                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-store-primary"
                       />
                       {errors.fullName && (
                         <p className="text-xs text-red-500 font-gotham">{errors.fullName}</p>
@@ -250,7 +250,7 @@ Corporate Gifting / Event Inquiry Details:
                         value={formData.organisation}
                         onChange={handleInputChange}
                         placeholder="Enter organization/company name"
-                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-store-primary"
                       />
                       {errors.organisation && (
                         <p className="text-xs text-red-500 font-gotham">{errors.organisation}</p>
@@ -267,7 +267,7 @@ Corporate Gifting / Event Inquiry Details:
                       value={formData.email}
                       onChange={handleInputChange}
                       placeholder="corporate.email@company.com"
-                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
+                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-store-primary"
                     />
                     {errors.email && (
                       <p className="text-xs text-red-500 font-gotham">{errors.email}</p>
@@ -277,7 +277,7 @@ Corporate Gifting / Event Inquiry Details:
                   {/* Row 3 */}
                   <div className="space-y-1.5">
                     <label className="font-sans font-medium text-xs uppercase tracking-wide text-stone-700">Phone Number <span className="text-red-500">*</span></label>
-                    <div className="flex border border-stone-200 rounded-xl overflow-hidden focus-within:border-emerald-600">
+                    <div className="flex border border-stone-200 rounded-xl overflow-hidden focus-within:border-store-primary">
                       <select
                         name="countryCode"
                         value={formData.countryCode}
@@ -295,7 +295,7 @@ Corporate Gifting / Event Inquiry Details:
                         value={formData.phoneNumber}
                         onChange={handleInputChange}
                         placeholder="017XXXXXXXX"
-                        className="w-full px-4 py-3 text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none"
+                        className="w-full px-4 py-3 text-sm font-gotham text-stone-850 placeholder-stone-400 focus:outline-none"
                       />
                     </div>
                     {errors.phoneNumber && (
@@ -306,7 +306,7 @@ Corporate Gifting / Event Inquiry Details:
 
                 {/* Inquiry Details Divider */}
                 <div className="space-y-4 pt-2 border-t border-stone-100">
-                  <h4 className="font-gotham text-[10px] font-bold uppercase tracking-widest text-emerald-800">
+                  <h4 className="font-gotham text-xs font-bold uppercase tracking-wider text-store-deep">
                     Order Scope &amp; Specifications
                   </h4>
 
@@ -318,7 +318,7 @@ Corporate Gifting / Event Inquiry Details:
                         name="purpose"
                         value={formData.purpose}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 focus:outline-none focus:border-emerald-600 cursor-pointer"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 focus:outline-none focus:border-store-primary cursor-pointer"
                       >
                         <option value="">Select Purpose</option>
                         <option value="corporate-gifting">Executive &amp; Corporate Gifting</option>
@@ -337,7 +337,7 @@ Corporate Gifting / Event Inquiry Details:
                         name="preferredCollection"
                         value={formData.preferredCollection}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 focus:outline-none focus:border-emerald-600 cursor-pointer"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 focus:outline-none focus:border-store-primary cursor-pointer"
                       >
                         <option value="">Select Category</option>
                         <option value="gourmet-hampers">Executive Gourmet &amp; Grocery Hampers</option>
@@ -358,7 +358,7 @@ Corporate Gifting / Event Inquiry Details:
                         name="deliveryDate"
                         value={formData.deliveryDate}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 focus:outline-none focus:border-emerald-600 cursor-pointer"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 focus:outline-none focus:border-store-primary cursor-pointer"
                       />
                       {errors.deliveryDate && (
                         <p className="text-xs text-red-500 font-gotham">{errors.deliveryDate}</p>
@@ -372,7 +372,7 @@ Corporate Gifting / Event Inquiry Details:
                         value={formData.quantity}
                         onChange={handleInputChange}
                         placeholder="e.g. 50 boxes, 200 crates, 500 units"
-                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
+                        className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-store-primary"
                       />
                       {errors.quantity && (
                         <p className="text-xs text-red-500 font-gotham">{errors.quantity}</p>
@@ -389,7 +389,7 @@ Corporate Gifting / Event Inquiry Details:
                       onChange={handleInputChange}
                       placeholder="Specify company logo branding, budget per unit, multi-address shipping requirements, or specific products you'd like included..."
                       rows={4}
-                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-xs font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-emerald-600 resize-none"
+                      className="w-full px-4 py-3 border border-stone-200 rounded-xl text-sm font-gotham text-stone-850 placeholder-stone-400 focus:outline-none focus:border-store-primary resize-none"
                     />
                     {errors.requirements && (
                       <p className="text-xs text-red-500 font-gotham">{errors.requirements}</p>
@@ -401,7 +401,7 @@ Corporate Gifting / Event Inquiry Details:
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="w-full sm:w-auto px-8 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all duration-300 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="w-full sm:w-auto px-8 py-3.5 bg-store-primary hover:bg-store-hover text-white font-bold text-sm rounded-xl transition-colors shadow-sm disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
                     {submitting ? 'SUBMITTING INQUIRY...' : 'Submit Corporate Inquiry'}
                   </button>

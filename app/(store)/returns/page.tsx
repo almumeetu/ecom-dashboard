@@ -71,7 +71,7 @@ export default function ReturnsPage() {
   ];
 
   return (
-    <div className="w-full bg-[#FAF9F5] text-zinc-900 font-sans min-h-screen">
+    <div className="w-full bg-store-page text-zinc-900 font-sans min-h-screen">
       {/* ── Page Banner ── */}
       <PageBanner
         title="Returns & Refunds Policy"
@@ -92,12 +92,12 @@ export default function ReturnsPage() {
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-xs">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-3.5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF2FF] border border-indigo-200/80 text-[#4F46E5] text-xs font-bold uppercase tracking-wider">
-                  <FiRefreshCw className="w-3.5 h-3.5 text-[#4F46E5]" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider">
+                  <FiRefreshCw className="w-3.5 h-3.5 text-store-primary" />
                   <span>Buyer Protection Guarantee</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-4xl font-extrabold text-[#0B132B] tracking-tight leading-tight">
+                <h1 className="text-2xl sm:text-4xl font-extrabold text-store-ink tracking-tight leading-tight">
                   7-Day Hassle-Free Return &amp; Replacement
                 </h1>
 
@@ -114,8 +114,8 @@ export default function ReturnsPage() {
                     <FiCheck className="w-3.5 h-3.5 text-blue-600" />
                     <span>Courier Pickup Across 64 Districts</span>
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-50 border border-orange-200 text-[#EA580C] text-xs font-bold">
-                    <FiCheck className="w-3.5 h-3.5 text-[#EA580C]" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-50 border border-orange-200 text-[#8B4F2B] text-xs font-bold">
+                    <FiCheck className="w-3.5 h-3.5 text-[#8B4F2B]" />
                     <span>Refund in 24–48h via bKash / Bank</span>
                   </span>
                 </div>
@@ -143,7 +143,7 @@ export default function ReturnsPage() {
                     href={`tel:${cleanPhone}`}
                     className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-bold text-center border border-zinc-300 transition-all flex items-center justify-center gap-2"
                   >
-                    <FiPhone className="w-3.5 h-3.5 text-[#4F46E5]" />
+                    <FiPhone className="w-3.5 h-3.5 text-store-primary" />
                     <span>Call Hotline: {primaryPhone}</span>
                   </a>
                 </div>
@@ -156,10 +156,10 @@ export default function ReturnsPage() {
       {/* ── 2. 4-Step Simple Return Process ── */}
       <section className="py-8 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#4F46E5]">
+          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
             Simple &amp; Smooth
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B132B] mt-1">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
             How The Return Process Works
           </h2>
           <p className="text-xs sm:text-sm text-zinc-500 mt-1">
@@ -170,13 +170,13 @@ export default function ReturnsPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="bg-white rounded-2xl p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
-              <span className="text-2xl font-black text-[#4F46E5]/30 block mb-2 font-mono">01</span>
+              <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">01</span>
               <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Notify Support</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
                 Contact our helpline or WhatsApp within 7 days. Share your Order ID and 1–2 photos of the issue.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-[#4F46E5]">
+            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiCheckCircle className="w-3.5 h-3.5" />
               <span>Response in &lt; 30 Minutes</span>
             </div>
@@ -184,13 +184,13 @@ export default function ReturnsPage() {
 
           <div className="bg-white rounded-2xl p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
-              <span className="text-2xl font-black text-[#4F46E5]/30 block mb-2 font-mono">02</span>
+              <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">02</span>
               <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Reverse Courier Scheduled</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
                 Our logistics partner schedules a doorstep pickup at your address with zero return fee for defective goods.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-[#4F46E5]">
+            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiTruck className="w-3.5 h-3.5" />
               <span>Doorstep Pickup</span>
             </div>
@@ -198,13 +198,13 @@ export default function ReturnsPage() {
 
           <div className="bg-white rounded-2xl p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
-              <span className="text-2xl font-black text-[#4F46E5]/30 block mb-2 font-mono">03</span>
+              <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">03</span>
               <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Hub Verification</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
                 The parcel is checked by our QC team in Banani, Dhaka to verify the condition and manufacturer seal.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-[#4F46E5]">
+            <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiShield className="w-3.5 h-3.5" />
               <span>Verified Same Day</span>
             </div>
@@ -212,7 +212,7 @@ export default function ReturnsPage() {
 
           <div className="bg-white rounded-2xl p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
-              <span className="text-2xl font-black text-[#4F46E5]/30 block mb-2 font-mono">04</span>
+              <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">04</span>
               <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Refund or Replacement</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
                 Receive an immediate replacement dispatched or full refund sent to your bKash, Nagad, or Bank account.
@@ -230,10 +230,10 @@ export default function ReturnsPage() {
       <section className="py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/80 shadow-xs">
           <div className="mb-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#4F46E5]">
+            <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
               Category Guidelines
             </span>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-[#0B132B] mt-0.5">
+            <h2 className="text-xl sm:text-2xl font-extrabold text-store-ink mt-0.5">
               Product Return Eligibility &amp; Condition Criteria
             </h2>
             <p className="text-xs sm:text-sm text-zinc-500 mt-1">
@@ -288,10 +288,10 @@ export default function ReturnsPage() {
       {/* ── 4. FAQs ── */}
       <section className="py-10 sm:py-14 max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#4F46E5]">
+          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
             Clarifications
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B132B] mt-1">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
             Frequently Asked Questions Regarding Returns
           </h2>
         </div>
@@ -307,11 +307,11 @@ export default function ReturnsPage() {
                 <button
                   type="button"
                   onClick={() => toggleFaq(index)}
-                  className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bold text-sm text-zinc-900 hover:text-[#4F46E5] transition-colors cursor-pointer"
+                  className="w-full text-left px-5 py-4 flex items-center justify-between gap-4 font-bold text-sm text-zinc-900 hover:text-store-primary transition-colors cursor-pointer"
                 >
                   <span>{faq.q}</span>
                   <div className="w-7 h-7 rounded-lg bg-zinc-100 flex items-center justify-center shrink-0 text-zinc-600">
-                    {isOpen ? <FiChevronUp className="w-4 h-4 text-[#4F46E5]" /> : <FiChevronDown className="w-4 h-4" />}
+                    {isOpen ? <FiChevronUp className="w-4 h-4 text-store-primary" /> : <FiChevronDown className="w-4 h-4" />}
                   </div>
                 </button>
 

@@ -47,7 +47,7 @@ export default function GiftItem() {
             <span className="text-white text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">
               Gift
             </span>
-            <span className="text-[#818CF8] text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">
+            <span className="text-[#C7D5DF] text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">
               Ideas
             </span>
           </h2>

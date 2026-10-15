@@ -34,12 +34,12 @@ export function PolicyModal({ policy, onClose }: PolicyModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-2xl bg-neutral-900 border border-[#b4a676]/30 rounded-2xl flex flex-col max-h-[calc(100vh-96px)] shadow-2xl p-6 md:p-8 animate-fadeIn"
+        className="relative w-full max-w-2xl bg-neutral-900 border border-[#8B4F2B]/30 rounded-2xl flex flex-col max-h-[calc(100vh-96px)] shadow-2xl p-6 md:p-8 animate-fadeIn"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-[#b4a676] transition-colors p-2 rounded-full hover:bg-white/5 cursor-pointer"
+          className="absolute top-4 right-4 z-10 text-zinc-400 hover:text-[#8B4F2B] transition-colors p-2 rounded-full hover:bg-white/5 cursor-pointer"
           aria-label="Close policy modal"
         >
           <LuX className="w-5 h-5" />
@@ -47,7 +47,7 @@ export function PolicyModal({ policy, onClose }: PolicyModalProps) {
 
         <h3
           id="policy-modal-title"
-          className="font-['Cormorant_Garamond'] text-2xl md:text-3xl text-[#b4a676] font-medium tracking-wide border-b border-[#b4a676]/20 pb-4 mb-4 pr-12"
+          className="font-['Cormorant_Garamond'] text-2xl md:text-3xl text-[#8B4F2B] font-medium tracking-wide border-b border-[#8B4F2B]/20 pb-4 mb-4 pr-12"
         >
           {policy.title}
         </h3>
@@ -60,7 +60,7 @@ export function PolicyModal({ policy, onClose }: PolicyModalProps) {
         <div className="mt-5 flex justify-end border-t border-white/10 pt-4 shrink-0">
           <button
             onClick={onClose}
-            className="bg-[#b4a676] hover:bg-[#a39465] text-zinc-950 font-bold px-6 py-2 rounded-full transition-colors text-xs tracking-wider uppercase cursor-pointer"
+            className="bg-[#8B4F2B] hover:bg-[#873708] text-zinc-950 font-bold px-6 py-2 rounded-full transition-colors text-xs tracking-wider uppercase cursor-pointer"
           >
             Close
           </button>

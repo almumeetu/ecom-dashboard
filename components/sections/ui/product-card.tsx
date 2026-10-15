@@ -10,8 +10,32 @@ import { useAuth } from "@/app/_providers/auth-provider";
 import type { WishlistProduct } from "@/lib/types";
 import { getProductFallbackImage } from "@/lib/admin-api";
 import { toast } from "sonner";
-import { LuShoppingBag, LuCheck, LuHeart, LuSparkles, LuShieldCheck } from "react-icons/lu";
-import { IoStar } from "react-icons/io5";
+import { LuShoppingBag, LuCheck, LuHeart } from "react-icons/lu";
+
+const IMAGE_FRAME_HEIGHT = "h-44 sm:h-48 lg:h-52";
+
+export function ProductCardSkeleton() {
+  return (
+    <div aria-hidden="true" className="flex h-full w-full flex-col overflow-hidden rounded-2xl border border-store-border bg-white animate-pulse">
+      <div className={`${IMAGE_FRAME_HEIGHT} flex shrink-0 items-center justify-center border-b border-store-surface px-5 py-5 sm:px-6 sm:py-6`}>
+        <div className="h-full w-full max-w-[190px] rounded-md bg-zinc-100" />
+      </div>
+      <div className="p-3 sm:p-3.5">
+        <div className="flex h-10 flex-col gap-2">
+        <div className="h-3 w-full rounded bg-zinc-100" />
+          <div className="h-3 w-3/4 rounded bg-zinc-100" />
+        </div>
+        <div className="mt-3 flex min-h-11 items-start justify-between gap-2">
+          <div className="flex flex-col gap-2">
+            <div className="h-4 w-16 rounded bg-zinc-100" />
+            <div className="h-3 w-12 rounded bg-zinc-100" />
+          </div>
+          <div className="h-9 w-9 rounded-md bg-zinc-100" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ProductCard({
   id,
@@ -23,10 +47,6 @@ export default function ProductCard({
   category,
   brand,
   vendor,
-  rating,
-  reviewCount,
-  unit,
-  badge,
   variantId,
 }: ProductCardProps) {
   const { isInWishlist, toggleWishlist } = useWishlist();
@@ -38,32 +58,6 @@ export default function ProductCard({
 
   const inWishlist = !!id && isInWishlist(id);
   const priceNum = useMemo(() => parseFloat(price.replace(/[^0-9.-]/g, "")) || 0, [price]);
-  const originalNum = useMemo(
-    () => (originalPrice ? parseFloat(originalPrice.replace(/[^0-9.-]/g, "")) || 0 : 0),
-    [originalPrice]
-  );
-
-  const discountPercent = useMemo(() => {
-    if (originalNum > priceNum && originalNum > 0) {
-      return Math.round(((originalNum - priceNum) / originalNum) * 100);
-    }
-    return 0;
-  }, [originalNum, priceNum]);
-
-  // Deterministic realistic rating & review count
-  const ratingValue = useMemo(() => {
-    if (rating) return rating.toFixed(1);
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) % 100;
-    return (4.6 + (hash % 4) * 0.1).toFixed(1);
-  }, [rating, name]);
-
-  const reviewCountValue = useMemo(() => {
-    if (reviewCount) return reviewCount;
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) hash = (hash * 19 + name.charCodeAt(i)) % 100;
-    return 24 + (hash % 60);
-  }, [reviewCount, name]);
 
   const resolvedImage = useMemo(() => {
     if (imageError || !image) {
@@ -133,7 +127,7 @@ export default function ProductCard({
   };
 
   const isVariantProduct = useMemo(() => {
-    // If unit mentions weights or sizes, or category is apparel/fragrance
+    // Products with options open their details before adding to the bag.
     const cat = (category || "").toLowerCase();
     const n = name.toLowerCase();
     return (
@@ -150,115 +144,82 @@ export default function ProductCard({
   }, [category, name]);
 
   const productUrl = `/products/${slug || id || ""}`;
-  const displayCategory = (category || brand || "NovaMart Genuine").toUpperCase();
 
   return (
-    <div className="group relative flex flex-col justify-between w-full h-full bg-white rounded-xl border border-zinc-200/80 hover:border-[#4F46E5]/40 shadow-2xs hover:shadow-lg transition-all duration-300 overflow-hidden mx-auto">
-      {/* Top Media & Visual Badge Container */}
-      <div className="relative w-full aspect-square bg-[#F8F9FA] overflow-hidden p-3 flex items-center justify-center">
-        {/* Floating Left Badges (Dynamic Discount & Special Tag) */}
-        <div className="absolute top-2.5 left-2.5 z-20 pointer-events-none flex flex-col gap-1 items-start">
-          {discountPercent > 0 && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium bg-[#EA580C] text-white shadow-xs tracking-tight">
-              -{discountPercent}%
-            </span>
-          )}
-          {badge && !badge.startsWith("-") && badge !== "NEW" && badge !== "HOT" && (
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-medium bg-[#1E1B4B]/90 backdrop-blur-xs text-white shadow-2xs tracking-wider uppercase">
-              {badge}
-            </span>
-          )}
-        </div>
-
-        {/* Floating Interactive Wishlist Button (Right) */}
-        <div className="absolute top-2.5 right-2.5 z-20">
-          <button
-            type="button"
-            onClick={handleToggleWishlist}
-            className={`w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-all duration-200 cursor-pointer shadow-xs hover:scale-105 active:scale-95 ${
-              inWishlist
-                ? "bg-rose-500 text-white shadow-rose-200"
-                : "bg-white/90 text-zinc-500 hover:text-rose-500 hover:bg-white border border-zinc-200/70"
-            }`}
-            aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
-          >
-            <LuHeart className={`w-3.5 h-3.5 ${inWishlist ? "fill-white" : ""}`} />
-          </button>
-        </div>
-
-        {/* Product Image */}
-        <Link href={productUrl} className="relative w-full h-full block">
-          <Image
-            src={resolvedImage}
-            alt={name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
-            className="object-contain group-hover:scale-105 transition-transform duration-500 ease-out"
-            onError={() => setImageError(true)}
-            unoptimized={resolvedImage.includes("unsplash.com")}
-          />
+    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-store-border bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-store-light hover:shadow-[0_12px_32px_rgba(20,38,56,0.08)]">
+      <div className={`${IMAGE_FRAME_HEIGHT} relative w-full shrink-0 overflow-hidden border-b border-store-surface bg-store-page`}>
+        <Link href={productUrl} aria-label={`View ${name}`} className="flex h-full w-full items-center justify-center px-5 py-5 sm:px-6 sm:py-6">
+          <div className="relative h-full w-full max-w-[190px]">
+            <Image
+              src={resolvedImage}
+              alt={name}
+              fill
+              sizes="(max-width: 639px) 140px, 190px"
+              className="object-contain object-center"
+              onError={() => setImageError(true)}
+              unoptimized={resolvedImage.includes("unsplash.com")}
+            />
+          </div>
         </Link>
+        <button
+          type="button"
+          onClick={handleToggleWishlist}
+          aria-label={inWishlist ? `Remove ${name} from wishlist` : `Add ${name} to wishlist`}
+          aria-pressed={inWishlist}
+          className={`absolute right-2.5 top-2.5 flex h-9 w-9 items-center justify-center rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent ${
+            inWishlist
+              ? "border-rose-100 bg-rose-50 text-rose-500"
+              : "border-zinc-200/80 bg-white/95 text-zinc-400 hover:border-rose-100 hover:text-rose-500"
+          }`}
+        >
+          <LuHeart className={`h-4 w-4 ${inWishlist ? "fill-current" : ""}`} />
+        </button>
       </div>
 
-      {/* ── Card Body Information ── */}
-      <div className="p-3 sm:p-3.5 flex flex-col justify-between flex-grow min-w-0">
-        <div>
-          {/* Muted Category / Department Tag */}
-          <p className="text-[10px] sm:text-[11px] font-semibold text-zinc-400 uppercase tracking-wider truncate mb-1">
-            {displayCategory}
-          </p>
+      <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-3.5">
+        <Link href={productUrl} title={name} className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent">
+          <h3 className="h-10 line-clamp-2 break-words text-[13px] font-medium leading-5 text-zinc-800 transition-colors hover:text-store-accent sm:text-sm">
+            {name}
+          </h3>
+        </Link>
 
-          {/* Product Title */}
-          <Link href={productUrl} className="block group-hover:text-[#4F46E5] transition-colors">
-            <h3 className="text-zinc-800 font-normal text-xs sm:text-[13px] leading-snug line-clamp-2 min-h-[2.3rem]">
-              {name}
-            </h3>
-          </Link>
-
-          {/* Price Row */}
-          <div className="flex items-baseline gap-2 mt-2">
-            <span className="text-sm sm:text-base font-medium text-zinc-900 tracking-tight">
+        <div className="mt-3 flex min-h-11 items-start justify-between gap-2">
+          <div className="min-w-0 tabular-nums">
+            <span className="block text-sm font-semibold leading-5 text-store-price sm:text-base [overflow-wrap:anywhere]">
               {price}
             </span>
             {originalPrice && (
-              <span className="text-xs text-zinc-400 line-through">
+              <span className="mt-0.5 block text-[11px] leading-4 text-zinc-500 line-through sm:text-xs">
                 {originalPrice}
               </span>
             )}
           </div>
-        </div>
-
-        {/* ── Full Width Bottom Action Button ── */}
-        <div className="mt-3">
           {isVariantProduct ? (
             <Link
               href={productUrl}
-              className="w-full h-9 rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-medium flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs active:scale-98"
+              aria-label={`Choose options for ${name}`}
+              title="Choose options"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-store-primary bg-white text-store-primary transition-colors hover:bg-store-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent"
             >
-              Select Option
+              <LuShoppingBag className="h-4 w-4" />
             </Link>
           ) : (
             <button
               type="button"
               onClick={handleAddToCart}
-              className={`w-full h-9 rounded-lg text-white text-xs font-medium flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer shadow-xs active:scale-98 ${
+              aria-label={isAdded ? `${name} added to bag` : `Add ${name} to bag`}
+              title={isAdded ? "Added to bag" : "Add to bag"}
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent ${
                 isAdded
-                  ? "bg-emerald-600 shadow-emerald-200"
-                  : "bg-[#4F46E5] hover:bg-[#4338CA] shadow-indigo-200"
+                  ? "border-emerald-600 bg-emerald-600 text-white"
+                  : "border-store-primary bg-store-primary text-white hover:border-store-hover hover:bg-store-hover"
               }`}
             >
-              {isAdded ? (
-                <>
-                  <LuCheck className="w-3.5 h-3.5 text-white" />
-                  <span>Added to Bag</span>
-                </>
-              ) : (
-                <span>Add to Bag</span>
-              )}
+              {isAdded ? <LuCheck className="h-4 w-4" /> : <LuShoppingBag className="h-4 w-4" />}
             </button>
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }

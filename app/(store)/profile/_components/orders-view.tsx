@@ -7,7 +7,7 @@ import ResolvedImage from "./image-resolver";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1";
 
-const SECTION_LABEL = "text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400";
+const SECTION_LABEL = "text-xs font-bold tracking-wider uppercase text-zinc-400";
 
 interface OrderItem {
   id: string;
@@ -109,7 +109,7 @@ export default function OrdersView() {
       {/* ── List ────────────────────────────────────────────────────────────── */}
       {loading ? (
         <div className="flex justify-center py-20">
-          <FiLoader className="w-7 h-7 text-[#C5B382] animate-spin" />
+          <FiLoader className="w-7 h-7 text-store-accent animate-spin" />
         </div>
       ) : orders.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 border border-dashed border-stone-200 rounded-xl">
@@ -143,11 +143,11 @@ export default function OrdersView() {
                     <p className="font-sans font-bold text-xs uppercase tracking-wider text-zinc-800">
                       {order.orderNumber}
                     </p>
-                    <span className={`border font-sans text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full ${statusStyle(order.status)}`}>
+                    <span className={`border font-sans text-xs font-bold tracking-wider uppercase px-2 py-0.5 rounded-full ${statusStyle(order.status)}`}>
                       {order.status}
                     </span>
                   </div>
-                  <p className="font-sans text-[10px] text-zinc-400 mt-0.5">
+                  <p className="font-sans text-xs text-zinc-400 mt-0.5">
                     {date}
                     {order.items?.length ? ` · ${order.items.length} item${order.items.length !== 1 ? "s" : ""}` : ""}
                   </p>
@@ -176,7 +176,7 @@ export default function OrdersView() {
               <div>
                 <p className={SECTION_LABEL}>Order Details</p>
                 <h3 className="text-xl font-medium text-zinc-900 tracking-tight mt-0.5">{selected.orderNumber}</h3>
-                <p className="font-sans text-[10px] text-zinc-400 mt-0.5">
+                <p className="font-sans text-xs text-zinc-400 mt-0.5">
                   Placed{" "}
                   {new Date(selected.placedAt || selected.createdAt).toLocaleDateString("en-US", {
                     day: "numeric", month: "long", year: "numeric",
@@ -184,7 +184,7 @@ export default function OrdersView() {
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <span className={`border font-sans text-[9px] font-bold tracking-wider uppercase px-3 py-1 rounded-full ${statusStyle(selected.status)}`}>
+                <span className={`border font-sans text-xs font-bold tracking-wider uppercase px-3 py-1 rounded-full ${statusStyle(selected.status)}`}>
                   {selected.status}
                 </span>
                 <button
@@ -203,7 +203,7 @@ export default function OrdersView() {
               {/* Items */}
               {selected.items && selected.items.length > 0 && (
                 <div>
-                  <p className="font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-zinc-400 mb-3">
+                  <p className="font-sans text-xs font-bold tracking-wider uppercase text-zinc-400 mb-3">
                     Items ({selected.items.length})
                   </p>
                   <div className="space-y-3">
@@ -217,7 +217,7 @@ export default function OrdersView() {
                           </div>
                           <div className="flex-grow min-w-0">
                             <p className="font-sans font-bold text-xs text-zinc-800 truncate">{name}</p>
-                            <p className="font-sans text-[10px] text-zinc-400 mt-0.5">Qty: {item.quantity}</p>
+                            <p className="font-sans text-xs text-zinc-400 mt-0.5">Qty: {item.quantity}</p>
                           </div>
                           <p className="font-sans font-bold text-xs text-zinc-800 shrink-0">
                             ৳{Number(price || 0).toLocaleString()}
@@ -232,7 +232,7 @@ export default function OrdersView() {
               {/* Shipping address */}
               {shippingAddr && (
                 <div>
-                  <p className="font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-zinc-400 mb-3 flex items-center gap-1.5">
+                  <p className="font-sans text-xs font-bold tracking-wider uppercase text-zinc-400 mb-3 flex items-center gap-1.5">
                     <FiMapPin className="text-xs" /> Delivery Address
                   </p>
                   <div className="bg-stone-50 border border-stone-100 rounded-xl px-4 py-3 space-y-0.5">
@@ -246,7 +246,7 @@ export default function OrdersView() {
 
               {/* Total */}
               <div className="flex items-center justify-between pt-1 border-t border-stone-100">
-                <p className="font-sans text-[10px] font-bold tracking-[0.16em] uppercase text-zinc-400">
+                <p className="font-sans text-xs font-bold tracking-wider uppercase text-zinc-400">
                   Total Paid
                 </p>
                 <p className="font-bold text-xl text-zinc-900 tracking-tight">

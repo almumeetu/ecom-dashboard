@@ -20,9 +20,6 @@ import {
   LuTruck,
   LuCheck,
   LuMapPin,
-  LuGlobe,
-  LuBuilding2,
-  LuClock,
   LuSparkles,
 } from "react-icons/lu";
 import {
@@ -39,10 +36,8 @@ import { clearBuyNowItem } from "@/lib/buy-now";
 import {
   fetchShopProductById,
   fetchShopSettings,
-  fetchCoupons,
   applyCouponApi,
   type ShopSettings,
-  type CouponItem,
 } from "@/lib/shop-api";
 import { resolveImageUrl } from "@/lib/admin-api";
 import type { Product as AdminProduct } from "@/lib/admin-api";
@@ -56,7 +51,7 @@ interface AppliedCouponState {
 }
 
 export default function CartPage() {
-  const { items, updateQuantity, removeItem, addItem, updateCartItem, initialised } = useCart();
+  const { items, updateQuantity, removeItem, updateCartItem, initialised } = useCart();
   const { isAuthenticated, setShowAuthModal } = useAuth();
   const { formatCurrency } = useCurrency();
   const { isInWishlist, toggleWishlist } = useWishlist();
@@ -64,12 +59,10 @@ export default function CartPage() {
 
   const [promoOpen, setPromoOpen] = useState(false);
   const [promoInput, setPromoInput] = useState("");
-  const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
   const [appliedCoupon, setAppliedCoupon] = useState<AppliedCouponState | null>(null);
   const [isApplyingPromo, setIsApplyingPromo] = useState(false);
   const [deliveryZone, setDeliveryZone] = useState<"dhaka" | "outside">("dhaka");
   const [settings, setSettings] = useState<ShopSettings | null>(null);
-  const [activeCoupons, setActiveCoupons] = useState<CouponItem[]>([]);
 
   const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const [cartProducts, setCartProducts] = useState<Record<string, AdminProduct>>({});
@@ -306,14 +299,6 @@ export default function CartPage() {
     fetchShopSettings().then((s) => {
       if (s) setSettings(s);
     });
-    fetchCoupons().then((coupons) => {
-      if (Array.isArray(coupons)) {
-        const valid = coupons.filter(
-          (c) => !c.expiresAt || new Date(c.expiresAt) > new Date()
-        );
-        setActiveCoupons(valid);
-      }
-    });
 
     if (typeof window !== "undefined") {
       try {
@@ -321,7 +306,6 @@ export default function CartPage() {
         if (stored) {
           const parsed = JSON.parse(stored);
           setAppliedCoupon(parsed);
-          setAppliedPromo(parsed.code);
         }
       } catch {}
     }
@@ -367,7 +351,6 @@ export default function CartPage() {
           discount: res.data.discount,
         };
         setAppliedCoupon(couponData);
-        setAppliedPromo(clean);
         if (typeof window !== "undefined") {
           sessionStorage.setItem("applied_coupon", JSON.stringify(couponData));
         }
@@ -385,7 +368,6 @@ export default function CartPage() {
 
   const handleRemovePromo = () => {
     setAppliedCoupon(null);
-    setAppliedPromo(null);
     if (typeof window !== "undefined") {
       sessionStorage.removeItem("applied_coupon");
     }
@@ -393,14 +375,9 @@ export default function CartPage() {
   };
 
   return (
-    <main className="flex-grow bg-[#FAFAFA] w-full min-h-screen font-sans">
+    <main className="flex-grow bg-store-page min-w-0 w-full min-h-screen font-sans pb-6">
       <PageBanner
-        title="Your Shopping Cart"
-        subtitle={
-          items.length > 0
-            ? `Review your ${items.length} selected item${items.length === 1 ? "" : "s"} before secure checkout.`
-            : "Your shopping bag is empty. Explore our verified marketplace for fresh deals!"
-        }
+        title="Shopping Cart"
         breadcrumbs={[
           { label: "Products", href: "/products" },
           { label: "Shopping Cart" },
@@ -409,32 +386,32 @@ export default function CartPage() {
 
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-12">
         {!initialised ? (
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 lg:gap-12 animate-pulse">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px] gap-6 sm:gap-8 lg:gap-10 animate-pulse">
             <div className="space-y-4">
               <div className="h-8 bg-zinc-200 rounded w-1/4" />
-              <div className="h-32 bg-white rounded-2xl border border-zinc-200" />
-              <div className="h-32 bg-white rounded-2xl border border-zinc-200" />
+              <div className="h-32 bg-white rounded-xl border border-zinc-200" />
+              <div className="h-32 bg-white rounded-xl border border-zinc-200" />
             </div>
-            <div className="h-96 bg-white rounded-2xl border border-zinc-200" />
+            <div className="h-96 bg-white rounded-xl border border-zinc-200" />
           </div>
         ) : items.length === 0 ? (
           /* ── Modern Empty Cart State ── */
           <div className="max-w-2xl mx-auto text-center py-16 px-4">
-            <div className="w-24 h-24 rounded-3xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center mx-auto mb-6 shadow-sm border border-indigo-100">
+            <div className="w-24 h-24 rounded-3xl bg-store-surface text-store-primary flex items-center justify-center mx-auto mb-6 shadow-sm border border-store-border">
               <LuTruck className="w-12 h-12" />
             </div>
 
-            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-semibold text-zinc-900 tracking-tight">
               Your Shopping Cart is Empty
             </h2>
             <p className="text-sm text-zinc-500 mt-2 max-w-md mx-auto leading-relaxed">
-              Looks like you haven&apos;t added any items to your bag yet. Discover fresh groceries, trending fashion, and authentic lifestyle products with fast nationwide doorstep delivery.
+              Add products to your cart to start shopping.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/products"
-                className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-sm px-8 py-3.5 rounded-full shadow-lg shadow-indigo-600/20 transition-all cursor-pointer"
+                className="bg-store-primary hover:bg-store-accent text-white font-medium text-sm px-8 py-3.5 rounded-full shadow-none transition-all cursor-pointer"
               >
                 Browse Marketplace
               </Link>
@@ -453,30 +430,30 @@ export default function CartPage() {
             </div>
 
             {/* Helpline Callout */}
-            <div className="mt-12 p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-xs inline-flex items-center gap-4 text-left">
-              <div className="w-10 h-10 rounded-full bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0">
+            <div className="mt-12 p-4 rounded-xl bg-white border border-zinc-200/80 inline-flex min-w-0 items-center gap-3 text-left">
+              <div className="w-10 h-10 rounded-full bg-store-surface text-store-primary flex items-center justify-center shrink-0">
                 <IoCallOutline className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                <p className="text-xs font-medium uppercase tracking-wider text-zinc-400">
                   Need Help Finding Something?
                 </p>
                 <a
                   href="tel:01722301927"
-                  className="text-sm font-extrabold text-zinc-900 hover:text-[#4F46E5] transition-colors"
+                  className="text-sm font-semibold text-zinc-900 hover:text-store-primary transition-colors"
                 >
-                  Call Support: 01722301927 (Central Hub)
+                  Call 01722301927
                 </a>
               </div>
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 lg:gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px] gap-6 sm:gap-8 lg:gap-10 items-start">
             
             {/* ── Left Column: Cart Items List ── */}
-            <div className="space-y-6">
+            <div className="min-w-0 space-y-6">
               {/* Back to Shop & Total Count */}
-              <div className="flex items-center justify-between pb-4 border-b border-zinc-200">
+              <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-200">
                 <div className="flex items-center gap-3">
                   <Link
                     href="/products"
@@ -486,20 +463,17 @@ export default function CartPage() {
                     <LuArrowLeft className="w-5 h-5" />
                   </Link>
                   <div>
-                    <h1 className="text-2xl font-black text-zinc-950 tracking-tight">
-                      Cart Items ({items.length})
-                    </h1>
-                    <p className="text-xs text-zinc-500">
-                      Dispatched from: {settings?.branchName ? `${settings.branchName}, Dhaka` : (settings?.branchAddress || "Dhaka Central Hub")}
-                    </p>
+                    <h2 className="text-lg sm:text-xl font-medium text-zinc-950 tracking-tight">
+                      Items ({items.length})
+                    </h2>
                   </div>
                 </div>
 
                 <Link
                   href="/products"
-                  className="text-xs font-bold text-emerald-600 hover:text-[#4338CA] hover:underline"
+                  className="inline-flex min-h-11 items-center text-sm font-medium text-store-accent hover:underline"
                 >
-                  + Add More Items
+                  Add items
                 </Link>
               </div>
 
@@ -518,242 +492,186 @@ export default function CartPage() {
                   const optionSummary = match ? match[2] : (item.color || item.size || "");
 
                   return (
-                    <div
-                      key={itemId}
-                      className={`p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-xs hover:border-zinc-300 transition-all ${
-                        openDropdownId === itemId ? "relative z-30" : ""
-                      }`}
-                    >
-                      <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 items-start">
-                        {/* Product Thumbnail */}
-                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden bg-zinc-50 border border-zinc-100 shrink-0">
+                    <article key={itemId} className="min-w-0 rounded-xl border border-[#DED7CC] bg-white p-4 sm:p-5">
+                      <div className="grid grid-cols-[72px_minmax(0,1fr)] items-start gap-4 sm:grid-cols-[104px_minmax(0,1fr)] sm:gap-5">
+                        <Link href={productUrl} className="relative aspect-square w-full rounded-lg overflow-hidden bg-zinc-50 border border-zinc-100">
                           <Image
                             src={item.image || "/images/no-image-icon-6.png"}
                             alt={item.name}
                             fill
-                            sizes="120px"
-                            className="object-cover hover:scale-105 transition-transform duration-300"
+                            sizes="(max-width: 640px) 72px, 104px"
+                            className="object-contain p-2 sm:p-3"
                           />
-                        </div>
-
-                        {/* Middle Details */}
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-2">
-                            <div>
-                              <Link
-                                href={productUrl}
-                                className="text-base font-bold text-zinc-900 hover:text-[#4F46E5] transition-colors line-clamp-1"
-                              >
-                                {displayName}
-                              </Link>
-                              
-                              {/* Option Selector Toggle */}
-                              {optionSummary && (
-                                <div className="mt-1 relative inline-block">
-                                  <button
-                                    type="button"
-                                    onClick={() => handleDropdownToggle(itemId, item.productId || "", item)}
-                                    className="inline-flex items-center gap-1.5 text-xs text-zinc-500 bg-zinc-100 hover:bg-zinc-200 px-2.5 py-1 rounded-md transition-colors font-medium cursor-pointer"
-                                  >
-                                    <span>Variant: {optionSummary}</span>
-                                    <IoChevronDownOutline className="w-3 h-3 text-zinc-400" />
-                                  </button>
-
-                                  {/* Dropdown for Variants */}
-                                  {openDropdownId === itemId && (
-                                    <>
-                                      <div
-                                        className="fixed inset-0 z-40"
-                                        onClick={() => setOpenDropdownId(null)}
-                                      />
-                                      <div className="absolute left-0 mt-2 w-80 bg-white border border-zinc-200 rounded-2xl shadow-2xl z-50 p-4 space-y-4">
-                                        {loadingProducts[item.productId || ""] ? (
-                                          <div className="p-4 text-xs text-zinc-500 flex items-center gap-2 justify-center">
-                                            <LuLoader className="w-4 h-4 animate-spin text-emerald-600" />
-                                            <span>Loading available variants...</span>
-                                          </div>
-                                        ) : (
-                                          <div className="space-y-4">
-                                            <div className="flex gap-3 items-center border-b border-zinc-100 pb-3">
-                                              <div className="w-12 h-12 relative bg-zinc-50 rounded-lg overflow-hidden shrink-0 border border-zinc-200">
-                                                <Image
-                                                  src={getMatchedVariantImage(item) || item.image}
-                                                  alt={item.name}
-                                                  fill
-                                                  sizes="48px"
-                                                  className="object-cover"
-                                                />
-                                              </div>
-                                              <div>
-                                                <h4 className="text-xs font-bold text-zinc-800 truncate w-48">
-                                                  {displayName}
-                                                </h4>
-                                                <p className="text-xs text-emerald-600 font-bold mt-0.5">
-                                                  {getMatchedVariantPrice(item)}
-                                                </p>
-                                              </div>
-                                            </div>
-
-                                            {/* Attribute Groups */}
-                                            <div className="space-y-3">
-                                              {Object.entries(getUniqueAttributes(item.productId || "")).map(([attrName, values]) => (
-                                                <div key={attrName} className="space-y-1">
-                                                  <p className="text-[10px] uppercase font-bold text-zinc-400">
-                                                    {attrName}
-                                                  </p>
-                                                  <div className="flex flex-wrap gap-1.5">
-                                                    {values.map((val) => {
-                                                      const isSelected = selectedOptions[attrName] === val;
-                                                      return (
-                                                        <button
-                                                          key={val}
-                                                          type="button"
-                                                          onClick={() => setSelectedOptions((prev) => ({ ...prev, [attrName]: val }))}
-                                                          className={`px-2.5 py-1 text-xs rounded-md border transition-all cursor-pointer ${
-                                                            isSelected
-                                                              ? "border-[#4F46E5] bg-[#EEF2FF] text-[#4F46E5] font-bold"
-                                                              : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
-                                                          }`}
-                                                        >
-                                                          {val}
-                                                        </button>
-                                                      );
-                                                    })}
-                                                  </div>
-                                                </div>
-                                              ))}
-                                            </div>
-
-                                            {/* Stock warning */}
-                                            {isMatchedVariantOutOfStock(item) && (
-                                              <div className="flex items-center gap-1.5 p-2 bg-amber-50 text-amber-700 text-xs rounded-lg">
-                                                <IoAlertCircleOutline className="w-4 h-4 shrink-0" />
-                                                <span>Sold out in this combination</span>
-                                              </div>
-                                            )}
-
-                                            <div className="flex gap-2 pt-2 border-t border-zinc-100">
-                                              <button
-                                                type="button"
-                                                onClick={() => setOpenDropdownId(null)}
-                                                className="flex-1 py-2 text-xs border border-zinc-200 rounded-lg text-zinc-600 hover:bg-zinc-50"
-                                              >
-                                                Cancel
-                                              </button>
-                                              <button
-                                                type="button"
-                                                disabled={isApplyDisabled(item)}
-                                                onClick={() => handleApplyChange(item)}
-                                                className="flex-1 py-2 text-xs bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold rounded-lg disabled:opacity-50"
-                                              >
-                                                Apply
-                                              </button>
-                                            </div>
-                                          </div>
-                                        )}
-                                      </div>
-                                    </>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-
-                            {/* Line Price */}
-                            <div className="text-right">
-                              <p className="text-base font-extrabold text-zinc-950">
-                                {formatCurrency(item.price * item.quantity)}
-                              </p>
-                              {item.quantity > 1 && (
-                                <p className="text-[11px] text-zinc-400">
-                                  {formatCurrency(item.price)} each
-                                </p>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Quantity & Actions Row */}
-                          <div className="flex flex-wrap items-center justify-between gap-3 mt-5 pt-3.5 border-t border-zinc-100">
-                            {/* Quantity Stepper */}
-                            <div className="flex items-center bg-zinc-100/80 p-1 rounded-xl border border-zinc-200/60 shadow-2xs">
-                              <button
-                                onClick={() => handleDecrement(itemId, item.quantity)}
-                                className="w-7 h-7 rounded-lg bg-white shadow-2xs flex items-center justify-center text-zinc-700 hover:bg-zinc-50 active:scale-95 transition-all cursor-pointer"
-                                aria-label="Decrease quantity"
-                              >
-                                <LuMinus className="w-3 h-3" />
-                              </button>
-                              <span className="w-8 text-center text-xs font-black text-zinc-900">
-                                {item.quantity}
-                              </span>
-                              <button
-                                onClick={() => updateQuantity(itemId, item.quantity + 1)}
-                                className="w-7 h-7 rounded-lg bg-white shadow-2xs flex items-center justify-center text-zinc-700 hover:bg-zinc-50 active:scale-95 transition-all cursor-pointer"
-                                aria-label="Increase quantity"
-                              >
-                                <LuPlus className="w-3 h-3" />
-                              </button>
-                            </div>
-
-                            {/* Wishlist & Remove */}
-                            <div className="flex items-center gap-2">
-                              <button
-                                type="button"
-                                onClick={() => handleToggleWishlist(item)}
-                                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer active:scale-95 ${
-                                  inWishlist
-                                    ? "bg-rose-50 border-rose-200 text-rose-600 shadow-2xs"
-                                    : "bg-white border-zinc-200 text-zinc-600 hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900"
-                                }`}
-                              >
-                                {inWishlist ? (
-                                  <>
-                                    <IoHeart className="w-4 h-4 text-rose-500 fill-rose-500" />
-                                    <span>Saved to Wishlist</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <IoHeartOutline className="w-4 h-4 text-zinc-400 group-hover:text-rose-500" />
-                                    <span>Save to Wishlist</span>
-                                  </>
-                                )}
-                              </button>
-
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  removeItem(itemId);
-                                  toast.info("Item removed from cart");
-                                }}
-                                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-rose-600 hover:bg-rose-50 transition-all cursor-pointer"
-                                title="Remove item"
-                              >
-                                <LuTrash2 className="w-3.5 h-3.5" />
-                                <span className="hidden sm:inline">Remove</span>
-                              </button>
-                            </div>
+                        </Link>
+                        <div className="min-w-0 space-y-2">
+                          <Link href={productUrl} className="block text-sm sm:text-base font-medium leading-6 text-zinc-900 hover:text-store-accent break-words">
+                            {displayName}
+                          </Link>
+                          {optionSummary && (
+                            <button
+                              type="button"
+                              onClick={() => handleDropdownToggle(itemId, item.productId || "", item)}
+                              aria-expanded={openDropdownId === itemId}
+                              aria-controls={`cart-options-${itemId}`}
+                              className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-lg border border-zinc-200 px-3 py-2 text-left text-xs text-zinc-600 hover:bg-zinc-50"
+                            >
+                              <span className="min-w-0 break-words">{optionSummary}</span>
+                              <IoChevronDownOutline className="h-4 w-4 shrink-0" />
+                            </button>
+                          )}
+                          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                            <p className="text-base font-semibold text-store-price break-words">
+                              {formatCurrency(item.price * item.quantity)}
+                            </p>
+                            {item.quantity > 1 && (
+                              <span className="text-xs text-zinc-500">{formatCurrency(item.price)} each</span>
+                            )}
                           </div>
                         </div>
                       </div>
-                    </div>
+                      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-zinc-100 pt-4">
+                        <div className="flex items-center rounded-lg border border-zinc-200 bg-white">
+                          <button type="button" onClick={() => handleDecrement(itemId, item.quantity)} className="flex h-11 w-11 items-center justify-center rounded-lg text-zinc-600 hover:bg-zinc-50" aria-label={`Decrease quantity of ${displayName}`}>
+                            <LuMinus className="h-4 w-4" />
+                          </button>
+                          <span className="w-8 text-center text-sm font-medium text-zinc-900">{item.quantity}</span>
+                          <button type="button" onClick={() => updateQuantity(itemId, item.quantity + 1)} className="flex h-11 w-11 items-center justify-center rounded-lg text-zinc-600 hover:bg-zinc-50" aria-label={`Increase quantity of ${displayName}`}>
+                            <LuPlus className="h-4 w-4" />
+                          </button>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleToggleWishlist(item)}
+                            aria-label={`Save ${displayName} to wishlist`}
+                            aria-pressed={inWishlist}
+                            className={`inline-flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm transition-colors ${inWishlist ? "bg-rose-50 text-rose-600" : "text-zinc-500 hover:bg-zinc-50"}`}
+                          >
+                            {inWishlist ? <IoHeart className="h-4 w-4" /> : <IoHeartOutline className="h-4 w-4" />}
+                            <span>{inWishlist ? "Saved" : "Save"}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              removeItem(itemId);
+                              toast.info("Item removed from cart");
+                            }}
+                            aria-label={`Remove ${displayName} from cart`}
+                            className="flex h-11 w-11 items-center justify-center rounded-lg text-zinc-500 hover:bg-rose-50 hover:text-rose-600"
+                          >
+                            <LuTrash2 className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                      {openDropdownId === itemId && (
+                        <div id={`cart-options-${itemId}`} className="mt-4 min-w-0 rounded-lg border border-zinc-200 bg-zinc-50/50 p-4">
+                          {loadingProducts[item.productId || ""] ? (
+                            <div className="p-4 text-xs text-zinc-500 flex items-center gap-2 justify-center">
+                              <LuLoader className="w-4 h-4 animate-spin text-emerald-600" />
+                              <span>Loading available variants...</span>
+                            </div>
+                          ) : (
+                            <div className="space-y-4">
+                              <div className="flex min-w-0 gap-3 items-center border-b border-zinc-100 pb-3">
+                                <div className="w-12 h-12 relative bg-zinc-50 rounded-lg overflow-hidden shrink-0 border border-zinc-200">
+                                  <Image
+                                    src={getMatchedVariantImage(item) || item.image}
+                                    alt={item.name}
+                                    fill
+                                    sizes="48px"
+                                    className="object-contain p-1"
+                                  />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <h4 className="text-sm font-medium text-zinc-800 break-words">
+                                    {displayName}
+                                  </h4>
+                                  <p className="text-xs text-emerald-600 font-medium mt-0.5">
+                                    {getMatchedVariantPrice(item)}
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* Attribute Groups */}
+                              <div className="space-y-3">
+                                {Object.entries(getUniqueAttributes(item.productId || "")).map(([attrName, values]) => (
+                                  <div key={attrName} className="space-y-1">
+                                    <p className="text-[10px] uppercase font-medium text-zinc-400">
+                                      {attrName}
+                                    </p>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {values.map((val) => {
+                                        const isSelected = selectedOptions[attrName] === val;
+                                        return (
+                                          <button
+                                            key={val}
+                                            type="button"
+                                            aria-pressed={isSelected}
+                                            onClick={() => setSelectedOptions((prev) => ({ ...prev, [attrName]: val }))}
+                                            className={`max-w-full break-words min-h-11 px-3 py-2 text-sm rounded-lg border transition-all cursor-pointer ${
+                                              isSelected
+                                                ? "border-store-primary bg-store-surface text-store-primary font-medium"
+                                                : "border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400"
+                                            }`}
+                                          >
+                                            {val}
+                                          </button>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+
+                              {/* Stock warning */}
+                              {isMatchedVariantOutOfStock(item) && (
+                                <div className="flex items-center gap-1.5 p-2 bg-amber-50 text-amber-700 text-xs rounded-lg">
+                                  <IoAlertCircleOutline className="w-4 h-4 shrink-0" />
+                                  <span>Sold out in this combination</span>
+                                </div>
+                              )}
+
+                              <div className="flex gap-2 pt-2 border-t border-zinc-100">
+                                <button
+                                  type="button"
+                                  onClick={() => setOpenDropdownId(null)}
+                                  className="flex-1 min-h-11 py-2 text-sm border border-zinc-200 rounded-lg text-zinc-600 hover:bg-zinc-50"
+                                >
+                                  Cancel
+                                </button>
+                                <button
+                                  type="button"
+                                  disabled={isApplyDisabled(item)}
+                                  onClick={() => handleApplyChange(item)}
+                                  className="flex-1 min-h-11 py-2 text-sm bg-store-primary hover:bg-store-accent text-white font-medium rounded-lg disabled:opacity-50"
+                                >
+                                  Apply
+                                </button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </article>
                   );
                 })}
               </div>
             </div>
 
             {/* ── Right Column: Order Summary ── */}
-            <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/80 shadow-xl space-y-6 sticky top-24">
-              <h2 className="text-xl font-black text-zinc-950 tracking-tight">
+            <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-6 lg:sticky lg:top-36">
+              <h2 className="text-xl font-semibold text-zinc-950 tracking-tight">
                 Order Summary
               </h2>
 
               {/* Delivery Destination Selector */}
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-[11px] font-extrabold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                    <LuMapPin className="w-3.5 h-3.5 text-[#4F46E5]" />
+                  <label className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
+                    <LuMapPin className="w-3.5 h-3.5 text-store-primary" />
                     <span>Delivery Destination</span>
                   </label>
-                  <span className="text-[10px] font-bold text-zinc-400">
+                  <span className="text-[10px] font-medium text-zinc-400">
                     {deliveryZone === "dhaka" ? "Next-Day Speed" : "Nationwide 2–4 Days"}
                   </span>
                 </div>
@@ -763,9 +681,10 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => setDeliveryZone("dhaka")}
-                    className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
+                    aria-pressed={deliveryZone === "dhaka"}
+                    className={`w-full p-3 sm:p-3.5 rounded-xl border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
                       deliveryZone === "dhaka"
-                        ? "border-[#4F46E5] bg-[#EEF2FF]/70 shadow-xs ring-1 ring-[#4F46E5]/30"
+                        ? "border-store-primary bg-store-surface/70 shadow-xs ring-1 ring-store-primary/30"
                         : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/60 text-zinc-700"
                     }`}
                   >
@@ -774,7 +693,7 @@ export default function CartPage() {
                       <div
                         className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-all ${
                           deliveryZone === "dhaka"
-                            ? "bg-[#4F46E5] text-white shadow-2xs"
+                            ? "bg-store-primary text-white shadow-2xs"
                             : "border-2 border-zinc-300 bg-white"
                         }`}
                       >
@@ -785,10 +704,10 @@ export default function CartPage() {
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-zinc-950">
+                          <span className="text-xs font-medium text-zinc-950">
                             Inside Dhaka
                           </span>
-                          <span className="text-[10px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-medium text-store-primary bg-store-surface px-2 py-0.5 rounded-full">
                             Next Day
                           </span>
                         </div>
@@ -801,12 +720,12 @@ export default function CartPage() {
                     {/* Right: Price / FREE Badge */}
                     <div className="text-right shrink-0">
                       {isDhakaFree ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-black uppercase tracking-wider shadow-2xs">
-                          <LuSparkles className="w-2.5 h-2.5 text-[#F97316] shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-store-surface text-store-primary text-[11px] font-semibold uppercase tracking-wider shadow-2xs">
+                          <LuSparkles className="w-2.5 h-2.5 text-[#E88443] shrink-0" />
                           <span>FREE</span>
                         </span>
                       ) : (
-                        <span className="text-xs font-black text-zinc-950">
+                        <span className="text-xs font-semibold text-zinc-950">
                           {formatCurrency(insideRate)}
                         </span>
                       )}
@@ -817,9 +736,10 @@ export default function CartPage() {
                   <button
                     type="button"
                     onClick={() => setDeliveryZone("outside")}
-                    className={`w-full p-3 sm:p-3.5 rounded-2xl border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
+                    aria-pressed={deliveryZone === "outside"}
+                    className={`w-full p-3 sm:p-3.5 rounded-xl border text-left transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
                       deliveryZone === "outside"
-                        ? "border-[#4F46E5] bg-[#EEF2FF]/70 shadow-xs ring-1 ring-[#4F46E5]/30"
+                        ? "border-store-primary bg-store-surface/70 shadow-xs ring-1 ring-store-primary/30"
                         : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/60 text-zinc-700"
                     }`}
                   >
@@ -828,7 +748,7 @@ export default function CartPage() {
                       <div
                         className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 transition-all ${
                           deliveryZone === "outside"
-                            ? "bg-[#4F46E5] text-white shadow-2xs"
+                            ? "bg-store-primary text-white shadow-2xs"
                             : "border-2 border-zinc-300 bg-white"
                         }`}
                       >
@@ -839,10 +759,10 @@ export default function CartPage() {
 
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-xs font-bold text-zinc-950">
+                          <span className="text-xs font-medium text-zinc-950">
                             All Bangladesh
                           </span>
-                          <span className="text-[10px] font-bold text-zinc-600 bg-zinc-100 px-2 py-0.5 rounded-full">
+                          <span className="text-[10px] font-medium text-zinc-600 bg-zinc-100 px-2 py-0.5 rounded-full">
                             2–4 Days
                           </span>
                         </div>
@@ -855,12 +775,12 @@ export default function CartPage() {
                     {/* Right: Price / FREE Badge */}
                     <div className="text-right shrink-0">
                       {outsideRate === 0 ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-black uppercase tracking-wider shadow-2xs">
-                          <LuSparkles className="w-2.5 h-2.5 text-[#F97316] shrink-0" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-store-surface text-store-primary text-[11px] font-semibold uppercase tracking-wider shadow-2xs">
+                          <LuSparkles className="w-2.5 h-2.5 text-[#E88443] shrink-0" />
                           <span>FREE</span>
                         </span>
                       ) : (
-                        <span className="text-xs font-black text-zinc-950">
+                        <span className="text-xs font-semibold text-zinc-950">
                           {formatCurrency(outsideRate)}
                         </span>
                       )}
@@ -874,76 +794,70 @@ export default function CartPage() {
                 <button
                   type="button"
                   onClick={() => setPromoOpen(!promoOpen)}
-                  className="w-full flex items-center justify-between text-xs font-bold uppercase tracking-wider text-zinc-700 hover:text-[#4F46E5] transition-colors cursor-pointer"
+                  aria-expanded={promoOpen}
+                  className="w-full flex items-center justify-between text-xs font-medium uppercase tracking-wider text-zinc-700 hover:text-store-primary transition-colors cursor-pointer"
                 >
                   <span className="flex items-center gap-1.5">
-                    <LuTag className="w-4 h-4 text-[#4F46E5]" />
+                    <LuTag className="w-4 h-4 text-store-primary" />
                     <span>Have A Promo Code?</span>
                   </span>
                   {promoOpen ? <LuChevronUp className="w-4 h-4" /> : <IoChevronDownOutline className="w-4 h-4" />}
                 </button>
 
                 {appliedCoupon ? (
-                  <div className="mt-3 p-3 rounded-xl bg-[#EEF2FF] border border-indigo-200 flex items-center justify-between">
+                  <div className="mt-3 p-3 rounded-xl bg-store-surface border border-store-border flex min-w-0 items-center justify-between gap-3">
                     <div>
-                      <span className="text-xs font-bold text-indigo-950 block">
-                        Coupon "{appliedCoupon.code}" Applied
+                      <span className="break-all text-sm font-medium text-store-deep block">
+                        Coupon {appliedCoupon.code} applied
                       </span>
-                      <span className="text-[11px] text-[#4F46E5]">
+                      <span className="text-[11px] text-store-primary">
                         Saved {formatCurrency(promoDiscount)}
                       </span>
                     </div>
                     <button
                       type="button"
                       onClick={handleRemovePromo}
-                      className="text-xs font-bold text-red-600 hover:underline cursor-pointer"
+                      className="text-xs font-medium text-red-600 hover:underline cursor-pointer"
                     >
                       Remove
                     </button>
                   </div>
                 ) : (
                   <div className={`overflow-hidden transition-all duration-300 ${promoOpen ? "max-h-28 mt-3" : "max-h-0"}`}>
-                    <form onSubmit={handleApplyPromo} className="flex gap-2">
+                    <form onSubmit={handleApplyPromo} className="flex min-w-0 gap-2">
                       <input
                         type="text"
+                        aria-label="Promo code"
                         value={promoInput}
                         onChange={(e) => setPromoInput(e.target.value)}
                         placeholder="Enter promo code"
-                        className="flex-1 bg-zinc-50 border border-zinc-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase text-zinc-900 focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5]/20"
+                        className="min-w-0 flex-1 min-h-11 bg-white border border-zinc-200 rounded-xl px-3 py-2 text-xs font-semibold uppercase text-zinc-900 focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary/20"
                       />
                       <button
                         type="submit"
                         disabled={isApplyingPromo}
-                        className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 disabled:opacity-50 text-white rounded-xl text-xs font-bold tracking-wider transition-colors cursor-pointer"
+                        className="px-4 py-2 bg-zinc-900 hover:bg-zinc-800 disabled:opacity-50 text-white rounded-xl text-xs font-medium tracking-wider transition-colors cursor-pointer"
                       >
                         {isApplyingPromo ? "Applying..." : "Apply"}
                       </button>
                     </form>
-                    {activeCoupons.length > 0 ? (
-                      <p className="text-[10px] text-zinc-400 mt-1.5">
-                        Hint: Use <strong className="text-zinc-700 font-semibold">{activeCoupons[0].code}</strong> for {activeCoupons[0].type === "percentage" ? `${activeCoupons[0].value}% off` : `${formatCurrency(Number(activeCoupons[0].value))} off`}!
-                      </p>
-                    ) : (
-                      <p className="text-[10px] text-zinc-400 mt-1.5">
-                        Enter your promotional voucher or coupon code to apply discount.
-                      </p>
-                    )}
+
                   </div>
                 )}
               </div>
 
               {/* Price Breakdown */}
               <div className="space-y-3 text-sm">
-                <div className="flex justify-between text-zinc-600">
+                <div className="flex justify-between gap-4 text-zinc-600">
                   <span>Subtotal ({items.length} item{items.length === 1 ? "" : "s"})</span>
                   <span className="font-semibold text-zinc-900">{formatCurrency(subtotal)}</span>
                 </div>
 
-                <div className="flex justify-between text-zinc-600">
+                <div className="flex justify-between gap-4 text-zinc-600">
                   <span>Delivery ({deliveryZone === "dhaka" ? "Inside Dhaka" : "All Bangladesh"})</span>
                   <span className="font-semibold text-zinc-900">
                     {baseShipping === 0 ? (
-                      <span className="text-emerald-600 font-bold uppercase text-xs">FREE</span>
+                      <span className="text-emerald-600 font-medium uppercase text-xs">FREE</span>
                     ) : (
                       formatCurrency(baseShipping)
                     )}
@@ -957,12 +871,12 @@ export default function CartPage() {
                   </div>
                 )}
 
-                <div className="pt-3 border-t border-zinc-200 flex justify-between items-baseline">
+                <div className="pt-4 border-t border-zinc-200 flex flex-wrap gap-3 justify-between items-baseline">
                   <div>
-                    <span className="text-lg font-black text-zinc-950 block">Grand Total</span>
-                    <span className="text-[11px] text-zinc-400">Inclusive of all applicable VAT/Taxes</span>
+                    <span className="text-lg font-semibold text-zinc-950 block">Grand Total</span>
+                    <span className="text-xs text-zinc-500">Tax included</span>
                   </div>
-                  <span className="text-2xl font-black text-[#1E1B4B]">
+                  <span className="text-2xl font-semibold text-store-deep">
                     {formatCurrency(total)}
                   </span>
                 </div>
@@ -979,29 +893,16 @@ export default function CartPage() {
                   clearBuyNowItem();
                   router.push("/checkout");
                 }}
-                className="w-full py-4 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-indigo-600/25 transition-all cursor-pointer flex items-center justify-center gap-2"
+                className="w-full min-h-12 px-4 py-3 bg-store-primary hover:bg-store-accent text-white font-medium text-sm rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>Proceed To Secure Checkout</span>
+                <span>Proceed to Checkout</span>
                 <LuLock className="w-4 h-4" />
               </button>
 
-              {/* Trust Badge */}
-              <div className="flex items-center justify-center gap-3 text-[11px] text-zinc-400 font-medium">
-                <span className="flex items-center gap-1.5">
-                  <LuLock className="w-3.5 h-3.5 text-[#4F46E5]" />
-                  <span>256-Bit Secure Checkout</span>
-                </span>
-                <span>•</span>
-                <span className="flex items-center gap-1.5">
-                  <LuTruck className="w-3.5 h-3.5 text-[#4F46E5]" />
-                  <span>Verified Delivery</span>
-                </span>
-              </div>
-
               {/* Support Callout */}
-              <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 space-y-2">
+              <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 space-y-2">
                 <div className="flex items-center gap-2">
-                  <IoCallOutline className="w-4 h-4 text-[#EA580C] shrink-0" />
+                  <IoCallOutline className="w-4 h-4 text-[#8B4F2B] shrink-0" />
                   <span>
                     Support: <strong className="text-zinc-900">01722301927</strong> (9 AM – 9 PM)
                   </span>

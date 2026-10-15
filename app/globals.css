@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..600;1,9..40,300..600&family=Plus+Jakarta+Sans:ital,wght@0,300..600;1,300..600&display=swap');
 @import "tailwindcss";
 @import "./animations.css";
 
@@ -21,6 +20,22 @@
   --color-dark-brown: #4b3729;
   --color-dark-charcoal: #18181b;
   --color-dark-crimson: #d31f3a;
+
+  --color-store-primary: #174a76;
+  --color-store-accent: #62717d;
+  --color-store-hover: #103858;
+  --color-store-deep: #142638;
+  --color-store-ink: #252a30;
+  --color-store-page: #f8f6f1;
+  --color-store-surface: #f2eee7;
+  --color-store-surface-strong: #e8e1d6;
+  --color-store-border: #ded7cc;
+  --color-store-light: #ead4b8;
+  --color-store-price: #1a4168;
+  --color-store-orange: #e88443;
+  --color-store-orange-hover: #a3562e;
+  --color-store-orange-soft: #faeee4;
+  --color-store-orange-ink: #8b4f2b;
 
   --color-khaki-gold: #C5A880;
   --color-sage-gold: #A89F91;
@@ -56,9 +71,9 @@
   --color-border: var(--color-pearl-gray);
   --color-border-dark: var(--color-greenish-gray);
 
-  --font-sans: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Plus Jakarta Sans', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Bengali', 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Noto Sans Bengali', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Plus Jakarta Sans', 'Noto Sans Bengali', 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-bembo: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
   --font-snell: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
   --font-gotham: 'Plus Jakarta Sans', 'DM Sans', system-ui, sans-serif;
@@ -93,40 +108,256 @@ body {
   font-weight: 400;
 }
 
-/* Headings: Clean, modern, avoiding bold/chunky appearance */
-h1, h2, h3, h4, h5, h6 {
+/* Keep every public storefront page on the NovaMart blue and orange system. */
+.storefront {
+  min-height: 100vh;
+  color: var(--color-store-ink);
+  background-color: var(--color-store-page);
+  --color-platinum-gray: #f3f0e9;
+  --color-off-white: var(--color-store-page);
+  --color-rich-black: var(--color-store-ink);
+  --color-pearl-gray: var(--color-store-border);
+  --color-greenish-gray: #cfc5b7;
+  --color-olive-slate: #626b70;
+  --color-footer-dark: #101c2a;
+  --color-neutral-dark: var(--color-store-ink);
+  --color-neutral-muted: #716b63;
+  --color-dark-charcoal: #142638;
+  --color-text-primary: var(--color-store-ink);
+  --color-text-secondary: #626b70;
+  --color-text-muted: #77736d;
+  --color-text-light: #ffffff;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: var(--color-store-page);
+  --color-bg-muted: var(--color-store-surface-strong);
+  --color-bg-dark: #142638;
+  --color-border: var(--color-store-border);
+  --color-border-dark: #c5bdae;
+  --color-warm-gray: #e3dccf;
+  --color-khaki-gold: #926e49;
+  --color-sage-gold: #82786a;
+  --color-orange-accent: var(--color-store-orange-soft);
+  --color-warm-gold: #9a7047;
+  --color-light-gold: #b08a60;
+  --color-mid-gold: #a47d52;
+  --color-script-gold: #806946;
+  --color-btn-gold-from: var(--color-store-primary);
+  --color-btn-gold-to: var(--color-store-hover);
+  --color-brand-primary: var(--color-store-primary);
+  --color-brand-2: var(--color-store-orange);
+  --color-brand-3: var(--color-store-orange-ink);
+  --color-brand-4: var(--color-store-deep);
+  --color-brand-5: var(--color-store-accent);
+  --color-primary: var(--color-store-primary);
+  --color-secondary: var(--color-store-accent);
+  --color-accent: var(--color-store-orange-ink);
+
+  /* Warm neutrals keep the storefront calm around the logo's blue and orange. */
+  --color-zinc-50: #faf8f4;
+  --color-zinc-100: #f3efe8;
+  --color-zinc-200: #e7e0d6;
+  --color-zinc-300: #d5ccc0;
+  --color-zinc-400: #b4a99c;
+  --color-zinc-500: #938779;
+  --color-zinc-600: #756b60;
+  --color-zinc-700: #554d45;
+  --color-zinc-800: #3d3731;
+  --color-zinc-900: #28241f;
+  --color-zinc-950: #181613;
+  --color-stone-50: #faf8f4;
+  --color-stone-100: #f3efe8;
+  --color-stone-200: #e7e0d6;
+  --color-stone-300: #d5ccc0;
+  --color-stone-400: #b4a99c;
+  --color-stone-500: #938779;
+  --color-stone-600: #756b60;
+  --color-stone-700: #554d45;
+  --color-stone-800: #3d3731;
+  --color-stone-900: #28241f;
+  --color-stone-950: #181613;
+  --color-gray-50: #faf8f4;
+  --color-gray-100: #f3efe8;
+  --color-gray-200: #e7e0d6;
+  --color-gray-300: #d5ccc0;
+  --color-gray-400: #b4a99c;
+  --color-gray-500: #938779;
+  --color-gray-600: #756b60;
+  --color-gray-700: #554d45;
+  --color-gray-800: #3d3731;
+  --color-gray-900: #28241f;
+  --color-gray-950: #181613;
+  --color-slate-50: #faf8f4;
+  --color-slate-100: #f3efe8;
+  --color-slate-200: #e7e0d6;
+  --color-slate-300: #d5ccc0;
+  --color-slate-400: #b4a99c;
+  --color-slate-500: #938779;
+  --color-slate-600: #756b60;
+  --color-slate-700: #554d45;
+  --color-slate-800: #3d3731;
+  --color-slate-900: #28241f;
+  --color-slate-950: #181613;
+  --color-neutral-50: #faf8f4;
+  --color-neutral-100: #f3efe8;
+  --color-neutral-200: #e7e0d6;
+  --color-neutral-300: #d5ccc0;
+  --color-neutral-400: #b4a99c;
+  --color-neutral-500: #938779;
+  --color-neutral-600: #756b60;
+  --color-neutral-700: #554d45;
+  --color-neutral-800: #3d3731;
+  --color-neutral-900: #28241f;
+  --color-neutral-950: #181613;
+  --color-zinc-150: #ede8df;
+  --color-zinc-650: #645c52;
+  --color-stone-150: #ede8df;
+  --color-stone-850: #322d27;
+
+  /* Retarget leftover cool brand utilities to the quieter store palette. */
+  --color-indigo-50: #faf8f4;
+  --color-indigo-100: #f3efe8;
+  --color-indigo-200: #e7e0d6;
+  --color-indigo-300: #d5ccc0;
+  --color-indigo-400: #9ba6ad;
+  --color-indigo-500: var(--color-store-primary);
+  --color-indigo-600: var(--color-store-primary);
+  --color-indigo-700: var(--color-store-hover);
+  --color-indigo-800: #17314a;
+  --color-indigo-900: #15283a;
+  --color-indigo-950: #101c2a;
+  --color-violet-50: #faf8f4;
+  --color-violet-100: #f3efe8;
+  --color-violet-200: #e7e0d6;
+  --color-violet-300: #d5ccc0;
+  --color-violet-400: #9ba6ad;
+  --color-violet-500: var(--color-store-primary);
+  --color-violet-600: var(--color-store-primary);
+  --color-violet-700: var(--color-store-hover);
+  --color-violet-800: #17314a;
+  --color-violet-900: #15283a;
+  --color-violet-950: #101c2a;
+  --color-purple-50: #faf8f4;
+  --color-purple-100: #f3efe8;
+  --color-purple-200: #e7e0d6;
+  --color-purple-300: #d5ccc0;
+  --color-purple-400: #9ba6ad;
+  --color-purple-500: var(--color-store-primary);
+  --color-purple-600: var(--color-store-primary);
+  --color-purple-700: var(--color-store-hover);
+  --color-purple-800: #17314a;
+  --color-purple-900: #15283a;
+  --color-purple-950: #101c2a;
+  --color-blue-50: #faf8f4;
+  --color-blue-100: #f3efe8;
+  --color-blue-200: #e7e0d6;
+  --color-blue-300: #d5ccc0;
+  --color-blue-400: #9ba6ad;
+  --color-blue-500: #3d6485;
+  --color-blue-600: var(--color-store-primary);
+  --color-blue-700: var(--color-store-hover);
+  --color-blue-800: #17314a;
+  --color-blue-900: #15283a;
+  --color-blue-950: #101c2a;
+  --color-orange-50: #faf3ea;
+  --color-orange-100: #f3e4d1;
+  --color-orange-200: #e9cba7;
+  --color-orange-300: #dca775;
+  --color-orange-400: var(--color-store-orange);
+  --color-orange-500: #9a5529;
+  --color-orange-600: var(--color-store-orange-ink);
+  --color-orange-700: #744425;
+  --color-orange-800: #5d3923;
+  --color-orange-900: #472d20;
+}
+
+.storefront-scroll-track {
+  scrollbar-width: thin;
+  scrollbar-color: #cfc5b7 transparent;
+}
+
+.storefront-scroll-track::-webkit-scrollbar { height: 4px; }
+.storefront-scroll-track::-webkit-scrollbar-track { background: transparent; }
+.storefront-scroll-track::-webkit-scrollbar-thumb {
+  background-color: #cfc5b7;
+  border-radius: 9999px;
+}
+
+.storefront input,
+.storefront select,
+.storefront textarea {
+  min-width: 0;
+}
+
+.storefront :is(button, a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--color-store-primary);
+  outline-offset: 3px;
+}
+
+.storefront-rich-content {
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+
+.storefront-rich-content :is(img, video, iframe) {
+  max-width: 100%;
+  height: auto;
+}
+
+.storefront-rich-content pre,
+.storefront-rich-content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 1023px) {
+  .storefront input:not([type="checkbox"]):not([type="radio"]),
+  .storefront select,
+  .storefront textarea {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .storefront:has([data-mobile-purchase-bar]) {
+    padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 359px) {
+  .storefront-mobile-logo > div:first-child { display: none; }
+}
+
+/* Keep storefront type clean while preserving a clear weight hierarchy. */
+.storefront :is(h1, h2, h3, h4, h5, h6) {
   font-family: var(--font-heading), var(--font-sans), sans-serif;
   font-weight: 500;
   letter-spacing: -0.015em;
 }
 
-/* Tone down bold font weights across the store for clean, refined, airy typography */
-.font-black,
-.font-extrabold {
-  font-weight: 500 !important;
+.storefront .font-black,
+.storefront .font-extrabold,
+.storefront .font-bold {
+  font-weight: 600 !important;
 }
 
-.font-bold {
-  font-weight: 500 !important;
-}
-
-/* Universal clean font overrides replacing legacy serif & cursive scripts */
-[class*="font-['Bembo_Std']"],
-[class*='font-["Bembo_Std"]'],
-[class*="font-['Snell_Roundhand_LT_Std']"],
-[class*='font-["Snell_Roundhand_LT_Std"]'],
-[class*="font-['Snell_Roundhand']"],
-[class*='font-["Snell_Roundhand"]'],
-[class*="font-['Gotham']"],
-[class*='font-["Gotham"]'],
-.font-serif {
+/* Legacy storefront font utility names resolve to the current type system. */
+.storefront [class*="font-['Bembo_Std']"],
+.storefront [class*='font-["Bembo_Std"]'],
+.storefront [class*="font-['Snell_Roundhand_LT_Std']"],
+.storefront [class*='font-["Snell_Roundhand_LT_Std"]'],
+.storefront [class*="font-['Snell_Roundhand']"],
+.storefront [class*='font-["Snell_Roundhand"]'],
+.storefront [class*="font-['Gotham']"],
+.storefront [class*='font-["Gotham"]'],
+.storefront .font-serif {
   font-family: var(--font-heading), var(--font-sans), sans-serif !important;
   font-weight: 500 !important;
 }
 
-/* Neutralize cursive handwriting slant */
-[class*="font-['Snell_Roundhand_LT_Std']"],
-[class*="font-['Snell_Roundhand']"] {
+/* Avoid cursive italics in storefront UI text. */
+.storefront [class*="font-['Snell_Roundhand_LT_Std']"],
+.storefront [class*="font-['Snell_Roundhand']"] {
   font-style: normal !important;
   font-weight: 400 !important;
 }
@@ -292,7 +523,7 @@ h1, h2, h3, h4, h5, h6 {
 .lte-btn:hover { opacity: 0.88; }
 .lte-btn:active { transform: scale(0.98); }
 
-.lte-btn-gold { background: linear-gradient(to right, #C5A880, #A89F91); }
+.lte-btn-gold { background: linear-gradient(to right, var(--color-btn-gold-from), var(--color-btn-gold-to)); }
 
 .lte-btn-dark { background-color: #1A1A1A; }
 .lte-btn-dark:hover { background-color: #2d2d2d; opacity: 1; }
@@ -510,13 +741,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .mySwiper .swiper-pagination-bullet-active,
 .swiper-pagination-bullet-active {
-  background: #B9975B;
+  background: var(--color-store-orange);
   transform: scale(1.2);
 }
 
 .mySwiper .swiper-pagination-bullet:hover,
 .swiper-pagination-bullet:hover {
-  background: #c5a86a;
+  background: var(--color-store-primary);
 }
 
 [class*="font-['Bembo_Std']"],

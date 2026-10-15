@@ -10,7 +10,7 @@ const lifestyleItems = [
     title: 'Tea Preparation',
     description: 'Elevate your tea experience! Discover our preparation guide by clicking and unlock the secrets to brewing the perfect cup. Enjoy every sip with expert tips designed enhance your tea journey!',
     image: '/images/Assembly/img-10.webp',
-    bgClass: 'bg-[#ECEAE6] text-neutral-800',
+    bgClass: 'bg-[#EDF4FA] text-neutral-800',
     btnClass: 'border-neutral-800 hover:bg-neutral-800 hover:text-white text-neutral-800',
     arrowBg: 'bg-white/80 text-neutral-800 border border-neutral-300',
     href: '/about',
@@ -20,7 +20,7 @@ const lifestyleItems = [
     title: 'Tea Recipes',
     description: 'Get exclusive tea recipes in your inbox! Discover your perfect blend and learn how to infuse artisanal flavours with ease.',
     image: '/images/Assembly/img-11.webp',
-    bgClass: 'bg-[#C5A880] text-white',
+    bgClass: 'bg-[#8B4F2B] text-white',
     btnClass: 'border-white hover:bg-white hover:text-neutral-800 text-white',
     arrowBg: 'bg-[#51524E] text-white',
     href: '/about',
@@ -32,7 +32,7 @@ const lifestyleItems = [
     image: '/images/Assembly/img-12.webp',
     bgClass: 'bg-[#51524E] text-white',
     btnClass: 'border-white hover:bg-white hover:text-neutral-800 text-white',
-    arrowBg: 'bg-[#C5A880] text-white',
+    arrowBg: 'bg-[#8B4F2B] text-white',
     href: '/about',
   },
 ];
@@ -60,7 +60,7 @@ export default function TeaLifestyle() {
             <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
               Lifestyle
             </span>
-            <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+            <span className="text-[#174A76] text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
               Journal
             </span>
           </h2>

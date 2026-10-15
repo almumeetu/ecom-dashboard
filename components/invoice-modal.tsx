@@ -60,7 +60,7 @@ export default function InvoiceModal({
   const { address } = order;
 
   return createPortal(
-    <div className="invoice-portal">
+    <div className="invoice-portal storefront">
       {/* Print rules: only the invoice sheet flows onto the page */}
       <style>{`
         @media print {
@@ -95,18 +95,18 @@ export default function InvoiceModal({
         aria-label="Order invoice"
       >
         <div
-          className="invoice-frame relative w-full max-w-3xl my-4"
+          className="invoice-frame relative min-w-0 w-full max-w-3xl my-4"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Toolbar */}
-          <div className="flex items-center justify-between mb-3">
+          <div className="invoice-no-print flex flex-wrap items-center justify-between gap-3 mb-3">
             <span className="text-white/90 font-sans text-sm font-medium uppercase tracking-wider">
               Invoice Preview
             </span>
             <div className="flex items-center gap-2">
               <button
                 onClick={() => window.print()}
-                className="px-5 py-2.5 bg-[#D31F3A] text-white font-sans text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-[#B91A32] transition-colors flex items-center gap-2 cursor-pointer"
+                className="px-5 py-2.5 bg-[#0751B8] text-white font-sans text-xs font-semibold uppercase tracking-wider rounded-full hover:bg-[#063F91] transition-colors flex items-center gap-2 cursor-pointer"
               >
                 <LuPrinter className="w-4 h-4" />
                 Print
@@ -124,12 +124,12 @@ export default function InvoiceModal({
           {/* Invoice Sheet */}
           <div
             id="invoice-sheet"
-            className="bg-white rounded-lg shadow-2xl px-6 sm:px-10 py-8 sm:py-10 text-stone-800"
+            className="bg-white rounded-lg shadow-2xl min-w-0 px-4 sm:px-10 py-6 sm:py-10 text-stone-800 break-words"
           >
             {/* Header: logo + company / invoice meta */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 pb-6 border-b border-stone-200">
               <div className="flex flex-col gap-2">
-                <Logo size="md" variant="dark" showTagline={true} />
+                <Logo size="md" variant="dark" />
                 <div className="mt-1">
                   <p className="font-sans text-xs text-stone-500 leading-relaxed max-w-[240px]">
                     {COMPANY.addressLine}
@@ -181,8 +181,8 @@ export default function InvoiceModal({
             </div>
 
             {/* Items table */}
-            <div className="py-6">
-              <table className="w-full text-left border-collapse">
+            <div className="py-6 overflow-x-auto print:overflow-visible">
+              <table className="w-full min-w-[480px] print:min-w-0 text-left border-collapse">
                 <thead>
                   <tr className="border-b border-stone-200">
                     <th className="font-sans text-[11px] uppercase tracking-wider text-stone-400 font-medium pb-3">
@@ -223,27 +223,27 @@ export default function InvoiceModal({
             {/* Totals */}
             <div className="flex justify-end">
               <div className="w-full sm:w-64 space-y-2">
-                <div className="flex justify-between font-sans text-sm text-stone-600">
+                <div className="flex justify-between gap-4 font-sans text-sm text-stone-600">
                   <span>Subtotal</span>
                   <span>{currency(subtotal)}</span>
                 </div>
-                <div className="flex justify-between font-sans text-sm text-stone-600">
+                <div className="flex justify-between gap-4 font-sans text-sm text-stone-600">
                   <span>Shipping</span>
                   <span>{shipping === 0 ? "Free" : currency(shipping)}</span>
                 </div>
-                <div className="flex justify-between font-sans text-sm text-stone-600">
+                <div className="flex justify-between gap-4 font-sans text-sm text-stone-600">
                   <span>Tax</span>
                   <span>{currency(tax)}</span>
                 </div>
                 {discount > 0.001 && (
-                  <div className="flex justify-between font-sans text-sm text-stone-600">
+                  <div className="flex justify-between gap-4 font-sans text-sm text-stone-600">
                     <span>Discount</span>
                     <span>-{currency(discount)}</span>
                   </div>
                 )}
                 <div className="flex justify-between font-serif text-lg text-stone-900 pt-2 mt-2 border-t border-stone-300">
                   <span>Total</span>
-                  <span className="text-[#D31F3A] font-semibold">
+                  <span className="text-[#e54840] font-semibold">
                     {currency(order.total)}
                   </span>
                 </div>

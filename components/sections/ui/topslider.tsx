@@ -7,9 +7,9 @@ import data from "@/data/top-header.json";
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-export default function TopSlider({ slogan }: { slogan?: string }) {
+export default function TopSlider() {
   const { slider } = data;
-  const slides = slogan ? [slogan, ...slider.slides] : slider.slides;
+  const slides = slider.slides;
 
   return (
     <div className="flex items-center gap-1 sm:gap-2 text-[#94A3B8] w-full justify-center">

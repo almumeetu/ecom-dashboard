@@ -12,12 +12,14 @@ export const CAMPAIGNS_UPDATED_EVENT = "novamart_campaigns_updated";
 export const DEFAULT_HERO_CAMPAIGNS: Campaign[] = [
   {
     id: "camp-hero-1",
-    title: "NovaMart-এ আপনাকে স্বাগতম",
-    description: "বিশ্বস্ত উৎসের ১০০% অথেনটিক পণ্য • সারা বাংলাদেশে দ্রুত ক্যাশ অন ডেলিভারি",
+    title: "প্রতিদিনের পছন্দ, এক জায়গায়",
+    description: "বিশ্বস্ত পণ্য, স্বচ্ছ দাম এবং সারা বাংলাদেশে নির্ভরযোগ্য ডেলিভারি—আপনার প্রয়োজনের সবকিছু NovaMart-এ।",
     status: "active",
     startAt: new Date().toISOString(),
     endAt: null,
-    hasDiscount: true,
+    hasDiscount: false,
+    badge: "Everyday essentials",
+    ctaText: "Explore products",
     sectionId: "sec-hero",
     section: {
       id: "sec-hero",

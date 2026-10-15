@@ -15,15 +15,11 @@ import {
   LuMapPin,
   LuCheck,
   LuPlus,
-  LuShieldCheck,
-  LuTruck,
   LuUser,
   LuPhone,
   LuMail,
-  LuChevronRight,
   LuChevronDown,
   LuPackage,
-  LuInfo,
   LuTag,
 } from "react-icons/lu";
 import { IoCallOutline } from "react-icons/io5";
@@ -330,17 +326,17 @@ export default function CheckoutPage() {
   if (mounted && checkoutItems.length === 0) {
     return (
       <main className="flex-grow bg-zinc-50/50 w-full min-h-screen py-16 px-4">
-        <div className="max-w-md mx-auto text-center bg-white p-8 rounded-3xl border border-zinc-200/80 shadow-sm">
-          <div className="w-16 h-16 rounded-2xl bg-zinc-100 flex items-center justify-center mx-auto mb-4 text-zinc-400">
+        <div className="max-w-md mx-auto text-center bg-white p-8 rounded-xl border border-zinc-200/80 shadow-sm">
+          <div className="w-16 h-16 rounded-lg bg-zinc-100 flex items-center justify-center mx-auto mb-4 text-zinc-400">
             <LuPackage className="w-8 h-8" />
           </div>
-          <h1 className="text-xl font-bold text-zinc-900 mb-2">Your checkout cart is empty</h1>
+          <h1 className="text-xl font-medium text-zinc-900 mb-2">Your checkout cart is empty</h1>
           <p className="text-xs text-zinc-500 mb-6">
             Explore our curated collections and add your favorite items to checkout.
           </p>
           <Link
             href="/products"
-            className="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md shadow-emerald-600/20"
+            className="inline-flex items-center justify-center gap-2 w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium uppercase tracking-wider rounded-xl transition-all shadow-md shadow-emerald-600/20"
           >
             Browse Products
           </Link>
@@ -350,56 +346,41 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="flex-grow bg-[#FAF9F6]/60 w-full min-h-screen pb-16">
+    <main className="flex-grow bg-store-page min-w-0 w-full min-h-screen pb-12 sm:pb-16">
       <PageBanner
-        title="Secure Checkout"
-        subtitle="Complete your shipping information and payment method to place your order."
-        badge="100% ENCRYPTED CHECKOUT"
+        title="Checkout"
         breadcrumbs={[
           { label: "Products", href: "/products" },
           { label: "Cart", href: "/cart" },
           { label: "Checkout" },
         ]}
-        showTrustChips={true}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
-        {/* Progress Stepper Bar */}
-        <div className="mb-8 flex items-center justify-between max-w-2xl mx-auto px-2">
-          <Link
-            href="/cart"
-            className="flex items-center gap-2 text-xs font-bold text-emerald-700 hover:underline"
-          >
-            <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[11px] font-extrabold">
-              ✓
-            </span>
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-10">
+        <nav aria-label="Checkout progress" className="mx-auto mb-8 grid max-w-xl grid-cols-3 gap-3 sm:mb-10 sm:gap-6">
+          <Link href="/cart" className="flex min-h-11 flex-col items-center gap-2 text-sm text-store-accent">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-store-surface"><LuCheck className="h-4 w-4" /></span>
             <span>Cart</span>
           </Link>
-          <div className="h-0.5 flex-1 mx-3 bg-emerald-600/30" />
-          <div className="flex items-center gap-2 text-xs font-extrabold text-zinc-900">
-            <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white flex items-center justify-center text-[11px] shadow-xs">
-              2
-            </span>
-            <span>Shipping & Payment</span>
+          <div aria-current="step" className="flex flex-col items-center gap-2 text-sm font-medium text-zinc-900">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-store-primary text-white">2</span>
+            <span>Checkout</span>
           </div>
-          <div className="h-0.5 flex-1 mx-3 bg-zinc-200" />
-          <div className="flex items-center gap-2 text-xs font-medium text-zinc-400">
-            <span className="w-6 h-6 rounded-full bg-zinc-100 text-zinc-400 flex items-center justify-center text-[11px]">
-              3
-            </span>
-            <span>Confirmation</span>
+          <div className="flex flex-col items-center gap-2 text-sm text-zinc-400">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full border border-zinc-200 bg-white">3</span>
+            <span>Complete</span>
           </div>
-        </div>
+        </nav>
 
         <form onSubmit={handlePlaceOrder}>
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-8 lg:gap-10 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_340px] xl:grid-cols-[minmax(0,1fr)_380px] gap-6 sm:gap-8 lg:gap-10 items-start">
             {/* ── Left Column: Checkout Forms ── */}
-            <div className="space-y-6">
+            <div className="min-w-0 space-y-6">
               {/* Back to Cart link */}
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-3">
                 <Link
                   href="/cart"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-zinc-500 hover:text-emerald-700 transition-colors uppercase tracking-wider"
+                  className="inline-flex items-center gap-1.5 min-h-11 text-sm font-medium text-zinc-500 hover:text-store-accent transition-colors"
                 >
                   <LuArrowLeft className="w-3.5 h-3.5" />
                   <span>Return to Cart</span>
@@ -409,30 +390,29 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setAddressModalOpen(true)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#4F46E5] bg-[#EEF2FF] hover:bg-indigo-100 rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 min-h-11 px-3 py-2 text-sm font-medium text-store-primary bg-store-surface hover:bg-store-surface-strong rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
                   >
                     <LuMapPin className="w-3.5 h-3.5" />
-                    <span>Choose Saved Address ({savedAddresses.length})</span>
+                    <span>Saved addresses ({savedAddresses.length})</span>
                   </button>
                 )}
               </div>
 
               {/* Login Callout for Guests */}
               {!isAuthenticated && (
-                <div className="p-4 rounded-2xl bg-[#EEF2FF]/70 border border-indigo-200/80 flex items-center justify-between gap-3 text-xs">
+                <div className="p-4 rounded-lg bg-store-surface/70 border border-store-border/80 flex flex-wrap items-center justify-between gap-3 text-xs">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-[#4F46E5] text-white flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-xl bg-store-primary text-white flex items-center justify-center shrink-0">
                       <LuUser className="w-4 h-4" />
                     </div>
                     <div>
-                      <p className="font-bold text-zinc-900">Already registered with NovaMart?</p>
-                      <p className="text-zinc-500 text-[11px]">Log in now for faster checkout with saved addresses.</p>
+                      <p className="font-medium text-zinc-900">Have an account?</p>
                     </div>
                   </div>
                   <button
                     type="button"
                     onClick={() => setShowAuthModal(true)}
-                    className="px-3.5 py-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold rounded-xl text-[11px] uppercase tracking-wider transition-colors cursor-pointer shrink-0"
+                    className="min-h-11 px-4 py-2 bg-store-primary hover:bg-store-accent text-white font-medium rounded-xl text-[11px] uppercase tracking-wider transition-colors cursor-pointer shrink-0"
                   >
                     Log In
                   </button>
@@ -440,38 +420,40 @@ export default function CheckoutPage() {
               )}
 
               {/* Step 1: Customer Contact Info Card */}
-              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-7 h-7 shrink-0 rounded-full bg-store-primary text-white text-xs font-semibold flex items-center justify-center">
                       1
                     </span>
-                    <h2 className="text-base font-bold text-zinc-900 tracking-tight">
-                      Customer Contact Information
+                    <h2 className="text-base font-medium text-zinc-900 tracking-tight">
+                      Contact details
                     </h2>
                   </div>
-                  <span className="text-[11px] text-zinc-400">Order updates will be sent here</span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                    <label htmlFor="checkout-name" className="block text-sm font-medium text-zinc-700 mb-2">
                       Full Name <span className="text-rose-500">*</span>
                     </label>
                     <div className="relative">
                       <LuUser className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         required
+                        id="checkout-name"
+                        name="fullName"
+                        autoComplete="name"
                         value={address.fullName}
                         onChange={(e) => updateAddressField("fullName", e.target.value)}
                         placeholder="e.g. Tanvir Ahmed"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                        className="w-full pl-10 pr-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                    <label htmlFor="checkout-phone" className="block text-sm font-medium text-zinc-700 mb-2">
                       Phone Number <span className="text-rose-500">*</span>
                     </label>
                     <div className="relative">
@@ -479,63 +461,72 @@ export default function CheckoutPage() {
                       <input
                         required
                         type="tel"
+                        id="checkout-phone"
+                        name="phone"
+                        autoComplete="tel"
                         value={address.phone}
                         onChange={(e) => updateAddressField("phone", e.target.value)}
                         placeholder="01XXXXXXXXX"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                        className="w-full pl-10 pr-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                  <div className="sm:col-span-2">
+                    <label htmlFor="checkout-email" className="block text-sm font-medium text-zinc-700 mb-2">
                       Email Address <span className="text-zinc-400 text-[11px] font-normal">(Optional)</span>
                     </label>
                     <div className="relative">
                       <LuMail className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         type="email"
+                        id="checkout-email"
+                        name="email"
+                        autoComplete="email"
                         value={address.email}
                         onChange={(e) => updateAddressField("email", e.target.value)}
                         placeholder="yourname@gmail.com"
-                        className="w-full pl-10 pr-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                        className="w-full pl-10 pr-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                       />
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Step 2: Shipping & Delivery Address Card */}
-              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              {/* Step 2: Delivery address Card */}
+              <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-7 h-7 shrink-0 rounded-full bg-store-primary text-white text-xs font-semibold flex items-center justify-center">
                       2
                     </span>
-                    <h2 className="text-base font-bold text-zinc-900 tracking-tight">
-                      Shipping & Delivery Address
+                    <h2 className="text-base font-medium text-zinc-900 tracking-tight">
+                      Delivery address
                     </h2>
                   </div>
                   <button
                     type="button"
                     onClick={() => setMapPickerOpen(true)}
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-[#4F46E5] bg-[#EEF2FF] hover:bg-indigo-100 px-3 py-1.5 rounded-xl border border-emerald-200/80 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-xs font-medium text-store-primary bg-store-surface hover:bg-store-surface-strong min-h-11 px-3 py-2 rounded-lg border border-emerald-200/80 transition-colors cursor-pointer"
                   >
                     <LuMapPin className="w-3.5 h-3.5" />
                     <span>Set from Map</span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   {/* Division / Region */}
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                    <label htmlFor="checkout-division" className="block text-sm font-medium text-zinc-700 mb-2">
                       Division / Region <span className="text-rose-500">*</span>
                     </label>
                     <select
+                      id="checkout-division"
+                      name="state"
+                      autoComplete="address-level1"
                       value={address.state}
                       onChange={(e) => updateAddressField("state", e.target.value)}
-                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                      className="w-full px-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                     >
                       {BD_DIVISIONS.map((div) => (
                         <option key={div} value={div}>
@@ -547,56 +538,68 @@ export default function CheckoutPage() {
 
                   {/* City / District */}
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                    <label htmlFor="checkout-city" className="block text-sm font-medium text-zinc-700 mb-2">
                       City / District <span className="text-rose-500">*</span>
                     </label>
                     <input
                       required
+                      id="checkout-city"
+                      name="city"
+                      autoComplete="address-level2"
                       value={address.city}
                       onChange={(e) => updateAddressField("city", e.target.value)}
                       placeholder="e.g. Dhaka, Gulshan, or Mirpur"
-                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                      className="w-full px-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                     />
                   </div>
 
                   {/* Area / Thana / Postal Code */}
-                  <div>
-                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                  <div className="sm:col-span-2">
+                    <label htmlFor="checkout-postal-code" className="block text-sm font-medium text-zinc-700 mb-2">
                       Area / Thana / Postcode
                     </label>
                     <input
+                      id="checkout-postal-code"
+                      name="postalCode"
+                      autoComplete="postal-code"
                       value={address.postalCode}
                       onChange={(e) => updateAddressField("postalCode", e.target.value)}
                       placeholder="e.g. Sector 3, 1230"
-                      className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                      className="w-full px-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 {/* Street Address Line 1 */}
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                  <label htmlFor="checkout-address-line1" className="block text-sm font-medium text-zinc-700 mb-2">
                     Street Address / House & Road <span className="text-rose-500">*</span>
                   </label>
                   <input
                     required
+                    id="checkout-address-line1"
+                    name="addressLine1"
+                    autoComplete="address-line1"
                     value={address.addressLine1}
                     onChange={(e) => updateAddressField("addressLine1", e.target.value)}
                     placeholder="House / Holding number, Road number, Block, Area landmark..."
-                    className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                    className="w-full px-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                   />
                 </div>
 
                 {/* Optional Address Line 2 */}
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                  <label htmlFor="checkout-address-line2" className="block text-sm font-medium text-zinc-700 mb-2">
                     Apartment / Flat / Floor Details <span className="text-zinc-400 text-[11px]">(Optional)</span>
                   </label>
                   <input
+                    id="checkout-address-line2"
+                    name="addressLine2"
+                    autoComplete="address-line2"
                     value={address.addressLine2 || ""}
                     onChange={(e) => updateAddressField("addressLine2", e.target.value)}
                     placeholder="e.g. Apt 4B, Level 4"
-                    className="w-full px-3.5 py-2.5 bg-zinc-50/70 border border-zinc-200 rounded-xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                    className="w-full px-3.5 min-h-12 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all"
                   />
                 </div>
 
@@ -607,7 +610,7 @@ export default function CheckoutPage() {
                       type="button"
                       disabled={addingAddress}
                       onClick={handleAddAddress}
-                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-bold text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-700 font-medium text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
                     >
                       {addingAddress ? (
                         <LuLoader className="w-3.5 h-3.5 animate-spin" />
@@ -621,22 +624,18 @@ export default function CheckoutPage() {
               </div>
 
               {/* Step 3: Delivery Options & Courier Speed */}
-              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-7 h-7 shrink-0 rounded-full bg-store-primary text-white text-xs font-semibold flex items-center justify-center">
                       3
                     </span>
                     <div>
-                      <h2 className="text-base font-bold text-zinc-900 tracking-tight">
-                        Delivery Method &amp; Courier Speed
+                      <h2 className="text-base font-medium text-zinc-900 tracking-tight">
+                        Delivery options
                       </h2>
-                      <p className="text-xs text-zinc-400">Choose your delivery zone and transit speed</p>
                     </div>
                   </div>
-                  <span className="text-[11px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-1 rounded-full border border-indigo-200/60">
-                    {deliveryZone === "dhaka" ? "Next-Day Speed" : "Nationwide 2–4 Days"}
-                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
@@ -644,21 +643,22 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setDeliveryZone("dhaka")}
-                    className={`p-4 rounded-2xl text-left transition-all duration-150 cursor-pointer relative flex flex-col justify-between ${
+                    aria-pressed={deliveryZone === "dhaka"}
+                    className={`p-4 rounded-lg text-left transition-all duration-150 cursor-pointer relative flex flex-col justify-between ${
                       deliveryZone === "dhaka"
-                        ? "border-2 border-[#4F46E5] bg-[#EEF2FF]/60 ring-2 ring-[#4F46E5]/10 shadow-xs"
+                        ? "border-2 border-store-primary bg-store-surface/60 ring-2 ring-store-primary/10 shadow-xs"
                         : "border border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
                     }`}
                   >
                     <div className="flex items-start justify-between w-full mb-1.5">
                       <div>
-                        <span className="text-sm font-bold text-zinc-950 block">Inside Dhaka</span>
+                        <span className="text-sm font-medium text-zinc-950 block">Inside Dhaka</span>
                         <p className="text-xs text-zinc-500 font-medium">Next Day Express Doorstep</p>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all shrink-0 ${
                           deliveryZone === "dhaka"
-                            ? "bg-[#4F46E5] text-white shadow-2xs"
+                            ? "bg-store-primary text-white shadow-2xs"
                             : "border border-zinc-300 bg-white"
                         }`}
                       >
@@ -666,7 +666,7 @@ export default function CheckoutPage() {
                       </div>
                     </div>
                     <div className="flex items-center justify-between text-xs pt-2.5 border-t border-zinc-200/60 mt-2">
-                      <span className={`font-extrabold ${isDhakaFree ? "text-emerald-700" : "text-[#1E1B4B]"}`}>
+                      <span className={`font-medium ${isDhakaFree ? "text-emerald-700" : "text-store-deep"}`}>
                         {isDhakaFree ? "FREE Delivery" : formatCurrency(insideRate)}
                       </span>
                       <span className="text-[10px] font-semibold text-zinc-500 bg-white px-2 py-0.5 rounded-full border border-zinc-200/80">
@@ -679,21 +679,22 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={() => setDeliveryZone("outside")}
-                    className={`p-4 rounded-2xl text-left transition-all duration-150 cursor-pointer relative flex flex-col justify-between ${
+                    aria-pressed={deliveryZone === "outside"}
+                    className={`p-4 rounded-lg text-left transition-all duration-150 cursor-pointer relative flex flex-col justify-between ${
                       deliveryZone === "outside"
-                        ? "border-2 border-[#4F46E5] bg-[#EEF2FF]/60 ring-2 ring-[#4F46E5]/10 shadow-xs"
+                        ? "border-2 border-store-primary bg-store-surface/60 ring-2 ring-store-primary/10 shadow-xs"
                         : "border border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
                     }`}
                   >
                     <div className="flex items-start justify-between w-full mb-1.5">
                       <div>
-                        <span className="text-sm font-bold text-zinc-950 block">All Bangladesh</span>
+                        <span className="text-sm font-medium text-zinc-950 block">All Bangladesh</span>
                         <p className="text-xs text-zinc-500 font-medium">Nationwide 64 Districts</p>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all shrink-0 ${
                           deliveryZone === "outside"
-                            ? "bg-[#4F46E5] text-white shadow-2xs"
+                            ? "bg-store-primary text-white shadow-2xs"
                             : "border border-zinc-300 bg-white"
                         }`}
                       >
@@ -701,7 +702,7 @@ export default function CheckoutPage() {
                       </div>
                     </div>
                     <div className="flex items-center justify-between text-xs pt-2.5 border-t border-zinc-200/60 mt-2">
-                      <span className={`font-extrabold ${outsideRate === 0 ? "text-emerald-700" : "text-[#1E1B4B]"}`}>
+                      <span className={`font-medium ${outsideRate === 0 ? "text-emerald-700" : "text-store-deep"}`}>
                         {outsideRate === 0 ? "FREE Delivery" : formatCurrency(outsideRate)}
                       </span>
                       <span className="text-[10px] font-semibold text-zinc-500 bg-white px-2 py-0.5 rounded-full border border-zinc-200/80">
@@ -713,28 +714,26 @@ export default function CheckoutPage() {
               </div>
 
               {/* Step 4: Payment Method */}
-              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-zinc-100">
+              <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-7 h-7 shrink-0 rounded-full bg-store-primary text-white text-xs font-semibold flex items-center justify-center">
                       4
                     </span>
                     <div>
-                      <h2 className="text-base font-bold text-zinc-900 tracking-tight">Payment Method</h2>
-                      <p className="text-xs text-zinc-400">100% Secure doorstep inspection guarantee</p>
+                      <h2 className="text-base font-medium text-zinc-900 tracking-tight">Payment Method</h2>
                     </div>
                   </div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200/80">
-                    Verified
-                  </span>
                 </div>
 
                 {/* Cash on Delivery Primary Option */}
-                <div
+                <button
+                  type="button"
+                  aria-pressed={paymentMethod === "cod"}
                   onClick={() => setPaymentMethod("cod")}
-                  className={`p-4 rounded-2xl border-2 transition-all cursor-pointer relative ${
+                  className={`w-full p-4 rounded-xl border-2 text-left transition-colors cursor-pointer relative ${
                     paymentMethod === "cod"
-                      ? "border-[#4F46E5] bg-[#EEF2FF]/40 ring-2 ring-[#4F46E5]/10 shadow-xs"
+                      ? "border-store-primary bg-store-surface/40 ring-2 ring-store-primary/10 shadow-xs"
                       : "border-zinc-200 bg-white hover:border-zinc-300"
                   }`}
                 >
@@ -743,7 +742,7 @@ export default function CheckoutPage() {
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${
                           paymentMethod === "cod"
-                            ? "bg-[#4F46E5] text-white shadow-2xs"
+                            ? "bg-store-primary text-white shadow-2xs"
                             : "border-2 border-zinc-300 bg-white"
                         }`}
                       >
@@ -753,29 +752,19 @@ export default function CheckoutPage() {
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between flex-wrap gap-1.5 mb-1">
-                        <span className="text-sm font-bold text-zinc-950">
+                        <span className="text-sm font-medium text-zinc-950">
                           Cash on Delivery (ক্যাশ অন ডেলিভারি)
-                        </span>
-                        <span className="text-[10px] font-extrabold uppercase tracking-wider bg-[#EEF2FF] text-[#4F46E5] border border-indigo-200/60 px-2.5 py-0.5 rounded-full">
-                          Zero Advance
                         </span>
                       </div>
                       <p className="text-xs text-zinc-600 leading-relaxed mb-2.5">
-                        Pay with cash or mobile banking (bKash/Nagad) upon receiving and inspecting items at your doorstep. Zero advance payment required.
+                        Pay when your order arrives. Cash or mobile banking accepted.
                       </p>
-                      <div className="flex items-center gap-3 text-[11px] font-semibold text-zinc-500 pt-2 border-t border-indigo-100/60">
-                        <span className="flex items-center gap-1 text-[#4F46E5]">
-                          <LuCheck className="w-3.5 h-3.5 stroke-[3]" /> Doorstep Inspection
-                        </span>
-                        <span>•</span>
-                        <span>Pay Courier via Cash / bKash</span>
-                      </div>
                     </div>
                   </div>
-                </div>
+                </button>
 
                 {/* Digital Payment / Cards info option */}
-                <div className="p-3.5 rounded-2xl border border-zinc-200/80 bg-zinc-50/60 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 text-xs">
+                <div className="p-4 rounded-lg border border-zinc-200/80 bg-zinc-50/60 flex flex-col xl:flex-row xl:items-center justify-between gap-2.5 text-xs">
                   <div className="flex items-center gap-2.5 min-w-0">
                     <div className="w-4 h-4 rounded-full border border-zinc-300 bg-white shrink-0" />
                     <div>
@@ -785,52 +774,54 @@ export default function CheckoutPage() {
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1.5 shrink-0 pl-6 sm:pl-0">
-                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-extrabold text-[#E2136E]">bKash</span>
-                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-extrabold text-[#ED1C24]">Nagad</span>
-                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-black italic text-[#1A1F71]">VISA</span>
-                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-bold text-zinc-800">Mastercard</span>
+                  <div className="flex flex-wrap items-center gap-1.5 pl-6 sm:pl-0">
+                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-medium text-[#E2136E]">bKash</span>
+                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-medium text-[#ED1C24]">Nagad</span>
+                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-semibold italic text-[#1A1F71]">VISA</span>
+                    <span className="px-2 py-0.5 bg-white border border-zinc-200 rounded text-[10px] font-medium text-zinc-800">Mastercard</span>
                   </div>
                 </div>
               </div>
 
               {/* Step 5: Optional Order Instructions */}
-              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/80 shadow-sm space-y-3">
-                <div className="flex items-center justify-between pb-2 border-b border-zinc-100">
+              <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-3">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <span className="w-6 h-6 rounded-full bg-[#4F46E5] text-white text-xs font-black flex items-center justify-center">
+                    <span className="w-7 h-7 shrink-0 rounded-full bg-store-primary text-white text-xs font-semibold flex items-center justify-center">
                       5
                     </span>
-                    <h2 className="text-base font-bold text-zinc-900 tracking-tight">
-                      Order Note / Special Instructions <span className="text-zinc-400 text-xs font-normal">(Optional)</span>
+                    <h2 className="text-base font-medium text-zinc-900 tracking-tight">
+                      Order note <span className="text-zinc-400 text-xs font-normal">(Optional)</span>
                     </h2>
                   </div>
                 </div>
                 <textarea
+                  aria-label="Order note"
                   value={orderNote}
                   onChange={(e) => setOrderNote(e.target.value)}
                   rows={3}
-                  className="w-full px-4 py-3 bg-zinc-50/70 border border-zinc-200 rounded-2xl text-xs font-medium text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 bg-white border border-zinc-200 rounded-lg text-sm text-zinc-900 placeholder:text-zinc-400 focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 focus:outline-none transition-all resize-none"
                   placeholder="Any special instructions (e.g. call before delivery, leave with concierge, preferred delivery time)..."
                 />
               </div>
             </div>
 
             {/* ── Right Column: Production-Ready Order Summary Sidebar ── */}
-            <div className="w-full lg:w-[420px] lg:sticky lg:top-24 space-y-4">
-              <div className="bg-white rounded-3xl p-6 sm:p-7 border border-zinc-200/90 shadow-xl shadow-zinc-200/30 space-y-5">
+            <div className="min-w-0 w-full lg:sticky lg:top-36 space-y-4">
+              <div className="min-w-0 bg-white rounded-xl p-4 sm:p-6 border border-[#DED7CC] space-y-5">
                 {/* Header */}
-                <div className="flex items-center justify-between pb-3.5 border-b border-zinc-100">
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-zinc-100">
                   <div className="flex items-center gap-2.5">
-                    <h3 className="text-base font-black text-zinc-950 tracking-tight">Order Summary</h3>
-                    <span className="text-xs font-extrabold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-0.5 rounded-full border border-indigo-200/70">
+                    <h3 className="text-base font-semibold text-zinc-950 tracking-tight">Order Summary</h3>
+                    <span className="text-xs font-medium text-store-primary bg-store-surface px-2.5 py-0.5 rounded-full border border-store-border/70">
                       {checkoutItems.length} {checkoutItems.length === 1 ? "Item" : "Items"}
                     </span>
                   </div>
                   <button
                     type="button"
                     onClick={() => setIsItemsOpen(!isItemsOpen)}
-                    className="flex items-center gap-1 text-xs font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors cursor-pointer select-none"
+                    aria-expanded={isItemsOpen}
+                    className="flex items-center gap-1 text-xs font-semibold text-store-primary hover:text-store-accent transition-colors cursor-pointer select-none"
                   >
                     <span>{isItemsOpen ? "Hide Items" : "View Items"}</span>
                     <LuChevronDown
@@ -843,73 +834,36 @@ export default function CheckoutPage() {
 
                 {/* Items List */}
                 {isItemsOpen && (
-                  <div className="space-y-2.5 max-h-[240px] overflow-y-auto pr-1">
+                  <div className="max-h-[340px] overflow-y-auto overscroll-y-contain pr-1">
                     {checkoutItems.map((item, idx) => (
                       <div
                         key={item.id ?? item.variantId ?? `${item.slug}-${idx}`}
-                        className="flex items-center gap-3 p-2.5 rounded-2xl bg-zinc-50/90 border border-zinc-100 hover:border-zinc-200 transition-colors"
+                        className="grid grid-cols-[48px_minmax(0,1fr)] items-start gap-3 py-3 border-b border-zinc-100 last:border-0"
                       >
-                        <div className="w-12 h-12 relative bg-white rounded-xl shrink-0 overflow-hidden border border-zinc-200/80">
-                          {item.image && (
-                            <Image
-                              src={item.image}
-                              alt={item.name}
-                              fill
-                              sizes="48px"
-                              className="object-contain p-1"
-                            />
-                          )}
-                          <span className="absolute -top-1 -right-1 bg-zinc-900 text-white text-[9px] font-extrabold rounded-full w-4.5 h-4.5 flex items-center justify-center shadow-xs">
-                            {item.quantity}
-                          </span>
+                        <div className="w-12 h-12 relative bg-zinc-50 rounded-lg overflow-hidden border border-zinc-100">
+                          <Image src={item.image || "/images/no-image-icon-6.png"} alt={item.name} fill sizes="48px" className="object-contain p-1" />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-xs font-bold text-zinc-900 truncate leading-tight">
-                            {item.name}
-                          </p>
-                          <p className="text-[11px] text-zinc-400 mt-0.5">
-                            {formatCurrency(item.price)} × {item.quantity}
-                          </p>
+                        <div className="min-w-0 space-y-1.5">
+                          <p className="text-sm font-medium text-zinc-900 leading-5 break-words">{item.name}</p>
+                          <div className="flex flex-wrap items-baseline justify-between gap-2">
+                            <span className="text-xs text-zinc-500">{formatCurrency(item.price)} × {item.quantity}</span>
+                            <span className="text-sm font-medium text-zinc-900">{formatCurrency(item.price * item.quantity)}</span>
+                          </div>
                         </div>
-                        <p className="text-xs font-black text-zinc-950 whitespace-nowrap">
-                          {formatCurrency(item.price * item.quantity)}
-                        </p>
                       </div>
                     ))}
                   </div>
                 )}
 
-                {/* Selected Shipping & Payment Summary */}
-                <div className="p-3.5 rounded-2xl bg-[#F8FAFC] border border-slate-200/80 space-y-2 text-xs">
-                  <div className="flex items-center justify-between text-zinc-600">
-                    <span className="flex items-center gap-1.5 font-medium text-zinc-700">
-                      <LuTruck className="w-3.5 h-3.5 text-[#4F46E5]" />
-                      <span>Delivery Option</span>
-                    </span>
-                    <span className="font-bold text-zinc-900 bg-white px-2.5 py-0.5 rounded-md border border-zinc-200/70 text-[11px]">
-                      {deliveryZone === "dhaka" ? "Inside Dhaka (Next Day)" : "All Bangladesh (2–4 Days)"}
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between text-zinc-600">
-                    <span className="flex items-center gap-1.5 font-medium text-zinc-700">
-                      <LuShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Payment Method</span>
-                    </span>
-                    <span className="font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200/70 text-[11px]">
-                      {paymentMethod === "cod" ? "Cash on Delivery" : "Cards / Mobile Banking"}
-                    </span>
-                  </div>
-                </div>
-
                 {/* Promo Code or Voucher Section */}
                 <div className="space-y-2 pt-1">
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-zinc-900 flex items-center gap-1.5">
-                      <LuTag className="w-3.5 h-3.5 text-[#4F46E5]" />
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="font-medium text-xs text-zinc-900 flex items-center gap-1.5">
+                      <LuTag className="w-3.5 h-3.5 text-store-primary" />
                       <span>Promo Code / Voucher</span>
                     </span>
                     {appliedCoupon && (
-                      <span className="text-[10px] font-extrabold uppercase text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                      <span className="text-[10px] font-medium uppercase text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
                         Applied
                       </span>
                     )}
@@ -922,7 +876,7 @@ export default function CheckoutPage() {
                           <LuCheck className="w-3 h-3 stroke-[3]" />
                         </div>
                         <div className="truncate">
-                          <span className="font-mono font-black text-xs text-emerald-950 tracking-wider uppercase block">
+                          <span className="font-mono font-semibold text-xs text-emerald-950 tracking-wider uppercase block">
                             {appliedCoupon.code}
                           </span>
                           <span className="text-[10px] text-emerald-700 font-semibold truncate block">
@@ -933,7 +887,7 @@ export default function CheckoutPage() {
                       <button
                         type="button"
                         onClick={handleRemoveCoupon}
-                        className="text-[11px] font-bold text-rose-600 hover:text-rose-700 hover:underline cursor-pointer px-2 py-1 shrink-0"
+                        className="text-[11px] font-medium text-rose-600 hover:text-rose-700 hover:underline cursor-pointer px-2 py-1 shrink-0"
                       >
                         Remove
                       </button>
@@ -942,16 +896,17 @@ export default function CheckoutPage() {
                     <div className="flex gap-2">
                       <input
                         type="text"
+                        aria-label="Promo code"
                         value={couponInput}
                         onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
                         placeholder="Enter promo code (e.g. NOVAMART)"
-                        className="flex-1 px-3.5 py-2.5 bg-zinc-50/80 border border-zinc-200 rounded-xl text-xs font-semibold uppercase placeholder:normal-case placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all"
+                        className="min-w-0 flex-1 min-h-12 px-3 py-3 bg-white border border-zinc-200 rounded-lg text-sm uppercase placeholder:normal-case placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 transition-all"
                       />
                       <button
                         type="button"
                         disabled={applyingCoupon || !couponInput.trim()}
                         onClick={handleApplyCoupon}
-                        className="px-4 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-xs shrink-0 flex items-center justify-center min-w-[70px]"
+                        className="px-4 py-2.5 bg-store-primary hover:bg-store-accent active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all shadow-xs shrink-0 flex items-center justify-center min-w-[70px]"
                       >
                         {applyingCoupon ? <LuLoader className="w-3.5 h-3.5 animate-spin" /> : "Apply"}
                       </button>
@@ -960,19 +915,19 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* Cost Breakdown */}
-                <div className="border-t border-zinc-100 pt-3.5 space-y-2.5 text-xs">
-                  <div className="flex justify-between text-zinc-600">
+                <div className="border-t border-zinc-100 pt-3.5 space-y-3 text-sm">
+                  <div className="flex justify-between gap-4 text-zinc-600">
                     <span>Subtotal</span>
-                    <span className="font-bold text-zinc-900">{formatCurrency(subtotal)}</span>
+                    <span className="font-medium text-zinc-900">{formatCurrency(subtotal)}</span>
                   </div>
 
-                  <div className="flex justify-between text-zinc-600">
+                  <div className="flex justify-between gap-4 text-zinc-600">
                     <span>
                       Delivery ({deliveryZone === "dhaka" ? "Inside Dhaka" : "All Bangladesh"})
                     </span>
-                    <span className="font-bold text-zinc-900">
+                    <span className="font-medium text-zinc-900">
                       {shipping === 0 ? (
-                        <span className="text-emerald-700 font-extrabold uppercase bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">FREE</span>
+                        <span className="text-emerald-700 font-medium uppercase bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">FREE</span>
                       ) : (
                         formatCurrency(shipping)
                       )}
@@ -986,19 +941,19 @@ export default function CheckoutPage() {
                     </div>
                   )}
 
-                  <div className="flex justify-between text-zinc-600">
+                  <div className="flex justify-between gap-4 text-zinc-600">
                     <span>Estimated Tax / VAT</span>
                     <span className="font-semibold text-zinc-400">Included</span>
                   </div>
 
-                  <div className="pt-3 border-t border-zinc-200 flex justify-between items-baseline">
+                  <div className="pt-4 border-t border-zinc-200 flex flex-wrap justify-between gap-3 items-baseline">
                     <div>
-                      <span className="text-base font-black text-zinc-950 block">Total Payable</span>
+                      <span className="text-base font-semibold text-zinc-950 block">Total Payable</span>
                       <span className="text-[10px] text-zinc-400">
                         {paymentMethod === "cod" ? "Cash on Delivery" : "Online Payment"}
                       </span>
                     </div>
-                    <span className="text-2xl font-black text-[#1E1B4B]">
+                    <span className="text-2xl font-semibold text-store-deep">
                       {formatCurrency(total)}
                     </span>
                   </div>
@@ -1014,16 +969,16 @@ export default function CheckoutPage() {
                         onChange={(e) => setAgreeToTerms(e.target.checked)}
                         className="peer sr-only"
                       />
-                      <div className="w-4 h-4 border border-zinc-300 rounded-md peer-checked:bg-[#4F46E5] peer-checked:border-[#4F46E5] flex items-center justify-center transition-colors">
+                      <div className="w-5 h-5 border border-zinc-300 rounded peer-focus-visible:ring-2 peer-focus-visible:ring-store-primary peer-focus-visible:ring-offset-2 peer-checked:bg-store-primary peer-checked:border-store-primary flex items-center justify-center transition-colors">
                         {agreeToTerms && <LuCheck className="w-3 h-3 text-white stroke-[3]" />}
                       </div>
                     </div>
-                    <span className="text-[11px] text-zinc-500 leading-relaxed">
+                    <span className="text-sm text-zinc-600 leading-6">
                       I have read and agree to the{" "}
                       <Link
                         href="/terms"
                         target="_blank"
-                        className="text-[#4F46E5] underline font-semibold hover:text-[#4338CA]"
+                        className="text-store-primary underline font-semibold hover:text-store-accent"
                       >
                         terms & conditions
                       </Link>{" "}
@@ -1036,7 +991,7 @@ export default function CheckoutPage() {
                 <button
                   type="submit"
                   disabled={submitting || !agreeToTerms}
-                  className="w-full py-4 bg-[#4F46E5] hover:bg-[#4338CA] active:scale-[0.98] text-white font-extrabold text-sm uppercase tracking-wider rounded-2xl shadow-lg shadow-indigo-600/25 transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full min-h-12 px-4 py-3 bg-store-primary hover:bg-store-accent text-white font-medium text-sm rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {submitting ? (
                     <>
@@ -1046,38 +1001,21 @@ export default function CheckoutPage() {
                   ) : (
                     <>
                       <LuLock className="w-4 h-4" />
-                      <span>Place Order ({paymentMethod === "cod" ? "Cash on Delivery" : "Pay Now"})</span>
+<span>Place Order</span>
                     </>
                   )}
                 </button>
 
-                {/* Trust Badges */}
-                <div className="pt-3 border-t border-zinc-100 grid grid-cols-3 gap-2 text-center">
-                  <div className="flex flex-col items-center gap-1">
-                    <LuShieldCheck className="w-4 h-4 text-[#4F46E5]" />
-                    <span className="text-[10px] font-bold text-zinc-500">256-Bit SSL</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <LuTruck className="w-4 h-4 text-[#4F46E5]" />
-                    <span className="text-[10px] font-bold text-zinc-500">Doorstep COD</span>
-                  </div>
-                  <div className="flex flex-col items-center gap-1">
-                    <LuCheck className="w-4 h-4 text-[#4F46E5] stroke-[3]" />
-                    <span className="text-[10px] font-bold text-zinc-500">100% Authentic</span>
-                  </div>
-                </div>
-
                 {/* Help & Support Callout */}
-                <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Customer Support</span>
-                    <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-bold">24/7 Live</span>
+                <div className="p-3.5 rounded-lg bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">Customer Support</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <IoCallOutline className="w-4 h-4 text-[#EA580C] shrink-0" />
+                    <IoCallOutline className="w-4 h-4 text-[#8B4F2B] shrink-0" />
                     <span>
                       Hotline:{" "}
-                      <a href="tel:01722301927" className="font-extrabold text-zinc-950 hover:text-[#4F46E5]">
+                      <a href="tel:01722301927" className="font-medium text-zinc-950 hover:text-store-primary">
                         01722301927
                       </a>
                     </span>
@@ -1088,7 +1026,7 @@ export default function CheckoutPage() {
                       href="https://wa.me/8801722301927?text=Hello%20NovaMart%2C%20I%20need%20help%20with%20checkout"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-emerald-700 hover:underline font-bold text-xs"
+                      className="text-emerald-700 hover:underline font-medium text-xs"
                     >
                       Chat with us on WhatsApp
                     </a>

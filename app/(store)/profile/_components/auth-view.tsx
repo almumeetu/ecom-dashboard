@@ -45,7 +45,7 @@ export default function AuthView() {
   };
 
   return (
-    <main className="min-h-[70vh] flex items-center justify-center bg-[#FAF9F5] py-12 px-4 sm:px-6 lg:px-8">
+    <main className="min-h-[70vh] flex items-center justify-center bg-store-page py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-[450px] bg-white border border-stone-200 p-8 shadow-sm flex flex-col items-center rounded-lg animate-fadeIn">
         <h1 className="text-3xl font-medium text-zinc-900 tracking-tight mb-6">
           {authView === "login" ? "Login" : "Sign Up"}
@@ -77,7 +77,7 @@ export default function AuthView() {
         <form onSubmit={handleSubmit} className="w-full space-y-4">
           {authView === "register" && (
             <div>
-              <label className="block text-[10px] font-bold tracking-wider uppercase text-zinc-500 mb-1">
+              <label className="block text-xs font-bold tracking-wider uppercase text-zinc-500 mb-1">
                 Full Name
               </label>
               <input
@@ -92,7 +92,7 @@ export default function AuthView() {
           )}
 
           <div>
-            <label className="block text-[10px] font-bold tracking-wider uppercase text-zinc-500 mb-1">
+            <label className="block text-xs font-bold tracking-wider uppercase text-zinc-500 mb-1">
               Email Address
             </label>
             <input
@@ -106,7 +106,7 @@ export default function AuthView() {
           </div>
 
           <div>
-            <label className="block text-[10px] font-bold tracking-wider uppercase text-zinc-500 mb-1">
+            <label className="block text-xs font-bold tracking-wider uppercase text-zinc-500 mb-1">
               Password
             </label>
             <div className="relative">
@@ -131,7 +131,7 @@ export default function AuthView() {
 
           {authView === "register" && (
             <div>
-              <label className="block text-[10px] font-bold tracking-wider uppercase text-zinc-500 mb-1">
+              <label className="block text-xs font-bold tracking-wider uppercase text-zinc-500 mb-1">
                 Confirm Password
               </label>
               <input
@@ -148,7 +148,7 @@ export default function AuthView() {
           <button
             type="submit"
             disabled={authSubmitting}
-            className="w-full bg-[#1A1A1A] hover:bg-stone-850 text-white font-sans text-xs font-semibold tracking-[0.16em] uppercase py-4 shadow transition duration-200 flex items-center justify-center gap-2 cursor-pointer mt-4"
+            className="w-full bg-store-primary hover:bg-stone-850 text-white font-sans text-xs font-semibold tracking-wider uppercase py-4 shadow transition duration-200 flex items-center justify-center gap-2 cursor-pointer mt-4"
           >
             {authSubmitting ? (
               <FiLoader className="animate-spin text-white w-4 h-4" />

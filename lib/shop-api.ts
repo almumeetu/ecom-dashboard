@@ -1,4 +1,5 @@
-import { type PaginatedProducts, type Product as AdminProduct, type Campaign, resolveImageUrl } from "./admin-api";
+import { type PaginatedProducts, type Product as AdminProduct, type Campaign, type News, resolveImageUrl } from "./admin-api";
+import { DEMO_NEWS } from "./demo-news";
 
 const API_BASE_URL =
   typeof window === "undefined"
@@ -354,6 +355,29 @@ async function safeFetchJson<T>(url: string, fallback: T): Promise<T> {
   }
 }
 
+export async function fetchShopNews(): Promise<News[]> {
+  const result = await safeFetchJson<News[]>(`${API_BASE_URL}/news`, []);
+  const publishedArticles = Array.isArray(result)
+    ? result
+        .filter((article) => article.isPublished)
+        .sort((a, b) => {
+          const dateA = new Date(a.publishedAt || a.createdAt).getTime();
+          const dateB = new Date(b.publishedAt || b.createdAt).getTime();
+          return dateB - dateA;
+        })
+    : [];
+  return publishedArticles.length > 0 ? publishedArticles : DEMO_NEWS;
+}
+
+export async function fetchShopNewsBySlug(slug: string): Promise<News | null> {
+  const article = await safeFetchJson<News | null>(
+    `${API_BASE_URL}/news/slug/${encodeURIComponent(slug)}`,
+    null,
+  );
+  if (article?.isPublished) return article;
+  return DEMO_NEWS.find((demoArticle) => demoArticle.slug === slug) ?? null;
+}
+
 export const DEFAULT_NOVAMART_CATEGORIES: ShopCategory[] = [
   { id: "cat-skincare", name: "Skin Care & Beauty", slug: "skin-care", imageUrl: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=800&auto=format&fit=crop&q=80" },
   { id: "cat-electronics", name: "Digital Electronics", slug: "digital-electronics", imageUrl: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?w=800&auto=format&fit=crop&q=80" },
@@ -395,7 +419,7 @@ export const DEFAULT_NOVAMART_SETTINGS: ShopSettings = {
   copyrightYear: "2026",
   parentCompany: "NovaMart Retail Bangladesh Limited",
   parentCompanyLink: "https://novamart.com.bd",
-  logo: "/images/logo/novamart-logo-main.png",
+  logo: "/images/logo/update-logo.png",
   isTopBarVisible: true,
   hideOutOfStock: false,
 };

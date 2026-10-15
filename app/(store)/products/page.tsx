@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import ProductCard from '@/components/sections/ui/product-card';
+import ProductCard, { ProductCardSkeleton } from '@/components/sections/ui/product-card';
 import PageBanner from '@/components/ui/page-banner';
 import { InfiniteScroll } from '@/app/admin/_components/infinite-scroll';
 import {
@@ -54,6 +54,15 @@ function ProductsPageContent() {
   // Display & UI state
   const [showDesktopSidebar, setShowDesktopSidebar] = useState(true);
   const [viewMode, setViewMode] = useState<'grid1' | 'grid2' | 'grid3' | 'grid4'>('grid4');
+  const productGridClassName = `grid ${
+    viewMode === 'grid1'
+      ? 'grid-cols-1 gap-3.5'
+      : viewMode === 'grid2'
+      ? 'grid-cols-2 gap-2.5 sm:gap-5'
+      : viewMode === 'grid3'
+      ? 'grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-5'
+      : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5'
+  }`;
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
 
@@ -509,7 +518,7 @@ function ProductsPageContent() {
                   type="checkbox"
                   checked={inStockOnly}
                   onChange={(e) => setInStockOnly(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-300 text-[#4F46E5] focus:ring-[#4F46E5] cursor-pointer"
+                  className="w-4 h-4 rounded border-zinc-300 text-store-primary focus:ring-store-primary cursor-pointer"
                 />
                 <span className="text-zinc-700 group-hover:text-zinc-900 font-medium">
                   In stock only
@@ -547,7 +556,7 @@ function ProductsPageContent() {
                       onClick={() => handlePricePreset(preset)}
                       className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors cursor-pointer ${
                         isActive
-                          ? 'bg-[#4F46E5] text-white border-[#4F46E5]'
+                          ? 'bg-store-primary text-white border-store-primary'
                           : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
                       }`}
                     >
@@ -567,7 +576,7 @@ function ProductsPageContent() {
                       placeholder="Min"
                       value={minPriceInput}
                       onChange={(e) => setMinPriceInput(e.target.value)}
-                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5] bg-white"
+                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-store-primary bg-white"
                     />
                   </div>
                   <div className="relative">
@@ -577,14 +586,14 @@ function ProductsPageContent() {
                       placeholder="Max"
                       value={maxPriceInput}
                       onChange={(e) => setMaxPriceInput(e.target.value)}
-                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5] bg-white"
+                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-store-primary bg-white"
                     />
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={applyCustomPrice}
-                  className="w-full py-2 bg-zinc-900 hover:bg-[#4F46E5] text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
+                  className="w-full py-2 bg-zinc-900 hover:bg-store-primary text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
                 >
                   Apply Price
                 </button>
@@ -622,12 +631,12 @@ function ProductsPageContent() {
                     }}
                     className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
                       isSelected
-                        ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
+                        ? 'bg-store-surface text-store-primary font-bold'
                         : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                     }`}
                   >
                     <span>{opt}</span>
-                    {isSelected && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
+                    {isSelected && <LuCheck className="w-3.5 h-3.5 text-store-primary" />}
                   </button>
                 );
               })}
@@ -661,7 +670,7 @@ function ProductsPageContent() {
                     value={catSearchTerm}
                     onChange={(e) => setCatSearchTerm(e.target.value)}
                     placeholder="Filter categories..."
-                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5]"
+                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-store-primary"
                   />
                 </div>
               )}
@@ -678,12 +687,12 @@ function ProductsPageContent() {
                         onClick={() => setSelectedCategory(opt)}
                         className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
+                            ? 'bg-store-surface text-store-primary font-bold'
                             : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                         }`}
                       >
                         <span className="truncate">{opt}</span>
-                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />}
+                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-store-primary shrink-0" />}
                       </button>
                     );
                   })}
@@ -717,7 +726,7 @@ function ProductsPageContent() {
                     value={brandSearchTerm}
                     onChange={(e) => setBrandSearchTerm(e.target.value)}
                     placeholder="Search brands..."
-                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-[#4F46E5]"
+                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-store-primary"
                   />
                 </div>
               )}
@@ -734,12 +743,12 @@ function ProductsPageContent() {
                         onClick={() => setSelectedBrand(opt)}
                         className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
                           isSelected
-                            ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
+                            ? 'bg-store-surface text-store-primary font-bold'
                             : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
                         }`}
                       >
                         <span className="truncate">{opt}</span>
-                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />}
+                        {isSelected && <LuCheck className="w-3.5 h-3.5 text-store-primary shrink-0" />}
                       </button>
                     );
                   })}
@@ -770,7 +779,7 @@ function ProductsPageContent() {
                   type="checkbox"
                   checked={onSaleOnly}
                   onChange={(e) => setOnSaleOnly(e.target.checked)}
-                  className="w-4 h-4 rounded border-zinc-300 text-[#4F46E5] focus:ring-[#4F46E5] cursor-pointer"
+                  className="w-4 h-4 rounded border-zinc-300 text-store-primary focus:ring-store-primary cursor-pointer"
                 />
                 <span className="text-zinc-700 group-hover:text-zinc-900 font-medium flex items-center gap-1.5">
                   <LuTag className="w-3.5 h-3.5 text-rose-500" />
@@ -785,7 +794,7 @@ function ProductsPageContent() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#FAF9F5] font-sans text-left">
+    <div className="flex flex-col min-h-screen bg-store-page font-sans text-left">
       <main className="flex-grow w-full text-left">
         {/* Strictly Left-Aligned Page Banner */}
         <PageBanner
@@ -798,7 +807,7 @@ function ProductsPageContent() {
         />
 
         {/* Quick Category Swipe Strip (Mobile & Desktop) */}
-        <div className="w-full bg-[#FAF9F5] border-b border-zinc-200/60 py-2 sm:py-2.5">
+        <div className="w-full bg-store-page border-b border-zinc-200/60 py-2 sm:py-2.5">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <button
               type="button"
@@ -830,7 +839,7 @@ function ProductsPageContent() {
                     }}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                       isSelected
-                        ? 'bg-[#4F46E5] text-white shadow-xs font-semibold'
+                        ? 'bg-store-primary text-white shadow-xs font-semibold'
                         : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200/80'
                     }`}
                   >
@@ -855,7 +864,7 @@ function ProductsPageContent() {
         </div>
 
         {/* Shopify OS 2.0 Filter Control Toolbar (Sticky with correct header clearance) */}
-        <div className="w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-md sticky top-[104px] xl:top-[118px] z-30 shadow-xs">
+        <div className="w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-md sticky top-[113px] xl:top-[118px] z-30 shadow-xs">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2.5 sm:py-3">
             
             {/* Mobile Layout (< sm): Single neat row with zero overflow */}
@@ -868,10 +877,10 @@ function ProductsPageContent() {
                   className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold shadow-2xs active:bg-zinc-100 shrink-0"
                   aria-label="Open Filters"
                 >
-                  <LuSlidersHorizontal className="w-3.5 h-3.5 text-[#4F46E5] shrink-0" />
+                  <LuSlidersHorizontal className="w-3.5 h-3.5 text-store-primary shrink-0" />
                   <span>Filters</span>
                   {activeFilters.length > 0 && (
-                    <span className="w-4.5 h-4.5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                    <span className="w-4.5 h-4.5 rounded-full bg-store-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0">
                       {activeFilters.length}
                     </span>
                   )}
@@ -912,12 +921,12 @@ function ProductsPageContent() {
                           }}
                           className={`w-full flex items-center justify-between px-3 py-2 text-left text-xs transition-colors cursor-pointer ${
                             selectedSort === opt.value
-                              ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
+                              ? 'bg-store-surface text-store-primary font-bold'
                               : 'text-zinc-700 hover:bg-zinc-50'
                           }`}
                         >
                           <span>{opt.label}</span>
-                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
+                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-store-primary" />}
                         </button>
                       ))}
                     </div>
@@ -975,7 +984,7 @@ function ProductsPageContent() {
                   <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
                   <span>{showDesktopSidebar ? 'Hide Filters' : 'Show Filters'}</span>
                   {activeFilters.length > 0 && (
-                    <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-store-primary text-white text-[10px] font-bold flex items-center justify-center">
                       {activeFilters.length}
                     </span>
                   )}
@@ -990,7 +999,7 @@ function ProductsPageContent() {
                   <LuSlidersHorizontal className="w-4 h-4 text-zinc-600" />
                   <span>Filters & Sort</span>
                   {activeFilters.length > 0 && (
-                    <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold flex items-center justify-center">
+                    <span className="w-5 h-5 rounded-full bg-store-primary text-white text-[10px] font-bold flex items-center justify-center">
                       {activeFilters.length}
                     </span>
                   )}
@@ -1085,12 +1094,12 @@ function ProductsPageContent() {
                           }}
                           className={`w-full flex items-center justify-between px-3.5 py-2 text-left text-xs transition-colors cursor-pointer ${
                             selectedSort === opt.value
-                              ? 'bg-[#EEF2FF] text-[#4F46E5] font-bold'
+                              ? 'bg-store-surface text-store-primary font-bold'
                               : 'text-zinc-700 hover:bg-zinc-50'
                           }`}
                         >
                           <span>{opt.label}</span>
-                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
+                          {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-store-primary" />}
                         </button>
                       ))}
                     </div>
@@ -1127,7 +1136,7 @@ function ProductsPageContent() {
               <button
                 type="button"
                 onClick={clearAllFilters}
-                className="text-[11px] sm:text-xs font-semibold text-[#4F46E5] hover:text-[#4338CA] underline underline-offset-2 ml-1 cursor-pointer transition-colors shrink-0 whitespace-nowrap"
+                className="text-[11px] sm:text-xs font-semibold text-store-primary hover:text-store-accent underline underline-offset-2 ml-1 cursor-pointer transition-colors shrink-0 whitespace-nowrap"
               >
                 Clear all ({activeFilters.length})
               </button>
@@ -1144,7 +1153,7 @@ function ProductsPageContent() {
               <aside className="hidden lg:block w-[260px] shrink-0 sticky top-[175px] self-start pr-2">
                 <div className="flex items-center justify-between pb-4 mb-2 border-b border-zinc-200">
                   <h3 className="font-extrabold text-sm uppercase tracking-wider text-zinc-900 flex items-center gap-2">
-                    <LuSlidersHorizontal className="w-4 h-4 text-[#4F46E5]" />
+                    <LuSlidersHorizontal className="w-4 h-4 text-store-primary" />
                     <span>Filter By</span>
                   </h3>
                   {activeFilters.length > 0 && (
@@ -1165,34 +1174,14 @@ function ProductsPageContent() {
             {/* Right Product Grid Area */}
             <div className="flex-1 min-w-0">
               {isLoading && products.length === 0 ? (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
+                <div className={productGridClassName}>
                   {[...Array(8)].map((_, i) => (
-                    <div
-                      key={i}
-                      className="w-full h-[300px] sm:h-[360px] bg-zinc-50 animate-pulse border border-zinc-100 rounded-xl flex flex-col justify-between p-3 sm:p-4"
-                    >
-                      <div className="w-full h-[160px] sm:h-[200px] bg-zinc-200 rounded-lg" />
-                      <div className="h-4 bg-zinc-200 w-3/4 rounded mt-3" />
-                      <div className="flex justify-between items-center mt-3">
-                        <div className="h-4 bg-zinc-200 w-1/3 rounded" />
-                        <div className="h-7 bg-zinc-200 w-1/3 rounded-full" />
-                      </div>
-                    </div>
+                    <ProductCardSkeleton key={i} />
                   ))}
                 </div>
               ) : filteredProducts.length > 0 ? (
                 <>
-                  <div
-                    className={`grid ${
-                      viewMode === 'grid1'
-                        ? 'grid-cols-1 gap-3.5'
-                        : viewMode === 'grid2'
-                        ? 'grid-cols-2 gap-2.5 sm:gap-5'
-                        : viewMode === 'grid3'
-                        ? 'grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-5'
-                        : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-5'
-                    }`}
-                  >
+                  <div className={productGridClassName}>
                     {filteredProducts.map((product) => (
                       <ProductCard
                         key={product.id}
@@ -1227,7 +1216,7 @@ function ProductsPageContent() {
               ) : (
                 /* Empty state when filters return 0 results */
                 <div className="flex flex-col items-center justify-center py-12 sm:py-20 text-center px-4 bg-zinc-50/50 rounded-2xl border border-dashed border-zinc-200 my-4">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-50 text-[#4F46E5] flex items-center justify-center mb-4">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-emerald-50 text-store-primary flex items-center justify-center mb-4">
                     <LuRotateCcw className="w-7 h-7 sm:w-8 sm:h-8" />
                   </div>
                   <h3 className="text-lg sm:text-xl font-bold text-zinc-900 mb-1">
@@ -1239,7 +1228,7 @@ function ProductsPageContent() {
                   <button
                     type="button"
                     onClick={clearAllFilters}
-                    className="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md shadow-indigo-600/20 active:scale-95"
+                    className="px-6 py-2.5 bg-store-primary hover:bg-store-accent text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all cursor-pointer shadow-md shadow-blue-600/20 active:scale-95"
                   >
                     Clear All Filters
                   </button>
@@ -1265,12 +1254,12 @@ function ProductsPageContent() {
               {/* Drawer Header */}
               <div className="px-4 sm:px-5 py-3.5 border-b border-zinc-200 flex items-center justify-between shrink-0 bg-zinc-50">
                 <div className="flex items-center gap-2">
-                  <LuSlidersHorizontal className="w-4 h-4 text-[#4F46E5]" />
+                  <LuSlidersHorizontal className="w-4 h-4 text-store-primary" />
                   <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
                     Filters & Sort
                   </h3>
                   {activeFilters.length > 0 && (
-                    <span className="px-2 py-0.5 rounded-full bg-[#4F46E5] text-white text-[10px] font-bold">
+                    <span className="px-2 py-0.5 rounded-full bg-store-primary text-white text-[10px] font-bold">
                       {activeFilters.length}
                     </span>
                   )}
@@ -1312,12 +1301,12 @@ function ProductsPageContent() {
                         onClick={() => setSelectedSort(opt.value)}
                         className={`px-3 py-2 rounded-lg text-xs font-medium border text-left flex items-center justify-between cursor-pointer transition-colors ${
                           selectedSort === opt.value
-                            ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5] font-bold'
+                            ? 'bg-store-surface border-store-primary text-store-primary font-bold'
                             : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:bg-zinc-100'
                         }`}
                       >
                         <span>{opt.label}</span>
-                        {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-[#4F46E5]" />}
+                        {selectedSort === opt.value && <LuCheck className="w-3.5 h-3.5 text-store-primary" />}
                       </button>
                     ))}
                   </div>
@@ -1340,7 +1329,7 @@ function ProductsPageContent() {
                 <button
                   type="button"
                   onClick={() => setIsMobileFilterOpen(false)}
-                  className="flex-1 py-3 px-4 bg-zinc-900 hover:bg-[#4F46E5] text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-all cursor-pointer shadow-sm active:scale-[0.99]"
+                  className="flex-1 py-3 px-4 bg-zinc-900 hover:bg-store-primary text-white text-xs font-bold uppercase tracking-wider rounded-xl text-center transition-all cursor-pointer shadow-sm active:scale-[0.99]"
                 >
                   View ({filteredProducts.length}) Products
                 </button>
@@ -1359,7 +1348,7 @@ export default function ProductsPage() {
     <Suspense
       fallback={
         <div className="flex flex-col items-center justify-center min-h-[50vh] py-20 text-center">
-          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#4F46E5] mb-4" />
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-store-primary mb-4" />
           <p className="text-zinc-500 text-xs font-medium uppercase tracking-wider">Loading marketplace products...</p>
         </div>
       }

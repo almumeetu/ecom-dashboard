@@ -1,10 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa6";
 import { fetchShopSettings } from "@/lib/shop-api";
 
 export default function FloatingWhatsApp() {
+  const pathname = usePathname();
+  const isPurchasePage = ["/cart", "/checkout", "/confirmation"].includes(pathname) || pathname.startsWith("/products/");
   const [phone, setPhone] = useState("+880 1722-301927");
   const [shopName, setShopName] = useState("NovaMart");
   const [isHovered, setIsHovered] = useState(false);
@@ -39,7 +42,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <div
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 font-sans"
+      className={`fixed bottom-6 right-6 z-40 items-center gap-2.5 font-sans ${isPurchasePage ? "hidden lg:flex" : "flex"}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -49,20 +52,20 @@ export default function FloatingWhatsApp() {
           isHovered ? "opacity-100 translate-x-0" : "opacity-0 translate-x-2 pointer-events-none"
         }`}
       >
-        <span className="w-2 h-2 rounded-full bg-[#F97316] animate-pulse" />
+        <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse" />
         <span>WhatsApp এ অর্ডার বা সাহায্য চান?</span>
       </div>
 
-      {/* Floating Circular WhatsApp Button (#EA580C Accent) */}
+      {/* WhatsApp keeps its recognizable brand green. */}
       <a
         href={`https://wa.me/${waNumber}?text=${message}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="relative group w-14 h-14 rounded-full bg-[#EA580C] hover:bg-[#C2410C] text-white flex items-center justify-center shadow-lg shadow-orange-950/25 hover:shadow-xl hover:shadow-[#EA580C]/40 transition-all duration-300 hover:scale-108 active:scale-95 cursor-pointer"
+        className="relative group w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white flex items-center justify-center shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-900/25 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
       >
         {/* Subtle breathing ripple wave */}
-        <span className="absolute -inset-1 rounded-full bg-[#EA580C] opacity-35 animate-ping -z-10" />
+        <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-25 animate-ping -z-10" />
 
         <FaWhatsapp className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" />
       </a>

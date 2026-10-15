@@ -1,25 +1,16 @@
 'use client';
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import {
   IoChevronBackOutline,
-  IoHomeOutline,
-  IoChevronForwardOutline,
-  IoShieldCheckmarkOutline,
 } from 'react-icons/io5';
 import ProductGallery from './ui/product-gallery';
 import ProductInfo from './ui/product-info';
-import ProductTabs from './ui/product-tabs';
 import RelatedCarousel from './ui/related-carousel';
-import MobileStickyBuyBar from './ui/mobile-sticky-buy-bar';
 import { fetchShopProductById } from '@/lib/shop-api';
 import { resolveImageUrl } from '@/lib/admin-api';
 import type { Product } from '@/lib/admin-api';
-import { useCart } from '@/app/_providers/cart-provider';
-import { setBuyNowItem } from '@/lib/buy-now';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
 
 export interface ParsedVariant {
   id: string;
@@ -176,15 +167,15 @@ function Skeleton() {
   return (
     <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-        <div className="lg:col-span-7 w-full space-y-4 animate-pulse">
-          <div className="w-full aspect-[4/5] bg-stone-100 rounded-2xl" />
-          <div className="flex gap-3">
+        <div className="lg:col-span-6 min-w-0 w-full space-y-4 animate-pulse">
+          <div className="w-full aspect-square sm:aspect-[4/3] lg:aspect-square bg-zinc-100 rounded-xl" />
+          <div className="flex gap-3 overflow-hidden">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="w-20 h-20 shrink-0 bg-stone-100 rounded-xl" />
             ))}
           </div>
         </div>
-        <div className="lg:col-span-5 w-full flex flex-col gap-5 animate-pulse">
+        <div className="lg:col-span-6 min-w-0 w-full flex flex-col gap-5 animate-pulse">
           <div className="h-4 bg-stone-100 w-1/4 rounded" />
           <div className="h-10 bg-stone-100 w-4/5 rounded" />
           <div className="h-4 bg-stone-100 w-full rounded" />
@@ -217,8 +208,6 @@ export default function ProductDetails({
   const [loading, setLoading] = useState(() => !initialProduct);
   const [error, setError] = useState(false);
 
-  const { addItem } = useCart();
-  const router = useRouter();
 
   useEffect(() => {
     // If we already have initialProduct matching productId, do not re-fetch
@@ -266,23 +255,11 @@ export default function ProductDetails({
     return list.length > 0 ? list : ['/images/no-image-icon-6.png'];
   }, [product]);
 
-  const discountPercentage = useMemo(() => {
-    if (!product) return undefined;
-    const currentPrice = selectedVariant ? selectedVariant.priceNum : product.priceNum;
-    const origStr = selectedVariant?.originalPriceFormatted || product.originalPriceFormatted;
-    if (!origStr) return undefined;
-    const origNum = Number(origStr.replace(/[^\d.]/g, ''));
-    if (origNum > currentPrice) {
-      return Math.round(((origNum - currentPrice) / origNum) * 100);
-    }
-    return undefined;
-  }, [product, selectedVariant]);
-
   if (loading) return <Skeleton />;
 
   if (error || !product) {
     return (
-      <main className="flex-grow bg-white w-full">
+      <main className="flex-grow bg-store-page min-w-0 w-full">
         <div className="max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-20 py-32 text-center">
           <p className="text-2xl text-zinc-400 font-medium mb-6">
             Product could not be found.
@@ -306,61 +283,12 @@ export default function ProductDetails({
     }
   };
 
-  const handleMobileAddToCart = async () => {
-    const finalPrice = selectedVariant ? selectedVariant.priceNum : product.priceNum;
-    const attributes = selectedVariant?.attributes ?? {};
-    try {
-      await addItem(
-        {
-          productId: product.id,
-          slug: product.slug,
-          name: product.name,
-          price: finalPrice,
-          image: selectedVariant?.image ?? product.image,
-          description: product.description,
-          color: attributes.Color ?? attributes.Colour ?? attributes.color ?? '',
-          size: attributes.Size ?? attributes.size ?? '',
-          variantId: selectedVariant?.id ?? product.variantId,
-          quantity: 1,
-          attributes,
-          ...attributes,
-        },
-        { silent: true }
-      );
-      toast.success(`Added ${product.name} to your bag!`);
-    } catch {
-      // Error message handled by CartProvider
-    }
-  };
-
-  const handleMobileBuyNow = () => {
-    const finalPrice = selectedVariant ? selectedVariant.priceNum : product.priceNum;
-    const attributes = selectedVariant?.attributes ?? {};
-    setBuyNowItem({
-      productId: product.id,
-      slug: product.slug,
-      name: product.name,
-      price: finalPrice,
-      image: selectedVariant?.image ?? product.image,
-      description: product.description,
-      color: attributes.Color ?? attributes.Colour ?? attributes.color ?? '',
-      size: attributes.Size ?? attributes.size ?? '',
-      variantId: selectedVariant?.id ?? product.variantId,
-      quantity: 1,
-      attributes,
-      ...attributes,
-    });
-    router.push('/checkout');
-  };
-
-  const isOutOfStock = (selectedVariant?.stockQuantity ?? 1) <= 0;
-
   return (
-    <main className="flex-grow bg-white w-full">
+    <main className="flex-grow bg-store-page min-w-0 w-full">
       {/* ── Minimalist Clean Breadcrumb Strip ───────────────────────── */}
-      <div className="w-full border-b border-stone-200/80 bg-stone-50/50">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-3 flex items-center justify-between text-xs text-zinc-500">
-          <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 flex-wrap text-xs text-zinc-500">
+      <div className="w-full border-b border-[#DED7CC] bg-white">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-4 flex min-w-0 items-center justify-between gap-4 text-xs text-zinc-500">
+          <nav aria-label="Breadcrumb" className="min-w-0 flex items-center gap-1.5 overflow-x-auto whitespace-nowrap text-xs [scrollbar-width:none] [&::-webkit-scrollbar]:hidden text-zinc-500">
             <Link
               href="/"
               className="text-zinc-500 hover:text-zinc-900 transition-colors font-medium"
@@ -386,7 +314,7 @@ export default function ProductDetails({
               </>
             )}
             <span className="text-zinc-400">/</span>
-            <span className="text-zinc-800 font-semibold truncate max-w-[200px] sm:max-w-md">
+            <span className="text-zinc-800 font-semibold shrink-0 truncate max-w-[180px] sm:max-w-md">
               {product.name}
             </span>
           </nav>
@@ -394,7 +322,7 @@ export default function ProductDetails({
           {/* Quick Back Link */}
           <Link
             href="/products"
-            className="hidden sm:inline-flex items-center gap-1 text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
+            className="hidden md:inline-flex shrink-0 items-center gap-1 text-xs font-semibold text-zinc-600 hover:text-zinc-950 transition-colors"
           >
             <IoChevronBackOutline className="w-3.5 h-3.5" />
             <span>Back to Products</span>
@@ -403,21 +331,19 @@ export default function ProductDetails({
       </div>
 
       {/* ── Main Product Two-Column Layout (Matching Screenshot) ────── */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 lg:py-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-start">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-10 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-start">
           {/* Gallery Column (Left - 6 cols) */}
-          <div className="lg:col-span-6 w-full">
+          <div className="lg:col-span-6 min-w-0 w-full">
             <ProductGallery
               images={galleryImages}
               activeImage={selectedVariant?.image}
               productName={product.name}
-              badge={product.brand || 'VERIFIED'}
-              discountPercentage={discountPercentage}
             />
           </div>
 
           {/* Purchasing Info & Inline Tabs Column (Right - 6 cols) */}
-          <div className="lg:col-span-6 w-full">
+          <div className="lg:col-span-6 min-w-0 w-full">
             <ProductInfo
               name={product.name}
               subtitle={product.subtitle}
@@ -448,15 +374,6 @@ export default function ProductDetails({
       {/* ── You May Also Like Section (Clean 5-Column Grid) ─────────── */}
       <RelatedCarousel currentCategory={product.category} currentProductId={product.id} />
 
-      {/* ── Mobile Sticky Buy Bar ───────────────────────────────────── */}
-      <MobileStickyBuyBar
-        name={product.name}
-        priceFormatted={selectedVariant?.priceFormatted || product.priceFormatted}
-        image={selectedVariant?.image || product.image}
-        onAddToCart={handleMobileAddToCart}
-        onBuyNow={handleMobileBuyNow}
-        isOutOfStock={isOutOfStock}
-      />
     </main>
   );
 }

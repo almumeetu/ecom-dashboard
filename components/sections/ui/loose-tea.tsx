@@ -92,7 +92,7 @@ export default function LooseTea() {
                     unoptimized
                   />
                 </div>
-                <p className="font-['Gotham'] text-xl text-neutral-800 text-center group-hover:text-[#b4a676] transition-colors line-clamp-2 max-w-[120px] px-1 leading-6" style={{ fontWeight: 'normal' }}>
+                <p className="font-['Gotham'] text-xl text-neutral-800 text-center group-hover:text-[#8B4F2B] transition-colors line-clamp-2 max-w-[120px] px-1 leading-6" style={{ fontWeight: 'normal' }}>
                   {subCategory.name}
                 </p>
               </Link>

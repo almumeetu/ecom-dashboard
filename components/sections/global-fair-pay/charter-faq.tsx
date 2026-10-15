@@ -39,7 +39,7 @@ export default function CharterFAQ() {
   };
 
   return (
-    <section className="w-full bg-[#FAF9F6] py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-stone-200/80">
+    <section className="w-full bg-[#F7FAFD] py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-stone-200/80">
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto space-y-3">

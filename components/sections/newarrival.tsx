@@ -57,8 +57,8 @@ export default function NewArrival() {
       <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] text-[#4F46E5] text-[11px] font-medium uppercase tracking-wider mb-3">
-            <LuSparkles className="w-3.5 h-3.5 text-[#F97316]" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F2EEE7] text-[#174A76] text-[11px] font-medium uppercase tracking-wider mb-3">
+            <LuSparkles className="w-3.5 h-3.5 text-[#E88443]" />
             <span>Curated Marketplace</span>
           </div>
 
@@ -81,8 +81,8 @@ export default function NewArrival() {
                   onClick={() => setSelectedCategory(tab)}
                   className={`px-4 py-2 rounded-full text-xs sm:text-[13px] font-bold transition-all duration-200 cursor-pointer ${
                     isActive
-                      ? "bg-[#4F46E5] text-white shadow-sm scale-102"
-                      : "bg-white text-zinc-600 hover:text-[#4F46E5] hover:bg-[#EEF2FF] border border-zinc-200/80"
+                      ? "bg-[#174A76] text-white shadow-sm scale-102"
+                      : "bg-white text-zinc-600 hover:text-[#174A76] hover:bg-[#F2EEE7] border border-zinc-200/80"
                   }`}
                 >
                   {tab}
@@ -125,7 +125,7 @@ export default function NewArrival() {
         ) : (
           <div className="text-center py-16 bg-white rounded-2xl border border-zinc-200/60 p-8">
             <p className="text-zinc-500 text-sm">No products found in this category.</p>
-            <Link href="/products" className="mt-4 inline-block text-[#4F46E5] font-semibold text-sm hover:underline">
+            <Link href="/products" className="mt-4 inline-block text-[#174A76] font-semibold text-sm hover:underline">
               View All Products →
             </Link>
           </div>
@@ -135,7 +135,7 @@ export default function NewArrival() {
         <div className="pt-10 sm:pt-12 text-center px-4">
           <Link
             href="/products"
-            className="w-full sm:w-auto max-w-sm sm:max-w-none inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-sans text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+            className="w-full sm:w-auto max-w-sm sm:max-w-none inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-[#174A76] hover:bg-[#103858] text-white font-sans text-xs font-semibold tracking-wider uppercase transition-all duration-300 shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
           >
             <span>Explore All Products</span>
             <LuArrowRight className="w-4 h-4" />

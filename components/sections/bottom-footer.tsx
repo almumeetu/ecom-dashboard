@@ -6,7 +6,6 @@ import {
   FaTiktok,
   FaXTwitter,
   FaLinkedinIn,
-  FaCcAmex,
 } from "react-icons/fa6";
 import { SiVisa } from "react-icons/si";
 import { HiLockClosed, HiTruck } from "react-icons/hi";
@@ -43,32 +42,32 @@ export default async function Bottomfooter() {
     (key) => socialContact[key] && socialContact[key]!.trim() !== ""
   );
 
-  const displaySocials = activeSocials.length > 0 ? activeSocials : (["facebook", "instagram", "youtube"] as SocialKey[]);
+  const displaySocials = activeSocials;
 
   // Dynamic Shop & Company Metadata
   const shopName = settings?.shopName?.trim() || "NovaMart";
   const copyrightYear = settings?.copyrightYear || new Date().getFullYear();
 
   return (
-    <section className="w-full bg-[#FAF9F5] text-zinc-600 py-4 sm:py-5 border-t border-zinc-200/80 font-sans">
+    <section className="w-full border-t border-white/10 bg-[#101d29] py-4 font-sans text-white/65 sm:py-5">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-4">
         
         {/* Row 1: Payment Gateways & Cash on Delivery Badge */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3 pb-3 border-b border-zinc-200/60">
+        <div className="flex flex-col items-center justify-between gap-3 border-b border-white/10 pb-3 md:flex-row">
           <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
-            <span className="text-xs font-semibold text-zinc-700 uppercase tracking-wider mr-1 flex items-center gap-1.5">
-              <HiLockClosed className="w-3.5 h-3.5 text-[#4F46E5]" />
+            <span className="mr-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/80">
+              <HiLockClosed className="w-3.5 h-3.5 text-store-light" />
               <span>নিরাপদ পেমেন্ট:</span>
             </span>
 
             <div className="flex items-center gap-2 flex-wrap justify-center">
               {/* Cash on Delivery Badge */}
               <div
-                className="h-7.5 px-2.5 bg-indigo-50 border border-indigo-200/80 rounded-md flex items-center gap-1.5 shadow-2xs hover:bg-indigo-100/60 transition-all shrink-0 cursor-default select-none"
+                className="flex h-7.5 shrink-0 cursor-default select-none items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.06] px-2.5 shadow-2xs transition-all hover:bg-white/10"
                 title="ক্যাশ অন ডেলিভারি সুবিধা সারা দেশে প্রযোজ্য"
               >
-                <HiTruck className="w-4 h-4 text-[#4F46E5] shrink-0" />
-                <span className="text-[11px] font-bold text-[#1E1B4B]">ক্যাশ অন ডেলিভারি</span>
+                <HiTruck className="w-4 h-4 shrink-0 text-store-light" />
+                <span className="text-[11px] font-semibold text-white">ক্যাশ অন ডেলিভারি</span>
               </div>
 
               {/* bKash Official Badge */}
@@ -130,34 +129,36 @@ export default async function Bottomfooter() {
           </div>
 
           {/* Social Icons */}
-          <div className="flex items-center gap-2">
-            {displaySocials.map((key) => {
-              const { Icon, label } = SOCIAL_ICONS[key];
-              const rawHref = socialContact[key];
-              const href = normalizeExternalUrl(rawHref);
-              return (
-                <Link
-                  key={key}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="w-7.5 h-7.5 rounded-full bg-white hover:bg-[#4F46E5] text-zinc-600 hover:text-white border border-zinc-200 hover:border-[#4F46E5] transition-all flex items-center justify-center cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                </Link>
-              );
-            })}
-          </div>
+          {displaySocials.length > 0 && (
+            <div className="flex items-center gap-2">
+              {displaySocials.map((key) => {
+                const { Icon, label } = SOCIAL_ICONS[key];
+                const rawHref = socialContact[key];
+                const href = normalizeExternalUrl(rawHref);
+                return (
+                  <Link
+                    key={key}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border border-white/15 bg-white/[0.06] text-white/70 shadow-2xs transition-all hover:scale-105 hover:border-store-light hover:bg-store-primary hover:text-white active:scale-95"
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Row 2: Standard Copyright & Trade License matching reference screenshot */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left text-xs text-zinc-500">
+        <div className="flex flex-col items-center justify-between gap-2 text-center text-xs text-white/55 sm:flex-row sm:text-left">
           <p className="leading-relaxed">
-            © {copyrightYear} <strong className="text-zinc-800 font-semibold">{shopName}</strong> — All rights reserved. | Trade License: <span className="font-mono text-zinc-600">TRAD/DNCC/1214708/2026</span>
+            © {copyrightYear} <strong className="font-semibold text-white/90">{shopName}</strong> — All rights reserved. | Trade License: <span className="font-mono text-white/65">TRAD/DNCC/1214708/2026</span>
           </p>
 
-          <p className="text-[11px] text-zinc-400">
+          <p className="text-[11px] text-white/40">
             Powered by Bangladesh Express Commerce Engine
           </p>
         </div>

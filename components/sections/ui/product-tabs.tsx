@@ -351,8 +351,8 @@ export default function ProductTabs({
 
             {[
               {
-                icon: <LuCheck className="w-4 h-4 text-[#4F46E5]" />,
-                bg: 'bg-[#EEF2FF]',
+                icon: <LuCheck className="w-4 h-4 text-store-primary" />,
+                bg: 'bg-store-surface',
                 title: 'Authentic & Verified',
                 desc: 'Procured directly from verified suppliers and brand authorized hubs.',
               },
@@ -363,14 +363,14 @@ export default function ProductTabs({
                 desc: 'Rigorous multi-point inspection before dispatch to ensure zero defect.',
               },
               {
-                icon: <LuClock className="w-4 h-4 text-blue-600" />,
-                bg: 'bg-blue-50',
+                icon: <LuClock className="w-4 h-4 text-store-primary" />,
+                bg: 'bg-store-surface',
                 title: 'Fast Doorstep Delivery',
                 desc: `Express courier dispatch across Bangladesh with live SMS tracking.`,
               },
               {
-                icon: <LuRotateCcw className="w-4 h-4 text-purple-600" />,
-                bg: 'bg-purple-50',
+                icon: <LuRotateCcw className="w-4 h-4 text-store-accent" />,
+                bg: 'bg-store-surface',
                 title: '7-Day Return & Replacement',
                 desc: 'Hassle-free replacement or refund guarantee within 7 days of delivery.',
               },
@@ -436,7 +436,7 @@ export default function ProductTabs({
           {/* Express Delivery Card */}
           <div className="p-6 sm:p-8 rounded-3xl bg-white border border-stone-200/90 shadow-2xs space-y-4">
             <div className="flex items-center gap-3 text-zinc-950 font-extrabold text-lg">
-              <div className="w-10 h-10 rounded-2xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-store-surface text-store-primary flex items-center justify-center">
                 <LuTruck className="w-5 h-5" />
               </div>
               <div>
@@ -453,25 +453,25 @@ export default function ProductTabs({
             ) : (
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-zinc-600">
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
                     <strong>Dhaka Metropolitan:</strong> Delivered in 1–2 business days ({deliveryInside} delivery charge).
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
                     <strong>All Bangladesh (Outside Dhaka):</strong> Delivered in 2–4 business days via courier ({deliveryOutside} delivery charge).
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
                     <strong>Real-time Tracking:</strong> SMS notifications and courier tracking links dispatched upon handover.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-[#4F46E5] shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
                     <strong>Inspection Privilege:</strong> External parcel condition check allowed upon delivery before releasing COD payment.
                   </span>
@@ -483,7 +483,7 @@ export default function ProductTabs({
           {/* Return & Exchange Card */}
           <div className="p-6 sm:p-8 rounded-3xl bg-white border border-stone-200/90 shadow-2xs space-y-4">
             <div className="flex items-center gap-3 text-zinc-950 font-extrabold text-lg">
-              <div className="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-store-surface text-store-accent flex items-center justify-center">
                 <LuRotateCcw className="w-5 h-5" />
               </div>
               <div>
@@ -502,25 +502,25 @@ export default function ProductTabs({
             ) : (
               <ul className="space-y-3 pt-2 text-xs sm:text-sm text-zinc-600">
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-accent shrink-0 mt-0.5" />
                   <span>
                     <strong>7-Day Window:</strong> You can request an exchange or return within 7 calendar days of receipt.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-accent shrink-0 mt-0.5" />
                   <span>
                     <strong>Condition:</strong> Product must remain unused, unworn, and undamaged with original tags intact.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-accent shrink-0 mt-0.5" />
                   <span>
                     <strong>Fast Refund:</strong> Refunds processed directly to your bKash, Nagad, or bank card within 24–48 hours.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
-                  <LuCheck className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
+                  <LuCheck className="w-4 h-4 text-store-accent shrink-0 mt-0.5" />
                   <span>
                     <strong>Doorstep Pickup:</strong> Return courier pickup arranged from your home or drop-off at nearest partner hub.
                   </span>
@@ -726,8 +726,8 @@ export default function ProductTabs({
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-extrabold text-zinc-950">{rev.name}</span>
                           {rev.verified && (
-                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-full border border-indigo-200/80">
-                              <LuShieldCheck className="w-3 h-3 text-[#4F46E5]" />
+                            <span className="inline-flex items-center gap-1 text-[10px] font-bold text-store-primary bg-store-surface px-2 py-0.5 rounded-full border border-store-border/80">
+                              <LuShieldCheck className="w-3 h-3 text-store-primary" />
                               Verified Buyer
                             </span>
                           )}
@@ -751,7 +751,7 @@ export default function ProductTabs({
                       onClick={() => toggleHelpful(rev.id)}
                       className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-semibold transition-all cursor-pointer ${
                         helpfulReviews[rev.id]
-                          ? 'bg-[#EEF2FF] border-[#4F46E5] text-[#4F46E5]'
+                          ? 'bg-store-surface border-store-primary text-store-primary'
                           : 'border-stone-200 hover:bg-stone-50 text-zinc-600'
                       }`}
                     >

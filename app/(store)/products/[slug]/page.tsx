@@ -59,15 +59,15 @@ function ProductSkeleton() {
   return (
     <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
-        <div className="lg:col-span-7 w-full animate-pulse space-y-4">
-          <div className="w-full aspect-[4/5] bg-stone-100 rounded-2xl" />
-          <div className="flex gap-3">
+        <div className="lg:col-span-6 min-w-0 w-full animate-pulse space-y-4">
+          <div className="w-full aspect-square sm:aspect-[4/3] lg:aspect-square bg-zinc-100 rounded-xl" />
+          <div className="flex gap-3 overflow-hidden">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="w-20 h-20 bg-stone-100 rounded-xl" />
             ))}
           </div>
         </div>
-        <div className="lg:col-span-5 w-full animate-pulse space-y-4">
+        <div className="lg:col-span-6 min-w-0 w-full animate-pulse space-y-4">
           <div className="h-6 bg-stone-100 w-1/4 rounded-full" />
           <div className="h-10 bg-stone-100 w-4/5 rounded-lg" />
           <div className="h-4 bg-stone-100 w-1/3 rounded" />
@@ -87,7 +87,7 @@ export default async function ProductPage({ params }: PageProps) {
   if (!product) notFound();
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="min-w-0 flex flex-col min-h-screen bg-store-page">
       <Suspense fallback={<ProductSkeleton />}>
         <ProductDetails productId={product.id} initialProduct={product} />
       </Suspense>

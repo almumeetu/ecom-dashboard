@@ -102,7 +102,7 @@ export default function GiftsPage() {
   }, []);
 
   return (
-    <main className="relative w-full bg-[#FAF9F5] overflow-hidden">
+    <main className="relative w-full bg-store-page overflow-hidden">
       <PageBanner
         title="Gift Sets & Curated Bundles"
         subtitle="Thoughtfully assembled multi-category luxury gift boxes, festive food packages, and executive celebration sets."
@@ -118,13 +118,13 @@ export default function GiftsPage() {
 
       {/* SECTION 2: Curated Collections */}
       <ScrollAnimate variant="fade-in-up">
-        <section className="w-full py-16 md:py-24 bg-[#F6F6F6] border-t border-stone-100">
+        <section className="w-full py-16 md:py-24 bg-store-surface border-t border-stone-100">
           <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
             {/* Header */}
             <div className="self-stretch flex flex-col justify-center items-center gap-3 overflow-hidden mb-16">
               <h2 className="inline-flex justify-center flex-wrap items-center gap-2">
                 <span className="text-zinc-900 text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">Curated</span>
-                <span className="text-[#4F46E5] text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">Collections</span>
+                <span className="text-store-primary text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight">Collections</span>
               </h2>
               <p className="max-w-[700px] text-center text-zinc-500 text-sm lg:text-base font-normal leading-relaxed mx-auto">
                 Designed to make a lasting impression for corporate, seasonal, and personal gifting.
@@ -171,7 +171,7 @@ export default function GiftsPage() {
               <div className="lg:col-span-5 flex flex-col justify-start items-start gap-4">
                 <h2 className="text-zinc-900 text-2xl sm:text-3xl md:text-4xl font-normal leading-tight tracking-tight">
                   Give More Than Gifts—
-                  <span className="block mt-2 text-[#4F46E5] text-2xl sm:text-4xl md:text-5xl font-normal leading-tight">
+                  <span className="block mt-2 text-store-primary text-2xl sm:text-4xl md:text-5xl font-normal leading-tight">
                     Share a Heritage
                   </span>
                 </h2>
@@ -224,7 +224,7 @@ export default function GiftsPage() {
 
       {/* SECTION 4: Brand Swiper */}
       <ScrollAnimate variant="fade-in-up">
-        <Brands bgClassName="bg-[#F6F6F6]" />
+        <Brands bgClassName="bg-store-surface" />
       </ScrollAnimate>
 
       {/* SECTION 5: Instagram Follow Swiper */}

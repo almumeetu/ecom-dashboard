@@ -72,7 +72,7 @@ function ProfilePageContent() {
   }, [isAuthenticated, refreshUser]);
 
   return (
-    <div className="relative min-h-[calc(100vh-140px)] bg-[#FAFAFA] flex flex-col justify-between font-sans">
+    <div className="relative min-h-[calc(100vh-140px)] bg-store-page flex flex-col justify-between font-sans">
       {!isAuthenticated && activeTab === "track" ? (
         /* ── Public / Guest Order Tracking ── */
         <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full animate-fadeIn">
@@ -108,7 +108,7 @@ function ProfilePageContent() {
                 <FiUser className="w-8 h-8" />
               </div>
 
-              <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
                 {settings?.shopName ? `${settings.shopName} Account` : "Verified Customer Portal"}
               </span>
 
@@ -152,26 +152,26 @@ function ProfilePageContent() {
                 <div className="p-3 rounded-xl bg-zinc-50 flex items-start gap-2.5">
                   <FiTruck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-[11px] font-bold text-zinc-800">
+                    <h5 className="text-xs font-bold text-zinc-800">
                       {settings?.branchName || "Dhaka & Nationwide Hub"}
                     </h5>
-                    <p className="text-[10px] text-zinc-400">Next-day live delivery status</p>
+                    <p className="text-xs text-zinc-400">Next-day live delivery status</p>
                   </div>
                 </div>
 
                 <div className="p-3 rounded-xl bg-zinc-50 flex items-start gap-2.5">
                   <FiShield className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-[11px] font-bold text-zinc-800">100% Genuine</h5>
-                    <p className="text-[10px] text-zinc-400">Verified products & vendors</p>
+                    <h5 className="text-xs font-bold text-zinc-800">100% Genuine</h5>
+                    <p className="text-xs text-zinc-400">Verified products & vendors</p>
                   </div>
                 </div>
 
                 <div className="p-3 rounded-xl bg-zinc-50 flex items-start gap-2.5">
                   <FiLock className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h5 className="text-[11px] font-bold text-zinc-800">Bank-Grade Safety</h5>
-                    <p className="text-[10px] text-zinc-400">Encrypted checkout & data</p>
+                    <h5 className="text-xs font-bold text-zinc-800">Bank-Grade Safety</h5>
+                    <p className="text-xs text-zinc-400">Encrypted checkout & data</p>
                   </div>
                 </div>
               </div>
@@ -220,7 +220,7 @@ function ProfilePageContent() {
                     <p className="text-xs text-zinc-500 truncate mt-0.5">
                       {user?.email || ""}
                     </p>
-                    <span className="inline-block mt-1 text-[10px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
+                    <span className="inline-block mt-1 text-xs font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-full">
                       Verified Member
                     </span>
                   </div>
@@ -272,7 +272,7 @@ function ProfilePageContent() {
                       );
                     })()}
                   </div>
-                  <p className="text-[11px] text-zinc-400">
+                  <p className="text-xs text-zinc-400">
                     {settings?.branchAddress || (settings?.branchName ? `${settings.branchName}, Dhaka` : "Central Hub, Dhaka")}
                   </p>
                 </div>
@@ -313,7 +313,7 @@ export default function ProfilePage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
+        <div className="min-h-screen flex items-center justify-center bg-store-page">
           <div className="flex flex-col items-center gap-3">
             <FiLoader className="w-8 h-8 text-emerald-600 animate-spin" />
             <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">

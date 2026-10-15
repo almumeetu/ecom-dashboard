@@ -39,7 +39,7 @@ export default function FounderCta() {
   return (
     <section className="w-full py-12 sm:py-16 md:py-20 bg-gradient-to-b from-[#0A0D12] via-[#0F141C] to-[#141A23] overflow-hidden relative">
       {/* Background decorative glow elements */}
-      <div className="absolute -top-32 -left-32 w-80 sm:w-96 h-80 sm:h-96 bg-[#4F46E5]/15 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -top-32 -left-32 w-80 sm:w-96 h-80 sm:h-96 bg-[#174A76]/15 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute -bottom-32 -right-32 w-80 sm:w-96 h-80 sm:h-96 bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(16,185,129,0.06),transparent_70%)] pointer-events-none" />
 
@@ -65,8 +65,8 @@ export default function FounderCta() {
               <div className="absolute top-3.5 left-3.5 sm:top-5 sm:left-5 z-20">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/65 backdrop-blur-md border border-white/15 text-white shadow-lg">
                   <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4F46E5] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4F46E5]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#174A76] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#174A76]"></span>
                   </span>
                   <span className="text-[11px] font-semibold tracking-wide">Direct Leadership</span>
                 </div>
@@ -76,7 +76,7 @@ export default function FounderCta() {
               <div className="absolute bottom-3.5 left-3.5 right-3.5 sm:bottom-5 sm:left-5 sm:right-5 z-20 lg:hidden">
                 <div className="flex items-center justify-between gap-3 bg-black/70 backdrop-blur-md border border-white/15 rounded-2xl p-2.5 sm:p-3 shadow-xl">
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#4F46E5]/60 shrink-0">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-[#174A76]/60 shrink-0">
                       <Image
                         src="/images/team/abdullah-2.jpg"
                         alt="NovaMart Team"
@@ -93,7 +93,7 @@ export default function FounderCta() {
                       <p className="text-zinc-300 text-[11px] truncate">Founder & CEO, {shopName}</p>
                     </div>
                   </div>
-                  <span className="text-[10px] font-semibold text-emerald-300 bg-[#4F46E5]/20 border border-emerald-500/35 px-2.5 py-1 rounded-full shrink-0">
+                  <span className="text-[10px] font-semibold text-emerald-300 bg-[#174A76]/20 border border-emerald-500/35 px-2.5 py-1 rounded-full shrink-0">
                     Verified
                   </span>
                 </div>
@@ -103,7 +103,7 @@ export default function FounderCta() {
             {/* ══════════ Right: Founder's Story & CTAs ══════════ */}
             <div className="lg:col-span-7 p-5 sm:p-8 md:p-10 lg:p-12 xl:p-14 flex flex-col justify-center">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#4F46E5]/15 border border-emerald-500/25 text-indigo-300 text-[11px] font-medium uppercase tracking-wider w-fit mb-3.5 sm:mb-4 shadow-[0_0_15px_rgba(16,185,129,0.12)]">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#174A76]/15 border border-emerald-500/25 text-indigo-300 text-[11px] font-medium uppercase tracking-wider w-fit mb-3.5 sm:mb-4 shadow-[0_0_15px_rgba(16,185,129,0.12)]">
                 <LuShieldCheck className="w-3.5 h-3.5 text-indigo-300" />
                 <span>Founder&apos;s Personal Promise</span>
               </div>
@@ -111,7 +111,7 @@ export default function FounderCta() {
               {/* Heading */}
               <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight mb-3 sm:mb-4 leading-tight sm:leading-snug">
                 Built on Trust,{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#818CF8] via-indigo-300 to-[#A5B4FC]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C7D5DF] via-indigo-300 to-[#E8E1D6]">
                   Delivered with Care
                 </span>
               </h2>
@@ -142,7 +142,7 @@ export default function FounderCta() {
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <span className="text-white font-bold text-base">NovaMart Team</span>
                     <LuBadgeCheck className="w-4.5 h-4.5 text-blue-400 shrink-0" />
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#4F46E5]/15 text-indigo-300 font-semibold border border-emerald-500/25">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#174A76]/15 text-indigo-300 font-semibold border border-emerald-500/25">
                       Verified Founder
                     </span>
                   </div>
@@ -160,7 +160,7 @@ export default function FounderCta() {
               <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-6 sm:mb-8">
                 {/* Feature 1 */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 p-2.5 sm:px-3 sm:py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] transition-colors text-center sm:text-left">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#4F46E5]/15 border border-emerald-500/25 flex items-center justify-center text-indigo-300 shrink-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#174A76]/15 border border-emerald-500/25 flex items-center justify-center text-indigo-300 shrink-0">
                     <LuShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                   <div className="min-w-0">
@@ -175,7 +175,7 @@ export default function FounderCta() {
 
                 {/* Feature 2 */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 p-2.5 sm:px-3 sm:py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] transition-colors text-center sm:text-left">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#4F46E5]/15 border border-emerald-500/25 flex items-center justify-center text-indigo-300 shrink-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#174A76]/15 border border-emerald-500/25 flex items-center justify-center text-indigo-300 shrink-0">
                     <LuSparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                   <div className="min-w-0">
@@ -190,7 +190,7 @@ export default function FounderCta() {
 
                 {/* Feature 3 */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-center gap-1.5 sm:gap-2.5 p-2.5 sm:px-3 sm:py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.07] transition-colors text-center sm:text-left">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#4F46E5]/15 border border-emerald-500/25 flex items-center justify-center text-indigo-300 shrink-0">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-[#174A76]/15 border border-emerald-500/25 flex items-center justify-center text-indigo-300 shrink-0">
                     <LuTag className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
                   <div className="min-w-0">
@@ -209,7 +209,7 @@ export default function FounderCta() {
                 {/* Primary Button */}
                 <Link
                   href="/products"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs sm:text-sm tracking-wide uppercase transition-all duration-300 shadow-[0_4px_20px_rgba(79,70,229,0.35)] hover:shadow-[0_6px_25px_rgba(79,70,229,0.5)] active:scale-[0.98] cursor-pointer group"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-[#174A76] hover:bg-[#103858] text-white font-bold text-xs sm:text-sm tracking-wide uppercase transition-all duration-300 shadow-[0_4px_20px_rgba(232,132,67,0.12)] hover:shadow-[0_6px_25px_rgba(232,132,67,0.22)] active:scale-[0.98] cursor-pointer group"
                 >
                   <span>Shop With Confidence</span>
                   <LuArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -234,8 +234,8 @@ export default function FounderCta() {
               <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 pt-4 mt-4 border-t border-white/[0.08] text-[11px] text-zinc-400">
                 <div className="flex items-center gap-2 text-center sm:text-left">
                   <span className="relative flex h-2 w-2 shrink-0">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#4F46E5] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#4F46E5]"></span>
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#174A76] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#174A76]"></span>
                   </span>
                   <span>Direct founder assistance • Fast reply within minutes</span>
                 </div>

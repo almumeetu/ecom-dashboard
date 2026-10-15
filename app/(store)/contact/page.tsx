@@ -127,7 +127,7 @@ export default function ContactPage() {
   ];
 
   return (
-    <div className="w-full bg-[#FAF9F5] text-zinc-900 font-sans min-h-screen">
+    <div className="w-full bg-store-page text-zinc-900 font-sans min-h-screen">
       {/* ── Page Banner ── */}
       <PageBanner
         title="Customer Care &amp; Contact Desk"
@@ -146,15 +146,15 @@ export default function ContactPage() {
       <section className="py-8 sm:py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {/* Card 1: Phone */}
-          <div className="bg-white rounded-2xl p-6 shadow-xs border border-zinc-200/80 flex flex-col justify-between hover:border-[#4F46E5] hover:shadow-md transition-all">
+          <div className="bg-white rounded-2xl p-6 shadow-xs border border-zinc-200/80 flex flex-col justify-between hover:border-store-primary hover:shadow-md transition-all">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center mb-4 border border-indigo-100">
+              <div className="w-12 h-12 rounded-xl bg-store-surface text-store-primary flex items-center justify-center mb-4 border border-store-border">
                 <FiPhone className="w-6 h-6" />
               </div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Customer Hotline
               </h3>
-              <p className="text-lg font-extrabold text-[#0B132B] mt-1">
+              <p className="text-lg font-extrabold text-store-ink mt-1">
                 {primaryPhone}
               </p>
               <p className="text-xs text-zinc-500 mt-1">
@@ -163,7 +163,7 @@ export default function ContactPage() {
             </div>
             <a
               href={`tel:${cleanPhone}`}
-              className="mt-4 text-xs font-bold text-[#4F46E5] hover:text-[#4338CA] inline-flex items-center gap-1"
+              className="mt-4 text-xs font-bold text-store-primary hover:text-store-hover inline-flex items-center gap-1"
             >
               <span>Call Helpline</span> →
             </a>
@@ -178,7 +178,7 @@ export default function ContactPage() {
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 WhatsApp Live Help
               </h3>
-              <p className="text-lg font-extrabold text-[#0B132B] mt-1">
+              <p className="text-lg font-extrabold text-store-ink mt-1">
                 Instant Chat Support
               </p>
               <p className="text-xs text-zinc-500 mt-1">
@@ -196,15 +196,15 @@ export default function ContactPage() {
           </div>
 
           {/* Card 3: Location */}
-          <div className="bg-white rounded-2xl p-6 shadow-xs border border-zinc-200/80 flex flex-col justify-between hover:border-[#4F46E5] hover:shadow-md transition-all">
+          <div className="bg-white rounded-2xl p-6 shadow-xs border border-zinc-200/80 flex flex-col justify-between hover:border-store-primary hover:shadow-md transition-all">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center mb-4 border border-indigo-100">
+              <div className="w-12 h-12 rounded-xl bg-store-surface text-store-primary flex items-center justify-center mb-4 border border-store-border">
                 <FiMapPin className="w-6 h-6" />
               </div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Corporate Flagship
               </h3>
-              <p className="text-xs font-bold text-[#0B132B] mt-1 leading-snug">
+              <p className="text-xs font-bold text-store-ink mt-1 leading-snug">
                 {branchAddress}
               </p>
               <p className="text-xs text-zinc-500 mt-1">
@@ -217,15 +217,15 @@ export default function ContactPage() {
           </div>
 
           {/* Card 4: Hours */}
-          <div className="bg-white rounded-2xl p-6 shadow-xs border border-zinc-200/80 flex flex-col justify-between hover:border-[#4F46E5] hover:shadow-md transition-all">
+          <div className="bg-white rounded-2xl p-6 shadow-xs border border-zinc-200/80 flex flex-col justify-between hover:border-store-primary hover:shadow-md transition-all">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#EA580C] flex items-center justify-center mb-4 border border-orange-100">
+              <div className="w-12 h-12 rounded-xl bg-orange-50 text-[#8B4F2B] flex items-center justify-center mb-4 border border-orange-100">
                 <FiClock className="w-6 h-6" />
               </div>
               <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400">
                 Operating Hours
               </h3>
-              <p className="text-sm font-bold text-[#0B132B] mt-1">
+              <p className="text-sm font-bold text-store-ink mt-1">
                 Support: 9:00 AM – 10:00 PM
               </p>
               <p className="text-xs text-zinc-500 mt-1">
@@ -246,11 +246,11 @@ export default function ContactPage() {
           
           {/* Left Column: Contact Form (6 cols) */}
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-xs">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF2FF] border border-indigo-200/80 text-[#4F46E5] text-xs font-bold uppercase tracking-wider mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-2">
               <FiMessageSquare className="w-3.5 h-3.5" />
               <span>Send Us A Message</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0B132B] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink tracking-tight">
               How Can We Help You?
             </h2>
             <p className="text-xs sm:text-sm text-zinc-500 mt-1.5 leading-relaxed">
@@ -270,7 +270,7 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     placeholder="e.g. Tanvir"
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all placeholder:text-zinc-400"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary transition-all placeholder:text-zinc-400"
                   />
                 </div>
 
@@ -284,7 +284,7 @@ export default function ContactPage() {
                     value={formData.lastName}
                     onChange={handleInputChange}
                     placeholder="e.g. Ahmed"
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all placeholder:text-zinc-400"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary transition-all placeholder:text-zinc-400"
                   />
                 </div>
               </div>
@@ -301,7 +301,7 @@ export default function ContactPage() {
                     onChange={handleInputChange}
                     placeholder="01722301927"
                     required
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all placeholder:text-zinc-400"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary transition-all placeholder:text-zinc-400"
                   />
                 </div>
 
@@ -315,7 +315,7 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="tanvir@example.com"
-                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all placeholder:text-zinc-400"
+                    className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary transition-all placeholder:text-zinc-400"
                   />
                 </div>
               </div>
@@ -328,7 +328,7 @@ export default function ContactPage() {
                   name="inquiryType"
                   value={formData.inquiryType}
                   onChange={handleInputChange}
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary transition-all"
                 >
                   <option value="order">Order Tracking &amp; Delivery Status</option>
                   <option value="return">Return or Product Replacement</option>
@@ -349,14 +349,14 @@ export default function ContactPage() {
                   onChange={handleInputChange}
                   placeholder="How can we assist you with your order?"
                   required
-                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-[#4F46E5] focus:ring-1 focus:ring-[#4F46E5] transition-all placeholder:text-zinc-400 resize-none"
+                  className="w-full bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 text-sm text-zinc-900 focus:bg-white focus:outline-none focus:border-store-primary focus:ring-1 focus:ring-store-primary transition-all placeholder:text-zinc-400 resize-none"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-3.5 px-6 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full py-3.5 px-6 rounded-xl bg-store-primary hover:bg-store-hover active:scale-95 text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 <FiSend className="w-4 h-4" />
                 <span>{submitting ? 'Sending Message...' : 'Submit Message'}</span>
@@ -367,11 +367,11 @@ export default function ContactPage() {
           {/* Right Column: Customer FAQs (6 cols) */}
           <div className="lg:col-span-6 space-y-4">
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/80 shadow-xs">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EEF2FF] border border-indigo-200/80 text-[#4F46E5] text-xs font-bold uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-2">
                 <FiHelpCircle className="w-3.5 h-3.5" />
                 <span>Customer FAQs</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-[#0B132B]">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-store-ink">
                 Frequently Asked Questions
               </h3>
               <p className="text-xs text-zinc-500 mt-1 mb-6">
@@ -389,12 +389,12 @@ export default function ContactPage() {
                       <button
                         type="button"
                         onClick={() => toggleFaq(idx)}
-                        className="w-full text-left px-4 py-3.5 flex items-center justify-between gap-3 font-bold text-xs sm:text-sm text-zinc-900 hover:text-[#4F46E5] transition-colors cursor-pointer"
+                        className="w-full text-left px-4 py-3.5 flex items-center justify-between gap-3 font-bold text-xs sm:text-sm text-zinc-900 hover:text-store-primary transition-colors cursor-pointer"
                       >
                         <span>{faq.question}</span>
                         <div className="w-6 h-6 rounded-md bg-white border border-zinc-200 flex items-center justify-center shrink-0">
                           {isOpen ? (
-                            <FiChevronUp className="w-3.5 h-3.5 text-[#4F46E5]" />
+                            <FiChevronUp className="w-3.5 h-3.5 text-store-primary" />
                           ) : (
                             <FiChevronDown className="w-3.5 h-3.5 text-zinc-500" />
                           )}
@@ -413,10 +413,10 @@ export default function ContactPage() {
             </div>
 
             {/* Direct WhatsApp Callout Banner */}
-            <div className="bg-[#1E1B4B] rounded-3xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="bg-store-deep rounded-3xl p-6 text-white flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <h4 className="text-sm font-bold text-white">Need an immediate answer?</h4>
-                <p className="text-xs text-indigo-200 mt-0.5">
+                <p className="text-xs text-store-light mt-0.5">
                   Our live support agents are active on WhatsApp right now.
                 </p>
               </div>
@@ -424,7 +424,7 @@ export default function ContactPage() {
                 href={`https://wa.me/${fullWhatsapp}?text=Hello%20NovaMart%2C%20I%20have%20an%20urgent%20inquiry.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2.5 rounded-xl bg-[#EA580C] hover:bg-[#C2410C] text-white font-bold text-xs transition-all flex items-center gap-2 shrink-0 shadow-xs"
+                className="px-4 py-2.5 rounded-xl bg-[#8B4F2B] hover:bg-[#704321] text-white font-bold text-xs transition-all flex items-center gap-2 shrink-0 shadow-xs"
               >
                 <FaWhatsapp className="w-4 h-4" />
                 <span>Chat on WhatsApp</span>

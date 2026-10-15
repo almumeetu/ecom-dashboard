@@ -22,6 +22,7 @@ export default function StoreLayout({
     <AuthProvider>
       <WishlistProvider>
         <CartProvider>
+          <div className="storefront min-w-0">
           <TopHeader />
           <Suspense fallback={<div className="h-16 bg-olive-slate animate-pulse w-full" />}>
             <Header />
@@ -33,6 +34,7 @@ export default function StoreLayout({
           <FloatingWhatsApp />
           <BackToTop />
           <Toaster richColors closeButton position="bottom-right" />
+          </div>
         </CartProvider>
       </WishlistProvider>
     </AuthProvider>

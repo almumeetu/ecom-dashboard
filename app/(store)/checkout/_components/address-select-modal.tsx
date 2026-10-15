@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { LuX, LuMapPin, LuCheck, LuLoader, LuPlus } from "react-icons/lu";
 import type { SavedAddress } from "@/lib/storefront-api";
 
@@ -22,23 +23,34 @@ export default function AddressSelectModal({
   onAddNew,
   loading = false,
 }: AddressSelectModalProps) {
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-fadeIn">
-      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col border border-zinc-200">
+    <div role="dialog" aria-modal="true" aria-labelledby="saved-addresses-title" className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-3 sm:p-4">
+      <div className="relative min-w-0 w-full max-w-xl bg-white rounded-xl shadow-xl overflow-hidden max-h-[90dvh] flex flex-col border border-zinc-200">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-5 border-b border-zinc-100 shrink-0">
+        <div className="flex items-center justify-between gap-3 px-4 sm:px-6 py-4 border-b border-zinc-100 shrink-0">
           <div>
-            <h3 className="text-lg font-bold text-zinc-900 tracking-tight">Saved Addresses</h3>
-            <p className="text-xs text-zinc-500 mt-0.5">
-              Select an address from your profile for fast checkout
-            </p>
+            <h3 id="saved-addresses-title" className="text-lg font-medium text-zinc-900 tracking-tight">Saved Addresses</h3>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="w-9 h-9 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-500 hover:text-zinc-900 flex items-center justify-center transition-colors cursor-pointer"
+            className="w-11 h-11 shrink-0 rounded-full bg-zinc-50 hover:bg-zinc-100 text-zinc-500 flex items-center justify-center transition-colors cursor-pointer"
             aria-label="Close modal"
           >
             <LuX className="w-5 h-5" />
@@ -46,7 +58,7 @@ export default function AddressSelectModal({
         </div>
 
         {/* Scrollable List */}
-        <div className="flex-grow overflow-y-auto p-6 space-y-3.5">
+        <div className="min-h-0 flex-grow overflow-y-auto overscroll-y-contain p-4 sm:p-6 space-y-4">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-12 text-zinc-500 text-sm gap-2.5">
               <LuLoader className="w-6 h-6 animate-spin text-emerald-600" />
@@ -67,15 +79,17 @@ export default function AddressSelectModal({
               {addresses.map((addr) => {
                 const isSelected = selectedAddressId === addr.id;
                 return (
-                  <div
+                  <button
                     key={addr.id}
+                    type="button"
+                    aria-pressed={isSelected}
                     onClick={() => {
                       onSelect(addr);
                       onClose();
                     }}
-                    className={`p-4 rounded-2xl cursor-pointer transition-all border flex items-start justify-between gap-3 ${
+                    className={`w-full min-w-0 p-4 text-left rounded-lg cursor-pointer transition-colors border flex items-start justify-between gap-3 ${
                       isSelected
-                        ? "border-emerald-600 bg-emerald-50/50 shadow-sm ring-1 ring-emerald-500/20"
+                        ? "border-store-primary bg-store-surface"
                         : "border-zinc-200 bg-white hover:border-zinc-300 hover:bg-zinc-50/50"
                     }`}
                   >
@@ -118,7 +132,7 @@ export default function AddressSelectModal({
                         {isSelected && <LuCheck className="w-3 h-3 stroke-[3]" />}
                       </div>
                     </div>
-                  </div>
+                  </button>
                 );
               })}
             </div>
@@ -126,7 +140,7 @@ export default function AddressSelectModal({
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-zinc-100 flex items-center justify-between shrink-0 bg-zinc-50/60">
+        <div className="px-4 sm:px-6 py-4 border-t border-zinc-100 flex flex-wrap gap-3 items-center justify-between shrink-0 bg-zinc-50/60">
           {onAddNew ? (
             <button
               type="button"
@@ -134,7 +148,7 @@ export default function AddressSelectModal({
                 onAddNew();
                 onClose();
               }}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 transition-colors cursor-pointer"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-store-accent transition-colors cursor-pointer"
             >
               <LuPlus className="w-4 h-4" />
               <span>Use a new address</span>
@@ -146,7 +160,7 @@ export default function AddressSelectModal({
           <button
             type="button"
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-white border border-zinc-200 text-zinc-700 font-bold text-xs uppercase tracking-wider hover:bg-zinc-100 transition-colors cursor-pointer"
+            className="min-h-11 px-5 py-2 rounded-lg bg-white border border-zinc-200 text-zinc-700 font-medium text-sm hover:bg-zinc-100 transition-colors cursor-pointer"
           >
             Close
           </button>

@@ -53,7 +53,7 @@ export default function ProductCarousel({ products, title }: ExtendedProductCaro
         <div className="flex flex-col items-center justify-center gap-4">
           <div className="flex items-center justify-center gap-8 sm:gap-12 md:gap-16">
             <button
-              className={`${prevElClass} flex items-center gap-2 text-stone-850 hover:text-[#B9975B] transition-colors text-xs font-semibold uppercase tracking-wider cursor-pointer select-none`}
+              className={`${prevElClass} flex items-center gap-2 text-stone-850 hover:text-[#8B4F2B] transition-colors text-xs font-semibold uppercase tracking-wider cursor-pointer select-none`}
               aria-label="Previous"
             >
               <FiChevronLeft className="text-dark-charcoal text-lg sm:text-xl" />
@@ -79,7 +79,7 @@ export default function ProductCarousel({ products, title }: ExtendedProductCaro
             })()}
 
             <button
-              className={`${nextElClass} flex items-center gap-2 text-stone-850 hover:text-[#B9975B] transition-colors text-xs font-semibold uppercase tracking-wider cursor-pointer select-none`}
+              className={`${nextElClass} flex items-center gap-2 text-stone-850 hover:text-[#8B4F2B] transition-colors text-xs font-semibold uppercase tracking-wider cursor-pointer select-none`}
               aria-label="Next"
             >
               <span className="font-gotham text-dark-charcoal uppercase font-medium text-[11px] tracking-[0.2em]">NEXT</span>
@@ -95,8 +95,8 @@ export default function ProductCarousel({ products, title }: ExtendedProductCaro
                 onClick={() => handleDotClick(i)}
                 className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   activeIndex === i
-                    ? 'bg-[#B9975B] scale-110'
-                    : 'bg-[#e2e2e2] hover:bg-[#c5a86a]'
+                    ? 'bg-[#8B4F2B] scale-110'
+                    : 'bg-[#e2e2e2] hover:bg-[#D96212]'
                 }`}
                 aria-label={`Go to slide page ${i + 1}`}
               />

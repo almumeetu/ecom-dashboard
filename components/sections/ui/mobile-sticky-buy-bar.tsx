@@ -1,13 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { IoBagCheckOutline, IoFlashOutline } from 'react-icons/io5';
 
 interface MobileStickyBuyBarProps {
   name: string;
   priceFormatted: string;
-  image: string;
   onAddToCart: () => void;
   onBuyNow: () => void;
   isOutOfStock?: boolean;
@@ -16,7 +14,6 @@ interface MobileStickyBuyBarProps {
 export default function MobileStickyBuyBar({
   name,
   priceFormatted,
-  image,
   onAddToCart,
   onBuyNow,
   isOutOfStock = false,
@@ -33,6 +30,7 @@ export default function MobileStickyBuyBar({
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -40,51 +38,34 @@ export default function MobileStickyBuyBar({
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/95 backdrop-blur-md border-t border-stone-200/90 px-4 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-6px_25px_rgba(0,0,0,0.08)] animate-in slide-in-from-bottom duration-300">
-      <div className="flex items-center justify-between gap-3 max-w-md mx-auto">
-        {/* Mini Product Details */}
-        <div className="flex items-center gap-2.5 min-w-0 flex-1">
-          <div className="relative w-11 h-11 rounded-xl overflow-hidden bg-stone-50 border border-stone-200/80 shrink-0">
-            <Image
-              src={image || '/images/no-image-icon-6.png'}
-              alt={name}
-              fill
-              sizes="44px"
-              className="object-contain p-1"
-            />
-          </div>
-          <div className="min-w-0 flex-1">
-            <h4 className="text-xs font-extrabold text-zinc-950 truncate leading-tight">
-              {name}
-            </h4>
-            <span className="text-xs font-black text-zinc-950">
-              {priceFormatted}
-            </span>
-          </div>
-        </div>
+    <div data-mobile-purchase-bar aria-label={`Buy ${name}`} className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white/95 backdrop-blur-md border-t border-[#DED7CC] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-[0_-4px_20px_rgba(0,0,0,0.04)]">
+      <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3 max-w-xl mx-auto">
+        <span className="max-w-28 break-words text-sm font-semibold text-store-price sm:text-base">
+          {priceFormatted}
+        </span>
 
         {/* Buttons */}
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="grid min-w-0 grid-cols-2 gap-2">
           <button
             type="button"
             onClick={onAddToCart}
             disabled={isOutOfStock}
-            className="h-10 px-3.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 transition-all active:scale-95 disabled:opacity-40"
+            className="min-w-0 h-11 px-2 bg-store-primary hover:bg-store-accent text-white font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors disabled:opacity-40"
             aria-label="Add to Bag"
           >
             <IoBagCheckOutline className="w-4 h-4" />
-            <span className="hidden sm:inline">Add</span>
+            <span>Add</span>
           </button>
 
           <button
             type="button"
             onClick={onBuyNow}
             disabled={isOutOfStock}
-            className="h-10 px-4 bg-[#1E1B4B] hover:bg-[#161338] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl flex items-center justify-center gap-1.5 shadow-md shadow-indigo-950/20 active:scale-95 disabled:opacity-40"
+            className="min-w-0 h-11 px-2 bg-store-deep hover:bg-store-hover text-white font-medium text-xs rounded-lg flex items-center justify-center gap-1.5 transition-colors disabled:opacity-40"
             aria-label="Buy Now"
           >
-            <IoFlashOutline className="w-3.5 h-3.5 text-[#F97316]" />
-            <span>অর্ডার করুন</span>
+            <IoFlashOutline className="w-3.5 h-3.5" />
+            <span>Buy Now</span>
           </button>
         </div>
       </div>

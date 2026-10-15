@@ -7,7 +7,7 @@ import { toast } from "sonner";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5010/api/v1";
 
-const SECTION_LABEL = "text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400";
+const SECTION_LABEL = "text-xs font-bold tracking-wider uppercase text-zinc-400";
 
 interface StatusLog {
   id: string;
@@ -120,7 +120,7 @@ export default function TrackOrderView() {
         <button
           type="submit"
           disabled={loading}
-          className="shrink-0 inline-flex items-center gap-2 bg-[#1A1A1A] hover:bg-stone-800 text-white font-sans text-[10px] font-bold tracking-[0.16em] uppercase px-7 py-3 rounded-xl transition cursor-pointer shadow-sm disabled:opacity-60"
+          className="shrink-0 inline-flex items-center gap-2 bg-store-primary hover:bg-stone-800 text-white font-sans text-xs font-bold tracking-wider uppercase px-7 py-3 rounded-xl transition cursor-pointer shadow-sm disabled:opacity-60"
         >
           {loading ? <FiLoader className="animate-spin w-3.5 h-3.5" /> : "Track"}
         </button>
@@ -138,7 +138,7 @@ export default function TrackOrderView() {
                   <p className="font-sans font-bold text-xs uppercase tracking-wider text-zinc-800">
                     {order.orderNumber}
                   </p>
-                  <p className="font-sans text-[10px] text-zinc-400 mt-1">
+                  <p className="font-sans text-xs text-zinc-400 mt-1">
                     Placed{" "}
                     {new Date(order.placedAt || order.createdAt).toLocaleDateString("en-US", {
                       day: "numeric", month: "long", year: "numeric",
@@ -147,14 +147,14 @@ export default function TrackOrderView() {
                 </div>
                 <div className="flex items-center flex-wrap gap-3">
                   {order.shippingCost !== undefined && (
-                    <span className="font-sans text-[11px] text-zinc-500 bg-white border border-stone-200 px-2.5 py-1 rounded-full">
+                    <span className="font-sans text-xs text-zinc-500 bg-white border border-stone-200 px-2.5 py-1 rounded-full">
                       Delivery:{" "}
                       <strong className="text-zinc-800">
                         {Number(order.shippingCost) === 0 ? "Free" : `৳${Number(order.shippingCost).toLocaleString()}`}
                       </strong>
                     </span>
                   )}
-                  <span className={`border font-sans text-[9px] font-bold tracking-wider uppercase px-3 py-1 rounded-full ${statusBadgeClass(order.status)}`}>
+                  <span className={`border font-sans text-xs font-bold tracking-wider uppercase px-3 py-1 rounded-full ${statusBadgeClass(order.status)}`}>
                     {order.status}
                   </span>
                   <span className="font-sans font-bold text-base text-zinc-900">
@@ -166,7 +166,7 @@ export default function TrackOrderView() {
               {/* Progress tracker */}
               {!isCancelled ? (
                 <div>
-                  <p className="font-sans text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400 mb-7">
+                  <p className="font-sans text-xs font-bold tracking-wider uppercase text-zinc-400 mb-7">
                     Delivery Progress
                   </p>
 
@@ -188,19 +188,19 @@ export default function TrackOrderView() {
                           <div className={`w-9 h-9 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                             isActive
                               ? isCurrent
-                                ? "bg-[#C5B382] border-[#C5B382] text-white shadow-md shadow-[#C5B382]/30 scale-110"
-                                : "bg-[#C5B382] border-[#C5B382] text-white"
+                                ? "bg-store-accent border-store-accent text-white shadow-md shadow-store-accent/30 scale-110"
+                                : "bg-store-accent border-store-accent text-white"
                               : "bg-white border-stone-200 text-stone-300"
                           }`}>
                             <Icon className="text-sm" />
                           </div>
-                          <p className={`font-sans text-[10px] font-bold tracking-wider uppercase transition-colors ${
+                          <p className={`font-sans text-xs font-bold tracking-wider uppercase transition-colors ${
                             isActive ? "text-zinc-800" : "text-stone-300"
                           }`}>
                             {step.label}
                           </p>
                           {isCurrent && (
-                            <span className="font-sans text-[9px] text-[#C5B382] font-bold tracking-wider uppercase">
+                            <span className="font-sans text-xs text-store-accent font-bold tracking-wider uppercase">
                               Current
                             </span>
                           )}
@@ -212,7 +212,7 @@ export default function TrackOrderView() {
                   {/* Status activity logs */}
                   {order.statusLogs && order.statusLogs.length > 0 && (
                     <div className="mt-8 pt-6 border-t border-stone-100">
-                      <p className="font-sans text-[10px] font-bold tracking-[0.18em] uppercase text-zinc-400 mb-4">
+                      <p className="font-sans text-xs font-bold tracking-wider uppercase text-zinc-400 mb-4">
                         Status History & Updates
                       </p>
                       <div className="space-y-2.5">
@@ -231,7 +231,7 @@ export default function TrackOrderView() {
                                 </p>
                               )}
                             </div>
-                            <span className="text-[10px] text-zinc-400 shrink-0 mt-0.5">
+                            <span className="text-xs text-zinc-400 shrink-0 mt-0.5">
                               {new Date(log.createdAt).toLocaleString("en-US", {
                                 month: "short",
                                 day: "numeric",

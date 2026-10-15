@@ -80,13 +80,13 @@ export default function PolicyNav({ currentKey }: PolicyNavProps) {
                 href={tab.href}
                 className={`group flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
                   isActive
-                    ? 'bg-[#4F46E5] text-white shadow-sm ring-1 ring-[#4F46E5]'
+                    ? 'bg-store-primary text-white shadow-sm ring-1 ring-store-primary'
                     : 'bg-zinc-50 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-zinc-200/70'
                 }`}
               >
                 <Icon
                   className={`w-3.5 h-3.5 transition-colors ${
-                    isActive ? 'text-white' : 'text-zinc-400 group-hover:text-[#4F46E5]'
+                    isActive ? 'text-white' : 'text-zinc-400 group-hover:text-store-primary'
                   }`}
                 />
                 <span>{tab.label}</span>
@@ -95,7 +95,7 @@ export default function PolicyNav({ currentKey }: PolicyNavProps) {
                     className={`hidden sm:inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
                       isActive
                         ? 'bg-white/20 text-white'
-                        : 'bg-zinc-200/70 text-zinc-600 group-hover:bg-indigo-50 group-hover:text-[#4F46E5]'
+                        : 'bg-zinc-200/70 text-zinc-600 group-hover:bg-store-surface group-hover:text-store-primary'
                     }`}
                   >
                     {tab.badge}

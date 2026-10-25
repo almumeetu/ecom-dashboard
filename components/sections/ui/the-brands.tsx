@@ -74,7 +74,7 @@ export default function TheBrands() {
             </div>
             <div>
               <p className="font-['Bembo_Std'] text-lg font-normal leading-6">
-                NovaMart offers depth of quality and verified authenticity across all departments. With expanding logistics hubs and nationwide delivery across all 64 districts, NovaMart is poised for sustainable growth, ethical commerce, and trusted customer relationships.
+                NovaMart offers products across multiple departments. Review product and delivery details before placing an order.
               </p>
             </div>
           </div>

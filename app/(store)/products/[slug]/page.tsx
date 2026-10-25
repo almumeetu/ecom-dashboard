@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       product.metaDescription ??
       product.shortDescription ??
       product.description ??
-      `Shop authentic ${product.name} with express delivery and verified buyer protection from NovaMart.`,
+      `Explore ${product.name} and review available delivery details at checkout.`,
     keywords: product.metaKeywords ?? undefined,
     openGraph: {
       title: product.metaTitle ?? product.name,

@@ -77,28 +77,28 @@ export default function DeliveryPage() {
 
   const deliveryFaqs = [
     {
-      q: 'How fast is delivery in Dhaka and nationwide across Bangladesh?',
-      a: 'Inside Dhaka Metropolitan, deliveries are completed within Same Day to 24–48 hours. Orders placed before 2:00 PM are prioritized for express same-day dispatch. For all other 63 districts across Bangladesh, standard door-to-door delivery takes 2 to 4 business days.',
+      q: 'Where can I find delivery options and estimates?',
+      a: 'Available delivery options and estimated delivery times depend on your address. Review the current details during checkout before placing your order.',
     },
     {
-      q: 'Is Cash on Delivery (COD) supported across all 64 districts?',
-      a: 'Yes! We offer 100% Cash on Delivery across all 64 districts and 495+ Upazilas in Bangladesh. You may inspect the outer parcel integrity at your doorstep before handing payment to the delivery rider.',
+      q: 'Which payment methods are available?',
+      a: 'Available payment methods are shown during checkout for your order.',
     },
     {
-      q: 'How are sensitive skin care, perfumes, and digital electronics packaged?',
-      a: 'All fragile and sensitive items—including liquid serums, perfumes, glass bottles, and electronic gadgets—are packed with multi-layer bubble wrap, moisture-resistant sealing, and shock-absorbing corrugated boxes with tamper-evident security tape.',
+      q: 'Where can I review delivery charges?',
+      a: 'Delivery charges depend on your delivery address and are displayed during checkout.',
     },
     {
-      q: 'How do I qualify for 100% Free Nationwide Delivery?',
-      a: 'Any single order with a cart subtotal of ৳1,999 or more qualifies for 100% Free Delivery automatically at checkout — no promo code or coupon needed.',
+      q: 'Can delivery charges vary by location?',
+      a: 'Yes. The applicable options and charges are based on the delivery address entered for your order.',
     },
     {
-      q: 'What should I do if a product is damaged or defective upon arrival?',
-      a: `Under our 7-Day Return & Replacement Guarantee, simply call our support desk at ${primaryPhone} or message our WhatsApp team with a picture of the item. We will arrange a free reverse courier pickup and dispatch an immediate replacement or full refund.`,
+      q: 'What if I have a question about delivery?',
+      a: `Contact our support team at ${primaryPhone} for help with delivery questions.`,
     },
     {
-      q: 'Can I track my parcel live after placing an order?',
-      a: 'Yes. As soon as your parcel is packed and handed over to our verified logistics partner, an SMS is automatically dispatched containing your tracking ID and a live real-time tracking link. You can also view real-time status from your NovaMart account under Profile → Orders.',
+      q: 'Where can I check my order status?',
+      a: 'Sign in to your account and open your orders to view available order updates.',
     },
   ];
 
@@ -106,13 +106,13 @@ export default function DeliveryPage() {
     <div className="w-full bg-store-page text-zinc-900 font-sans min-h-screen">
       {/* ── Page Banner ── */}
       <PageBanner
-        title="Delivery & Shipping Rates"
-        subtitle="Prompt, secure, and nationwide delivery for all marketplace categories — skin care, digital electronics, luxury perfumes, fashion & baby products."
+        title="Delivery Information"
+        subtitle="Review delivery options and charges for your order."
         breadcrumbs={[
           { label: 'Customer Care', href: '/contact' },
           { label: 'Delivery & Shipping' },
         ]}
-        showTrustChips={true}
+        showTrustChips={false}
       />
 
       {/* ── Sticky Policy Navigation ── */}
@@ -126,32 +126,30 @@ export default function DeliveryPage() {
               <div className="lg:col-span-8 space-y-3.5">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider">
                   <FiTruck className="w-3.5 h-3.5 text-store-primary" />
-                  <span>Nationwide Logistics Network • 64 Districts</span>
+                  <span>Delivery options and charges</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-4xl font-extrabold text-store-ink tracking-tight leading-tight">
-                  Fast, Reliable &amp; Insured Doorstep Delivery
-                </h1>
+                <h2 className="text-2xl font-semibold leading-tight tracking-tight text-store-ink sm:text-4xl">
+                  Delivery options for your order
+                </h2>
 
                 <p className="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-3xl">
-                  NovaMart partners with verified nationwide logistics networks including Steadfast, RedX, and Pathao to guarantee rapid delivery across all 64 districts in Bangladesh with real-time SMS tracking and 100% Cash on Delivery support.
+                  Available delivery services and charges depend on the address entered for your order. Review the current details during checkout.
                 </p>
 
-                {/* Free shipping callout pill */}
                 <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-orange-50 border border-orange-200 text-[#8B4F2B] text-xs sm:text-sm font-bold">
                   <FiCheckCircle className="w-4 h-4 text-[#8B4F2B]" />
-                  <span>Free Nationwide Delivery on all orders over ৳1,999</span>
+                  <span>Delivery charges are shown during checkout</span>
                 </div>
               </div>
 
               {/* Quick Contact Box */}
               <div className="lg:col-span-4 bg-zinc-50 rounded-2xl p-5 border border-zinc-200/80 space-y-3">
                 <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500">
-                  Delivery Inquiries &amp; Live Tracking
+                  Delivery questions
                 </h3>
                 <div className="text-xs text-zinc-700 space-y-1.5">
-                  <p className="font-semibold text-zinc-900">Banani Central Fulfillment Hub</p>
-                  <p>Daily Dispatch: 9:00 AM – 7:00 PM</p>
+                  <p className="font-semibold text-zinc-900">Contact customer support</p>
                   <p>Hotline: <strong className="text-store-primary">{primaryPhone}</strong></p>
                 </div>
                 <div className="pt-1 flex flex-col sm:flex-row lg:flex-col gap-2">
@@ -159,7 +157,7 @@ export default function DeliveryPage() {
                     href="/profile?tab=track"
                     className="w-full py-2.5 px-4 rounded-xl bg-store-primary hover:bg-store-hover text-white text-xs font-bold text-center transition-all shadow-xs"
                   >
-                    Track Your Parcel
+                    View Your Orders
                   </Link>
                   <a
                     href={`https://wa.me/${fullWhatsapp}?text=Hello%20NovaMart%2C%20I%20have%20a%20question%20about%20my%20delivery.`}
@@ -168,7 +166,7 @@ export default function DeliveryPage() {
                     className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-zinc-100 text-zinc-800 text-xs font-bold text-center border border-zinc-300 transition-all flex items-center justify-center gap-2"
                   >
                     <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366]" />
-                    <span>WhatsApp Courier Desk</span>
+                    <span>Contact Support</span>
                   </a>
                 </div>
               </div>
@@ -177,20 +175,20 @@ export default function DeliveryPage() {
             {/* 4 Stat Badges */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-8 pt-6 border-t border-zinc-100">
               <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/60 text-center">
-                <span className="text-lg sm:text-xl font-extrabold text-store-primary block">64 Districts</span>
-                <span className="text-xs text-zinc-500 block mt-0.5">Nationwide Doorstep Coverage</span>
+                <span className="text-lg sm:text-xl font-extrabold text-store-primary block">Delivery</span>
+                <span className="text-xs text-zinc-500 block mt-0.5">Options shown at checkout</span>
               </div>
               <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/60 text-center">
-                <span className="text-lg sm:text-xl font-extrabold text-store-primary block">24 – 48 Hours</span>
-                <span className="text-xs text-zinc-500 block mt-0.5">Dhaka Metro Express</span>
+                <span className="text-lg sm:text-xl font-extrabold text-store-primary block">Charges</span>
+                <span className="text-xs text-zinc-500 block mt-0.5">Based on your address</span>
               </div>
               <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/60 text-center">
-                <span className="text-lg sm:text-xl font-extrabold text-[#8B4F2B] block">FREE on ৳1,999+</span>
-                <span className="text-xs text-zinc-500 block mt-0.5">Zero Shipping Cost</span>
+                <span className="text-lg sm:text-xl font-extrabold text-[#8B4F2B] block">Payment</span>
+                <span className="text-xs text-zinc-500 block mt-0.5">Options shown at checkout</span>
               </div>
               <div className="p-3 rounded-xl bg-zinc-50 border border-zinc-200/60 text-center">
-                <span className="text-lg sm:text-xl font-extrabold text-store-primary block">7-Day Protection</span>
-                <span className="text-xs text-zinc-500 block mt-0.5">Free Return &amp; Replacement</span>
+                <span className="text-lg sm:text-xl font-extrabold text-store-primary block">Support</span>
+                <span className="text-xs text-zinc-500 block mt-0.5">Contact details below</span>
               </div>
             </div>
           </div>
@@ -201,13 +199,13 @@ export default function DeliveryPage() {
       <section className="py-6 sm:py-8 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="mb-6">
           <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Coverage &amp; Schedules
+            Delivery details
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink tracking-tight mt-1">
-            Delivery Zones &amp; Shipping Timelines
+            Delivery areas and charges
           </h2>
           <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-            Transparent flat-rate shipping tailored for urban speed and regional courier safety.
+            Available areas and charges are confirmed during checkout.
           </p>
         </div>
 
@@ -220,7 +218,7 @@ export default function DeliveryPage() {
                   <FiMapPin className="w-6 h-6" />
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-store-surface text-store-primary text-[11px] font-bold uppercase tracking-wider">
-                  Express Route
+                  Dhaka
                 </span>
               </div>
 
@@ -228,36 +226,31 @@ export default function DeliveryPage() {
                 Inside Dhaka Metro
               </h3>
               <p className="text-store-primary font-extrabold text-sm mb-3">
-                Same Day / 24 – 48 Hours
+                Delivery fee: {deliveryInside}
               </p>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-100 text-zinc-800 text-xs font-bold mb-4">
-                <span>Standard Fee: {deliveryInside}</span>
-                <span className="text-[#8B4F2B] font-black">• FREE on ৳1,999+</span>
-              </div>
-
               <p className="text-xs text-zinc-600 leading-relaxed mb-4">
-                Fast courier dispatch across all major Dhaka residential and commercial sectors.
+                Delivery availability and timing may vary by address.
               </p>
 
               <ul className="space-y-2 text-xs text-zinc-600 border-t border-zinc-100 pt-4">
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Orders before 2:00 PM eligible for same-day dispatch</span>
+                  <span>Check delivery details during checkout</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Protective bubble wrapping for fragile cosmetics &amp; perfumes</span>
+                  <span>Available delivery options are shown with your order</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Direct phone confirmation by delivery rider prior to arrival</span>
+                  <span>Contact support if you have a delivery question</span>
                 </li>
               </ul>
             </div>
 
             <div className="mt-6 pt-3 border-t border-zinc-100 text-[11px] text-zinc-500">
-              <strong className="text-zinc-700">Hub Areas:</strong> Banani, Gulshan, Uttara, Dhanmondi, Mirpur, Motijheel, Mohammadpur.
+            Delivery details depend on the address entered at checkout.
             </div>
           </div>
 
@@ -269,7 +262,7 @@ export default function DeliveryPage() {
                   <FiTruck className="w-6 h-6" />
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 text-[11px] font-bold uppercase tracking-wider">
-                  Suburban Route
+                  Nearby areas
                 </span>
               </div>
 
@@ -277,40 +270,35 @@ export default function DeliveryPage() {
                 Greater Dhaka Suburbs
               </h3>
               <p className="text-store-primary font-extrabold text-sm mb-3">
-                24 – 48 Hours
+                Delivery fee: {deliveryNearCity}
               </p>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-100 text-zinc-800 text-xs font-bold mb-4">
-                <span>Standard Fee: {deliveryNearCity}</span>
-                <span className="text-[#8B4F2B] font-black">• FREE on ৳1,999+</span>
-              </div>
-
               <p className="text-xs text-zinc-600 leading-relaxed mb-4">
-                Direct daily connection to surrounding manufacturing and residential hubs.
+                Delivery availability and timing may vary by address.
               </p>
 
               <ul className="space-y-2 text-xs text-zinc-600 border-t border-zinc-100 pt-4">
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Daily scheduled courier runs across suburban districts</span>
+                  <span>Check delivery details during checkout</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Cash on Delivery supported at your door or workplace</span>
+                  <span>Available payment methods are shown at checkout</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Real-time SMS updates with rider contact number</span>
+                  <span>Order updates are available from your account</span>
                 </li>
               </ul>
             </div>
 
             <div className="mt-6 pt-3 border-t border-zinc-100 text-[11px] text-zinc-500">
-              <strong className="text-zinc-700">Hub Areas:</strong> Gazipur, Savar, Narayanganj, Tongi, Keraniganj, Ashulia.
+              Delivery details depend on the address entered at checkout.
             </div>
           </div>
 
-          {/* Card 3: All 64 Districts Nationwide */}
+          {/* Card 3: Outside Dhaka */}
           <div className="bg-white rounded-2xl p-6 sm:p-7 border border-zinc-200/80 shadow-xs flex flex-col justify-between hover:border-store-primary hover:shadow-md transition-all">
             <div>
               <div className="flex items-center justify-between mb-4">
@@ -318,44 +306,39 @@ export default function DeliveryPage() {
                   <FiPackage className="w-6 h-6" />
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-orange-100 text-[#8B4F2B] text-[11px] font-bold uppercase tracking-wider">
-                  All 64 Districts
+                  Other locations
                 </span>
               </div>
 
               <h3 className="text-lg font-bold text-store-ink mb-0.5">
-                All Over Bangladesh
+                Outside Dhaka
               </h3>
               <p className="text-store-primary font-extrabold text-sm mb-3">
-                2 – 4 Business Days
+                Delivery fee: {deliveryOutside}
               </p>
 
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-zinc-100 text-zinc-800 text-xs font-bold mb-4">
-                <span>Standard Fee: {deliveryOutside}</span>
-                <span className="text-[#8B4F2B] font-black">• FREE on ৳1,999+</span>
-              </div>
-
               <p className="text-xs text-zinc-600 leading-relaxed mb-4">
-                Secure nationwide doorstep delivery to every Thana and Upazila via Steadfast &amp; RedX.
+                Delivery availability and timing may vary by address.
               </p>
 
               <ul className="space-y-2 text-xs text-zinc-600 border-t border-zinc-100 pt-4">
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Nationwide Cash on Delivery (COD) supported in all Upazilas</span>
+                  <span>Check delivery details during checkout</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Corrugated shockproof box packaging for electronic devices</span>
+                  <span>Available payment methods are shown at checkout</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <FiCheck className="w-3.5 h-3.5 text-store-primary shrink-0 mt-0.5" />
-                  <span>Real-time tracking link sent via SMS upon courier dispatch</span>
+                  <span>Order updates are available from your account</span>
                 </li>
               </ul>
             </div>
 
             <div className="mt-6 pt-3 border-t border-zinc-100 text-[11px] text-zinc-500">
-              <strong className="text-zinc-700">Divisions:</strong> Chittagong, Sylhet, Rajshahi, Khulna, Barishal, Rangpur, Mymensingh.
+              Delivery details depend on the address entered at checkout.
             </div>
           </div>
         </div>
@@ -370,12 +353,12 @@ export default function DeliveryPage() {
                 Clear Pricing
               </span>
               <h2 className="text-xl sm:text-2xl font-extrabold text-store-ink mt-0.5">
-                Standard Shipping Rates &amp; Free Delivery Policy
+                Delivery charges
               </h2>
             </div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-store-surface border border-store-border text-store-primary text-xs font-bold">
               <FiCheckCircle className="w-4 h-4 text-store-primary" />
-              <span>Free Delivery Threshold: ৳1,999+</span>
+              <span>Current delivery fees</span>
             </div>
           </div>
 
@@ -384,10 +367,8 @@ export default function DeliveryPage() {
               <thead>
                 <tr className="bg-zinc-50 border-b border-zinc-200 text-zinc-700 font-bold uppercase tracking-wider text-[11px]">
                   <th className="py-3.5 px-4 sm:px-6">Destination Zone</th>
-                  <th className="py-3.5 px-4 sm:px-6">Orders &lt; ৳1,999</th>
-                  <th className="py-3.5 px-4 sm:px-6">Orders ৳1,999 &amp; Above</th>
-                  <th className="py-3.5 px-4 sm:px-6">Estimated Transit</th>
-                  <th className="py-3.5 px-4 sm:px-6">Payment Supported</th>
+                  <th className="py-3.5 px-4 sm:px-6">Current delivery fee</th>
+                  <th className="py-3.5 px-4 sm:px-6">Delivery details</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-100 text-zinc-700">
@@ -396,39 +377,21 @@ export default function DeliveryPage() {
                     Dhaka Metro (All Thanas)
                   </td>
                   <td className="py-3.5 px-4 sm:px-6 font-semibold">{deliveryInside}</td>
-                  <td className="py-3.5 px-4 sm:px-6">
-                    <span className="inline-flex px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs">
-                      100% FREE
-                    </span>
-                  </td>
-                  <td className="py-3.5 px-4 sm:px-6 text-zinc-600">Same Day / 24–48 Hours</td>
-                  <td className="py-3.5 px-4 sm:px-6 text-zinc-500">Cash on Delivery, bKash, Cards</td>
+                  <td className="py-3.5 px-4 sm:px-6 text-zinc-600">See available options during checkout</td>
                 </tr>
                 <tr className="hover:bg-zinc-50/70 transition-colors">
                   <td className="py-3.5 px-4 sm:px-6 font-bold text-zinc-950">
                     Greater Dhaka (Gazipur, Savar, Narayanganj)
                   </td>
                   <td className="py-3.5 px-4 sm:px-6 font-semibold">{deliveryNearCity}</td>
-                  <td className="py-3.5 px-4 sm:px-6">
-                    <span className="inline-flex px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs">
-                      100% FREE
-                    </span>
-                  </td>
-                  <td className="py-3.5 px-4 sm:px-6 text-zinc-600">24–48 Hours</td>
-                  <td className="py-3.5 px-4 sm:px-6 text-zinc-500">Cash on Delivery, bKash, Cards</td>
+                  <td className="py-3.5 px-4 sm:px-6 text-zinc-600">See available options during checkout</td>
                 </tr>
                 <tr className="hover:bg-zinc-50/70 transition-colors">
                   <td className="py-3.5 px-4 sm:px-6 font-bold text-zinc-950">
-                    All 64 Districts (Outside Dhaka)
+                    Outside Dhaka
                   </td>
                   <td className="py-3.5 px-4 sm:px-6 font-semibold">{deliveryOutside}</td>
-                  <td className="py-3.5 px-4 sm:px-6">
-                    <span className="inline-flex px-2.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-xs">
-                      100% FREE
-                    </span>
-                  </td>
-                  <td className="py-3.5 px-4 sm:px-6 text-zinc-600">2–4 Business Days</td>
-                  <td className="py-3.5 px-4 sm:px-6 text-zinc-500">Cash on Delivery, bKash, Cards</td>
+                  <td className="py-3.5 px-4 sm:px-6 text-zinc-600">See available options during checkout</td>
                 </tr>
               </tbody>
             </table>
@@ -436,17 +399,17 @@ export default function DeliveryPage() {
         </div>
       </section>
 
-      {/* ── 4. 4-Stage Fulfillment Lifecycle ── */}
+        {/* ── 4. Order overview ── */}
       <section className="py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="mb-8 text-center max-w-xl mx-auto">
           <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Transparency &amp; Care
+            Order information
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
-            How Your Order Travels to You
+            Order and delivery overview
           </h2>
           <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-            Every order is inspected, protected, tracked, and safely handed over to your doorstep.
+            Review your order details and check your account for available updates.
           </p>
         </div>
 
@@ -454,56 +417,56 @@ export default function DeliveryPage() {
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
               <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">01</span>
-              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Order Verification</h3>
+              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Place your order</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
-                As soon as your order is confirmed, our Banani central hub reserves authentic items directly from stock.
+                Review your items, delivery address, and applicable charges before confirming your order.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiCheckCircle className="w-3.5 h-3.5" />
-              <span>Instant SMS Confirmation</span>
+              <span>Review order details</span>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
               <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">02</span>
-              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">QC &amp; Sealed Packaging</h3>
+              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Order processing</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
-                Items are checked for seal integrity and batch codes, then enclosed in multi-layer shockproof bubble wrap.
+                Order processing information is available through your account.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiShield className="w-3.5 h-3.5" />
-              <span>100% Quality Inspected</span>
+              <span>View your order status</span>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
               <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">03</span>
-              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Courier Handover &amp; SMS</h3>
+              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Delivery updates</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
-                Parcels are handed over to express couriers. A tracking ID link is sent straight to your phone.
+                Check your account for delivery updates that are available for your order.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiClock className="w-3.5 h-3.5" />
-              <span>Live Real-Time Tracking</span>
+              <span>Order updates</span>
             </div>
           </div>
 
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-zinc-200/80 shadow-xs flex flex-col justify-between">
             <div>
               <span className="text-2xl font-black text-store-primary/30 block mb-2 font-mono">04</span>
-              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Doorstep COD &amp; Protection</h3>
+              <h3 className="text-sm font-bold text-zinc-900 mb-1.5">Need assistance?</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">
-                Inspect parcel exterior before paying COD. You are covered by our 7-Day Return &amp; Replacement policy.
+                Contact customer support if you have a question about your order or delivery.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-zinc-100 flex items-center gap-1.5 text-[11px] font-bold text-store-primary">
               <FiRefreshCw className="w-3.5 h-3.5" />
-              <span>7-Day Return Guarantee</span>
+              <span>Contact support</span>
             </div>
           </div>
         </div>
@@ -519,7 +482,7 @@ export default function DeliveryPage() {
             Frequently Asked Delivery Questions
           </h2>
           <p className="text-xs sm:text-sm text-zinc-500 mt-1">
-            Answers regarding dispatch, payment options, and nationwide coverage.
+            Answers about delivery options and order updates.
           </p>
         </div>
 

@@ -21,6 +21,7 @@ export function ProductCardSkeleton() {
         <div className="h-full w-full max-w-[190px] rounded-md bg-zinc-100" />
       </div>
       <div className="p-3 sm:p-3.5">
+        <div className="mb-2 h-2.5 w-16 rounded bg-zinc-100" />
         <div className="flex h-10 flex-col gap-2">
         <div className="h-3 w-full rounded bg-zinc-100" />
           <div className="h-3 w-3/4 rounded bg-zinc-100" />
@@ -47,6 +48,7 @@ export default function ProductCard({
   category,
   brand,
   vendor,
+  badge,
   variantId,
 }: ProductCardProps) {
   const { isInWishlist, toggleWishlist } = useWishlist();
@@ -55,6 +57,10 @@ export default function ProductCard({
 
   const [isAdded, setIsAdded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const displayBadge = badge?.trim();
+  const isDiscountBadge = displayBadge
+    ? /^(?:save\s*)?-?\d+(?:\.\d+)?\s*%(?:\s*(?:off|discount))?$/i.test(displayBadge)
+    : false;
 
   const inWishlist = !!id && isInWishlist(id);
   const priceNum = useMemo(() => parseFloat(price.replace(/[^0-9.-]/g, "")) || 0, [price]);
@@ -146,7 +152,7 @@ export default function ProductCard({
   const productUrl = `/products/${slug || id || ""}`;
 
   return (
-    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-store-border bg-white transition-all duration-300 hover:-translate-y-0.5 hover:border-store-light hover:shadow-[0_12px_32px_rgba(20,38,56,0.08)]">
+    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-[20px] border border-store-border bg-white shadow-[0_6px_22px_rgba(20,38,56,0.035)] transition-all duration-300 hover:-translate-y-1 hover:border-store-light hover:shadow-[0_18px_38px_rgba(20,38,56,0.1)]">
       <div className={`${IMAGE_FRAME_HEIGHT} relative w-full shrink-0 overflow-hidden border-b border-store-surface bg-store-page`}>
         <Link href={productUrl} aria-label={`View ${name}`} className="flex h-full w-full items-center justify-center px-5 py-5 sm:px-6 sm:py-6">
           <div className="relative h-full w-full max-w-[190px]">
@@ -155,12 +161,17 @@ export default function ProductCard({
               alt={name}
               fill
               sizes="(max-width: 639px) 140px, 190px"
-              className="object-contain object-center"
+              className="object-contain object-center transition-transform duration-500 group-hover:scale-105"
               onError={() => setImageError(true)}
               unoptimized={resolvedImage.includes("unsplash.com")}
             />
           </div>
         </Link>
+        {displayBadge && !isDiscountBadge && (
+          <span className="absolute left-2.5 top-2.5 max-w-[calc(100%-3.75rem)] truncate rounded-full bg-store-deep px-2.5 py-1 text-[10px] font-semibold text-white shadow-sm">
+            {displayBadge}
+          </span>
+        )}
         <button
           type="button"
           onClick={handleToggleWishlist}
@@ -177,6 +188,7 @@ export default function ProductCard({
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-3.5">
+        {category && <p className="mb-1 truncate text-[10px] font-semibold uppercase tracking-[0.11em] text-store-accent">{category}</p>}
         <Link href={productUrl} title={name} className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent">
           <h3 className="h-10 line-clamp-2 break-words text-[13px] font-medium leading-5 text-zinc-800 transition-colors hover:text-store-accent sm:text-sm">
             {name}

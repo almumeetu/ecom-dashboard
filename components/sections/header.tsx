@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import MobileMenu from "./ui/mobile-menu";
 import Navigation from "./ui/navigation";
 import { IoSearchOutline, IoHeartOutline } from "react-icons/io5";
-import { LuShoppingBag, LuUser, LuChevronDown, LuLogOut, LuPhone, LuTruck, LuMapPin, LuX, LuLayoutDashboard } from "react-icons/lu";
+import { LuShoppingBag, LuUser, LuChevronDown, LuLogOut, LuTruck, LuX, LuLayoutDashboard } from "react-icons/lu";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { useAuth } from "@/app/_providers/auth-provider";
 import { useCart } from "@/app/_providers/cart-provider";
@@ -40,8 +40,8 @@ export default function Header() {
 
   const desktopDropdownRef = useRef<HTMLDivElement>(null);
   const mobileDropdownRef = useRef<HTMLDivElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const desktopSearchRef = useRef<HTMLDivElement>(null);
+  const mobileSearchRef = useRef<HTMLDivElement>(null);
 
   // Fetch categories dynamically for mobile menu navigation
   useEffect(() => {
@@ -109,6 +109,7 @@ export default function Header() {
       return;
     }
 
+    let cancelled = false;
     const delayDebounceFn = setTimeout(async () => {
       setIsSearching(true);
       try {
@@ -117,15 +118,18 @@ export default function Header() {
           limit: 5,
           search: trimmedQuery,
         });
-        setSuggestions(res.data);
+        if (!cancelled) setSuggestions(res.data);
       } catch (err) {
         console.error("Failed to fetch search suggestions:", err);
       } finally {
-        setIsSearching(false);
+        if (!cancelled) setIsSearching(false);
       }
     }, 300);
 
-    return () => clearTimeout(delayDebounceFn);
+    return () => {
+      cancelled = true;
+      clearTimeout(delayDebounceFn);
+    };
   }, [searchQuery]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -146,7 +150,10 @@ export default function Header() {
       if (clickedOutsideDesktop && clickedOutsideMobile) {
         setDropdownOpen(false);
       }
-      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target as Node)) {
+      if (
+        !desktopSearchRef.current?.contains(target) &&
+        !mobileSearchRef.current?.contains(target)
+      ) {
         setShowSuggestions(false);
       }
     };
@@ -165,11 +172,6 @@ export default function Header() {
     };
   }, []);
 
-  const handleNavigate = (path: string) => {
-    setDropdownOpen(false);
-    window.location.href = path;
-  };
-
   return (
     <header className="sticky top-0 z-50 w-full font-sans bg-white">
       {/* ═══════════════ Desktop Main Header ═══════════════ */}
@@ -181,7 +183,7 @@ export default function Header() {
           </div>
 
           {/* Search Bar — centered & wide */}
-          <div className="flex-1 max-w-2xl relative" ref={searchContainerRef}>
+          <div className="flex-1 max-w-2xl relative" ref={desktopSearchRef}>
             <form
               onSubmit={(e) => { handleSearchSubmit(e); setShowSuggestions(false); }}
               className="relative flex items-center w-full"
@@ -189,6 +191,7 @@ export default function Header() {
               <IoSearchOutline className="absolute left-4 w-4.5 h-4.5 text-zinc-400 pointer-events-none" />
               <input
                 type="text"
+                aria-label="Search products"
                 placeholder="Search honey, ghee, rice, oil, cosmetics, electronics..."
                 value={searchQuery}
                 onChange={(e) => {
@@ -330,9 +333,12 @@ export default function Header() {
                 >
                   <div className="w-8 h-8 rounded-full bg-store-primary text-white flex items-center justify-center font-bold text-xs overflow-hidden shrink-0">
                     {user?.avatarUrl || (user as any)?.avatar ? (
-                      <img
-                        src={user?.avatarUrl || (user as any)?.avatar || undefined}
+                      <Image
+                        src={user?.avatarUrl || (user as any)?.avatar || ""}
                         alt={user?.name || "User"}
+                        width={32}
+                        height={32}
+                        unoptimized
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -369,9 +375,12 @@ export default function Header() {
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-store-primary text-white flex items-center justify-center font-bold text-xs shrink-0 overflow-hidden">
                           {user?.avatarUrl || (user as any)?.avatar ? (
-                            <img
-                              src={user?.avatarUrl || (user as any)?.avatar || undefined}
+                          <Image
+                            src={user?.avatarUrl || (user as any)?.avatar || ""}
                               alt={user?.name || "User"}
+                            width={36}
+                            height={36}
+                            unoptimized
                               className="w-full h-full object-cover"
                             />
                           ) : (
@@ -492,7 +501,7 @@ export default function Header() {
       </div>
 
       {/* ═══════════════ Desktop Navigation Bar ═══════════════ */}
-      <div className="hidden xl:block bg-store-accent text-white border-t border-white/10">
+      <div className="hidden xl:block border-t border-white/10 bg-store-accent text-white shadow-sm">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <Navigation />
         </div>
@@ -506,6 +515,7 @@ export default function Header() {
             <MobileMenu
               navItems={dynamicNavItems}
               sylhetiTeaItems={novaMartCategoryItems}
+              categories={categories}
             />
           </div>
 
@@ -556,9 +566,12 @@ export default function Header() {
                   aria-label="User menu"
                 >
                   {user?.avatarUrl || (user as any)?.avatar ? (
-                    <img
-                      src={user?.avatarUrl || (user as any)?.avatar || undefined}
+                    <Image
+                      src={user?.avatarUrl || (user as any)?.avatar || ""}
                       alt={user?.name || "User"}
+                      width={28}
+                      height={28}
+                      unoptimized
                       className="w-full h-full object-cover"
                     />
                   ) : (
@@ -622,7 +635,7 @@ export default function Header() {
         </div>
 
         {/* Mobile search bar — full width below header row */}
-        <div className="px-4 pb-2.5" ref={searchContainerRef}>
+        <div className="px-4 pb-3" ref={mobileSearchRef}>
           <form
             onSubmit={(e) => { handleSearchSubmit(e); setShowSuggestions(false); }}
             className="flex items-center w-full relative"
@@ -630,6 +643,7 @@ export default function Header() {
             <IoSearchOutline className="absolute left-3 w-4 h-4 text-zinc-400 pointer-events-none" />
             <input
               type="text"
+              aria-label="Search products"
               placeholder="Search products, brands..."
               value={searchQuery}
               onChange={(e) => {
@@ -637,7 +651,7 @@ export default function Header() {
                 setShowSuggestions(true);
               }}
               onFocus={() => setShowSuggestions(true)}
-              className="w-full h-9.5 pl-9 pr-16 rounded-full border border-zinc-200 bg-zinc-50/90 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/20 transition-all shadow-2xs"
+              className="w-full h-11 pl-10 pr-16 rounded-full border border-zinc-200 bg-zinc-50/90 text-sm text-zinc-900 placeholder:text-zinc-400 outline-none focus:bg-white focus:border-store-primary focus:ring-2 focus:ring-store-primary/20 transition-all shadow-2xs"
             />
             {searchQuery && (
               <button

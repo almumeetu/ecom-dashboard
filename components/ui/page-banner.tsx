@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FiChevronRight } from "react-icons/fi";
+import { FiCheck, FiChevronRight, FiMessageCircle, FiRefreshCw, FiTruck } from "react-icons/fi";
 import { LuHouse } from "react-icons/lu";
 
 export interface BreadcrumbItem {
@@ -18,43 +18,57 @@ export interface PageBannerProps {
   className?: string;
 }
 
+const trustPoints = [
+  { label: "Delivery details at checkout", icon: FiTruck },
+  { label: "7-day returns", icon: FiRefreshCw },
+  { label: "Customer support", icon: FiMessageCircle },
+];
+
 export default function PageBanner({
   title,
+  subtitle,
+  badge,
   breadcrumbs,
+  showTrustChips = false,
   className = "",
 }: PageBannerProps) {
   return (
-    <div
-      className={`w-full bg-white border-b border-[#e8edf1] ${className}`}
+    <section
+      className={`relative isolate w-full overflow-hidden border-b border-store-border/80 bg-[linear-gradient(115deg,#ffffff_0%,#ffffff_58%,#f5f1e9_100%)] ${className}`}
     >
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-5 sm:py-7">
-        {/* Breadcrumb strip */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-store-surface/70 blur-3xl sm:h-72 sm:w-72"
+      />
+
+      <div className="relative mx-auto max-w-[1440px] px-4 py-5 sm:px-6 sm:py-7 md:px-10 lg:px-16 lg:py-9">
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center gap-1.5 text-xs text-zinc-500 font-medium overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden mb-3"
+          className="mb-4 flex items-center gap-1.5 overflow-x-auto text-xs font-medium text-zinc-500 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-1 text-stone-400 hover:text-stone-800 transition-colors shrink-0"
+            className="inline-flex shrink-0 items-center gap-1 text-zinc-500 transition-colors hover:text-store-primary"
           >
-            <LuHouse className="w-3.5 h-3.5 text-stone-400 shrink-0" />
+            <LuHouse aria-hidden="true" className="h-3.5 w-3.5 shrink-0" />
             <span>Home</span>
           </Link>
 
-          {breadcrumbs.map((item, idx) => {
-            const isLast = idx === breadcrumbs.length - 1;
+          {breadcrumbs.map((item, index) => {
+            const isLast = index === breadcrumbs.length - 1;
+
             return (
-              <span key={idx} className="inline-flex items-center gap-1.5 shrink-0">
-                <FiChevronRight className="w-3 h-3 text-stone-300 shrink-0" />
+              <span key={`${item.label}-${index}`} className="inline-flex shrink-0 items-center gap-1.5">
+                <FiChevronRight aria-hidden="true" className="h-3 w-3 shrink-0 text-zinc-300" />
                 {item.href && !isLast ? (
                   <Link
                     href={item.href}
-                    className="text-stone-500 hover:text-stone-900 transition-colors truncate max-w-[140px] sm:max-w-[200px]"
+                    className="max-w-[140px] truncate text-zinc-500 transition-colors hover:text-store-primary sm:max-w-[200px]"
                   >
                     {item.label}
                   </Link>
                 ) : (
-                  <span className="text-stone-700 font-medium truncate max-w-[180px] sm:max-w-xs">
+                  <span className="max-w-[180px] truncate font-semibold text-store-ink sm:max-w-xs">
                     {item.label}
                   </span>
                 )}
@@ -63,14 +77,42 @@ export default function PageBanner({
           })}
         </nav>
 
-        {/* Page title */}
-        {title && (
-          <h1 className="text-2xl sm:text-3xl font-medium tracking-tight text-zinc-900 leading-snug break-words">
-            {title}
-          </h1>
-        )}
+        <div className="max-w-4xl">
+          {badge && (
+            <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-store-border bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-store-primary">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-store-primary" />
+              {badge}
+            </span>
+          )}
 
+          {title && (
+            <h1 className="text-2xl font-semibold leading-tight tracking-tight text-store-ink sm:text-3xl lg:text-4xl">
+              {title}
+            </h1>
+          )}
+
+          {subtitle && (
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-zinc-600 sm:mt-3 sm:text-base sm:leading-7">
+              {subtitle}
+            </p>
+          )}
+
+          {showTrustChips && (
+            <ul aria-label="NovaMart service highlights" className="mt-4 flex flex-wrap gap-2 sm:mt-5">
+              {trustPoints.map(({ label, icon: Icon }) => (
+                <li
+                  key={label}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-store-border/80 bg-white/80 px-3 py-1.5 text-[11px] font-semibold text-zinc-600 shadow-[0_2px_8px_rgba(20,38,56,0.035)] sm:text-xs"
+                >
+                  <Icon aria-hidden="true" className="h-3.5 w-3.5 text-store-primary" />
+                  <span>{label}</span>
+                  <FiCheck aria-hidden="true" className="h-3 w-3 text-emerald-600" />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -56,9 +56,7 @@ export default function ConfirmationPage() {
     order?.address?.state?.toLowerCase().includes("dhaka") ||
     order?.address?.city?.toLowerCase().includes("dhaka");
 
-  const estimatedDelivery = isDhakaAddress
-    ? "Tomorrow (Within 24 Hours)"
-    : "Within 2-4 Business Days";
+  const estimatedDelivery = "Check your account for available order updates";
 
   const orderDateFormatted = new Date().toLocaleDateString("en-US", {
     month: "short",

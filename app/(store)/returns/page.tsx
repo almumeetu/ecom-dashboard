@@ -97,9 +97,9 @@ export default function ReturnsPage() {
                   <span>Buyer Protection Guarantee</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-4xl font-extrabold text-store-ink tracking-tight leading-tight">
+                <h2 className="text-2xl font-semibold leading-tight tracking-tight text-store-ink sm:text-4xl">
                   7-Day Hassle-Free Return &amp; Replacement
-                </h1>
+                </h2>
 
                 <p className="text-sm sm:text-base text-zinc-600 leading-relaxed max-w-3xl">
                   At NovaMart, your satisfaction and peace of mind come first. If any product arrives damaged in transit, with an expired batch code, or fails to meet your ordered specifications, we will replace it immediately or issue a 100% full refund with zero reverse shipping fees.

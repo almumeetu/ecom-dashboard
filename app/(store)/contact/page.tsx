@@ -95,19 +95,19 @@ export default function ContactPage() {
 
   const faqs = [
     {
-      question: 'How fast is delivery in Dhaka and nationwide across Bangladesh?',
+      question: 'Where can I find delivery options and estimates?',
       answer:
-        'Deliveries inside Dhaka Metropolitan are completed within Same Day to 24–48 hours (orders placed before 2:00 PM are prioritized for same-day dispatch). For all other 63 districts nationwide, standard door-to-door delivery takes 2 to 4 business days.',
+        'Available delivery options and estimated delivery times depend on your address. Review the current details during checkout before placing your order.',
     },
     {
-      question: 'What are the delivery charges and how do I get Free Delivery?',
+      question: 'Where can I find delivery options and charges?',
       answer:
-        'Delivery inside Dhaka is ৳60 and outside Dhaka across 64 districts is ৳120. All orders with a subtotal of ৳1,999 or more automatically qualify for 100% Free Nationwide Delivery at checkout without any coupon needed.',
+        'Available delivery options and charges depend on your delivery address. Review the current details during checkout before placing your order.',
     },
     {
-      question: 'Is Cash on Delivery (COD) available nationwide?',
+      question: 'Which payment methods are available?',
       answer:
-        'Yes! We provide Cash on Delivery (COD) across all 64 districts and 495+ Upazilas in Bangladesh. You may inspect the outer parcel condition at your doorstep before handing payment to the rider.',
+        'Available payment methods are shown during checkout for your order.',
     },
     {
       question: 'What is your 7-day return and replacement policy?',

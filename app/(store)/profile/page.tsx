@@ -155,7 +155,7 @@ function ProfilePageContent() {
                     <h5 className="text-xs font-bold text-zinc-800">
                       {settings?.branchName || "Dhaka & Nationwide Hub"}
                     </h5>
-                    <p className="text-xs text-zinc-400">Next-day live delivery status</p>
+                    <p className="text-xs text-zinc-400">Check available order updates</p>
                   </div>
                 </div>
 

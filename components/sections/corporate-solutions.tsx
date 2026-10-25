@@ -61,7 +61,7 @@ export default function CorporateSolutions() {
     {
       num: '04',
       title: 'Multi-Location Nationwide Dispatch',
-      desc: 'Consolidated delivery to your corporate office or direct individual doorstep delivery to employees across all 64 districts.',
+      desc: 'Delivery arrangements can be discussed based on your order and requested locations.',
     },
   ];
 

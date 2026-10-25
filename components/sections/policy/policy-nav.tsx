@@ -65,47 +65,48 @@ export default function PolicyNav({ currentKey }: PolicyNavProps) {
   const pathname = usePathname();
 
   return (
-    <div className="w-full bg-white border-b border-zinc-200/80 sticky top-[60px] sm:top-[68px] z-30 shadow-xs">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-3">
-        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
-          {POLICY_TABS.map((tab) => {
-            const Icon = tab.icon;
-            const isActive =
-              currentKey === tab.key ||
-              (pathname ? pathname.startsWith(tab.href) : false);
+    <nav
+      aria-label="Customer care and policy pages"
+      className="sticky top-[60px] z-30 w-full border-b border-store-border/80 bg-white/95 shadow-[0_4px_16px_rgba(20,38,56,0.035)] backdrop-blur-md sm:top-[68px]"
+    >
+      <div className="mx-auto max-w-[1440px] px-4 py-2.5 sm:px-6 md:px-10 lg:px-16">
+        <div className="flex items-center gap-3">
+          <span className="hidden shrink-0 text-[10px] font-bold uppercase tracking-[0.16em] text-zinc-400 lg:inline">
+            Help center
+          </span>
+          <div className="no-scrollbar flex min-w-0 items-center gap-1.5 overflow-x-auto scroll-smooth py-0.5 sm:gap-2">
+            {POLICY_TABS.map((tab) => {
+              const Icon = tab.icon;
+              const isActive =
+                currentKey === tab.key ||
+                (pathname ? pathname.startsWith(tab.href) : false);
 
-            return (
-              <Link
-                key={tab.key}
-                href={tab.href}
-                className={`group flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
-                  isActive
-                    ? 'bg-store-primary text-white shadow-sm ring-1 ring-store-primary'
-                    : 'bg-zinc-50 text-zinc-600 hover:text-zinc-950 hover:bg-zinc-100 border border-zinc-200/70'
-                }`}
-              >
-                <Icon
-                  className={`w-3.5 h-3.5 transition-colors ${
-                    isActive ? 'text-white' : 'text-zinc-400 group-hover:text-store-primary'
+              return (
+                <Link
+                  key={tab.key}
+                  href={tab.href}
+                  aria-label={tab.badge ? `${tab.label}, ${tab.badge}` : tab.label}
+                  aria-current={isActive ? 'page' : undefined}
+                  title={tab.badge ? `${tab.label} · ${tab.badge}` : tab.label}
+                  className={`group flex shrink-0 cursor-pointer items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2.5 text-xs font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-primary sm:px-4 ${
+                    isActive
+                      ? 'bg-store-primary text-white shadow-sm'
+                      : 'border border-transparent bg-zinc-50 text-zinc-600 hover:border-store-border hover:bg-store-surface hover:text-store-ink'
                   }`}
-                />
-                <span>{tab.label}</span>
-                {tab.badge && (
-                  <span
-                    className={`hidden sm:inline-block text-[10px] font-bold px-1.5 py-0.5 rounded-md ${
-                      isActive
-                        ? 'bg-white/20 text-white'
-                        : 'bg-zinc-200/70 text-zinc-600 group-hover:bg-store-surface group-hover:text-store-primary'
+                >
+                  <Icon
+                    aria-hidden="true"
+                    className={`w-3.5 h-3.5 transition-colors ${
+                      isActive ? 'text-white' : 'text-zinc-400 group-hover:text-store-primary'
                     }`}
-                  >
-                    {tab.badge}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
+                  />
+                  <span>{tab.label}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }

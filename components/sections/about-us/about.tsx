@@ -73,8 +73,8 @@ export default function About() {
     },
     {
       icon: FiTruck,
-      title: 'Nationwide Delivery',
-      desc: 'Express 24-48 hours inside Dhaka (৳60) and 2-4 business days across all 64 districts in Bangladesh (৳120). Free on ৳1,999+.',
+      title: 'Delivery Options',
+      desc: 'Available delivery options and charges are shown at checkout based on your delivery address.',
     },
     {
       icon: FiRefreshCw,
@@ -141,9 +141,9 @@ export default function About() {
                   <div className="flex items-start gap-3 p-4 rounded-xl bg-white border border-zinc-200/80 shadow-xs">
                     <HiCheckCircle className="w-5 h-5 text-store-primary shrink-0 mt-0.5" />
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">All 64 Districts</h4>
+                      <h4 className="text-xs sm:text-sm font-bold text-zinc-900">Delivery Options</h4>
                       <p className="text-xs text-zinc-500 mt-0.5 leading-relaxed">
-                        Cash on Delivery available nationwide with live SMS tracking.
+                        Available options and charges are shown at checkout.
                       </p>
                     </div>
                   </div>

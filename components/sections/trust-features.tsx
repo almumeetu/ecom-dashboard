@@ -6,8 +6,8 @@ import { LuTruck, LuShieldCheck, LuStore, LuCreditCard } from 'react-icons/lu';
 export default function TrustFeatures() {
   const features = [
     {
-      title: 'Fast Doorstep Delivery',
-      desc: 'Same-day grocery deliveries & rapid shipping for fashion, footwear and electronics.',
+      title: 'Delivery Options',
+      desc: 'Available delivery options and charges depend on your address and are shown at checkout.',
       icon: LuTruck,
       color: 'text-store-primary bg-store-surface border-store-border',
     },

@@ -24,7 +24,7 @@ export default function CorporateFAQ() {
     },
     {
       q: 'Do you deliver directly to individual employee home addresses across Bangladesh?',
-      a: 'Yes! We offer nationwide multi-destination fulfillment. You can provide an Excel sheet of your employees or clients across all 64 districts, and our verified logistics network will deliver directly to each individual doorstep with live SMS tracking.',
+      a: 'Delivery options for corporate orders can be discussed with our support team. Please contact us with your locations and order details.',
     },
     {
       q: 'Do you provide official Mushak-6.3 VAT Challans and Tax Invoices?',

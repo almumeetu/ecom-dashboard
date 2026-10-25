@@ -111,7 +111,7 @@ export default async function Mainfooter() {
             </div>
             <div>
               <span className="text-xs sm:text-sm font-semibold text-white block">
-                Nationwide Delivery
+                Delivery Information
               </span>
             </div>
           </div>

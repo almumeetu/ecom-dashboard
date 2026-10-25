@@ -1,17 +1,12 @@
 'use client';
 
-import React from 'react';
 import Link from 'next/link';
 import {
   FiFileText,
-  FiShield,
-  FiCheckCircle,
   FiPhone,
   FiMail,
   FiCheck,
 } from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa6';
-import ScrollAnimate from '@/components/ui/scroll-animate';
 import PageBanner from '@/components/ui/page-banner';
 import PolicyNav from '@/components/sections/policy/policy-nav';
 
@@ -33,7 +28,7 @@ export default function TermsPage() {
       id: 'pricing',
       title: '3. Pricing, Discounts & Payment Methods',
       content:
-        'All prices listed on NovaMart are in Bangladeshi Taka (BDT) inclusive of applicable taxes. NovaMart reserves the right to correct any typographical or technological pricing errors prior to shipment. We accept Cash on Delivery (COD) across all 64 districts in Bangladesh, mobile financial banking (bKash, Nagad, Rocket), and international credit/debit cards processed through bank-grade SSL encrypted gateways.',
+        'All prices listed on NovaMart are in Bangladeshi Taka (BDT) inclusive of applicable taxes. NovaMart reserves the right to correct any typographical or technological pricing errors prior to shipment. Available payment methods are shown during checkout.',
     },
     {
       id: 'orders',
@@ -45,7 +40,7 @@ export default function TermsPage() {
       id: 'shipping',
       title: '5. Doorstep Delivery & Risk of Loss',
       content:
-        'NovaMart provides nationwide delivery across all 64 districts in Bangladesh. Estimated transit times are 24–48 hours within Dhaka Metro and 2–4 business days across other districts. Orders with a subtotal of ৳1,999 or more qualify for 100% Free Delivery. The risk of loss transfers to the customer upon physical doorstep delivery and payment acceptance.',
+        'Available delivery options, applicable charges, and any estimated delivery times depend on the delivery address and are shown during checkout. Please review these details before placing an order.',
     },
     {
       id: 'returns',
@@ -79,48 +74,48 @@ export default function TermsPage() {
 
       {/* ── Content Container ── */}
       <section className="py-10 sm:py-14 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-12 lg:gap-8">
           
           {/* Main Content Column (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
-            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-xs space-y-8">
+            <article className="space-y-7 rounded-[28px] border border-store-border/80 bg-white p-6 shadow-[0_12px_40px_rgba(20,38,56,0.045)] sm:space-y-8 sm:p-9 lg:p-10">
               <div>
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-3">
                   <FiFileText className="w-3.5 h-3.5 text-store-primary" />
                   <span>Effective Date: January 1, 2026</span>
                 </div>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-store-ink tracking-tight">
+                <h2 className="text-2xl font-semibold tracking-tight text-store-ink sm:text-3xl">
                   NovaMart Bangladesh Terms of Service
-                </h1>
-                <p className="text-xs sm:text-sm text-zinc-500 mt-1.5 leading-relaxed">
+                </h2>
+                <p className="mt-2 text-sm leading-6 text-zinc-500 sm:text-[15px] sm:leading-7">
                   Please review these terms carefully before placing an order. These provisions define your legal rights, warranties, and obligations.
                 </p>
               </div>
 
-              <div className="space-y-6 divide-y divide-zinc-100">
+              <div className="divide-y divide-store-border/70">
                 {sections.map((section, idx) => (
-                  <div key={section.id} className={idx > 0 ? 'pt-6' : ''}>
-                    <h2 className="text-base sm:text-lg font-bold text-store-ink mb-2">
+                  <section key={section.id} id={section.id} className={idx > 0 ? 'pt-6 sm:pt-7' : 'pb-6 sm:pb-7'}>
+                    <h3 className="mb-2 text-base font-semibold text-store-ink sm:text-lg">
                       {section.title}
-                    </h2>
-                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed">
+                    </h3>
+                    <p className="text-sm leading-6 text-zinc-600 sm:text-[15px] sm:leading-7">
                       {section.content}
                     </p>
-                  </div>
+                  </section>
                 ))}
               </div>
-            </div>
+            </article>
           </div>
 
           {/* Sticky Sidebar (4 cols) */}
-          <div className="lg:col-span-4 space-y-5 lg:sticky lg:top-32">
+          <aside className="space-y-4 lg:sticky lg:top-32 lg:col-span-4">
             {/* Quick Guarantees Box */}
-            <div className="bg-white rounded-3xl p-6 border border-zinc-200/80 shadow-xs space-y-4">
-              <h3 className="text-sm font-bold text-store-ink uppercase tracking-wider">
+            <section className="space-y-4 rounded-2xl border border-store-border/80 bg-white p-5 shadow-[0_8px_28px_rgba(20,38,56,0.04)] sm:p-6">
+              <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-store-ink">
                 The NovaMart Buyer Charter
               </h3>
 
-              <div className="space-y-3 text-xs text-zinc-600">
+              <div className="space-y-3 text-sm text-zinc-600">
                 <div className="flex items-start gap-2.5">
                   <FiCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span><strong>100% Authentic:</strong> Zero counterfeit guarantee or double money back.</span>
@@ -160,13 +155,13 @@ export default function TermsPage() {
                   </a>
                 </div>
               </div>
-            </div>
+            </section>
 
             {/* Quick Links to other policies */}
-            <div className="bg-white rounded-3xl p-6 border border-zinc-200/80 shadow-xs space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-500">
+            <section className="space-y-3 rounded-2xl border border-store-border/80 bg-white p-5 shadow-[0_8px_28px_rgba(20,38,56,0.04)] sm:p-6">
+              <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-zinc-500">
                 Related Policies
-              </h4>
+              </h3>
               <ul className="space-y-2 text-xs font-semibold">
                 <li>
                   <Link href="/delivery" className="text-zinc-700 hover:text-store-primary block">
@@ -189,8 +184,8 @@ export default function TermsPage() {
                   </Link>
                 </li>
               </ul>
-            </div>
-          </div>
+            </section>
+          </aside>
 
         </div>
       </section>

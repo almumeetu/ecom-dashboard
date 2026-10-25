@@ -131,8 +131,8 @@ function LoginFormContent() {
                   <LuTruck className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-white">Next-Day Dhaka & Nationwide Delivery</h4>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">Dispatched securely from our central logistics hub</p>
+                  <h4 className="text-xs font-bold text-white">Delivery Options</h4>
+                  <p className="text-[11px] text-zinc-400 mt-0.5">Available details are shown during checkout</p>
                 </div>
               </div>
 

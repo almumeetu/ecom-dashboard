@@ -8,7 +8,7 @@ export default function LuxuryHero() {
   const scrollToForm = () => {
     const element = document.getElementById('inquiry-form');
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     }
   };
 

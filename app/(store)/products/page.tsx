@@ -107,12 +107,17 @@ function ProductsPageContent() {
   const [isLoading, setIsLoading] = useState(false);
   const reqIdRef = useRef(0);
   const pageRef = useRef(1);
-  const sortRef = useRef<HTMLDivElement>(null);
+  const mobileSortRef = useRef<HTMLDivElement>(null);
+  const desktopSortRef = useRef<HTMLDivElement>(null);
+  const filterCloseRef = useRef<HTMLButtonElement>(null);
 
   // Close sort dropdown when clicking outside
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
-      if (sortRef.current && !sortRef.current.contains(e.target as Node)) {
+      if (
+        !mobileSortRef.current?.contains(e.target as Node) &&
+        !desktopSortRef.current?.contains(e.target as Node)
+      ) {
         setIsSortDropdownOpen(false);
       }
     };
@@ -122,13 +127,18 @@ function ProductsPageContent() {
 
   // Lock scroll on mobile drawer
   useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
     if (isMobileFilterOpen) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      filterCloseRef.current?.focus();
     }
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsMobileFilterOpen(false);
+    };
+    if (isMobileFilterOpen) window.addEventListener('keydown', handleEscape);
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleEscape);
     };
   }, [isMobileFilterOpen]);
 
@@ -495,13 +505,13 @@ function ProductsPageContent() {
   // Sidebar Facets Component (used in both Desktop & Mobile Drawer)
   const renderSidebarFilters = () => {
     return (
-      <div className="space-y-6 text-zinc-800 text-xs">
+      <div className="space-y-0 text-sm text-zinc-800">
         {/* 1. Availability Facet */}
-        <div className="border-b border-zinc-200 pb-5">
+        <div className="border-b border-zinc-100 py-4 first:pt-1">
           <button
             type="button"
             onClick={() => toggleAccordion('availability')}
-            className="w-full flex items-center justify-between font-bold text-xs uppercase tracking-wider text-zinc-900 py-1 cursor-pointer select-none"
+            className="w-full min-h-10 flex items-center justify-between font-semibold text-sm text-zinc-900 cursor-pointer select-none"
           >
             <span>Availability</span>
             {openAccordions.availability ? (
@@ -529,11 +539,11 @@ function ProductsPageContent() {
         </div>
 
         {/* 2. Price Facet (Shopify numeric inputs + presets) */}
-        <div className="border-b border-zinc-200 pb-5">
+        <div className="border-b border-zinc-100 py-4">
           <button
             type="button"
             onClick={() => toggleAccordion('price')}
-            className="w-full flex items-center justify-between font-bold text-xs uppercase tracking-wider text-zinc-900 py-1 cursor-pointer select-none"
+            className="w-full min-h-10 flex items-center justify-between font-semibold text-sm text-zinc-900 cursor-pointer select-none"
           >
             <span>Price (BDT)</span>
             {openAccordions.price ? (
@@ -554,7 +564,7 @@ function ProductsPageContent() {
                       key={preset.label}
                       type="button"
                       onClick={() => handlePricePreset(preset)}
-                      className={`px-2.5 py-1 rounded-md text-[11px] font-medium border transition-colors cursor-pointer ${
+                      className={`min-h-8 px-3 py-1.5 rounded-full text-[11px] font-semibold border transition-colors cursor-pointer ${
                         isActive
                           ? 'bg-store-primary text-white border-store-primary'
                           : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-100'
@@ -576,7 +586,7 @@ function ProductsPageContent() {
                       placeholder="Min"
                       value={minPriceInput}
                       onChange={(e) => setMinPriceInput(e.target.value)}
-                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-store-primary bg-white"
+                      className="w-full h-10 pl-7 pr-2 border border-zinc-200 rounded-lg text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 bg-white"
                     />
                   </div>
                   <div className="relative">
@@ -586,14 +596,14 @@ function ProductsPageContent() {
                       placeholder="Max"
                       value={maxPriceInput}
                       onChange={(e) => setMaxPriceInput(e.target.value)}
-                      className="w-full pl-6 pr-2 py-1.5 border border-zinc-200 rounded-md text-xs text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-store-primary bg-white"
+                      className="w-full h-10 pl-7 pr-2 border border-zinc-200 rounded-lg text-sm text-zinc-800 placeholder-zinc-400 focus:outline-none focus:border-store-primary focus:ring-2 focus:ring-store-primary/10 bg-white"
                     />
                   </div>
                 </div>
                 <button
                   type="button"
                   onClick={applyCustomPrice}
-                  className="w-full py-2 bg-zinc-900 hover:bg-store-primary text-white rounded-lg text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
+                  className="w-full min-h-10 py-2 bg-store-primary hover:bg-store-hover text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer text-center active:scale-[0.99]"
                 >
                   Apply Price
                 </button>
@@ -603,11 +613,11 @@ function ProductsPageContent() {
         </div>
 
         {/* 3. Collection / Department Facet */}
-        <div className="border-b border-zinc-200 pb-5">
+        <div className="border-b border-zinc-100 py-4">
           <button
             type="button"
             onClick={() => toggleAccordion('collection')}
-            className="w-full flex items-center justify-between font-bold text-xs uppercase tracking-wider text-zinc-900 py-1 cursor-pointer select-none"
+            className="w-full min-h-10 flex items-center justify-between font-semibold text-sm text-zinc-900 cursor-pointer select-none"
           >
             <span>Department / Collection</span>
             {openAccordions.collection ? (
@@ -629,7 +639,7 @@ function ProductsPageContent() {
                       setSelectedCollection(opt);
                       setSelectedCategory('All');
                     }}
-                    className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
+                    className={`w-full min-h-10 flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors cursor-pointer ${
                       isSelected
                         ? 'bg-store-surface text-store-primary font-bold'
                         : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
@@ -645,11 +655,11 @@ function ProductsPageContent() {
         </div>
 
         {/* 4. Subcategories Facet */}
-        <div className="border-b border-zinc-200 pb-5">
+        <div className="border-b border-zinc-100 py-4">
           <button
             type="button"
             onClick={() => toggleAccordion('category')}
-            className="w-full flex items-center justify-between font-bold text-xs uppercase tracking-wider text-zinc-900 py-1 cursor-pointer select-none"
+            className="w-full min-h-10 flex items-center justify-between font-semibold text-sm text-zinc-900 cursor-pointer select-none"
           >
             <span>Categories</span>
             {openAccordions.category ? (
@@ -670,7 +680,7 @@ function ProductsPageContent() {
                     value={catSearchTerm}
                     onChange={(e) => setCatSearchTerm(e.target.value)}
                     placeholder="Filter categories..."
-                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-store-primary"
+                    className="w-full h-10 pl-9 pr-3 bg-zinc-50 border border-zinc-200 rounded-lg text-sm placeholder-zinc-400 focus:outline-none focus:border-store-primary focus:ring-2 focus:ring-store-primary/10"
                   />
                 </div>
               )}
@@ -685,7 +695,7 @@ function ProductsPageContent() {
                         key={opt}
                         type="button"
                         onClick={() => setSelectedCategory(opt)}
-                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
+                        className={`w-full min-h-10 flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors cursor-pointer ${
                           isSelected
                             ? 'bg-store-surface text-store-primary font-bold'
                             : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
@@ -702,11 +712,11 @@ function ProductsPageContent() {
         </div>
 
         {/* 5. Brand / Vendor Facet */}
-        <div className="border-b border-zinc-200 pb-5">
+        <div className="border-b border-zinc-100 py-4">
           <button
             type="button"
             onClick={() => toggleAccordion('brand')}
-            className="w-full flex items-center justify-between font-bold text-xs uppercase tracking-wider text-zinc-900 py-1 cursor-pointer select-none"
+            className="w-full min-h-10 flex items-center justify-between font-semibold text-sm text-zinc-900 cursor-pointer select-none"
           >
             <span>Brand / Merchant</span>
             {openAccordions.brand ? (
@@ -726,7 +736,7 @@ function ProductsPageContent() {
                     value={brandSearchTerm}
                     onChange={(e) => setBrandSearchTerm(e.target.value)}
                     placeholder="Search brands..."
-                    className="w-full pl-8 pr-2 py-1 bg-zinc-50 border border-zinc-200 rounded-md text-xs placeholder-zinc-400 focus:outline-none focus:border-store-primary"
+                    className="w-full h-10 pl-9 pr-3 bg-zinc-50 border border-zinc-200 rounded-lg text-sm placeholder-zinc-400 focus:outline-none focus:border-store-primary focus:ring-2 focus:ring-store-primary/10"
                   />
                 </div>
               )}
@@ -741,7 +751,7 @@ function ProductsPageContent() {
                         key={opt}
                         type="button"
                         onClick={() => setSelectedBrand(opt)}
-                        className={`w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left transition-colors cursor-pointer ${
+                        className={`w-full min-h-10 flex items-center justify-between px-3 py-2 rounded-lg text-left transition-colors cursor-pointer ${
                           isSelected
                             ? 'bg-store-surface text-store-primary font-bold'
                             : 'text-zinc-600 hover:bg-zinc-50 hover:text-zinc-900 font-medium'
@@ -758,11 +768,11 @@ function ProductsPageContent() {
         </div>
 
         {/* 6. Special Offers / Discounts */}
-        <div className="pb-2">
+        <div className="py-4">
           <button
             type="button"
             onClick={() => toggleAccordion('deals')}
-            className="w-full flex items-center justify-between font-bold text-xs uppercase tracking-wider text-zinc-900 py-1 cursor-pointer select-none"
+            className="w-full min-h-10 flex items-center justify-between font-semibold text-sm text-zinc-900 cursor-pointer select-none"
           >
             <span>Deals & Discounts</span>
             {openAccordions.deals ? (
@@ -807,8 +817,8 @@ function ProductsPageContent() {
         />
 
         {/* Quick Category Swipe Strip (Mobile & Desktop) */}
-        <div className="w-full bg-store-page border-b border-zinc-200/60 py-2 sm:py-2.5">
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="w-full border-b border-zinc-200/70 bg-gradient-to-r from-white via-store-page to-white py-3 sm:py-3.5">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 flex items-center gap-2 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             <button
               type="button"
               onClick={() => {
@@ -816,10 +826,10 @@ function ProductsPageContent() {
                 setSelectedCategory('All');
                 setOnSaleOnly(false);
               }}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
+              className={`min-h-10 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                 selectedCollection === 'All' && selectedCategory === 'All' && !onSaleOnly
-                  ? 'bg-zinc-900 text-white shadow-xs font-semibold'
-                  : 'bg-white text-zinc-600 hover:bg-zinc-100 border border-zinc-200/80'
+                  ? 'bg-store-accent text-white shadow-sm font-semibold'
+                  : 'bg-white/80 text-zinc-600 hover:bg-white hover:border-store-primary/30 border border-zinc-200/80'
               }`}
             >
               All Products
@@ -837,10 +847,10 @@ function ProductsPageContent() {
                       setSelectedCollection(col);
                       setSelectedCategory('All');
                     }}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
+                    className={`min-h-10 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                       isSelected
-                        ? 'bg-store-primary text-white shadow-xs font-semibold'
-                        : 'bg-white text-zinc-700 hover:bg-zinc-100 border border-zinc-200/80'
+                        ? 'bg-store-primary text-white shadow-sm font-semibold'
+                        : 'bg-white/80 text-zinc-700 hover:bg-white hover:border-store-primary/30 border border-zinc-200/80'
                     }`}
                   >
                     {col}
@@ -851,10 +861,10 @@ function ProductsPageContent() {
             <button
               type="button"
               onClick={() => setOnSaleOnly(!onSaleOnly)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1 shrink-0 ${
+              className={`min-h-10 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all cursor-pointer flex items-center gap-1 shrink-0 ${
                 onSaleOnly
                   ? 'bg-rose-600 text-white shadow-xs font-semibold'
-                  : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200/60'
+                  : 'bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200/70'
               }`}
             >
               <LuTag className="w-3 h-3" />
@@ -864,17 +874,17 @@ function ProductsPageContent() {
         </div>
 
         {/* Shopify OS 2.0 Filter Control Toolbar (Sticky with correct header clearance) */}
-        <div className="w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-md sticky top-[113px] xl:top-[118px] z-30 shadow-xs">
+        <div className="sticky top-[120px] z-30 w-full border-b border-zinc-200/80 bg-white/95 shadow-[0_8px_24px_rgba(15,23,42,0.06)] backdrop-blur-md">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2.5 sm:py-3">
             
             {/* Mobile Layout (< sm): Single neat row with zero overflow */}
-            <div className="flex sm:hidden items-center justify-between gap-2 w-full">
+            <div className="flex flex-wrap sm:hidden items-center justify-between gap-x-2 gap-y-2 w-full">
               <div className="flex items-center gap-1.5 min-w-0">
                 {/* Mobile Filter Trigger Button */}
                 <button
                   type="button"
                   onClick={() => setIsMobileFilterOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold shadow-2xs active:bg-zinc-100 shrink-0"
+                  className="inline-flex min-h-10 items-center gap-1.5 px-3 py-1.5 rounded-xl border border-zinc-200 bg-white text-xs font-semibold text-zinc-800 shadow-sm transition-colors hover:border-store-primary/30 active:bg-zinc-100 shrink-0"
                   aria-label="Open Filters"
                 >
                   <LuSlidersHorizontal className="w-3.5 h-3.5 text-store-primary shrink-0" />
@@ -887,11 +897,11 @@ function ProductsPageContent() {
                 </button>
 
                 {/* Mobile Sort Dropdown */}
-                <div className="relative shrink-0" ref={sortRef}>
+                <div className="relative shrink-0" ref={mobileSortRef}>
                   <button
                     type="button"
                     onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-zinc-200 bg-white text-zinc-700 text-xs font-medium shadow-2xs active:bg-zinc-100"
+                    className="inline-flex min-h-10 items-center gap-1 px-3 py-1.5 rounded-xl border border-zinc-200 bg-white text-xs font-medium text-zinc-700 shadow-sm transition-colors hover:border-store-primary/30 active:bg-zinc-100"
                     aria-label="Sort Options"
                   >
                     <span className="text-zinc-400">Sort:</span>
@@ -919,7 +929,7 @@ function ProductsPageContent() {
                             setSelectedSort(opt.value);
                             setIsSortDropdownOpen(false);
                           }}
-                          className={`w-full flex items-center justify-between px-3 py-2 text-left text-xs transition-colors cursor-pointer ${
+                          className={`w-full min-h-10 flex items-center justify-between px-3 py-2 text-left text-xs transition-colors cursor-pointer ${
                             selectedSort === opt.value
                               ? 'bg-store-surface text-store-primary font-bold'
                               : 'text-zinc-700 hover:bg-zinc-50'
@@ -937,12 +947,14 @@ function ProductsPageContent() {
               {/* Mobile Right: View Mode (1 vs 2 cols) & Count */}
               <div className="flex items-center gap-2 shrink-0">
                 {/* Mobile 1-Col vs 2-Col Switcher */}
-                <div className="flex items-center border border-zinc-200 rounded-lg p-0.5 bg-zinc-50">
+                  <div className="flex items-center border border-zinc-200 rounded-xl p-0.5 bg-zinc-100/80">
                   <button
                     type="button"
                     onClick={() => setViewMode('grid1')}
                     title="Single Column View"
-                    className={`p-1 rounded-md transition-all ${
+                    aria-label="Single column view"
+                    aria-pressed={viewMode === 'grid1'}
+                    className={`grid h-9 w-9 place-items-center rounded-md transition-all ${
                       viewMode === 'grid1'
                         ? 'bg-white text-zinc-900 shadow-2xs font-bold'
                         : 'text-zinc-400 hover:text-zinc-700'
@@ -954,7 +966,9 @@ function ProductsPageContent() {
                     type="button"
                     onClick={() => setViewMode('grid2')}
                     title="Two Columns View"
-                    className={`p-1 rounded-md transition-all ${
+                    aria-label="Two column view"
+                    aria-pressed={viewMode !== 'grid1'}
+                    className={`grid h-9 w-9 place-items-center rounded-md transition-all ${
                       viewMode !== 'grid1'
                         ? 'bg-white text-zinc-900 shadow-2xs font-bold'
                         : 'text-zinc-400 hover:text-zinc-700'
@@ -1014,7 +1028,7 @@ function ProductsPageContent() {
               {/* Right: Grid Switcher & Shopify Sort By */}
               <div className="flex items-center gap-3 sm:gap-5">
                 {/* Desktop Grid Switcher */}
-                <div className="flex items-center gap-1 border border-zinc-200 rounded-lg p-0.5 bg-zinc-50">
+                <div className="flex items-center gap-1 border border-zinc-200 rounded-xl p-0.5 bg-zinc-100/80">
                   {/* 2 Cols */}
                   <button
                     type="button"
@@ -1071,11 +1085,11 @@ function ProductsPageContent() {
                 </div>
 
                 {/* Sort By Dropdown (Shopify Style) */}
-                <div className="relative" ref={sortRef}>
+                <div className="relative" ref={desktopSortRef}>
                   <button
                     type="button"
                     onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
-                    className="flex items-center gap-1.5 text-xs text-zinc-700 hover:text-zinc-900 font-medium py-1.5 px-2.5 rounded-lg border border-zinc-200 hover:border-zinc-300 bg-white transition-all cursor-pointer shadow-2xs"
+                    className="flex min-h-10 items-center gap-1.5 text-xs text-zinc-700 hover:text-zinc-900 font-medium py-1.5 px-3 rounded-xl border border-zinc-200 hover:border-store-primary/30 bg-white transition-all cursor-pointer shadow-sm"
                   >
                     <span className="text-zinc-400">Sort by:</span>
                     <span className="font-semibold text-zinc-900">{currentSortLabel}</span>
@@ -1115,7 +1129,7 @@ function ProductsPageContent() {
 
         {/* Active Filter Chips Bar (Shopify Pill Tags, horizontally scrollable on mobile) */}
         {activeFilters.length > 0 && (
-          <div className="w-full bg-zinc-50/90 border-b border-zinc-200/80">
+          <div className="w-full border-b border-zinc-200/80 bg-store-page/90">
             <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-2 flex items-center gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
               <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-zinc-400 shrink-0 mr-1 select-none">
                 Filters:
@@ -1150,8 +1164,8 @@ function ProductsPageContent() {
             
             {/* Desktop Left-Hand Shopify Sidebar */}
             {showDesktopSidebar && (
-              <aside className="hidden lg:block w-[260px] shrink-0 sticky top-[175px] self-start pr-2">
-                <div className="flex items-center justify-between pb-4 mb-2 border-b border-zinc-200">
+              <aside className="hidden lg:block w-[260px] shrink-0 sticky top-[175px] self-start rounded-2xl border border-store-border bg-white p-5 shadow-[0_12px_32px_rgba(20,38,56,0.05)]">
+                <div className="flex items-center justify-between pb-4 mb-1 border-b border-zinc-100">
                   <h3 className="font-extrabold text-sm uppercase tracking-wider text-zinc-900 flex items-center gap-2">
                     <LuSlidersHorizontal className="w-4 h-4 text-store-primary" />
                     <span>Filter By</span>
@@ -1243,16 +1257,17 @@ function ProductsPageContent() {
         {isMobileFilterOpen && (
           <div className="fixed inset-0 z-[100] flex justify-end bg-black/60 backdrop-blur-xs transition-opacity duration-300">
             {/* Click backdrop to close */}
-            <div
+            <button
+              type="button"
               className="absolute inset-0 cursor-pointer"
               onClick={() => setIsMobileFilterOpen(false)}
-              aria-label="Close backdrop"
+              aria-label="Close filters"
             />
 
-            <div className="relative w-full sm:max-w-[380px] h-[100dvh] bg-white shadow-2xl flex flex-col justify-between font-sans z-10">
+            <div role="dialog" aria-modal="true" aria-label="Filters and sort" className="relative w-full sm:max-w-[400px] h-[100dvh] bg-white shadow-2xl flex flex-col justify-between font-sans z-10">
               
               {/* Drawer Header */}
-              <div className="px-4 sm:px-5 py-3.5 border-b border-zinc-200 flex items-center justify-between shrink-0 bg-zinc-50">
+              <div className="px-4 sm:px-5 py-4 border-b border-zinc-200 flex items-center justify-between shrink-0 bg-gradient-to-r from-white to-store-page">
                 <div className="flex items-center gap-2">
                   <LuSlidersHorizontal className="w-4 h-4 text-store-primary" />
                   <h3 className="text-sm font-bold uppercase tracking-wider text-zinc-900">
@@ -1276,9 +1291,10 @@ function ProductsPageContent() {
                     </button>
                   )}
                   <button
+                    ref={filterCloseRef}
                     type="button"
                     onClick={() => setIsMobileFilterOpen(false)}
-                    className="w-8 h-8 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:text-zinc-800 cursor-pointer bg-white active:scale-95"
+                    className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-500 hover:text-zinc-800 cursor-pointer bg-white active:scale-95"
                     aria-label="Close filters"
                   >
                     <IoCloseOutline className="w-5 h-5" />
@@ -1316,7 +1332,7 @@ function ProductsPageContent() {
               </div>
 
               {/* Drawer Sticky Footer Action */}
-              <div className="p-3.5 sm:p-4 border-t border-zinc-200 bg-zinc-50 shrink-0 pb-[max(1rem,env(safe-area-inset-bottom))] flex items-center gap-2.5">
+              <div className="p-3.5 sm:p-4 border-t border-zinc-200 bg-white shrink-0 pb-[max(1rem,env(safe-area-inset-bottom))] flex items-center gap-2.5 shadow-[0_-8px_24px_rgba(15,23,42,0.05)]">
                 {activeFilters.length > 0 && (
                   <button
                     type="button"

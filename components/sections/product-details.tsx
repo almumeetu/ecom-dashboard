@@ -279,7 +279,7 @@ export default function ProductDetails({
   const scrollToReviews = () => {
     const el = document.getElementById('product-details-tabs');
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   };
 

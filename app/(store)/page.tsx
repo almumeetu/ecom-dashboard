@@ -196,8 +196,8 @@ export default function Home() {
     },
     {
       icon: LuTruck,
-      title: "Nationwide delivery",
-      description: "Delivered across Bangladesh",
+      title: "Delivery options",
+      description: "Available details are shown at checkout",
     },
     {
       icon: LuWalletCards,
@@ -212,11 +212,11 @@ export default function Home() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-store-page font-sans text-zinc-900 pb-16 sm:pb-20">
+    <main className="w-full min-h-screen bg-store-page font-sans text-zinc-900 pb-16 sm:pb-20">
       {/* ── 1. Order Notice Ribbon Strip (Direct Hotline Call & WhatsApp) ── */}
       <OrderRibbon />
 
-      <div className="space-y-10 pt-6 sm:space-y-12 sm:pt-8 lg:space-y-14">
+      <div className="space-y-12 pt-7 sm:space-y-16 sm:pt-10 lg:space-y-20">
         {/* ── 2. Hero Section: Category Sidebar + Dynamic Campaign Slider ── */}
         <StoreHero
           categories={categories}
@@ -228,20 +228,20 @@ export default function Home() {
           aria-label="Shop with confidence"
           className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10 lg:px-16"
         >
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-store-border bg-store-border shadow-sm sm:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 xl:grid-cols-4">
             {shoppingBenefits.map(({ icon: Icon, title, description }) => (
               <div
                 key={title}
-                className="flex min-w-0 items-center gap-2.5 bg-white px-3 py-4 sm:gap-3 sm:px-4 sm:py-5 lg:px-5"
+                className="flex min-w-0 flex-col items-start gap-3 rounded-2xl border border-store-border bg-white px-4 py-4 shadow-[0_6px_24px_rgba(20,38,56,0.035)] sm:flex-row sm:items-center sm:gap-3 sm:px-5 sm:py-5"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-store-surface text-store-primary sm:h-11 sm:w-11">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-store-surface text-store-primary">
                   <Icon aria-hidden="true" className="h-5 w-5" />
                 </span>
                 <span className="min-w-0">
                   <span className="block text-xs font-semibold leading-5 text-store-ink sm:text-sm">
                     {title}
                   </span>
-                  <span className="mt-0.5 block text-[10px] leading-4 text-store-accent sm:text-xs">
+                  <span className="mt-0.5 block text-[11px] leading-4 text-store-accent sm:text-xs">
                     {description}
                   </span>
                 </span>
@@ -260,14 +260,14 @@ export default function Home() {
         <StorefrontCta featuredProduct={featuredProducts[0]} />
 
         {showStorefrontHighlights && products.length > 0 && (
-          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-10 sm:space-y-12 lg:space-y-14">
+          <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-12 sm:space-y-16 lg:space-y-20">
             <section>
               <div className="flex items-center justify-between gap-4 mb-5 sm:mb-6">
                 <div>
-                  <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.16em] text-store-primary">
+                  <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.18em] text-store-orange-ink">
                     {hasSpecialOffers ? "Worth a closer look" : "Picked for you"}
                   </p>
-                  <h2 className="text-xl font-semibold tracking-tight text-store-ink sm:text-2xl">
+                  <h2 className="text-2xl font-semibold tracking-tight text-store-ink sm:text-3xl">
                     {hasSpecialOffers ? "Special offers" : "Popular picks"}
                   </h2>
                   <p className="mt-1 text-xs text-store-accent sm:text-sm">
@@ -281,7 +281,7 @@ export default function Home() {
                   View all
                 </Link>
               </div>
-              <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
+              <div className="grid grid-cols-2 min-[480px]:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
                 {featuredProducts.map((product) => (
                   <div key={product.id}>{renderProductCard(product)}</div>
                 ))}
@@ -333,10 +333,14 @@ export default function Home() {
         {/* ── 4. Featured Picks and Product Catalog ── */}
         <section id="featured-picks-section" className="scroll-mt-44 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 sm:scroll-mt-48">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 sm:mb-7">
-            <h2 className="text-xl sm:text-2xl font-medium text-zinc-900 tracking-tight">
-              {selectedCategory === "All" ? "All Products" : selectedCategory}
-            </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-6 sm:mb-7">
+            <div>
+              <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.18em] text-store-orange-ink">Discover more</p>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-store-ink tracking-tight">
+                {selectedCategory === "All" ? "Explore all products" : selectedCategory}
+              </h2>
+              <p className="mt-1 text-xs text-store-accent sm:text-sm">Find the right product for every moment.</p>
+            </div>
 
             {/* Search & Sort Controls */}
             <div className="flex flex-wrap items-center gap-2.5">
@@ -406,13 +410,13 @@ export default function Home() {
 
           {/* Responsive product grid */}
           {loading ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
               {Array.from({ length: 10 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />
               ))}
             </div>
           ) : displayedProducts.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-5">
               {visibleProducts.map((product) => (
                 <div key={product.id}>{renderProductCard(product)}</div>
               ))}
@@ -452,6 +456,6 @@ export default function Home() {
         </section>
         <BlogArticles variant="preview" />
       </div>
-    </div>
+    </main>
   );
 }

@@ -440,8 +440,8 @@ export default function ProductTabs({
                 <LuTruck className="w-5 h-5" />
               </div>
               <div>
-                <h4>Express Shipping Information</h4>
-                <p className="text-xs font-normal text-zinc-500">Fast doorstep courier delivery across Bangladesh</p>
+                <h4>Delivery Information</h4>
+                <p className="text-xs font-normal text-zinc-500">Review delivery details for your address at checkout.</p>
               </div>
             </div>
 
@@ -455,25 +455,25 @@ export default function ProductTabs({
                 <li className="flex items-start gap-2.5">
                   <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
-                    <strong>Dhaka Metropolitan:</strong> Delivered in 1–2 business days ({deliveryInside} delivery charge).
+                    <strong>Inside Dhaka:</strong> {deliveryInside} delivery charge. Check checkout for current options.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
-                    <strong>All Bangladesh (Outside Dhaka):</strong> Delivered in 2–4 business days via courier ({deliveryOutside} delivery charge).
+                    <strong>Outside Dhaka:</strong> {deliveryOutside} delivery charge. Check checkout for current options.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
-                    <strong>Real-time Tracking:</strong> SMS notifications and courier tracking links dispatched upon handover.
+                    <strong>Order updates:</strong> Check your account for available updates.
                   </span>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <LuCheck className="w-4 h-4 text-store-primary shrink-0 mt-0.5" />
                   <span>
-                    <strong>Inspection Privilege:</strong> External parcel condition check allowed upon delivery before releasing COD payment.
+                    <strong>Payment methods:</strong> Available options are shown during checkout.
                   </span>
                 </li>
               </ul>

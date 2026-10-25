@@ -103,23 +103,34 @@ export default function Navigation() {
       className={item.hasDropdown ? "" : "relative"}
       onMouseEnter={item.hasDropdown ? handleMouseEnter : undefined}
       onMouseLeave={item.hasDropdown ? handleMouseLeave : undefined}
+      onFocusCapture={item.hasDropdown ? handleMouseEnter : undefined}
+      onBlurCapture={item.hasDropdown ? (event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) handleMouseLeave();
+      } : undefined}
+      onKeyDown={item.hasDropdown ? (event) => {
+        if (event.key === "Escape") {
+          setIsTeasHovered(false);
+          (event.currentTarget.querySelector("a") as HTMLElement | null)?.focus();
+        }
+      } : undefined}
     >
       <Link
         href={item.href}
         className="block"
+        aria-expanded={item.hasDropdown ? isTeasHovered : undefined}
       >
         {item.hasDropdown ? (
-          <span className="inline-flex items-center gap-2 bg-store-primary hover:bg-store-accent text-white font-bold text-xs uppercase tracking-wide px-3.5 py-1.5 rounded-lg transition-all shadow-2xs">
-            <LuLayoutGrid className="w-3.5 h-3.5 text-blue-200" />
+          <span className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/10 px-3.5 py-2 text-xs font-bold uppercase tracking-wide text-white shadow-sm transition-colors hover:bg-white/20">
+            <LuLayoutGrid className="w-3.5 h-3.5 text-amber-200" />
             <span>{item.label}</span>
             <RiArrowDownSLine className={`text-base transition-transform duration-200 ${isTeasHovered ? 'rotate-180' : ''}`} />
           </span>
         ) : (
           <span
-            className={`text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap transition-colors flex items-center gap-0.5 py-2.5 ${
+            className={`flex items-center gap-0.5 whitespace-nowrap rounded-lg px-2.5 py-2 text-[11px] font-semibold uppercase tracking-wider transition-colors ${
               isActive(item.href)
-                ? "text-[#D4E5F6] font-bold"
-                : "text-slate-300 hover:text-white"
+                ? "bg-white/10 text-white font-bold"
+                : "text-slate-200 hover:bg-white/10 hover:text-white"
             }`}
           >
             {item.label}
@@ -137,11 +148,11 @@ export default function Navigation() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="w-[92vw] max-w-[1300px] bg-white shadow-[0px_16px_48px_0px_rgba(0,0,0,0.12)] rounded-xl border border-zinc-100 overflow-hidden">
-            <div className="px-10 py-10 flex justify-start items-start gap-12 text-zinc-800">
+          <div className="w-[min(90vw,760px)] rounded-2xl border border-store-border bg-white shadow-[0_24px_60px_rgba(20,38,56,0.16)] overflow-hidden">
+            <div className="flex items-start gap-8 px-7 py-7 text-zinc-800">
               
-              <div className="flex-1 flex justify-start items-start gap-12">
-                <div className="w-[280px] xl:w-[320px] shrink-0 flex flex-col justify-start items-start">
+              <div className="flex min-w-0 flex-1 items-start gap-8">
+                <div className="flex w-[min(44%,280px)] shrink-0 flex-col items-start">
                   <Link
                     href="/products"
                     onClick={() => setIsTeasHovered(false)}
@@ -174,7 +185,7 @@ export default function Navigation() {
                   })}
                 </div>
 
-                <div className="flex-1 pt-2 flex flex-col justify-start items-start">
+                <div className="flex min-w-0 flex-1 flex-col items-start border-l border-store-border pl-8 pt-2">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-3">
                     Subcategories
                   </span>
@@ -191,62 +202,9 @@ export default function Navigation() {
                       </Link>
                     ))
                   ) : (
-                    <div className="flex flex-col gap-2">
-                      <Link href="/products?search=grocery" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-store-primary text-sm">🥦 Organic Fruits & Fresh Vegetables</Link>
-                      <Link href="/products?search=food" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-store-primary text-sm">🥐 Bakery, Snacks & Beverages</Link>
-                      <Link href="/products?category=Fashion" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-store-primary text-sm">👗 Women&apos;s &amp; Men&apos;s Apparel</Link>
-                      <Link href="/products?category=Footwear" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-store-primary text-sm">👟 Footwear & Casual Sneakers</Link>
-                      <Link href="/products?category=Accessories" onClick={() => setIsTeasHovered(false)} className="text-zinc-600 hover:text-store-primary text-sm">⌚ Watches, Bags & Sunglasses</Link>
-                    </div>
+                    <Link href="/products" onClick={() => setIsTeasHovered(false)} className="text-sm font-medium text-store-primary hover:text-store-hover">Explore all products →</Link>
                   )}
                 </div>
-              </div>
-
-              <div className="w-px self-stretch bg-zinc-200"></div>
-
-              {/* Promo Cards inside Mega-Menu */}
-              <div className="flex-1 flex justify-start items-center gap-6">
-                <Link 
-                  href="/products?search=grocery" 
-                  onClick={() => setIsTeasHovered(false)}
-                  className="flex-1 flex flex-col justify-center items-start gap-2.5 group/promo"
-                >
-                  <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-xs">
-                    <img 
-                      src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=80" 
-                      alt="Fresh Grocery Deals" 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover/promo:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-store-primary px-2 py-0.5 rounded">
-                      Fresh Daily
-                    </span>
-                  </div>
-                  <div className="text-zinc-800 group-hover/promo:text-store-primary font-semibold text-sm transition-colors">
-                    Daily Groceries & Pantry →
-                  </div>
-                </Link>
-
-                <Link 
-                  href="/products?category=Fashion" 
-                  onClick={() => setIsTeasHovered(false)}
-                  className="flex-1 flex flex-col justify-center items-start gap-2.5 group/promo"
-                >
-                  <div className="relative w-full h-64 rounded-xl overflow-hidden shadow-xs">
-                    <img 
-                      src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&auto=format&fit=crop&q=80" 
-                      alt="Trending Fashion" 
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover/promo:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <span className="absolute bottom-3 left-3 text-white text-xs font-bold bg-[#8B4F2B] px-2 py-0.5 rounded">
-                      Top Brands
-                    </span>
-                  </div>
-                  <div className="text-zinc-800 group-hover/promo:text-store-primary font-semibold text-sm transition-colors">
-                    Trending Fashion Drops →
-                  </div>
-                </Link>
               </div>
             </div>
           </div>
@@ -256,22 +214,23 @@ export default function Navigation() {
   );
 
   return (
-    <nav className="relative hidden xl:flex items-center justify-between w-full h-11">
-      <div className="flex items-center gap-5 xl:gap-7">
+    <nav className="relative hidden h-12 w-full items-center justify-between xl:flex">
+      <div className="flex items-center gap-1 xl:gap-2">
         {allNavItems.map(renderNavItem)}
       </div>
 
-      <div className="flex items-center gap-4 text-xs font-semibold">
+      <div className="flex items-center gap-3 text-xs font-semibold">
         <Link
           href="/products"
-          className="flex items-center gap-1.5 text-[#E88443] hover:text-[#8B4F2B] transition-colors uppercase tracking-wider text-[11px] font-bold"
+          className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-amber-200 transition-colors hover:bg-white/10 hover:text-amber-100"
         >
-          <span>⚡ Daily Offers</span>
+          <span aria-hidden="true">⚡</span>
+          <span>Daily Offers</span>
         </Link>
-        <span className="text-slate-600">|</span>
-        <span className="text-slate-300 text-[11px] font-medium flex items-center gap-1.5">
+        <span className="h-5 w-px bg-white/15" aria-hidden="true" />
+        <span className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[11px] font-medium text-slate-200">
           <span className="w-1.5 h-1.5 rounded-full bg-store-primary animate-pulse"></span>
-          Free Shipping ৳999+
+          Delivery information
         </span>
       </div>
     </nav>

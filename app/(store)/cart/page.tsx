@@ -672,7 +672,7 @@ export default function CartPage() {
                     <span>Delivery Destination</span>
                   </label>
                   <span className="text-[10px] font-medium text-zinc-400">
-                    {deliveryZone === "dhaka" ? "Next-Day Speed" : "Nationwide 2–4 Days"}
+                    Delivery details shown at checkout
                   </span>
                 </div>
 
@@ -707,12 +707,9 @@ export default function CartPage() {
                           <span className="text-xs font-medium text-zinc-950">
                             Inside Dhaka
                           </span>
-                          <span className="text-[10px] font-medium text-store-primary bg-store-surface px-2 py-0.5 rounded-full">
-                            Next Day
-                          </span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-medium mt-0.5">
-                          Express doorstep delivery (1 day)
+                          Delivery options and charges are shown at checkout.
                         </p>
                       </div>
                     </div>
@@ -760,14 +757,11 @@ export default function CartPage() {
                       <div className="min-w-0">
                         <div className="flex items-center gap-2">
                           <span className="text-xs font-medium text-zinc-950">
-                            All Bangladesh
-                          </span>
-                          <span className="text-[10px] font-medium text-zinc-600 bg-zinc-100 px-2 py-0.5 rounded-full">
-                            2–4 Days
+                            Outside Dhaka
                           </span>
                         </div>
                         <p className="text-[11px] text-zinc-500 font-medium mt-0.5">
-                          Nationwide courier doorstep delivery
+                          Delivery options depend on your address.
                         </p>
                       </div>
                     </div>

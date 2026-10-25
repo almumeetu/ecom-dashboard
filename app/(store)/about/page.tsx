@@ -4,7 +4,7 @@ import PolicyNav from '@/components/sections/policy/policy-nav';
 
 export const metadata = {
   title: "About Us | NovaMart — Bangladesh's Premier Multi-Category Shopping Platform",
-  description: "Discover NovaMart, Bangladesh's modern e-commerce destination for authentic skin care, digital electronics, luxury perfumes, fashion, baby care, and home essentials delivered nationwide.",
+  description: "Discover NovaMart, a multi-category online store featuring skin care, digital electronics, perfumes, fashion, baby care, and home essentials.",
 };
 
 export default function AboutPage() {
@@ -12,7 +12,7 @@ export default function AboutPage() {
     <div className="w-full">
       <PageBanner
         title="About NovaMart"
-        subtitle="Bangladesh's premier multi-category online shopping destination. Delivering 100% genuine products with fast doorstep delivery and buyer protection across all 64 districts."
+        subtitle="Explore products across skin care, electronics, fashion, baby care, and home essentials. Delivery options and charges are shown at checkout."
         breadcrumbs={[
           { label: "About Us" },
         ]}

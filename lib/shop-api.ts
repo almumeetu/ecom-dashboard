@@ -442,9 +442,15 @@ export async function fetchShopBrands(): Promise<ShopBrand[]> {
   return result && result.length > 0 ? result : DEFAULT_NOVAMART_BRANDS;
 }
 
-export async function fetchShopCategories(): Promise<ShopCategory[]> {
-  const result = await safeFetchJson<ShopCategory[]>(`${API_BASE_URL}/category`, []);
-  return result && result.length > 0 ? result : DEFAULT_NOVAMART_CATEGORIES;
+let categoriesInFlight: Promise<ShopCategory[]> | null = null;
+
+export function fetchShopCategories(): Promise<ShopCategory[]> {
+  if (!categoriesInFlight) {
+    categoriesInFlight = safeFetchJson<ShopCategory[]>(`${API_BASE_URL}/category`, [])
+      .then((result) => result && result.length > 0 ? result : DEFAULT_NOVAMART_CATEGORIES)
+      .finally(() => { categoriesInFlight = null; });
+  }
+  return categoriesInFlight;
 }
 
 export async function fetchShopSettings(): Promise<ShopSettings | null> {
@@ -484,8 +490,8 @@ export async function fetchStorePolicies(): Promise<StorePolicies | null> {
   if (result) return result;
   return {
     delivery: {
-      title: "Nationwide Doorstep Delivery",
-      content: "Inside Dhaka Metropolitan: ৳60 (24 to 48 hours). All other 63 districts across Bangladesh: ৳120 (2 to 4 days). Free delivery on orders over ৳1,999. Cash on Delivery is supported nationwide.",
+      title: "Delivery Information",
+      content: "Available delivery options and charges depend on the delivery address. Review the current details during checkout before placing an order.",
     },
     return: {
       title: "7-Day Return & Replacement Policy",

@@ -653,7 +653,7 @@ export default function CheckoutPage() {
                     <div className="flex items-start justify-between w-full mb-1.5">
                       <div>
                         <span className="text-sm font-medium text-zinc-950 block">Inside Dhaka</span>
-                        <p className="text-xs text-zinc-500 font-medium">Next Day Express Doorstep</p>
+                        <p className="text-xs text-zinc-500 font-medium">Delivery details for your address</p>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all shrink-0 ${
@@ -670,7 +670,7 @@ export default function CheckoutPage() {
                         {isDhakaFree ? "FREE Delivery" : formatCurrency(insideRate)}
                       </span>
                       <span className="text-[10px] font-semibold text-zinc-500 bg-white px-2 py-0.5 rounded-full border border-zinc-200/80">
-                        1 Business Day
+                        Delivery details
                       </span>
                     </div>
                   </button>
@@ -688,8 +688,8 @@ export default function CheckoutPage() {
                   >
                     <div className="flex items-start justify-between w-full mb-1.5">
                       <div>
-                        <span className="text-sm font-medium text-zinc-950 block">All Bangladesh</span>
-                        <p className="text-xs text-zinc-500 font-medium">Nationwide 64 Districts</p>
+                        <span className="text-sm font-medium text-zinc-950 block">Outside Dhaka</span>
+                        <p className="text-xs text-zinc-500 font-medium">Delivery options depend on your address</p>
                       </div>
                       <div
                         className={`w-5 h-5 rounded-full flex items-center justify-center transition-all shrink-0 ${
@@ -706,7 +706,7 @@ export default function CheckoutPage() {
                         {outsideRate === 0 ? "FREE Delivery" : formatCurrency(outsideRate)}
                       </span>
                       <span className="text-[10px] font-semibold text-zinc-500 bg-white px-2 py-0.5 rounded-full border border-zinc-200/80">
-                        2–4 Business Days
+                        Delivery details
                       </span>
                     </div>
                   </button>

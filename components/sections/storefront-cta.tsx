@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { LuArrowRight, LuBadgePercent, LuCheck, LuShoppingBag, LuSparkles } from "react-icons/lu";
+import { LuArrowRight, LuShoppingBag } from "react-icons/lu";
 import type { ShopProduct } from "@/lib/shop-api";
 
 type StorefrontCtaProps = {
@@ -8,105 +8,74 @@ type StorefrontCtaProps = {
 };
 
 export default function StorefrontCta({ featuredProduct }: StorefrontCtaProps) {
-  const hasDiscount = Boolean(
-    featuredProduct?.originalPrice && featuredProduct.originalPrice > featuredProduct.price,
-  );
-  const discountPercent = hasDiscount && featuredProduct
-    ? Math.round(((featuredProduct.originalPrice! - featuredProduct.price) / featuredProduct.originalPrice!) * 100)
-    : 0;
   const productHref = featuredProduct?.slug
     ? `/products/${encodeURIComponent(featuredProduct.slug)}`
     : "/products";
 
   return (
     <section className="mx-auto w-full max-w-[1440px] px-4 sm:px-6 md:px-10 lg:px-16" aria-labelledby="storefront-cta-title">
-      <div className="relative isolate overflow-hidden rounded-3xl border border-store-border bg-gradient-to-br from-store-surface via-white to-store-orange-soft shadow-sm sm:rounded-[30px]">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full bg-orange-200/25 blur-3xl" />
-        <div className="relative grid items-center gap-8 p-5 sm:p-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12 lg:p-10">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-store-primary/15 bg-white/80 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-store-primary shadow-sm">
-              {hasDiscount ? <LuBadgePercent className="h-4 w-4 text-orange-500" aria-hidden="true" /> : <LuSparkles className="h-4 w-4 text-orange-500" aria-hidden="true" />}
-              {hasDiscount ? "A deal picked for you" : "A NovaMart pick"}
-            </span>
-
-            <h2 id="storefront-cta-title" className="mt-4 max-w-xl text-2xl font-semibold leading-tight tracking-tight text-store-deep sm:text-3xl lg:text-[2.5rem]">
-              Find your next <span className="text-store-primary">everyday favourite.</span>
+      <div className="relative isolate overflow-hidden rounded-3xl bg-store-deep shadow-[0_18px_45px_rgba(20,38,56,0.12)] sm:rounded-[30px]">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-20 -top-28 h-72 w-72 rounded-full bg-store-primary/40 blur-3xl" />
+        <div aria-hidden="true" className="pointer-events-none absolute bottom-0 left-0 h-1 w-20 bg-store-orange sm:w-28" />
+        <div className="relative grid items-center gap-8 p-6 sm:gap-10 sm:p-9 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:p-12">
+          <div className="max-w-lg">
+            <h2 id="storefront-cta-title" className="max-w-md text-3xl font-semibold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              Find your next <span className="text-[#f4c9a9]">everyday favourite.</span>
             </h2>
 
-            <div className="mt-6 flex flex-col gap-3 min-[420px]:flex-row">
+            <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-8">
               <Link
                 href={productHref}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-store-primary px-5 py-3 text-sm font-semibold text-white shadow-md shadow-store-deep/15 transition hover:bg-store-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-primary"
+                className="inline-flex min-h-12 items-center justify-center gap-3 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-store-deep transition hover:bg-store-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 {featuredProduct ? "Shop this pick" : "Start shopping"}
                 <LuArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
-              <Link
-                href="/products"
-                className="inline-flex min-h-12 items-center justify-center rounded-xl border border-store-primary/25 bg-white/80 px-5 py-3 text-sm font-semibold text-store-deep transition hover:border-store-primary hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-primary"
-              >
-                Explore all products
-              </Link>
+              {featuredProduct && (
+                <Link
+                  href="/products"
+                  className="inline-flex min-h-12 items-center justify-center rounded-xl border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:border-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Explore all products
+                </Link>
+              )}
             </div>
-
-            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-xs font-medium text-store-accent">
-              {["Handpicked finds", "Secure checkout", "Delivery across Bangladesh"].map((benefit) => (
-                <li key={benefit} className="inline-flex items-center gap-1.5">
-                  <LuCheck className="h-3.5 w-3.5 text-emerald-600" aria-hidden="true" />
-                  {benefit}
-                </li>
-              ))}
-            </ul>
           </div>
 
           {featuredProduct ? (
             <Link
               href={productHref}
-              aria-label={`Shop ${featuredProduct.name}`}
-              className="group relative mx-auto flex w-full max-w-[500px] items-center gap-4 rounded-2xl border border-white bg-white/90 p-3 shadow-lg shadow-store-deep/10 transition hover:-translate-y-0.5 hover:shadow-xl sm:gap-5 sm:p-4"
+              className="group grid w-full grid-cols-[100px_minmax(0,1fr)] items-stretch gap-4 rounded-2xl bg-white p-3 shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:grid-cols-[150px_minmax(0,1fr)] sm:gap-6 sm:p-4"
             >
-              <div className="relative aspect-square w-[112px] shrink-0 overflow-hidden rounded-xl bg-store-surface sm:w-36">
+              <div className="relative min-h-[140px] overflow-hidden rounded-xl bg-store-surface sm:min-h-[180px]">
                 <Image
                   src={featuredProduct.image}
-                  alt={featuredProduct.name}
+                  alt=""
                   fill
-                  sizes="(max-width: 640px) 112px, 144px"
-                  className="object-contain p-2 transition-transform duration-300 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100px, 150px"
+                  className="object-contain p-3 transition-transform duration-300 group-hover:scale-105"
                   unoptimized
                 />
-                {hasDiscount && (
-                  <span className="absolute left-2 top-2 rounded-full bg-orange-500 px-2 py-1 text-[10px] font-bold text-white shadow-sm">
-                    {discountPercent}% OFF
-                  </span>
-                )}
               </div>
 
-              <div className="min-w-0 flex-1 py-1">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-store-accent">
-                  {featuredProduct.category || "Featured product"}
-                </p>
-                <h3 className="mt-2 line-clamp-2 text-sm font-semibold leading-snug text-store-ink sm:text-base">
+              <div className="flex min-w-0 flex-col items-start justify-center py-1 pr-1 sm:py-3 sm:pr-3">
+                <h3 className="line-clamp-3 text-sm font-semibold leading-snug text-store-ink sm:text-lg">
                   {featuredProduct.name}
                 </h3>
-                <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span className="text-lg font-bold text-store-deep sm:text-xl">
+                <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1 sm:mt-4">
+                  <span className="text-lg font-semibold text-store-deep sm:text-2xl">
                     ৳ {featuredProduct.price.toLocaleString()}
                   </span>
-                  {hasDiscount && featuredProduct.originalPrice && (
-                    <span className="text-xs text-zinc-400 line-through">
-                      ৳ {featuredProduct.originalPrice.toLocaleString()}
-                    </span>
-                  )}
                 </div>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-store-primary">
-                  View product <LuArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                <span className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-store-primary sm:mt-4 sm:text-sm">
+                  View product <LuArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </span>
               </div>
             </Link>
           ) : (
             <Link
               href="/products"
-              className="group relative mx-auto flex min-h-[188px] w-full max-w-[500px] items-center justify-center overflow-hidden rounded-2xl border border-white bg-white/80 p-6 text-center shadow-lg shadow-store-deep/10 transition hover:-translate-y-0.5 sm:min-h-[216px]"
+              className="group relative flex min-h-[170px] w-full items-center justify-center overflow-hidden rounded-2xl bg-white p-6 text-center shadow-lg shadow-black/10 transition hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:min-h-[212px]"
             >
               <div aria-hidden="true" className="absolute h-48 w-48 rounded-full bg-store-surface" />
               <div className="relative">

@@ -152,28 +152,21 @@ export default function StoreHero({
 
   return (
     <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-3 sm:mb-6">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-store-orange-ink">Welcome to NovaMart</p>
-          <p className="mt-1 text-sm text-store-accent sm:text-base">Your favourite finds, thoughtfully brought together.</p>
-        </div>
-        <Link href="/products" className="hidden items-center gap-2 text-sm font-semibold text-store-primary transition-colors hover:text-store-hover sm:inline-flex">
-          Explore the store <LuArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
-      </div>
-      <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-12 lg:gap-5">
+      <div className="grid grid-cols-1 items-stretch gap-3 lg:grid-cols-12 lg:gap-4">
         {/* ═══════════════ LEFT COLUMN: Shop by Category Sidebar ═══════════════ */}
-        <div className="hidden lg:col-span-3 lg:flex h-[470px] flex-col overflow-hidden rounded-[28px] border border-store-border bg-white shadow-[0_16px_40px_rgba(20,38,56,0.06)] xl:h-[500px]">
+        <div className="hidden h-[470px] flex-col overflow-hidden rounded-[24px] border border-store-border bg-white shadow-[0_12px_36px_rgba(20,38,56,0.05)] lg:col-span-3 lg:flex xl:h-[500px]">
           {/* Header */}
-          <div className="bg-store-deep px-5 py-5 text-white flex items-center justify-between text-sm font-semibold tracking-wide shrink-0">
-            <div className="flex items-center gap-2">
-              <LuMenu className="w-4 h-4 text-store-orange" />
-              <span>Shop by category</span>
+          <div className="flex shrink-0 items-center gap-3 border-b border-store-border px-5 py-5">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-store-deep text-store-orange">
+              <LuMenu className="h-4 w-4" aria-hidden="true" />
+            </span>
+            <div>
+              <h2 className="text-sm font-semibold text-store-deep">Shop by category</h2>
             </div>
           </div>
 
           {/* Categories List */}
-          <div className="storefront-scroll-track flex-1 overflow-y-auto py-2">
+          <div className="storefront-scroll-track min-h-0 flex-1 overflow-y-auto px-2 py-2">
             {sidebarCategories.map((cat) => {
               const isSelected = selectedCategory.toLowerCase() === cat.name.toLowerCase();
               return (
@@ -182,20 +175,20 @@ export default function StoreHero({
                   type="button"
                   onClick={() => onSelectCategory(cat.name)}
                   aria-pressed={isSelected}
-                  className={`mx-2 flex w-[calc(100%_-_1rem)] items-center justify-between rounded-xl px-3 py-1.5 text-left transition-colors duration-200 group cursor-pointer ${
+                  className={`group flex w-full cursor-pointer items-center justify-between rounded-xl px-2.5 py-2 text-left transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-store-primary ${
                     isSelected
-                      ? "bg-store-surface text-store-primary font-bold"
-                      : "text-zinc-700 hover:bg-store-surface/80 hover:text-store-primary"
+                      ? "bg-store-surface text-store-primary"
+                      : "text-store-ink hover:bg-store-page hover:text-store-primary"
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                    <div className="relative flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-store-border bg-store-page text-xs">
+                    <div className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-store-surface text-xs">
                       {cat.imageUrl ? (
                         <Image
                           src={cat.imageUrl}
                           alt={cat.name}
                           fill
-                          sizes="32px"
+                          sizes="36px"
                           className="object-cover transition-transform duration-300 group-hover:scale-110"
                           unoptimized={cat.imageUrl.includes("unsplash.com")}
                         />
@@ -203,7 +196,7 @@ export default function StoreHero({
                         <span>🛍️</span>
                       )}
                     </div>
-                    <span className="truncate text-xs font-semibold leading-tight">
+                    <span className="truncate text-xs font-semibold leading-tight xl:text-[13px]">
                       {cat.name}
                     </span>
                   </div>
@@ -221,13 +214,13 @@ export default function StoreHero({
           </div>
 
           {/* Bottom All Categories Link */}
-          <div className="shrink-0 border-t border-store-border bg-store-page p-3 text-center">
+          <div className="shrink-0 border-t border-store-border px-5 py-4">
             <Link
               href="/products"
-              className="text-[11px] font-bold text-store-primary hover:text-store-accent inline-flex items-center gap-1 transition-colors"
+              className="group flex items-center justify-between text-xs font-semibold text-store-primary transition-colors hover:text-store-orange-ink"
             >
-              <span>View All Categories</span>
-              <LuArrowRight className="w-3 h-3" />
+              <span>View all categories</span>
+              <LuArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -238,7 +231,7 @@ export default function StoreHero({
           aria-label="Featured campaigns"
           aria-roledescription="carousel"
           ref={carouselRef}
-          className="group relative h-[420px] w-full select-none overflow-hidden rounded-[28px] bg-store-deep shadow-[0_24px_60px_rgba(20,38,56,0.16)] sm:h-[450px] lg:col-span-9 lg:h-[470px] xl:h-[500px]"
+          className="group relative h-[360px] w-full select-none overflow-hidden rounded-[20px] bg-store-deep shadow-[0_18px_50px_rgba(20,38,56,0.14)] sm:h-[460px] sm:rounded-[24px] lg:col-span-9 lg:h-[470px] xl:h-[500px]"
           onTouchStart={(event) => { touchStartX.current = event.touches[0].clientX; }}
           onTouchEnd={handleTouchEnd}
           onMouseEnter={() => setIsHovered(true)}
@@ -281,21 +274,18 @@ export default function StoreHero({
                 </div>
 
                 {/* Rich Gradient Overlay for High Readability */}
-                <div className="absolute inset-0 bg-gradient-to-r from-store-deep/95 via-store-deep/75 to-store-deep/15 sm:from-store-deep/95 sm:via-store-deep/70 sm:to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-store-deep/70 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#102334]/95 via-[#102334]/75 to-[#102334]/30 sm:via-[#102334]/65 sm:to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#102334]/85 via-transparent to-[#102334]/10" />
+                <div aria-hidden="true" className="absolute inset-y-0 left-0 w-1 bg-store-orange" />
 
                 {/* Banner Content Container */}
-                <div className="absolute inset-0 z-20 flex max-w-[710px] flex-col items-start justify-center px-7 pb-10 text-white sm:px-12 md:px-14 lg:px-16">
-                  <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-sm sm:text-[11px]">
-                    <span className="h-1.5 w-1.5 rounded-full bg-store-orange" aria-hidden="true" />
-                    {camp.badge?.trim() || (camp.hasDiscount ? "Special offer" : "Featured collection")}
-                  </span>
+                <div className="absolute inset-0 z-20 flex max-w-[680px] flex-col items-start justify-center px-5 pb-16 pt-5 text-white sm:px-12 sm:pb-20 sm:pt-6 lg:px-14">
                   {/* Campaign Title */}
-                  <h1 className="mb-4 max-w-[640px] text-[clamp(2rem,4vw,3.75rem)] font-semibold leading-[1.13] tracking-[-0.04em] text-white">
+                  <h1 className="mb-2 max-w-[600px] text-[clamp(1.6rem,6vw,2rem)] font-semibold leading-[1.16] tracking-[-0.035em] text-white sm:mb-4 sm:text-[clamp(1.8rem,3.6vw,3.4rem)]">
                     {camp.title}
                   </h1>
                   {camp.description?.trim() && (
-                    <p className="mb-7 max-w-[490px] line-clamp-3 text-sm leading-6 text-white/85 sm:text-base sm:leading-7">
+                    <p className="mb-4 line-clamp-2 max-w-[480px] text-xs leading-5 text-white/80 sm:mb-6 sm:line-clamp-3 sm:text-base sm:leading-7">
                       {camp.description}
                     </p>
                   )}
@@ -304,10 +294,10 @@ export default function StoreHero({
                   <Link
                     href={getCampaignHref(camp)}
                     tabIndex={isActive ? 0 : -1}
-                    className="inline-flex min-h-12 w-fit items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-semibold text-store-deep shadow-lg shadow-black/10 transition hover:-translate-y-0.5 hover:bg-store-surface active:scale-[0.98] sm:px-7"
+                    className="group/cta inline-flex min-h-10 w-fit items-center gap-3 rounded-xl bg-white px-4 py-2.5 text-xs font-semibold text-store-deep transition hover:bg-store-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:min-h-12 sm:gap-4 sm:px-6 sm:py-3 sm:text-sm"
                   >
                     <span>{camp.ctaText || "Shop Now"}</span>
-                    <LuArrowRight className="w-4 h-4" />
+                    <LuArrowRight className="h-4 w-4 transition-transform group-hover/cta:translate-x-1" aria-hidden="true" />
                   </Link>
 
                 </div>
@@ -322,7 +312,7 @@ export default function StoreHero({
                 type="button"
                 onClick={handlePrev}
                 aria-label="Previous Campaign"
-                className="absolute bottom-5 left-6 z-30 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-sm transition-all hover:bg-white hover:text-store-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-95 sm:bottom-7 sm:left-12 sm:h-11 sm:w-11"
+                className="absolute bottom-5 left-7 z-30 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-store-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-7 sm:left-12 lg:left-14"
               >
                 <LuChevronLeft className="w-5 h-5" />
               </button>
@@ -331,13 +321,13 @@ export default function StoreHero({
                 type="button"
                 onClick={handleNext}
                 aria-label="Next Campaign"
-                className="absolute bottom-5 left-[70px] z-30 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/30 bg-white/15 text-white backdrop-blur-sm transition-all hover:bg-white hover:text-store-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white active:scale-95 sm:bottom-7 sm:left-[100px] sm:h-11 sm:w-11"
+                className="absolute bottom-5 left-[76px] z-30 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-white/25 bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white hover:text-store-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:bottom-7 sm:left-[96px] lg:left-[104px]"
               >
                 <LuChevronRight className="w-5 h-5" />
               </button>
 
               {/* Slide Pagination Dots */}
-              <div className="storefront-scroll-track absolute bottom-5 right-6 z-30 flex max-w-[45%] items-center gap-1 overflow-x-auto sm:bottom-8 sm:right-10">
+              <div className="storefront-scroll-track absolute bottom-5 right-5 z-30 flex max-w-[45%] items-center gap-1 overflow-x-auto sm:bottom-7 sm:right-10">
                 {campaigns.map((_, dotIndex) => (
                   <button
                     key={dotIndex}
@@ -347,7 +337,7 @@ export default function StoreHero({
                     className="grid h-10 w-7 shrink-0 cursor-pointer place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-white"
                     aria-label={`Go to campaign ${dotIndex + 1}`}
                   >
-                    <span className={`h-2 rounded-full transition-all duration-300 ${dotIndex === currentSlide ? "w-6 bg-store-orange" : "w-2 bg-white/60"}`} />
+                    <span className={`h-1 rounded-full transition-all duration-300 ${dotIndex === currentSlide ? "w-6 bg-store-orange" : "w-2 bg-white/60"}`} />
                   </button>
                 ))}
               </div>

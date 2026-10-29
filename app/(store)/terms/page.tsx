@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import {
-  FiFileText,
   FiPhone,
   FiMail,
   FiCheck,
@@ -80,15 +79,11 @@ export default function TermsPage() {
           <div className="lg:col-span-8 space-y-6">
             <article className="space-y-7 rounded-[28px] border border-store-border/80 bg-white p-6 shadow-[0_12px_40px_rgba(20,38,56,0.045)] sm:space-y-8 sm:p-9 lg:p-10">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-3">
-                  <FiFileText className="w-3.5 h-3.5 text-store-primary" />
-                  <span>Effective Date: January 1, 2026</span>
-                </div>
                 <h2 className="text-2xl font-semibold tracking-tight text-store-ink sm:text-3xl">
                   NovaMart Bangladesh Terms of Service
                 </h2>
                 <p className="mt-2 text-sm leading-6 text-zinc-500 sm:text-[15px] sm:leading-7">
-                  Please review these terms carefully before placing an order. These provisions define your legal rights, warranties, and obligations.
+                  Effective January 1, 2026. Please review these terms carefully before placing an order. These provisions define your legal rights, warranties, and obligations.
                 </p>
               </div>
 

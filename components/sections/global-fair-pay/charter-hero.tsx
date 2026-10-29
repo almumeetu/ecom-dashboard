@@ -41,14 +41,6 @@ export default function CharterHero() {
       <div className="absolute -bottom-24 right-10 w-[400px] h-[300px] bg-teal-500/10 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto relative z-10 text-center flex flex-col items-center">
-        {/* Top Badge */}
-        <ScrollAnimate variant="fade-in-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-semibold tracking-wider uppercase mb-6 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            NovaMart Ethical Standards
-          </div>
-        </ScrollAnimate>
-
         {/* Main Headline */}
         <ScrollAnimate variant="fade-in-up" delay={100}>
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.15] mb-6">

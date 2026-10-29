@@ -42,11 +42,6 @@ export default function CharterVerification() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <ScrollAnimate variant="fade-in-up">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-200">
-              Rigorous Accountability
-            </span>
-          </ScrollAnimate>
           <ScrollAnimate variant="fade-in-up" delay={80}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
               How We Verify <span className="text-emerald-600">& Enforce Compliance</span>

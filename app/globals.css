@@ -340,7 +340,7 @@ body {
 }
 
 @media (max-width: 359px) {
-  .storefront-mobile-logo > div:first-child { display: none; }
+  .storefront-mobile-logo > span:first-child { display: none; }
 }
 
 /* Keep storefront type clean while preserving a clear weight hierarchy. */

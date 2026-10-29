@@ -5,7 +5,6 @@ import {
   HiShieldCheck,
   HiOutlineDocumentDownload,
   HiArrowRight,
-  HiOutlineSparkles,
   HiPhone,
 } from "react-icons/hi";
 import ScrollAnimate from "@/components/ui/scroll-animate";
@@ -18,13 +17,6 @@ export default function CharterCTA() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10 text-center flex flex-col items-center space-y-8">
-        <ScrollAnimate variant="fade-in-up">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs sm:text-sm font-semibold tracking-wider uppercase backdrop-blur-md">
-            <HiOutlineSparkles className="w-4 h-4 text-emerald-400" />
-            Join the Fair Trade Movement
-          </div>
-        </ScrollAnimate>
-
         <ScrollAnimate variant="fade-in-up" delay={80}>
           <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight max-w-3xl">
             Stand With Us for{" "}

@@ -9,14 +9,13 @@ import {
   FiShield,
   FiPhone,
   FiArrowRight,
-  FiShoppingBag,
   FiRefreshCw,
   FiAward,
   FiPackage,
   FiHeart,
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa6';
-import { HiCheckCircle, HiShieldCheck, HiSparkles } from 'react-icons/hi';
+import { HiCheckCircle, HiSparkles } from 'react-icons/hi';
 import ScrollAnimate from '@/components/ui/scroll-animate';
 
 export default function About() {
@@ -99,10 +98,6 @@ export default function About() {
               
               {/* Left Column: Mission & Narrative */}
               <div className="lg:col-span-7 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold tracking-wider uppercase">
-                  <FiShoppingBag className="w-3.5 h-3.5 text-store-primary" />
-                  <span>About NovaMart Bangladesh</span>
-                </div>
 
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-zinc-950 tracking-tight leading-tight">
                   Authentic Quality &amp; Multi-Category Convenience Across Bangladesh
@@ -223,10 +218,6 @@ export default function About() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               
               <div className="lg:col-span-8 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-deep/90 border border-store-light/40 text-store-light text-xs font-bold uppercase tracking-wider">
-                  <HiShieldCheck className="w-4 h-4 text-store-light" />
-                  <span>The NovaMart Promise</span>
-                </div>
 
                 <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
                   Authenticity First, Customer Always
@@ -292,9 +283,6 @@ export default function About() {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-                Product Departments
-              </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
                 Explore Our Core Categories
               </h2>
@@ -352,9 +340,6 @@ export default function About() {
       <section className="py-14 sm:py-20 bg-white border-y border-zinc-200/80">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-              Why NovaMart
-            </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-950 tracking-tight mt-1">
               Our Core Service Commitments
             </h2>

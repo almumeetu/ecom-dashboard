@@ -72,9 +72,6 @@ export default function CorporateSolutions() {
         {/* Section Header */}
         <ScrollAnimate variant="fade-in-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs uppercase font-medium text-store-primary tracking-wider inline-block mb-2">
-              Tailored Enterprise Capabilities
-            </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl text-zinc-900 font-normal tracking-tight mb-4">
               Curated Corporate Solutions
             </h2>
@@ -105,9 +102,6 @@ export default function CorporateSolutions() {
 
                 <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow">
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-store-primary block mb-1">
-                      {item.subtitle}
-                    </span>
                     <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl text-stone-900 font-semibold mb-3">
                       {item.title}
                     </h3>
@@ -141,9 +135,6 @@ export default function CorporateSolutions() {
         {/* 4-Step Process Section */}
         <div className="bg-white rounded-3xl p-8 sm:p-12 md:p-16 border border-stone-200 shadow-sm mb-16">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase font-bold text-store-primary tracking-wider">
-              Seamless Execution
-            </span>
             <h3 className="font-['Bembo_Std'] text-2xl sm:text-3xl md:text-4xl text-stone-900 font-semibold mt-1">
               How Corporate Ordering Works
             </h3>

@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ProductCard, { ProductCardSkeleton } from "@/components/sections/ui/product-card";
-import OrderRibbon from "@/components/sections/order-ribbon";
 import StoreHero from "@/components/sections/store-hero";
 import BrowseCategories from "@/components/sections/browse-categories";
 import HorizontalScroller from "@/components/sections/ui/horizontal-scroller";
@@ -213,9 +212,6 @@ export default function Home() {
 
   return (
     <main className="w-full min-h-screen bg-store-page font-sans text-zinc-900 pb-16 sm:pb-20">
-      {/* ── 1. Order Notice Ribbon Strip (Direct Hotline Call & WhatsApp) ── */}
-      <OrderRibbon />
-
       <div className="space-y-12 pt-7 sm:space-y-16 sm:pt-10 lg:space-y-20">
         {/* ── 2. Hero Section: Category Sidebar + Dynamic Campaign Slider ── */}
         <StoreHero
@@ -264,9 +260,6 @@ export default function Home() {
             <section>
               <div className="flex items-center justify-between gap-4 mb-5 sm:mb-6">
                 <div>
-                  <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.18em] text-store-orange-ink">
-                    {hasSpecialOffers ? "Worth a closer look" : "Picked for you"}
-                  </p>
                   <h2 className="text-2xl font-semibold tracking-tight text-store-ink sm:text-3xl">
                     {hasSpecialOffers ? "Special offers" : "Popular picks"}
                   </h2>
@@ -335,7 +328,6 @@ export default function Home() {
           {/* Section Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-6 sm:mb-7">
             <div>
-              <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.18em] text-store-orange-ink">Discover more</p>
               <h2 className="text-2xl sm:text-3xl font-semibold text-store-ink tracking-tight">
                 {selectedCategory === "All" ? "Explore all products" : selectedCategory}
               </h2>

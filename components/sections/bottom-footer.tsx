@@ -8,7 +8,7 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa6";
 import { SiVisa } from "react-icons/si";
-import { HiLockClosed, HiTruck } from "react-icons/hi";
+import { HiLockClosed } from "react-icons/hi";
 import { fetchShopSettings } from "@/lib/shop-api";
 
 type SocialKey = "tiktok" | "instagram" | "twitter" | "facebook" | "linkedin" | "youtube";
@@ -50,9 +50,9 @@ export default async function Bottomfooter() {
 
   return (
     <section className="w-full border-t border-white/10 bg-[#101d29] py-4 font-sans text-white/65 sm:py-5">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 space-y-4">
+      <div className="mx-auto max-w-[1440px] space-y-4 px-4 sm:px-6 md:px-10 lg:px-16">
         
-        {/* Row 1: Payment Gateways & Cash on Delivery Badge */}
+        {/* Payment methods and social links */}
         <div className="flex flex-col items-center justify-between gap-3 border-b border-white/10 pb-3 md:flex-row">
           <div className="flex items-center gap-2 flex-wrap justify-center md:justify-start">
             <span className="mr-1 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white/80">
@@ -60,16 +60,7 @@ export default async function Bottomfooter() {
               <span>নিরাপদ পেমেন্ট:</span>
             </span>
 
-            <div className="flex items-center gap-2 flex-wrap justify-center">
-              {/* Cash on Delivery Badge */}
-              <div
-                className="flex h-7.5 shrink-0 cursor-default select-none items-center gap-1.5 rounded-md border border-white/15 bg-white/[0.06] px-2.5 shadow-2xs transition-all hover:bg-white/10"
-                title="ক্যাশ অন ডেলিভারি সুবিধা সারা দেশে প্রযোজ্য"
-              >
-                <HiTruck className="w-4 h-4 shrink-0 text-store-light" />
-                <span className="text-[11px] font-semibold text-white">ক্যাশ অন ডেলিভারি</span>
-              </div>
-
+            <div className="flex flex-wrap items-center justify-center gap-2">
               {/* bKash Official Badge */}
               <div
                 className="h-7.5 px-2 bg-white rounded-md flex items-center gap-1.5 border border-zinc-200 shadow-2xs hover:border-pink-300 transition-all shrink-0 cursor-default select-none"
@@ -120,8 +111,8 @@ export default async function Bottomfooter() {
                 title="Mastercard"
               >
                 <div className="flex items-center -space-x-1">
-                  <div className="w-3 h-3 rounded-full bg-[#EB001B]" />
-                  <div className="w-3 h-3 rounded-full bg-[#F79E1B] opacity-90" />
+                  <div className="h-3 w-3 rounded-full bg-[#EB001B]" />
+                  <div className="h-3 w-3 rounded-full bg-[#F79E1B] opacity-90" />
                 </div>
                 <span className="font-bold text-[10px] text-zinc-900 tracking-tight">Mastercard</span>
               </div>

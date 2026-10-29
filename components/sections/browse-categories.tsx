@@ -28,9 +28,6 @@ export default function BrowseCategories({
         trackClassName="items-stretch px-1 pt-1"
         heading={
           <div>
-            <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.18em] text-store-orange-ink">
-              Made for your everyday
-            </p>
             <h2 className="text-2xl font-semibold tracking-tight text-store-ink sm:text-3xl">
               Shop by category
             </h2>

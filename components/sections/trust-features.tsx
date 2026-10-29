@@ -36,9 +36,6 @@ export default function TrustFeatures() {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16 w-full flex flex-col items-center">
         {/* Title */}
         <div className="text-center max-w-2xl mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-stone-200/80 text-stone-800 text-[11px] font-medium uppercase tracking-wider mb-3">
-            <span>Marketplace Promise</span>
-          </div>
           <h2 className="text-zinc-900 text-3xl sm:text-4xl md:text-5xl font-normal tracking-tight mb-3">
             Why Shop On Our Marketplace
           </h2>

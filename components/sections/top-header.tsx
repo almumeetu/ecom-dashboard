@@ -1,104 +1,22 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
-import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { LuTruck } from "react-icons/lu";
-import { FaWhatsapp } from "react-icons/fa6";
 import TopSlider from "./ui/topslider";
-import { fetchShopSettings } from "@/lib/shop-api";
-import data from "@/data/data.json";
 
 export default function TopHeader() {
-  const { help } = data;
-  const [shopSettings, setShopSettings] = useState<any>(null);
-
-  useEffect(() => {
-    async function loadSettings() {
-      try {
-        const settings = await fetchShopSettings();
-        if (settings) {
-          setShopSettings(settings);
-        }
-      } catch (error) {
-        console.error("Failed to load settings:", error);
-      }
-    }
-    loadSettings();
-  }, []);
-
-  // contactNumber comes as { entries: [{title, value}] } from the API
-  const rawContactEntries: { title: string; value: string }[] =
-    Array.isArray(shopSettings?.contactNumber?.entries)
-      ? shopSettings.contactNumber.entries
-      : Array.isArray(shopSettings?.contactNumber)
-      ? shopSettings.contactNumber
-      : [];
-
-  const contactEntries = rawContactEntries;
-
-  const primaryPhone = contactEntries[0]?.value || "+880 1722-301927";
-  const primaryPhoneClean = primaryPhone.replace(/[^\d+]/g, "") || "01722301927";
-
-  const rawWa = shopSettings?.socialContact?.whatsapp || primaryPhoneClean;
-  const waDigits = String(rawWa).replace(/[^\d]/g, "");
-  const whatsappNumber = waDigits.startsWith("88")
-    ? waDigits
-    : waDigits.startsWith("0")
-    ? `88${waDigits}`
-    : `880${waDigits}`;
-
-  const secondaryPhone = contactEntries[1]?.value;
-  const isDifferentSecondary =
-    secondaryPhone &&
-    secondaryPhone.replace(/[^\d]/g, "") !== primaryPhoneClean.replace(/[^\d]/g, "");
-
   return (
     <section className="w-full bg-store-primary text-store-light text-xs border-b border-store-accent relative z-40 select-none">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         {/* Desktop & Tablet bar (single clean row) */}
         <div className="hidden md:flex items-center justify-between h-9 gap-4">
-          {/* Left: Hotline & WhatsApp */}
-          <div className="flex items-center gap-3 shrink-0 text-xs font-normal">
-            <a
-              href={`tel:${primaryPhoneClean}`}
-              className="flex items-center gap-1.5 text-store-light hover:text-white transition-colors font-medium"
-            >
-              <IoCallOutline className="w-3.5 h-3.5 text-white/80" />
-              <span>
-                Hotline: <strong className="text-white font-semibold">{primaryPhone}</strong>
-              </span>
-            </a>
-            <span className="text-white/40">|</span>
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=Hello%20NovaMart`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-store-light hover:text-white transition-colors font-medium group"
-            >
-              <FaWhatsapp className="w-3.5 h-3.5 text-[#25D366] group-hover:scale-110 transition-transform" />
-              {isDifferentSecondary ? (
-                <span>
-                  WhatsApp: <strong className="text-white font-medium">{secondaryPhone}</strong>
-                </span>
-              ) : (
-                <span className="text-[#25D366] font-semibold hover:underline">WhatsApp</span>
-              )}
-            </a>
-          </div>
-
-          {/* Center: Announcement Slider */}
-          <div className="flex-1 max-w-xl mx-4 overflow-hidden">
+          {/* Announcement Slider */}
+          <div className="min-w-0 flex-1 max-w-xl overflow-hidden">
             <TopSlider />
           </div>
 
-          {/* Right: Cash on delivery & Track Order */}
-          <div className="flex items-center gap-3.5 shrink-0 text-xs font-normal">
-            <span className="flex items-center gap-1.5 text-store-light font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#ffd18e] animate-pulse" />
-              <span>Cash on delivery</span>
-            </span>
-            <span className="text-white/40">|</span>
+          {/* Track order shortcut */}
+          <div className="flex shrink-0 items-center text-xs font-normal">
             <Link
               href="/profile?tab=track"
               className="flex items-center gap-1.5 text-store-light hover:text-white transition-colors font-medium"
@@ -111,15 +29,6 @@ export default function TopHeader() {
 
         {/* Mobile bar (single clean compact row) */}
         <div className="md:hidden flex items-center justify-between py-1.5 gap-2">
-          <a
-            href={`tel:${primaryPhoneClean}`}
-            className="flex items-center gap-1 text-[11px] text-store-light hover:text-white shrink-0 font-medium"
-            aria-label="Hotline call"
-          >
-            <IoCallOutline className="w-3.5 h-3.5 text-white/80" />
-            <span>{primaryPhone}</span>
-          </a>
-
           <div className="flex-1 overflow-hidden px-1">
             <TopSlider />
           </div>

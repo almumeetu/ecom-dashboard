@@ -134,9 +134,6 @@ Corporate Gifting / Event Inquiry Details:
           {/* Left Column (Content) */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             <div className="space-y-4">
-              <span className="text-xs uppercase font-bold text-store-primary tracking-wider">
-                Direct Enterprise Desk
-              </span>
               <h2 className="font-sans text-3xl sm:text-4xl text-store-ink font-medium leading-tight">
                 Let&apos;s Curate Something Worth Remembering
               </h2>

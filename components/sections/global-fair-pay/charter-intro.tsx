@@ -6,7 +6,6 @@ import {
   HiCurrencyDollar,
   HiUserGroup,
   HiClock,
-  HiSparkles,
 } from "react-icons/hi";
 import ScrollAnimate from "@/components/ui/scroll-animate";
 
@@ -48,12 +47,6 @@ export default function CharterIntro() {
         {/* Section Heading */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
           <div className="lg:col-span-7 space-y-3">
-            <ScrollAnimate variant="fade-in-up">
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100/60 px-3 py-1 rounded-full border border-emerald-300/60">
-                <HiSparkles className="w-3.5 h-3.5" />
-                Measurable Impact & Integrity
-              </span>
-            </ScrollAnimate>
             <ScrollAnimate variant="fade-in-up" delay={80}>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
                 Why Ethical Pay Powers <br className="hidden sm:block" />

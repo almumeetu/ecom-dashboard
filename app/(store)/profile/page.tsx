@@ -108,9 +108,6 @@ function ProfilePageContent() {
                 <FiUser className="w-8 h-8" />
               </div>
 
-              <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                {settings?.shopName ? `${settings.shopName} Account` : "Verified Customer Portal"}
-              </span>
 
               <h1 className="text-2xl sm:text-3xl font-black text-zinc-950 tracking-tight mt-3">
                 Customer Account Portal

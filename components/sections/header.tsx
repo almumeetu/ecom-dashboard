@@ -526,7 +526,7 @@ export default function Header() {
           <div className="flex items-center gap-1 shrink-0">
             <Link
               href="/wishlist"
-              className="relative p-2 text-zinc-700 hover:text-store-primary transition-colors"
+              className="relative grid h-10 w-10 place-items-center text-zinc-700 transition-colors hover:text-store-primary"
               aria-label="Wishlist"
             >
               <IoHeartOutline className="w-5 h-5" />
@@ -539,7 +539,7 @@ export default function Header() {
 
             <Link
               href="/cart"
-              className="relative p-2 text-zinc-700 hover:text-store-primary transition-colors"
+              className="relative grid h-10 w-10 place-items-center text-zinc-700 transition-colors hover:text-store-primary"
               aria-label="Shopping Cart"
             >
               <LuShoppingBag className="w-5 h-5" />
@@ -553,7 +553,7 @@ export default function Header() {
             {!mounted || !isAuthenticated ? (
               <button
                 onClick={() => setShowAuthModal(true)}
-                className="p-2 text-zinc-700 hover:text-store-primary transition-colors cursor-pointer"
+                className="grid h-10 w-10 cursor-pointer place-items-center text-zinc-700 transition-colors hover:text-store-primary"
                 aria-label="Sign in"
               >
                 <LuUser className="w-5 h-5" />
@@ -562,8 +562,9 @@ export default function Header() {
               <div className="relative" ref={mobileDropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="w-7 h-7 rounded-full bg-store-primary text-white flex items-center justify-center font-bold text-xs overflow-hidden shrink-0 cursor-pointer"
+                  className="flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center overflow-hidden rounded-full bg-store-primary text-xs font-bold text-white"
                   aria-label="User menu"
+                  aria-expanded={dropdownOpen}
                 >
                   {user?.avatarUrl || (user as any)?.avatar ? (
                     <Image
@@ -635,7 +636,7 @@ export default function Header() {
         </div>
 
         {/* Mobile search bar — full width below header row */}
-        <div className="px-4 pb-3" ref={mobileSearchRef}>
+        <div className="relative px-4 pb-3" ref={mobileSearchRef}>
           <form
             onSubmit={(e) => { handleSearchSubmit(e); setShowSuggestions(false); }}
             className="flex items-center w-full relative"
@@ -644,7 +645,7 @@ export default function Header() {
             <input
               type="text"
               aria-label="Search products"
-              placeholder="Search products, brands..."
+              placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
@@ -677,7 +678,7 @@ export default function Header() {
 
           {/* Mobile Search Suggestions */}
           {showSuggestions && searchQuery.trim() !== "" && (
-            <div className="mt-1.5 bg-white text-zinc-800 shadow-xl border border-zinc-200 py-2 z-[999] rounded-lg relative">
+            <div className="absolute left-4 right-4 top-full z-[999] mt-1.5 max-h-[min(240px,45dvh)] overflow-y-auto rounded-lg border border-zinc-200 bg-white py-2 text-zinc-800 shadow-xl">
               {isSearching ? (
                 <div className="flex items-center justify-center py-5 gap-2 text-sm text-zinc-500">
                   <div className="animate-spin rounded-full h-4 w-4 border-2 border-store-primary border-t-transparent" />

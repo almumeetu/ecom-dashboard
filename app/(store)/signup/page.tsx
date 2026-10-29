@@ -118,9 +118,6 @@ function SignUpFormContent() {
               <Logo variant="light" size="md" />
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-store-deep/90 border border-store-light/40 text-store-light text-[10px] font-bold tracking-widest uppercase mb-4">
-              <span>Verified Marketplace</span>
-            </div>
 
             <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
               Create Your Customer Account

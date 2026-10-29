@@ -35,11 +35,7 @@ export default function BlogArticleDetail({ article }: { article: News }) {
 
         <article>
           <header className="mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-store-border bg-white px-3 py-1 text-xs font-semibold uppercase tracking-wider text-store-accent">
-              <LuBookOpen className="h-3.5 w-3.5" aria-hidden="true" />
-              NovaMart Journal
-            </span>
-            <h1 className="mt-5 text-3xl font-semibold leading-tight tracking-tight text-store-ink sm:text-4xl md:text-5xl">
+            <h1 className="text-3xl font-semibold leading-tight tracking-tight text-store-ink sm:text-4xl md:text-5xl">
               {article.title}
             </h1>
             {article.excerpt?.trim() && (

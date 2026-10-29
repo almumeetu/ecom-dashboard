@@ -46,9 +46,6 @@ export default function CorporateFAQ() {
         
         <ScrollAnimate variant="fade-in-up">
           <div className="text-center mb-12 sm:mb-16">
-            <span className="text-xs uppercase font-bold text-store-primary tracking-wider">
-              Corporate Guidelines
-            </span>
             <h2 className="text-3xl sm:text-4xl text-zinc-900 font-normal tracking-tight mt-1">
               Corporate &amp; Wholesale FAQs
             </h2>
@@ -90,9 +87,6 @@ export default function CorporateFAQ() {
         <ScrollAnimate variant="fade-in-up">
           <div className="bg-store-page rounded-3xl p-8 sm:p-10 border border-stone-200 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-store-deep block mb-1">
-                Need Fast Proposal or Custom Budgeting?
-              </span>
               <h3 className="text-2xl text-zinc-900 font-bold tracking-tight mb-2">
                 Connect Directly with Our Executive Desk
               </h3>

@@ -12,7 +12,7 @@ import { getProductFallbackImage } from "@/lib/admin-api";
 import { toast } from "sonner";
 import { LuShoppingBag, LuCheck, LuHeart } from "react-icons/lu";
 
-const IMAGE_FRAME_HEIGHT = "h-44 sm:h-48 lg:h-52";
+const IMAGE_FRAME_HEIGHT = "h-40 sm:h-48 lg:h-52";
 
 export function ProductCardSkeleton() {
   return (
@@ -20,18 +20,14 @@ export function ProductCardSkeleton() {
       <div className={`${IMAGE_FRAME_HEIGHT} flex shrink-0 items-center justify-center border-b border-store-surface px-5 py-5 sm:px-6 sm:py-6`}>
         <div className="h-full w-full max-w-[190px] rounded-md bg-zinc-100" />
       </div>
-      <div className="p-3 sm:p-3.5">
-        <div className="mb-2 h-2.5 w-16 rounded bg-zinc-100" />
+      <div className="p-2.5 sm:p-3.5">
         <div className="flex h-10 flex-col gap-2">
-        <div className="h-3 w-full rounded bg-zinc-100" />
+          <div className="h-3 w-full rounded bg-zinc-100" />
           <div className="h-3 w-3/4 rounded bg-zinc-100" />
         </div>
         <div className="mt-3 flex min-h-11 items-start justify-between gap-2">
-          <div className="flex flex-col gap-2">
-            <div className="h-4 w-16 rounded bg-zinc-100" />
-            <div className="h-3 w-12 rounded bg-zinc-100" />
-          </div>
-          <div className="h-9 w-9 rounded-md bg-zinc-100" />
+          <div className="h-4 w-16 rounded bg-zinc-100" />
+          <div className="h-8 w-8 rounded-lg bg-zinc-100 sm:h-10 sm:w-10" />
         </div>
       </div>
     </div>
@@ -42,7 +38,6 @@ export default function ProductCard({
   id,
   name,
   price,
-  originalPrice,
   image,
   slug,
   category,
@@ -152,9 +147,9 @@ export default function ProductCard({
   const productUrl = `/products/${slug || id || ""}`;
 
   return (
-    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-[20px] border border-store-border bg-white shadow-[0_6px_22px_rgba(20,38,56,0.035)] transition-all duration-300 hover:-translate-y-1 hover:border-store-light hover:shadow-[0_18px_38px_rgba(20,38,56,0.1)]">
+    <article className="group relative flex h-full w-full flex-col overflow-hidden rounded-2xl border border-store-border bg-white shadow-[0_4px_16px_rgba(20,38,56,0.035)] transition-all duration-300 hover:border-store-light sm:rounded-[20px] sm:hover:-translate-y-1 sm:hover:shadow-[0_18px_38px_rgba(20,38,56,0.1)]">
       <div className={`${IMAGE_FRAME_HEIGHT} relative w-full shrink-0 overflow-hidden border-b border-store-surface bg-store-page`}>
-        <Link href={productUrl} aria-label={`View ${name}`} className="flex h-full w-full items-center justify-center px-5 py-5 sm:px-6 sm:py-6">
+        <Link href={productUrl} aria-label={`View ${name}`} className="flex h-full w-full items-center justify-center p-4 sm:p-6">
           <div className="relative h-full w-full max-w-[190px]">
             <Image
               src={resolvedImage}
@@ -177,43 +172,41 @@ export default function ProductCard({
           onClick={handleToggleWishlist}
           aria-label={inWishlist ? `Remove ${name} from wishlist` : `Add ${name} to wishlist`}
           aria-pressed={inWishlist}
-          className={`absolute right-2.5 top-2.5 flex h-9 w-9 items-center justify-center rounded-full border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent ${
+          className="absolute right-1.5 top-1.5 grid h-10 w-10 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent"
+        >
+          <span className={`grid h-8 w-8 place-items-center rounded-full border transition-colors sm:h-9 sm:w-9 ${
             inWishlist
               ? "border-rose-100 bg-rose-50 text-rose-500"
               : "border-zinc-200/80 bg-white/95 text-zinc-400 hover:border-rose-100 hover:text-rose-500"
-          }`}
-        >
-          <LuHeart className={`h-4 w-4 ${inWishlist ? "fill-current" : ""}`} />
+          }`}>
+            <LuHeart className={`h-4 w-4 ${inWishlist ? "fill-current" : ""}`} aria-hidden="true" />
+          </span>
         </button>
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-3.5">
-        {category && <p className="mb-1 truncate text-[10px] font-semibold uppercase tracking-[0.11em] text-store-accent">{category}</p>}
+      <div className="flex min-w-0 flex-1 flex-col p-2.5 sm:p-3.5">
         <Link href={productUrl} title={name} className="block rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent">
           <h3 className="h-10 line-clamp-2 break-words text-[13px] font-medium leading-5 text-zinc-800 transition-colors hover:text-store-accent sm:text-sm">
             {name}
           </h3>
         </Link>
 
-        <div className="mt-3 flex min-h-11 items-start justify-between gap-2">
+        <div className="mt-auto flex min-h-10 items-center justify-between gap-1 pt-2 sm:gap-1.5 sm:pt-3">
           <div className="min-w-0 tabular-nums">
             <span className="block text-sm font-semibold leading-5 text-store-price sm:text-base [overflow-wrap:anywhere]">
               {price}
             </span>
-            {originalPrice && (
-              <span className="mt-0.5 block text-[11px] leading-4 text-zinc-500 line-through sm:text-xs">
-                {originalPrice}
-              </span>
-            )}
           </div>
           {isVariantProduct ? (
             <Link
               href={productUrl}
               aria-label={`Choose options for ${name}`}
               title="Choose options"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-store-primary bg-white text-store-primary transition-colors hover:bg-store-primary hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent"
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent"
             >
-              <LuShoppingBag className="h-4 w-4" />
+              <span className="grid h-8 w-8 place-items-center rounded-lg border border-store-primary bg-white text-store-primary transition-colors hover:bg-store-primary hover:text-white sm:h-10 sm:w-10">
+                <LuShoppingBag className="h-4 w-4" aria-hidden="true" />
+              </span>
             </Link>
           ) : (
             <button
@@ -221,13 +214,15 @@ export default function ProductCard({
               onClick={handleAddToCart}
               aria-label={isAdded ? `${name} added to bag` : `Add ${name} to bag`}
               title={isAdded ? "Added to bag" : "Add to bag"}
-              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-md border transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent ${
+              className="grid h-10 w-10 shrink-0 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-store-accent"
+            >
+              <span className={`grid h-8 w-8 place-items-center rounded-lg border transition-colors sm:h-10 sm:w-10 ${
                 isAdded
                   ? "border-emerald-600 bg-emerald-600 text-white"
                   : "border-store-primary bg-store-primary text-white hover:border-store-hover hover:bg-store-hover"
-              }`}
-            >
-              {isAdded ? <LuCheck className="h-4 w-4" /> : <LuShoppingBag className="h-4 w-4" />}
+              }`}>
+                {isAdded ? <LuCheck className="h-4 w-4" aria-hidden="true" /> : <LuShoppingBag className="h-4 w-4" aria-hidden="true" />}
+              </span>
             </button>
           )}
         </div>

@@ -42,7 +42,7 @@ export default function FloatingWhatsApp() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-40 items-center gap-2.5 font-sans ${isPurchasePage ? "hidden lg:flex" : "flex"}`}
+      className={`fixed bottom-4 right-4 z-40 items-center gap-2.5 font-sans sm:bottom-6 sm:right-6 ${isPurchasePage ? "hidden lg:flex" : "hidden sm:flex"}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -62,12 +62,12 @@ export default function FloatingWhatsApp() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="relative group w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white flex items-center justify-center shadow-lg shadow-emerald-950/20 hover:shadow-xl hover:shadow-emerald-900/25 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
+        className="group relative flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-emerald-950/20 transition-all duration-300 hover:scale-105 hover:bg-[#1DA851] hover:shadow-xl hover:shadow-emerald-900/25 active:scale-95 sm:h-14 sm:w-14"
       >
         {/* Subtle breathing ripple wave */}
-        <span className="absolute -inset-1 rounded-full bg-[#25D366] opacity-25 animate-ping -z-10" />
+        <span className="absolute -inset-1 -z-10 animate-ping rounded-full bg-[#25D366] opacity-25 motion-reduce:animate-none" />
 
-        <FaWhatsapp className="w-8 h-8 text-white transition-transform duration-300 group-hover:scale-110" />
+        <FaWhatsapp className="h-7 w-7 text-white transition-transform duration-300 group-hover:scale-110 sm:h-8 sm:w-8" />
       </a>
     </div>
   );

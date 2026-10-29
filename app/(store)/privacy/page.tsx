@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import {
-  FiLock,
   FiPhone,
   FiMail,
   FiCheck,
@@ -74,10 +73,6 @@ export default function PrivacyPage() {
           <div className="space-y-6 lg:col-span-8">
             <article className="space-y-7 rounded-[28px] border border-store-border/80 bg-white p-6 shadow-[0_12px_40px_rgba(20,38,56,0.045)] sm:space-y-8 sm:p-9 lg:p-10">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-3">
-                  <FiLock className="w-3.5 h-3.5 text-store-primary" />
-                  <span>ISO &amp; SSL Bank-Grade Security</span>
-                </div>
                 <h2 className="text-2xl font-semibold tracking-tight text-store-ink sm:text-3xl">
                   NovaMart Bangladesh Privacy Statement
                 </h2>

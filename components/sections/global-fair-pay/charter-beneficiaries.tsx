@@ -4,7 +4,6 @@ import Image from "next/image";
 import {
   HiUserGroup,
   HiCheck,
-  HiOutlineSparkles,
 } from "react-icons/hi";
 import ScrollAnimate from "@/components/ui/scroll-animate";
 
@@ -65,12 +64,6 @@ export default function CharterBeneficiaries() {
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <ScrollAnimate variant="fade-in-up">
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 bg-emerald-100/60 px-3.5 py-1 rounded-full border border-emerald-300/60">
-              <HiOutlineSparkles className="w-3.5 h-3.5" />
-              Human-Centered Commerce
-            </span>
-          </ScrollAnimate>
           <ScrollAnimate variant="fade-in-up" delay={80}>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-stone-900 tracking-tight">
               Who the Charter <span className="text-emerald-600">Protects</span>

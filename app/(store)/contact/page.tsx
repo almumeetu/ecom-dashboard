@@ -10,9 +10,7 @@ import {
   FiCheckCircle,
   FiChevronDown,
   FiChevronUp,
-  FiMessageSquare,
   FiSend,
-  FiHelpCircle,
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { toast } from 'sonner';
@@ -246,10 +244,6 @@ export default function ContactPage() {
           
           {/* Left Column: Contact Form (6 cols) */}
           <div className="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-xs">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-2">
-              <FiMessageSquare className="w-3.5 h-3.5" />
-              <span>Send Us A Message</span>
-            </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink tracking-tight">
               How Can We Help You?
             </h2>
@@ -367,10 +361,6 @@ export default function ContactPage() {
           {/* Right Column: Customer FAQs (6 cols) */}
           <div className="lg:col-span-6 space-y-4">
             <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/80 shadow-xs">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider mb-2">
-                <FiHelpCircle className="w-3.5 h-3.5" />
-                <span>Customer FAQs</span>
-              </div>
               <h3 className="text-xl sm:text-2xl font-extrabold text-store-ink">
                 Frequently Asked Questions
               </h3>

@@ -214,25 +214,11 @@ export default function Navigation() {
   );
 
   return (
-    <nav className="relative hidden h-12 w-full items-center justify-between xl:flex">
+    <nav aria-label="Main navigation" className="relative hidden h-12 w-full items-center xl:flex">
       <div className="flex items-center gap-1 xl:gap-2">
         {allNavItems.map(renderNavItem)}
       </div>
 
-      <div className="flex items-center gap-3 text-xs font-semibold">
-        <Link
-          href="/products"
-          className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-[11px] font-bold uppercase tracking-wider text-amber-200 transition-colors hover:bg-white/10 hover:text-amber-100"
-        >
-          <span aria-hidden="true">⚡</span>
-          <span>Daily Offers</span>
-        </Link>
-        <span className="h-5 w-px bg-white/15" aria-hidden="true" />
-        <span className="flex items-center gap-1.5 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-[11px] font-medium text-slate-200">
-          <span className="w-1.5 h-1.5 rounded-full bg-store-primary animate-pulse"></span>
-          Delivery information
-        </span>
-      </div>
     </nav>
   );
 }

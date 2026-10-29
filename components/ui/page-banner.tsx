@@ -12,7 +12,6 @@ export interface BreadcrumbItem {
 export interface PageBannerProps {
   title?: string;
   subtitle?: string;
-  badge?: string;
   breadcrumbs: BreadcrumbItem[];
   showTrustChips?: boolean;
   className?: string;
@@ -27,7 +26,6 @@ const trustPoints = [
 export default function PageBanner({
   title,
   subtitle,
-  badge,
   breadcrumbs,
   showTrustChips = false,
   className = "",
@@ -78,13 +76,6 @@ export default function PageBanner({
         </nav>
 
         <div className="max-w-4xl">
-          {badge && (
-            <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-store-border bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-store-primary">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-store-primary" />
-              {badge}
-            </span>
-          )}
-
           {title && (
             <h1 className="text-2xl font-semibold leading-tight tracking-tight text-store-ink sm:text-3xl lg:text-4xl">
               {title}

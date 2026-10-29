@@ -92,10 +92,6 @@ export default function ReturnsPage() {
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-xs">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-3.5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider">
-                  <FiRefreshCw className="w-3.5 h-3.5 text-store-primary" />
-                  <span>Buyer Protection Guarantee</span>
-                </div>
 
                 <h2 className="text-2xl font-semibold leading-tight tracking-tight text-store-ink sm:text-4xl">
                   7-Day Hassle-Free Return &amp; Replacement
@@ -156,9 +152,6 @@ export default function ReturnsPage() {
       {/* ── 2. 4-Step Simple Return Process ── */}
       <section className="py-8 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Simple &amp; Smooth
-          </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
             How The Return Process Works
           </h2>
@@ -230,9 +223,6 @@ export default function ReturnsPage() {
       <section className="py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/80 shadow-xs">
           <div className="mb-6">
-            <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-              Category Guidelines
-            </span>
             <h2 className="text-xl sm:text-2xl font-extrabold text-store-ink mt-0.5">
               Product Return Eligibility &amp; Condition Criteria
             </h2>
@@ -288,9 +278,6 @@ export default function ReturnsPage() {
       {/* ── 4. FAQs ── */}
       <section className="py-10 sm:py-14 max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Clarifications
-          </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
             Frequently Asked Questions Regarding Returns
           </h2>

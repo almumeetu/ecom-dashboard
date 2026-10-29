@@ -159,9 +159,6 @@ export default function BlogArticles({ variant, initialArticles }: BlogArticlesP
     <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
       <div className="mb-5 flex flex-col gap-4 sm:mb-7 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-store-accent">
-            {isPreview ? "Stories & guides" : "The NovaMart journal"}
-          </p>
           <Heading className={`${isPreview ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl"} font-semibold tracking-tight text-store-ink`}>
             {isPreview ? "Ideas for better everyday living" : "Stories, guides & inspiration"}
           </Heading>

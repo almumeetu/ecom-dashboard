@@ -124,10 +124,6 @@ export default function DeliveryPage() {
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-xs">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               <div className="lg:col-span-8 space-y-3.5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-store-surface border border-store-border/80 text-store-primary text-xs font-bold uppercase tracking-wider">
-                  <FiTruck className="w-3.5 h-3.5 text-store-primary" />
-                  <span>Delivery options and charges</span>
-                </div>
 
                 <h2 className="text-2xl font-semibold leading-tight tracking-tight text-store-ink sm:text-4xl">
                   Delivery options for your order
@@ -198,9 +194,6 @@ export default function DeliveryPage() {
       {/* ── 2. Primary Delivery Zones (3 Columns) ── */}
       <section className="py-6 sm:py-8 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="mb-6">
-          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Delivery details
-          </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink tracking-tight mt-1">
             Delivery areas and charges
           </h2>
@@ -349,9 +342,6 @@ export default function DeliveryPage() {
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-zinc-200/80 shadow-xs">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-                Clear Pricing
-              </span>
               <h2 className="text-xl sm:text-2xl font-extrabold text-store-ink mt-0.5">
                 Delivery charges
               </h2>
@@ -402,9 +392,6 @@ export default function DeliveryPage() {
         {/* ── 4. Order overview ── */}
       <section className="py-10 max-w-[1440px] mx-auto px-4 sm:px-6 md:px-10 lg:px-16">
         <div className="mb-8 text-center max-w-xl mx-auto">
-          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Order information
-          </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
             Order and delivery overview
           </h2>
@@ -475,9 +462,6 @@ export default function DeliveryPage() {
       {/* ── 5. FAQs Accordion ── */}
       <section className="py-10 sm:py-14 max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-store-primary">
-            Have Questions?
-          </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-store-ink mt-1">
             Frequently Asked Delivery Questions
           </h2>
